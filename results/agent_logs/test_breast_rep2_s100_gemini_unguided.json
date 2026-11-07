@@ -1,0 +1,527 @@
+{
+ "run_id": "test_breast_rep2_s100_gemini_unguided",
+ "family": "gemini",
+ "model": "gemini-2.5-flash",
+ "condition": "unguided",
+ "temperature": 0.2,
+ "seed": 100,
+ "tissue": "breast_rep2",
+ "bench_seed": 100,
+ "started": "2026-11-07T00:34:02-0600",
+ "steps": [
+  {
+   "step": 0,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "top_expressed_pairs",
+     "args": {
+      "n": 50
+     },
+     "result": "[{\"sender\": \"LAMP3+_DCs\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.964, \"perm_p\": 0.001}, {\"sender\": \"CD4+_T_Cells\", \"receiver\": \"CD8+_T_Cells\", \"ligand\": \"LIG_21\", \"receptor\": \"REC_21\", \"score\": 0.897, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Macrophages_1\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.86, \"perm_p\": 0.001}, {\"sender\": \"Macrophages_1\", \"receiver\": \"Perivascular-Like\", \"ligand\": \"LIG_12\", \"receptor\": \"REC_12\", \"score\": 0.827, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"IRF7+_DCs\", \"ligand\": \"LIG_11\", \"receptor\": \"REC_11\", \"score\": 0.813, \"perm_p\": 0.001}, {\"sender\": \"Stromal_&_T_Cell_Hybrid\", \"receiver\": \"Macrophages_1\", \"ligand\": \"LIG_29\", \"receptor\": \"REC_29\", \"score\": 0.802, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"Macrophages_1\", \"ligand\": \"LIG_31\", \"receptor\": \"REC_31\", \"score\": 0.787, \"perm_p\": 0.001}, {\"sender\": \"Perivascular-Like\", \"receiver\": \"DCIS_1\", \"ligand\": \"LIG_36\", \"receptor\": \"REC_36\", \"score\": 0.726, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"Stromal\", \"ligand\": \"LIG_34\", \"receptor\": \"REC_34\", \"score\": 0.712, \"perm_p\": 0.001}, {\"sender\": \"Endothelial\", \"receiver\": \"Macrophages_1\", \"ligand\": \"LIG_15\", \"receptor\": \"REC_15\", \"score\": 0.709, \"perm_p\": 0.001}, {\"sender\": \"Myoepi_KRT15+\", \"receiver\": \"IRF7+_DCs\", \"ligand\": \"LIG_04\", \"receptor\": \"REC_04\", \"score\": 0.685, \"perm_p\": 0.001}, {\"sender\": \"DCIS_2\", \"receiver\": \"IRF7+_DCs\", \"ligand\": \"LIG_06\", \"receptor\": \"REC_06\", \"score\": 0.643, \"perm_p\": 0.001}, {\"sender\": \"DCIS_1\", \"receiver\": \"IRF7+_DCs\", \"ligand\": \"LIG_27\", \"receptor\": \"REC_27\", \"score\": 0.638, \"perm_p\": 0.001}, {\"sender\": \"Macrophages_1\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_12\", \"receptor\": \"REC_12\", \"score\": 0.619, \"perm_p\": 0.001}, {\"sender\": \"Macrophages_2\", \"receiver\": \"DCIS_1\", \"ligand\": \"LIG_30\", \"receptor\": \"REC_30\", \"score\": 0.605, \"perm_p\": 0.001}, {\"sender\": \"IRF7+_DCs\", \"receiver\": \"DCIS_2\", \"ligand\": \"LIG_17\", \"receptor\": \"REC_17\", \"score\": 0.605, \"perm_p\": 0.001}, {\"sender\": \"DCIS_2\", \"receiver\": \"B_Cells\", \"ligand\": \"LIG_13\", \"receptor\": \"REC_13\", \"score\": 0.602, \"perm_p\": 0.001}, {\"sender\": \"Myoepi_ACTA2+\", \"receiver\": \"DCIS_1\", \"ligand\": \"LIG_20\", \"receptor\": \"REC_20\", \"score\": 0.581, \"perm_p\": 0.001}, {\"sender\": \"DCIS_2\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.578, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Prolif_Invasive_Tumor\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.571, \"perm_p\": 0.001}, {\"sender\": \"DCIS_1\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.563, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Myoepi_KRT15+\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.556, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Prolif_Invasive_Tumor\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.552, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Invasive_Tumor\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.548, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"DCIS_1\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.54, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Invasive_Tumor\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.539, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"T_Cell_&_Tumor_Hybrid\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.536, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Macrophages_1\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.531, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Endothelial\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.529, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"CD8+_T_Cells\", \"ligand\": \"LIG_34\", \"receptor\": \"REC_34\", \"score\": 0.528, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"DCIS_1\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.526, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"B_Cells\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.525, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"T_Cell_&_Tumor_Hybrid\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.525, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"DCIS_2\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.524, \"perm_p\": 0.001}, {\"sender\": \"Macrophages_1\", \"receiver\": \"CD8+_T_Cells\", \"ligand\": \"LIG_12\", \"receptor\": \"REC_12\", \"score\": 0.521, \"perm_p\": 0.001}, {\"sender\": \"Endothelial\", \"receiver\": \"Perivascular-Like\", \"ligand\": \"LIG_12\", \"receptor\": \"REC_12\", \"score\": 0.52, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Myoepi_ACTA2+\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.519, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Stromal\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.519, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Macrophages_2\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.518, \"perm_p\": 0.001}, {\"sender\": \"Myoepi_ACTA2+\", \"receiver\": \"Prolif_Invasive_Tumor\", \"ligand\": \"LIG_08\", \"receptor\": \"REC_08\", \"score\": 0.518, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Endothelial\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.518, \"perm_p\": 0.001}, {\"sender\": \"Prolif_Invasive_Tumor\", \"receiver\": \"Myoepi_ACTA2+\", \"ligand\": \"LIG_28\", \"receptor\": \"REC_28\", \"score\": 0.515, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Stromal\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.515, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Myoepi_KRT15+\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.514, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Myoepi_ACTA2+\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.513, \"perm_p\": 0.001}, {\"sender\": \"Macrophages_1\", \"receiver\": \"B_Cells\", \"ligand\": \"LIG_12\", \"receptor\": \"REC_12\", \"score\": 0.512, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"DCIS_2\", \"ligan"
+    }
+   ],
+   "usage": [
+    830,
+    18
+   ]
+  },
+  {
+   "step": 1,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "radius_um": 10,
+      "receiver": "CD4+_T_Cells",
+      "sender": "LAMP3+_DCs"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 280, \"expected_if_random\": 9.3, \"enrichment\": 29.956, \"frac_senders_with_receiver_within_r\": 0.694}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "sender": "LAMP3+_DCs",
+      "ligand": "LIG_25",
+      "radius_um": 10,
+      "receiver": "CD4+_T_Cells",
+      "receptor": "REC_25"
+     },
+     "result": "{\"n_ligand_pos_senders\": 133, \"n_receptor_pos_receivers\": 3804, \"n_pairs_within_r\": 106, \"frac_Lpos_senders_near_Rpos_receiver\": 0.489, \"frac_Rpos_receivers_near_Lpos_sender\": 0.025}"
+    }
+   ],
+   "usage": [
+    3755,
+    89
+   ]
+  },
+  {
+   "step": 2,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "sender": "CD4+_T_Cells",
+      "radius_um": 10,
+      "receiver": "CD8+_T_Cells"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 3861, \"expected_if_random\": 224.5, \"enrichment\": 17.198, \"frac_senders_with_receiver_within_r\": 0.432}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "sender": "CD4+_T_Cells",
+      "radius_um": 10,
+      "ligand": "LIG_21",
+      "receiver": "CD8+_T_Cells",
+      "receptor": "REC_21"
+     },
+     "result": "{\"n_ligand_pos_senders\": 3720, \"n_receptor_pos_receivers\": 3117, \"n_pairs_within_r\": 1493, \"frac_Lpos_senders_near_Rpos_receiver\": 0.309, \"frac_Rpos_receivers_near_Lpos_sender\": 0.307}"
+    }
+   ],
+   "usage": [
+    4021,
+    93
+   ]
+  },
+  {
+   "step": 3,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "radius_um": 10,
+      "receiver": "Macrophages_1",
+      "sender": "LAMP3+_DCs"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 49, \"expected_if_random\": 12.7, \"enrichment\": 3.867, \"frac_senders_with_receiver_within_r\": 0.194}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "receptor": "REC_38",
+      "radius_um": 10,
+      "ligand": "LIG_38",
+      "receiver": "Macrophages_1",
+      "sender": "LAMP3+_DCs"
+     },
+     "result": "{\"n_ligand_pos_senders\": 131, \"n_receptor_pos_receivers\": 5304, \"n_pairs_within_r\": 16, \"frac_Lpos_senders_near_Rpos_receiver\": 0.099, \"frac_Rpos_receivers_near_Lpos_sender\": 0.003}"
+    }
+   ],
+   "usage": [
+    4296,
+    83
+   ]
+  },
+  {
+   "step": 4,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "radius_um": 10,
+      "sender": "Macrophages_1",
+      "receiver": "Perivascular-Like"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 67, \"expected_if_random\": 33.8, \"enrichment\": 1.984, \"frac_senders_with_receiver_within_r\": 0.008}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "receiver": "Perivascular-Like",
+      "ligand": "LIG_12",
+      "receptor": "REC_12",
+      "radius_um": 10,
+      "sender": "Macrophages_1"
+     },
+     "result": "{\"n_ligand_pos_senders\": 5159, \"n_receptor_pos_receivers\": 363, \"n_pairs_within_r\": 19, \"frac_Lpos_senders_near_Rpos_receiver\": 0.004, \"frac_Rpos_receivers_near_Lpos_sender\": 0.05}"
+    }
+   ],
+   "usage": [
+    4554,
+    85
+   ]
+  },
+  {
+   "step": 5,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "sender": "B_Cells",
+      "receiver": "IRF7+_DCs",
+      "radius_um": 10
+     },
+     "result": "{\"n_sender_receiver_pairs\": 129, \"expected_if_random\": 11.6, \"enrichment\": 11.134, \"frac_senders_with_receiver_within_r\": 0.032}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "receiver": "IRF7+_DCs",
+      "receptor": "REC_11",
+      "radius_um": 10,
+      "ligand": "LIG_11",
+      "sender": "B_Cells"
+     },
+     "result": "{\"n_ligand_pos_senders\": 2445, \"n_receptor_pos_receivers\": 267, \"n_pairs_within_r\": 50, \"frac_Lpos_senders_near_Rpos_receiver\": 0.02, \"frac_Rpos_receivers_near_Lpos_sender\": 0.154}"
+    }
+   ],
+   "usage": [
+    4813,
+    85
+   ]
+  },
+  {
+   "step": 6,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "sender": "Stromal_&_T_Cell_Hybrid",
+      "radius_um": 10,
+      "receiver": "Macrophages_1"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 88, \"expected_if_random\": 33.5, \"enrichment\": 2.63, \"frac_senders_with_receiver_within_r\": 0.132}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "receptor": "REC_29",
+      "ligand": "LIG_29",
+      "sender": "Stromal_&_T_Cell_Hybrid",
+      "receiver": "Macrophages_1",
+      "radius_um": 10
+     },
+     "result": "{\"n_ligand_pos_senders\": 333, \"n_receptor_pos_receivers\": 5179, \"n_pairs_within_r\": 34, \"frac_Lpos_senders_near_Rpos_receiver\": 0.084, \"frac_Rpos_receivers_near_Lpos_sender\": 0.006}"
+    }
+   ],
+   "usage": [
+    5074,
+    95
+   ]
+  },
+  {
+   "step": 7,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "radius_um": 10,
+      "receiver": "Macrophages_1",
+      "sender": "CD8+_T_Cells"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 1549, \"expected_if_random\": 304.3, \"enrichment\": 5.09, \"frac_senders_with_receiver_within_r\": 0.255}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "radius_um": 10,
+      "ligand": "LIG_31",
+      "receiver": "Macrophages_1",
+      "receptor": "REC_31",
+      "sender": "CD8+_T_Cells"
+     },
+     "result": "{\"n_ligand_pos_senders\": 3115, \"n_receptor_pos_receivers\": 5132, \"n_pairs_within_r\": 612, \"frac_Lpos_senders_near_Rpos_receiver\": 0.175, \"frac_Rpos_receivers_near_Lpos_sender\": 0.102}"
+    }
+   ],
+   "usage": [
+    5343,
+    87
+   ]
+  },
+  {
+   "step": 8,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "receiver": "DCIS_1",
+      "radius_um": 10,
+      "sender": "Perivascular-Like"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 0, \"expected_if_random\": 30.1, \"enrichment\": 0.0, \"frac_senders_with_receiver_within_r\": 0.0}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "radius_um": 10,
+      "sender": "Perivascular-Like",
+      "receiver": "DCIS_1",
+      "receptor": "REC_36",
+      "ligand": "LIG_36"
+     },
+     "result": "{\"n_ligand_pos_senders\": 349, \"n_receptor_pos_receivers\": 4596, \"n_pairs_within_r\": 0, \"frac_Lpos_senders_near_Rpos_receiver\": 0.0, \"frac_Rpos_receivers_near_Lpos_sender\": 0.0}"
+    }
+   ],
+   "usage": [
+    5609,
+    87
+   ]
+  },
+  {
+   "step": 9,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "receiver": "Stromal",
+      "sender": "B_Cells",
+      "radius_um": 10
+     },
+     "result": "{\"n_sender_receiver_pairs\": 1456, \"expected_if_random\": 1119.4, \"enrichment\": 1.301, \"frac_senders_with_receiver_within_r\": 0.29}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "receiver": "Stromal",
+      "ligand": "LIG_34",
+      "sender": "B_Cells",
+      "radius_um": 10,
+      "receptor": "REC_34"
+     },
+     "result": "{\"n_ligand_pos_senders\": 2419, \"n_receptor_pos_receivers\": 25225, \"n_pairs_within_r\": 596, \"frac_Lpos_senders_near_Rpos_receiver\": 0.204, \"frac_Rpos_receivers_near_Lpos_sender\": 0.021}"
+    }
+   ],
+   "usage": [
+    5861,
+    79
+   ]
+  },
+  {
+   "step": 10,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "receiver": "Macrophages_1",
+      "radius_um": 10,
+      "sender": "Endothelial"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 457, \"expected_if_random\": 412.0, \"enrichment\": 1.109, \"frac_senders_with_receiver_within_r\": 0.062}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "receiver": "Macrophages_1",
+      "ligand": "LIG_15",
+      "receptor": "REC_15",
+      "radius_um": 10,
+      "sender": "Endothelial"
+     },
+     "result": "{\"n_ligand_pos_senders\": 4329, \"n_receptor_pos_receivers\": 5066, \"n_pairs_within_r\": 216, \"frac_Lpos_senders_near_Rpos_receiver\": 0.045, \"frac_Rpos_receivers_near_Lpos_sender\": 0.039}"
+    }
+   ],
+   "usage": [
+    6121,
+    79
+   ]
+  },
+  {
+   "step": 11,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "sender": "Myoepi_KRT15+",
+      "receiver": "IRF7+_DCs",
+      "radius_um": 10
+     },
+     "result": "{\"n_sender_receiver_pairs\": 0, \"expected_if_random\": 8.1, \"enrichment\": 0.0, \"frac_senders_with_receiver_within_r\": 0.0}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "sender": "Myoepi_KRT15+",
+      "radius_um": 10,
+      "receiver": "IRF7+_DCs",
+      "ligand": "LIG_04",
+      "receptor": "REC_04"
+     },
+     "result": "{\"n_ligand_pos_senders\": 1681, \"n_receptor_pos_receivers\": 259, \"n_pairs_within_r\": 0, \"frac_Lpos_senders_near_Rpos_receiver\": 0.0, \"frac_Rpos_receivers_near_Lpos_sender\": 0.0}"
+    }
+   ],
+   "usage": [
+    6379,
+    97
+   ]
+  },
+  {
+   "step": 12,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "submit_claims",
+     "args": {
+      "claims": [
+       {
+        "evidence": "High spatial proximity (enrichment 29.96, 69.4% senders near receivers) and colocalization (48.9% L+ senders near R+ receivers).",
+        "receiver": "CD4+_T_Cells",
+        "sender": "LAMP3+_DCs",
+        "receptor": "REC_25",
+        "ligand": "LIG_25"
+       },
+       {
+        "receptor": "REC_21",
+        "sender": "CD4+_T_Cells",
+        "evidence": "Strong spatial proximity (enrichment 17.20, 43.2% senders near receivers) and colocalization (30.9% L+ senders near R+ receivers).",
+        "receiver": "CD8+_T_Cells",
+        "ligand": "LIG_21"
+       },
+       {
+        "receptor": "REC_38",
+        "ligand": "LIG_38",
+        "receiver": "Macrophages_1",
+        "sender": "LAMP3+_DCs",
+        "evidence": "Moderate spatial proximity (enrichment 3.87, 19.4% senders near receivers) and some colocalization (9.9% L+ senders near R+ receivers)."
+       },
+       {
+        "evidence": "Low spatial proximity (enrichment 1.98, 0.8% senders near receivers) and limited colocalization (0.4% L+ senders near R+ receivers).",
+        "ligand": "LIG_12",
+        "receiver": "Perivascular-Like",
+        "receptor": "REC_12",
+        "sender": "Macrophages_1"
+       },
+       {
+        "receptor": "REC_11",
+        "sender": "B_Cells",
+        "evidence": "High spatial proximity (enrichment 11.13, 3.2% senders near receivers) and some colocalization (2.0% L+ senders near R+ receivers).",
+        "receiver": "IRF7+_DCs",
+        "ligand": "LIG_11"
+       },
+       {
+        "receptor": "REC_29",
+        "ligand": "LIG_29",
+        "evidence": "Moderate spatial proximity (enrichment 2.63, 13.2% senders near receivers) and some colocalization (8.4% L+ senders near R+ receivers).",
+        "sender": "Stromal_&_T_Cell_Hybrid",
+        "receiver": "Macrophages_1"
+       },
+       {
+        "evidence": "Good spatial proximity (enrichment 5.09, 25.5% senders near receivers) and colocalization (17.5% L+ senders near R+ receivers).",
+        "sender": "CD8+_T_Cells",
+        "receiver": "Macrophages_1",
+        "ligand": "LIG_31",
+        "receptor": "REC_31"
+       },
+       {
+        "receiver": "DCIS_1",
+        "evidence": "No spatial proximity or colocalization observed.",
+        "sender": "Perivascular-Like",
+        "ligand": "LIG_36",
+        "receptor": "REC_36"
+       },
+       {
+        "receptor": "REC_34",
+        "sender": "B_Cells",
+        "evidence": "Moderate spatial proximity (enrichment 1.30, 29.0% senders near receivers) and some colocalization (20.4% L+ senders near R+ receivers).",
+        "receiver": "Stromal",
+        "ligand": "LIG_34"
+       },
+       {
+        "sender": "Endothelial",
+        "receptor": "REC_15",
+        "evidence": "Low spatial proximity (enrichment 1.11, 6.2% senders near receivers) and some colocalization (4.5% L+ senders near R+ receivers).",
+        "ligand": "LIG_15",
+        "receiver": "Macrophages_1"
+       }
+      ]
+     },
+     "result": "{\"status\": \"received\", \"n\": 10}"
+    }
+   ],
+   "usage": [
+    6651,
+    826
+   ]
+  }
+ ],
+ "usage": {
+  "prompt": 63307,
+  "completion": 1803
+ },
+ "status": "submitted",
+ "claims": [
+  {
+   "evidence": "High spatial proximity (enrichment 29.96, 69.4% senders near receivers) and colocalization (48.9% L+ senders near R+ receivers).",
+   "receiver": "CD4+_T_Cells",
+   "sender": "LAMP3+_DCs",
+   "receptor": "REC_25",
+   "ligand": "LIG_25"
+  },
+  {
+   "receptor": "REC_21",
+   "sender": "CD4+_T_Cells",
+   "evidence": "Strong spatial proximity (enrichment 17.20, 43.2% senders near receivers) and colocalization (30.9% L+ senders near R+ receivers).",
+   "receiver": "CD8+_T_Cells",
+   "ligand": "LIG_21"
+  },
+  {
+   "receptor": "REC_38",
+   "ligand": "LIG_38",
+   "receiver": "Macrophages_1",
+   "sender": "LAMP3+_DCs",
+   "evidence": "Moderate spatial proximity (enrichment 3.87, 19.4% senders near receivers) and some colocalization (9.9% L+ senders near R+ receivers)."
+  },
+  {
+   "evidence": "Low spatial proximity (enrichment 1.98, 0.8% senders near receivers) and limited colocalization (0.4% L+ senders near R+ receivers).",
+   "ligand": "LIG_12",
+   "receiver": "Perivascular-Like",
+   "receptor": "REC_12",
+   "sender": "Macrophages_1"
+  },
+  {
+   "receptor": "REC_11",
+   "sender": "B_Cells",
+   "evidence": "High spatial proximity (enrichment 11.13, 3.2% senders near receivers) and some colocalization (2.0% L+ senders near R+ receivers).",
+   "receiver": "IRF7+_DCs",
+   "ligand": "LIG_11"
+  },
+  {
+   "receptor": "REC_29",
+   "ligand": "LIG_29",
+   "evidence": "Moderate spatial proximity (enrichment 2.63, 13.2% senders near receivers) and some colocalization (8.4% L+ senders near R+ receivers).",
+   "sender": "Stromal_&_T_Cell_Hybrid",
+   "receiver": "Macrophages_1"
+  },
+  {
+   "evidence": "Good spatial proximity (enrichment 5.09, 25.5% senders near receivers) and colocalization (17.5% L+ senders near R+ receivers).",
+   "sender": "CD8+_T_Cells",
+   "receiver": "Macrophages_1",
+   "ligand": "LIG_31",
+   "receptor": "REC_31"
+  },
+  {
+   "receiver": "DCIS_1",
+   "evidence": "No spatial proximity or colocalization observed.",
+   "sender": "Perivascular-Like",
+   "ligand": "LIG_36",
+   "receptor": "REC_36"
+  },
+  {
+   "receptor": "REC_34",
+   "sender": "B_Cells",
+   "evidence": "Moderate spatial proximity (enrichment 1.30, 29.0% senders near receivers) and some colocalization (20.4% L+ senders near R+ receivers).",
+   "receiver": "Stromal",
+   "ligand": "LIG_34"
+  },
+  {
+   "sender": "Endothelial",
+   "receptor": "REC_15",
+   "evidence": "Low spatial proximity (enrichment 1.11, 6.2% senders near receivers) and some colocalization (4.5% L+ senders near R+ receivers).",
+   "ligand": "LIG_15",
+   "receiver": "Macrophages_1"
+  }
+ ],
+ "runtime_s": 71.8,
+ "n_tool_calls": 24
+}

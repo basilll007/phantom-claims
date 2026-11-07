@@ -26,11 +26,13 @@ permutation null, split consistency, minimum-evidence rule, BH-FDR) and writes a
 pre-registered semi-synthetic benchmark built on real 10x Xenium sections of breast, pancreatic and lung cancer, the
 frozen gate reduced the phantom rate of expression-only top-10 lists from \testBreastReponeCpdbKTenPR{} to
 \testBreastReponeCpdbKTenPRafter{} on held-out breast seeds while retaining \testBreastReponeCpdbKTenRet{} of true claims,
-and was calibrated under the null (\calibFullFive{} of unplanted claims at $p<0.05$). Contrary to our pre-registered
+\todo{H3 transfer sentence (pancreas, lung) after final eval}, and was calibrated under the null
+(\calibFullFive{} of unplanted claims at $p<0.05$). Contrary to our pre-registered
 H1, phantom rates of expression-only tools and of two LLM agent families at $K{=}10$ did not reach 30\% on this
 benchmark. Agents given the gate as a tool still submitted claims their own verifier had rejected, which
-argues for enforcement outside the agent. On real breast data the gate rejected all PD-L1/PD-1 claims but also
-all contact-dependent positive controls, a limitation we report.
+argues for enforcement outside the agent. On real breast data the gate rejected all PD-L1/PD-1 claims for insufficient contact evidence (the
+contacts were at chance level rather than depleted), but it also rejected all contact-dependent positive controls, a
+limitation we report.
 \end{abstract}
 
 \section{Introduction}
@@ -41,9 +43,10 @@ expression profile \citep{janesick2023}. Cell--cell communication (CCC) inferenc
 mechanistic claims, and is increasingly automated by tool-using LLM agents \todo{cite biology agent papers}.
 Many widely used CCC methods score ligand--receptor (L--R) pairs from cell-type expression alone
 \citep{efremova2020cellphonedb,jin2021cellchat,dimitrov2022liana}. A claim can therefore be well supported by
-expression yet physically impossible: in our parent analysis of the Janesick et al.\ breast cancer sections, cells
-expressing PD-L1 (\textit{CD274}) and PD-1 (\textit{PDCD1}) were rarely within contact distance. We call such
-outputs \emph{phantom claims}.
+expression yet unsupported, or contradicted, by the spatial state, for example when ligand- and
+receptor-expressing cells are rarely within contact distance. Our parent analysis of the Janesick et al.\ breast
+sections examined this question for PD-L1 (\textit{CD274}) and PD-1 (\textit{PDCD1})
+\todo{cite and verify the parent thesis finding}. We call such outputs \emph{phantom claims}.
 
 We argue that claims produced over a world state should be \emph{governed at the claim level}: every claim is
 checked against the state before it is reported, and the check leaves an auditable record. Our contributions:
@@ -136,8 +139,12 @@ post-hoc enforcement. Of \compDevSubmitted{} submitted claims, \compDevVerifiedF
 transcripts describe a claim as lacking spatial support and still submit it to fill the requested $K$.
 
 \paragraph{Real data (no planting).} On breast Rep1/Rep2 the frozen gate, with the receptor as the response (no
-target priors exist for a 313-gene panel), passed \realPdlPass{}/\realPdlN{} PD-L1/PD-1 claims; these had too few
-ligand$^+$--receptor$^+$ contacts within 30\,\textmu m in both replicates, the ``never meet'' pattern. It also passed
+target priors exist for a 313-gene panel), passed \realPdlPass{}/\realPdlN{} PD-L1/PD-1 claims (the top expression-scored type pairs,
+LAMP3$^+$ DCs $\rightarrow$ T cells), all for insufficient evidence: fewer than 50 ligand$^+$--receptor$^+$ contacts
+within 30\,\textmu m in both replicates (Figure~\ref{fig:examples}c). An exploratory tile-restricted permutation of
+positivity shows that these contacts are at chance level (observed/expected \realContactRatioLo{}--\realContactRatioHi{};
+\realContactNDepleted{} of \realContactN{} tests nominally depleted, not replicated). The data do not support the
+claims, but they do not show active segregation either. It also passed
 \realExprtopPass{}/\realExprtopN{} of the expression-only real top-10 claims, \emph{and}
 \realPosctlPass{}/\realPosctlN{} contact-dependent positive controls (CD80/CD86--CTLA4, MMRN2--CD93). The real-data
 gate is therefore conservative and cannot certify positives without a response readout.
@@ -163,6 +170,12 @@ response readouts that small panels lack.
 
 \appendix
 \section{Reproducibility}
+\begin{figure*}[h]\centering
+\includegraphics[width=\linewidth]{../figures/fig_examples.png}
+\caption{(a) A planted \textsc{true} pair: target counts rise in receivers near ligand$^+$ senders. (b) A planted
+\textsc{phantom}: ligand- and receptor-planted cells never meet. (c) Real breast Rep1: CD274$^+$ LAMP3$^+$ DCs and
+PDCD1$^+$ T cells; their contacts are few and at chance level.}\label{fig:examples}
+\end{figure*}
 All numbers are generated from \texttt{results/results.jsonl} via \texttt{scripts/make\_paper\_numbers.py}
 (provenance per macro in \texttt{paper/numbers\_provenance.json}). Data sources and licences: \texttt{paper/DATA\_SOURCES.md}.
 \begin{figure}[h]\centering

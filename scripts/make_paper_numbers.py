@@ -108,3 +108,16 @@ os.makedirs("paper", exist_ok=True)
 open("paper/numbers.tex", "w").write("\n".join(out) + "\n")
 json.dump(used, open("paper/numbers_provenance.json", "w"), indent=1, default=float)
 print(len(used), "numbers with provenance;", sum("TODOVERIFY" in l for l in out), "missing")
+# real-data contacts vs chance (PD-L1/PD-1 claims with expected > 1)
+r = R.get("real_breast_contacts_vs_chance")
+if r:
+    pd_ = [x for x in r["records"] if x["source"] == "PD-L1/PD-1 case" and x["expected"] > 1]
+    lo, hi = min(x["ratio"] for x in pd_), max(x["ratio"] for x in pd_)
+    nsig = sum(x["p_depleted"] < 0.05 for x in pd_)
+    BS = chr(92)
+    mk = lambda n, v: BS + "newcommand{" + BS + n + "}{" + v + "}"
+    extra = [mk("realContactRatioLo", f"{lo:.2f}"), mk("realContactRatioHi", f"{hi:.2f}"),
+             mk("realContactNDepleted", str(nsig)), mk("realContactN", str(len(pd_)))]
+    open("paper/numbers.tex", "a").write("\n".join(extra) + "\n")
+    used.update(realContactRatio=dict(id=r["id"], value=[lo, hi, nsig, len(pd_)]))
+    json.dump(used, open("paper/numbers_provenance.json", "w"), indent=1, default=float)

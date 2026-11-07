@@ -1844,5 +1844,14 @@
    "n"
   ],
   "value": 4
+ },
+ "realContactRatio": {
+  "id": "real_breast_contacts_vs_chance",
+  "value": [
+   0.5344327378225683,
+   1.5813401858074718,
+   1,
+   8
+  ]
  }
 }

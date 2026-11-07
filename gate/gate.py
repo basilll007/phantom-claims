@@ -30,6 +30,7 @@ class GateConfig:
     use_split: bool = True          # ablation
     use_min_evidence: bool = True   # ablation
     use_perm: bool = True           # ablation: False -> skip (a)
+    use_targets: bool = True        # exploratory: False -> receptor-as-response (real-data mode)
 
 
 def bh(p):
@@ -159,7 +160,7 @@ class Gate:
             rec.update(pass_=False, reasons=["cell_type_absent"]); return rec
         Lv = self.x.log_multi(L)[iA]
         E = W @ Lv
-        tg = [g for g in self.x.targets.get((L, R), []) if self.x.has(g)]
+        tg = [g for g in self.x.targets.get((L, R), []) if self.x.has(g)] if self.cfg.use_targets else []
         if tg:
             Y = np.mean([self.x.z(g)[iB] for g in tg], 0); rec["response"] = {"targets": tg}
         else:
