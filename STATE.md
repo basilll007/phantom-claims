@@ -2,7 +2,7 @@
 - **Phase:** 1 (data) — Phase 0 setup done
 - **Deadline (loop stop):** 2026-11-07 07:30 local (CST)
 - **Workshop:** First Workshop on Medical World Models @ AAAI-27 (Montreal, Feb 16-23 2027). Site: https://med-wm.github.io/aaai27-mwm/ . Submission deadline **2026-11-15 AoE**; notification 2026-12-02; camera-ready 2026-12-15. Full paper <= 8 pages excl. refs (AAAI 2-col), abstract <= 2 pages; non-archival; OpenReview (link TBA). Scope = clinical patient-state world models -> frame the gate as a verification/safety layer for decision support.
-- **PREREG commit:** (see PROGRESS.md)
+- **PREREG commit:** da1b81c
 - **Env:** .venv (uv, Python 3.12), torch 2.11.0+cu128, RTX 5060 Laptop sm_120 verified. UV_CACHE_DIR=.uv_cache (C: drive nearly full — keep caches on F:).
 - **LLM agent:** Gemini key in .env (GeminiAPI), DeepSeek key in env (DEEPSEEK_API_KEY). Models pinned: gemini-2.5-flash, deepseek-flash. Budget per family: 4M tokens / USD 5 hard cap. Tokens used: gemini 0, deepseek 0.
 - **Next task:** process breast Rep1/Rep2 -> data/processed; build bench generator + tests.

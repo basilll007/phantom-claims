@@ -7,3 +7,4 @@
 - 2026-11-06 23:55 CST — Decision: benchmark plants on anonymized added channels with real-gene baselines (labels known for whole claim universe; no LLM prior leakage). Real L-R panel list used for Phase 7 real-data check.
 - 2026-11-06 23:55 CST — Blocker: 10x dataset pages HTTP 429; a background retry loop with a browser UA was denied by the permission system as bot-check circumvention -> dropped; will use occasional single WebFetch.
 - 2026-11-06 23:55 CST — L-R pool: LIANA consensus (4620 pairs) ∩ breast panel (313 genes) = 23 pairs (all complex subunits required).
+- 2026-11-06 23:55 CST — PREREG.md frozen in commit da1b81c (before any evaluation).
