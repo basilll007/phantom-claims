@@ -1,6 +1,6 @@
 # MORNING REPORT — Phantom Claims (rewritten every cycle)
 
-**Status:** Phases 0–7 done; Phase 8 (paper) drafted, needs a LaTeX compile and citation checks. ~90% of plan done. Last update 2026-11-07 00:46 CST.
+**Status:** Phases 0–7 done; Phase 8 (paper) drafted, needs a LaTeX compile and citation checks. ~92% of plan done. Last update 2026-11-07 00:54 CST.
 
 ## 1. Verdicts (pre-registered rules; K = 10; 95% hierarchical bootstrap CIs; all numbers from results/results.jsonl)
 | Hyp | Verdict | Key numbers (result ids) |
@@ -12,7 +12,7 @@
 
 ## 2. Top findings (surprises and negatives included)
 1. **H1 failed at the pre-registered defaults; the benchmark is easy at K=10.** Expression tools rank TRUE plants above the matched never-meet decoys, and agents with spatial tools avoid most phantoms. Exploratory: at ¼ effect size the expression-only phantom rate is 0.72, which the gate reduces to 0.08 (retention 0.86), so H1 depends on effect size.
-2. **The gate is calibrated, and its tile-restricted null matters:** 5.0% of null claims fall below p<0.05 (9% with a global null). NICHE false passes are 0.12 dev, 0.04–0.06 test (0.32 with a global null). TRUE pass rates are 0.96–1.00 and PHANTOM/RANDOM 0.
+2. **The gate is calibrated even on real structured tissue, and its tile-restricted null matters.** On 200 random real-gene claims on real breast tissue, 6% reach p<0.05 (8% when the targets are sender markers) and 0% pass the full gate. With a global null the rate is 11%, and 19% for marker targets (`real_gene_null_breast_rep1`). NICHE false passes are 0.12 dev and 0.04–0.06 test (0.32 with a global null). TRUE pass rates are 0.96–1.00, and PHANTOM/RANDOM 0.
 3. **Agents don't fully enforce their own verifier:** on test, 5 of 240 submitted claims (4 of them false) had been rejected by the agent's own `verify_claim`, and 13 were never verified. The phantom rate is 0.07 with the gate as a tool vs 0.00 post hoc (`agent_test_gate_tool_compliance`).
 4. **Negative: the gate's power is entirely the response readout.** With 0/3 responding targets retention is 0.00–0.03; in receptor-only mode (the real-data readout) it is 0.20. On real breast tissue: 0/6 PD-L1/PD-1 claims, 0/10 expression-only top claims and **0/4 positive controls** pass. The PD-L1/PD-1 contacts are at **chance level** (obs/exp 0.53–1.58), *not depleted*, so "never meet" is **not** supported at these type pairs (`real_breast_contacts_vs_chance`).
 
@@ -27,13 +27,16 @@
 5. Submission deadline is **Nov 15 AoE** (OpenReview link not yet announced).
 
 ## 5. Risks / possible bugs (harshest-reviewer view)
-- H2/H3 "supported" is partly by construction: never-meet decoys have no contacts, and TRUE plants have a strong target response that the gate reads directly from the listed targets. Reviewers will ask about realism; the effect, noise and responder sweeps are in the paper as exploratory.
+- **Independent code review (subagent, read-only):** no leakage and no bugs that inflate results. The permutation test, BH, metrics, bootstrap, verdict rules and dev/test separation were all verified. Fixed: the agent tool whitelist, a verdict edge case and a figure NaN. Post-freeze edits are documented in PREREG Amendment 3 and are behavior-preserving.
+- **What H2 actually tests:** the K=10 tool lists contain 88 never-meet phantoms, 3 wrong-type-pair negatives and **0 niche** negatives (`list_negative_composition`), so H2 at K=10 mostly tests the contact and response rules. Harder negatives appear only at K=20 (124 wrong-type-pair, 9 niche) and in the planted-claim analysis. Phantoms carry no target signal, so any target check rejects them, and the gate's exposure kernel equals the generator's. Together, H2/H3 "supported" is partly by construction; the paper states all of this.
 - 3 agent runs per family per dataset is small; agent H1 per tissue is noisy (CIs ±0.15).
 - Pancreas and lung cell types are marker-based (Unlabeled after QC: pancreas 11.1%, lung 15.7%; `results/tables/cell_counts.csv`).
 - Two amendments were made (the donor-gene range after a degenerate first smoke run, and freezing the gate config). Both are logged before any test data were generated.
 - OOM crash during lung final eval: nothing had been logged, so it was rerun. Documented in PROGRESS.md.
 
 ## 6. Next 3 actions
-1. Finish the r_plant=50 robustness sweep (running) and add it to the paper appendix.
-2. Adversarial code review of gate, generator and scorer for subtle bugs; add the result to the report.
-3. Tighten the paper to ≤8 pages, and add an appendix with annotation markers, the agent prompt and an audit-record example.
+1. **Harder benchmark variant (exploratory, dev only):** NICHE pairs without the expression cap, so they actually reach top-K lists; phantoms with target noise. This tests the tile and split machinery inside H2-style lists.
+2. Human: compile the paper (expected ~6 pages plus appendix), verify citations and licences, and decide whether to add a third non-breast cancer.
+3. Optional: more agent runs (budget used: Gemini ~1.8M and DeepSeek ~1.4M of 4M tokens each) to tighten the per-tissue CIs.
+
+Done this cycle: the r_plant=50 sweep (retention 0.90), the independent review, the real-gene null, and an appendix with audit records, the agent protocol and the annotation rules.
