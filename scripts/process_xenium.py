@@ -24,7 +24,7 @@ def main(tissue, raw, annot=None, min_counts=10):
     n0 = a.n_obs
     if annot:
         an = pd.read_csv(annot)
-        an["Barcode"] = an["Barcode"].astype(float).astype(np.int64).astype(str)
+        an["Barcode"] = (an["Barcode"].astype(float).astype(np.int64).astype(str) if pd.api.types.is_numeric_dtype(an["Barcode"]) else an["Barcode"].astype(str))
         an = an.set_index("Barcode")["Cluster"]
         a.obs["cell_type"] = an.reindex(a.obs_names).fillna("Unlabeled").values
         a.uns["annotation_source"] = os.path.basename(annot)

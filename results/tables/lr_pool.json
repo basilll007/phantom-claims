@@ -1,0 +1,26 @@
+{
+ "breast_rep1": {
+  "panel_genes": 313,
+  "consensus_pairs": 4620,
+  "pairs_in_panel": 23,
+  "has_CD274_PDCD1": true
+ },
+ "breast_rep2": {
+  "panel_genes": 313,
+  "consensus_pairs": 4620,
+  "pairs_in_panel": 23,
+  "has_CD274_PDCD1": true
+ },
+ "pancreas": {
+  "panel_genes": 377,
+  "consensus_pairs": 4620,
+  "pairs_in_panel": 31,
+  "has_CD274_PDCD1": true
+ },
+ "lung": {
+  "panel_genes": 377,
+  "consensus_pairs": 4620,
+  "pairs_in_panel": 31,
+  "has_CD274_PDCD1": true
+ }
+}
