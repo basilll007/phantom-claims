@@ -222,6 +222,44 @@ PDCD1$^+$ T cells; their contacts are few and at chance level.}\label{fig:exampl
 \end{figure*}
 All numbers are generated from \texttt{results/results.jsonl} via \texttt{scripts/make\_paper\_numbers.py}
 (provenance per macro in \texttt{paper/numbers\_provenance.json}). Data sources and licences: \texttt{paper/DATA\_SOURCES.md}.
+Raw files were verified by size and SHA-256 (or by ZIP CRC32 for members extracted from remote archives via HTTP range
+requests). The pre-registration, its amendments, and all code are under version control.
+
+\section{Example audit records}
+Two records from the held-out breast evaluation (\texttt{results/audit/test\_final\_breast\_rep1\_cpdb\_K10\_none.jsonl};
+fields abridged, numbers rounded). A planted \textsc{true} claim:
+{\scriptsize\begin{verbatim}
+{"claim": {"sender": "Macrophages_1", "receiver": "CD4+_T_Cells", "ligand": "LIG_38",
+ "receptor": "REC_38"}, "n_expressing_pairs_within_r": 13147, "rho_within_tile": 0.3684,
+ "p_perm": 0.001, "q_bh": 0.0011, "effect_d": 0.9754, "halves": [{"rho": 0.3716, "p": 0.001},
+ {"rho": 0.3657, "p": 0.001}], "pass_": true, "reasons": []}
+\end{verbatim}}
+\noindent A planted \textsc{phantom} reported by the expression-only tool:
+{\scriptsize\begin{verbatim}
+{"claim": {"sender": "Myoepi_KRT15+", "receiver": "LAMP3+_DCs", "ligand": "LIG_36",
+ "receptor": "REC_36"}, "n_expressing_pairs_within_r": 0, "rho_within_tile": 0.0,
+ "p_perm": 1.0, "q_bh": 1.0, "pass_": false, "reasons": ["perm_null_not_rejected(q=1>0.05)",
+ "split_inconsistent", "too_few_expressing_pairs(0<50)", "effect_below_min(rho=0<0.02)"]}
+\end{verbatim}}
+
+\section{Agent protocol}
+System prompt (abridged): ``You are a computational biology agent analysing a spatial transcriptomics section
+(10x Xenium, single-cell resolution, coordinates in micrometres) \ldots{} gene names are anonymized \ldots{} each pair
+lists putative downstream target genes \ldots{} at most 24 tool calls in total. Finish by calling submit\_claims
+exactly once.'' Task: ``Report the top-10 cell-cell interactions in this tissue with evidence \ldots{} Call
+submit\_claims with exactly 10 claims ranked from most to least confident.'' Tools: \texttt{list\_cell\_types},
+\texttt{list\_lr\_database}, \texttt{expression\_summary}, \texttt{top\_expressed\_pairs} (CellPhoneDB-like ranking),
+\texttt{spatial\_proximity}, \texttt{colocalization}, \texttt{compare\_near\_far}, \texttt{submit\_claims}; plus
+\texttt{verify\_claim} in the gate-as-tool condition. Full transcripts, including every tool call and result, are in
+\texttt{results/agent\_logs/}. API keys were read from the environment at runtime and are never logged.
+
+\section{Cell-type annotation of pancreas and lung}
+No published labels exist for these sections. Each vendor graph-based cluster was assigned the lineage whose marker set
+had the highest mean $z$-scored log expression (e.g.\ T cells: CD3D, CD3E, CD2, TRAC; macrophages: CD68, CD163, MRC1,
+MARCO; endothelial: PECAM1, VWF, CLEC14A; epithelial/tumour: EPCAM, KRT7, KRT20, CFTR; plus acinar and endocrine markers
+for pancreas and ciliated and alveolar markers for lung). A cluster was left \texttt{Unlabeled} if its best score was
+below 0.3 or less than 0.1 above the runner-up (rule fixed before any evaluation; tables in
+\texttt{results/tables/annotation\_*.csv}).
 \begin{figure}[h]\centering
 \includegraphics[width=\linewidth]{../figures/fig_planted_pass_rates.png}
 \caption{Gate pass rates on all planted claims by category (dev ablations, test tissues).}\label{fig:planted}
