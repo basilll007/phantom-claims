@@ -131,7 +131,10 @@ if pp:
     P.to_csv("results/tables/planted_pass_rates.csv")
     fig, ax = plt.subplots(figsize=(8, 3.2))
     P.plot.bar(ax=ax, color=["#55a868", "#c44e52", "#dd8452", "#8172b3"], width=0.8)
-    ax.set_ylabel("gate pass rate (planted claims)"); ax.set_ylim(0, 1.05); ax.legend(fontsize=7, frameon=False, ncol=4)
+    ax.set_ylabel("gate pass rate (planted claims)"); ax.set_ylim(0, 1.05)
+    ax.legend(["true", "phantom (all 0)" if (P.phantom == 0).all() else "phantom", "niche",
+               "random (all 0)" if (P.random == 0).all() else "random"],
+              fontsize=7, frameon=False, ncol=4, loc="lower center", bbox_to_anchor=(0.5, 1.0))
     ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha="right", fontsize=7); fig.tight_layout()
     fig.savefig("figures/fig_planted_pass_rates.png", dpi=200); plt.close(fig)
 
