@@ -1,39 +1,39 @@
 # MORNING REPORT — Phantom Claims (rewritten every cycle)
 
-**Status:** Phase 6 (final eval) running; phases 0–5 and 7 done. ~70% of plan done. Last update 2026-11-07 00:29 CST.
+**Status:** Phases 0–7 done; Phase 8 (paper) drafted, needs a LaTeX compile and citation checks. ~90% of plan done. Last update 2026-11-07 00:46 CST.
 
-## 1. Verdicts (all numbers from results/results.jsonl; K = 10; 95% hierarchical bootstrap CIs)
-| Hyp | Verdict | Key numbers (result id) |
+## 1. Verdicts (pre-registered rules; K = 10; 95% hierarchical bootstrap CIs; all numbers from results/results.jsonl)
+| Hyp | Verdict | Key numbers (result ids) |
 |---|---|---|
-| H1 tools (dev) | **INCONCLUSIVE** | cpdb phantom 0.30 [0.16, 0.46]; prod 0.24 [0.12, 0.38] (`dev_default_H1_expr_*_K10`). Rule needs CI-low ≥ 0.20. |
-| H1 tools (test breast) | **INCONCLUSIVE** | Rep1 held-out seeds 0.20 [0.08, 0.32]; Rep2 0.18 [0.06, 0.32] (`test_final_breast_rep*_H1_expr_cpdb_K10`) |
-| H1 LLM agents (dev) | **INCONCLUSIVE** | both families 0.20 [0.07, 0.35]; Gemini 0.27, DeepSeek 0.13 (`agent_dev_breast_rep1_*_unguided_K10`) |
-| H2 (dev) | **SUPPORTED** | tools: phantom → 0.00, retention 0.97 [0.88, 1.0]; agents post-hoc: → 0.00, retention 0.96 [0.87, 1.0] |
-| H2 (test breast Rep1/Rep2) | **SUPPORTED** | phantom → 0.00, retention 1.00 (`test_final_breast_rep*_H2_expr_*_K10_none`) |
-| H3 | **NOT YET RUN** | breast held-out passes; pancreas + lung final eval in progress |
+| **H1** expression tools | **INCONCLUSIVE** (everywhere) | dev 0.30 [0.16, 0.46] cpdb / 0.24 prod; test: breast Rep1 0.20, Rep2 0.18, pancreas 0.12, lung 0.14 (`*_H1_expr_*_K10`). None meets "≥0.30 and CI-low ≥0.20". |
+| **H1** LLM agents | **INCONCLUSIVE** (pooled) | dev 0.20 [0.07, 0.35]; test, 24 runs: 0.13 [0.08, 0.18] (Gemini 0.15, DeepSeek 0.11) (`agent_test_all_both_unguided_K10`). Per-tissue pancreas (0.08) is FALSIFIED (<0.10). |
+| **H2** gate works | **SUPPORTED** (every split and condition) | tools: dev → 0.00, retention 0.97 [0.88, 1.0]; test → 0.00, retention 1.00. Agents post hoc on test: → 0.00, retention 0.995 [0.98, 1.0] |
+| **H3** transfer | **SUPPORTED** | frozen gate meets H2 on held-out breast seeds, breast Rep2, **pancreatic cancer** and **lung cancer**, with no retuning (`results/tables/verdicts.json`). K=20: 0.51–0.57 → 0.00–0.02, retention 0.98–1.00 |
 
-## 2. Top findings (including the surprises and the negative ones)
-1. **The benchmark is easier than intended at K = 10.** Expression-only tools rank planted TRUE pairs above the matched never-meet decoys (with log-normalised means, concentrating a matched count increase into fewer cells lowers the score). So H1 is *not* supported at K = 10. At K = 20 the phantom rate is 0.57 [0.48, 0.67] (test Rep1), but that is partly mechanical, since only 10 TRUE claims exist.
-2. **The gate removes phantoms while keeping the true claims, and is calibrated:** null p < 0.05 for 5.0% of unplanted claims (`dev_gate_null_calibration`). Planted pass rates: TRUE 0.98, PHANTOM 0.00, NICHE 0.12. With a global instead of a tile-restricted null, NICHE rises to 0.32 and the null p < 0.05 rate to 9%, so tiles are the component that matters for hard negatives.
-3. **Agents ignore their own verifier:** with `verify_claim` available, agents still submitted 5 of 60 claims the tool had rejected (3 of them were negatives) and 5 they never verified (`agent_dev_gate_tool_compliance`). The phantom rate was 0.15 with the gate as a tool vs 0.00 when the gate is applied post hoc. Enforcement has to be outside the agent.
-4. **Real data, a negative result (corrected):** on real breast tissue the frozen gate passes 0/6 PD-L1/PD-1 claims, all for *insufficient evidence* (0–12 expressing contacts within 30 µm). But those contacts are at **chance level, not depleted**: observed/expected 0.53–1.58 (`real_breast_contacts_vs_chance`). So "never meet" is **not** supported at these type pairs; I retracted my earlier wording. The gate also passes **0/4 contact-dependent positive controls** (`real_breast_gate_check`). In receptor-only mode the gate keeps only 0.20 of TRUE plants even on the benchmark (`dev_default_breast_rep1_H2_expr_cpdb_K10_receptor_only`), so without target priors it cannot validate positives.
+## 2. Top findings (surprises and negatives included)
+1. **H1 failed at the pre-registered defaults; the benchmark is easy at K=10.** Expression tools rank TRUE plants above the matched never-meet decoys, and agents with spatial tools avoid most phantoms. Exploratory: at ¼ effect size the expression-only phantom rate is 0.72, which the gate reduces to 0.08 (retention 0.86), so H1 depends on effect size.
+2. **The gate is calibrated, and its tile-restricted null matters:** 5.0% of null claims fall below p<0.05 (9% with a global null). NICHE false passes are 0.12 dev, 0.04–0.06 test (0.32 with a global null). TRUE pass rates are 0.96–1.00 and PHANTOM/RANDOM 0.
+3. **Agents don't fully enforce their own verifier:** on test, 5 of 240 submitted claims (4 of them false) had been rejected by the agent's own `verify_claim`, and 13 were never verified. The phantom rate is 0.07 with the gate as a tool vs 0.00 post hoc (`agent_test_gate_tool_compliance`).
+4. **Negative: the gate's power is entirely the response readout.** With 0/3 responding targets retention is 0.00–0.03; in receptor-only mode (the real-data readout) it is 0.20. On real breast tissue: 0/6 PD-L1/PD-1 claims, 0/10 expression-only top claims and **0/4 positive controls** pass. The PD-L1/PD-1 contacts are at **chance level** (obs/exp 0.53–1.58), *not depleted*, so "never meet" is **not** supported at these type pairs (`real_breast_contacts_vs_chance`).
 
 ## 3. Figures
-`figures/spatial_{breast_rep1,breast_rep2,pancreas,lung}.png`, `figures/fig_phantom_rates.png`, `figures/fig_planted_pass_rates.png`
+`figures/fig_examples.png` (TRUE / PHANTOM / real PD-L1–PD-1), `figures/fig_phantom_rates.png`, `figures/fig_planted_pass_rates.png`, `figures/spatial_{breast_rep1,breast_rep2,pancreas,lung}.png`. Tables: `results/tables/verdict_table.csv`, `paper/tables/verdicts.tex`.
 
 ## 4. Blockers / what the human must do
-- Colorectal and ovarian (Immuno-Oncology panel) data: the 10x dataset pages return HTTP 429 to automated fetches, and I did not guess URLs. To add a third non-breast cancer: open the 10x dataset page, copy the `outs.zip` URL into `configs/`, then run `scripts/zip_remote_extract.py`.
-- LaTeX isn't installed locally: compile `paper/` on Overleaf.
-- If you have the official Janesick annotations for pancreas or lung (there are none): ours are marker-based (`scripts/annotate_markers.py`).
+1. **Compile `paper/main.tex` on Overleaf** with the official AAAI-27 author kit (no LaTeX here). Swap the `\documentclass` line as marked. Numbers come from `paper/numbers.tex` (auto-generated; provenance in `paper/numbers_provenance.json`).
+2. **Verify citations** (`paper/refs.bib`, written from memory) and the 3 `\todo{}` items: the medical-world-model and agent citations, and the parent-thesis PD-L1/PD-1 finding, **which our analysis does not reproduce at the type-pair level**.
+3. **Check dataset licences** in `paper/DATA_SOURCES.md` (marked TODO-VERIFY).
+4. Optional third non-breast cancer (colorectal or ovarian, IO panel): the 10x pages returned HTTP 429, so I didn't guess URLs. Paste an official `outs.zip` URL and run `scripts/zip_remote_extract.py`.
+5. Submission deadline is **Nov 15 AoE** (OpenReview link not yet announced).
 
 ## 5. Risks / possible bugs (harshest-reviewer view)
-- H2 is near-perfect partly by construction: never-meet decoys have ~0 expressing contacts, and TRUE plants have a strong default effect (within-tile ρ ≈ 0.2–0.5). Exploratory sweeps over effect 0.5 / 0.25, noise and plant radius are running to find where it breaks.
-- The gate uses the database's target lists. TRUE targets are 2/3 correct by design, which is optimistic compared with real priors.
-- Gate false positives come from niche pairs (6–12%) and wrong-sender claims next to a TRUE sender.
-- Pancreas and lung annotations are approximate (marker-scored XOA clusters; 17–20% Unlabeled).
-- One Gemini smoke run (249k tokens) used the uncapped harness; it is excluded from metrics (`results/agent_logs/smoke/`).
+- H2/H3 "supported" is partly by construction: never-meet decoys have no contacts, and TRUE plants have a strong target response that the gate reads directly from the listed targets. Reviewers will ask about realism; the effect, noise and responder sweeps are in the paper as exploratory.
+- 3 agent runs per family per dataset is small; agent H1 per tissue is noisy (CIs ±0.15).
+- Pancreas and lung cell types are marker-based (17–20% Unlabeled).
+- Two amendments were made (the donor-gene range after a degenerate first smoke run, and freezing the gate config). Both are logged before any test data were generated.
+- OOM crash during lung final eval: nothing had been logged, so it was rerun. Documented in PROGRESS.md.
 
 ## 6. Next 3 actions
-1. Finish the pancreas + lung final eval, then compute the H3 verdict.
-2. Run test agents (breast running; pancreas/lung next), then `scripts/agent_score.py test`.
-3. Finish the knob sweeps, then a paper draft (`paper/`) generated from the results.
+1. Finish the r_plant=50 robustness sweep (running) and add it to the paper appendix.
+2. Adversarial code review of gate, generator and scorer for subtle bugs; add the result to the report.
+3. Tighten the paper to ≤8 pages, and add an appendix with annotation markers, the agent prompt and an audit-record example.

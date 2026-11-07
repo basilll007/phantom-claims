@@ -9,8 +9,8 @@
 | P3 baselines + H1 dev | claude-main | done | 2026-11-07 00:12 |
 | P4 gate + tuning + validity + ablations | claude-main | done | 2026-11-07 00:20 |
 | P5 agent harness + dev runs | claude-main | done | 2026-11-07 00:28 CST |
-| P6 final eval tools (breast done; pancreas/lung running) | claude-main | in-progress | 2026-11-07 00:28 CST |
-| P6 final eval agents | claude-main | in-progress | 2026-11-07 00:28 CST |
+| P6 final eval tools (all 4 test sets) | claude-main | done | 2026-11-07 00:28 CST |
+| P6 final eval agents (24+24 runs) | claude-main | done | 2026-11-07 00:28 CST |
 | P7 real-data check | claude-main | done (negative on positive controls) | 2026-11-07 00:22 |
-| P8 paper | claude-main | todo | |
+| P8 paper draft | claude-main | in-progress | 2026-11-07 00:45 CST |
 | exploratory sweeps (dev) | claude-main | in-progress | 2026-11-07 00:28 CST |
