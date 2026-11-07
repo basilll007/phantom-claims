@@ -286,16 +286,28 @@
    "split": "test",
    "tissue": "pancreas",
    "condition": "expr_cpdb",
-   "pr": NaN,
-   "pr_ci": null,
-   "H1": "NOT YET RUN",
-   "pr_after": NaN,
-   "red": NaN,
-   "red_ci": null,
-   "ret": NaN,
-   "ret_ci": null,
-   "H2": "NOT YET RUN",
-   "ids": [],
+   "pr": 0.12,
+   "pr_ci": [
+    0.040000000000000036,
+    0.21999999999999997
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 1.0,
+   "ret_ci": [
+    1.0,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "test_final_pancreas_H1_expr_cpdb_K10",
+    "test_final_pancreas_H2_expr_cpdb_K10_none"
+   ],
    "gate_tool_pr": NaN,
    "gate_tool_ci": NaN,
    "n_runs": NaN
@@ -304,16 +316,28 @@
    "split": "test",
    "tissue": "pancreas",
    "condition": "expr_prod",
-   "pr": NaN,
-   "pr_ci": null,
-   "H1": "NOT YET RUN",
-   "pr_after": NaN,
-   "red": NaN,
-   "red_ci": null,
-   "ret": NaN,
-   "ret_ci": null,
-   "H2": "NOT YET RUN",
-   "ids": [],
+   "pr": 0.12,
+   "pr_ci": [
+    0.040000000000000036,
+    0.21999999999999997
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 1.0,
+   "ret_ci": [
+    1.0,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "test_final_pancreas_H1_expr_prod_K10",
+    "test_final_pancreas_H2_expr_prod_K10_none"
+   ],
    "gate_tool_pr": NaN,
    "gate_tool_ci": NaN,
    "n_runs": NaN
@@ -359,7 +383,7 @@
  "H3_detail": {
   "breast_rep1_heldout": true,
   "rep2": true,
-  "pancreas": null,
+  "pancreas": true,
   "lung": null
  }
 }

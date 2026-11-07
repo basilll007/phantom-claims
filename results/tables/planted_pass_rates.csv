@@ -1,8 +1,9 @@
 setting,true,phantom,niche,random
 dev:full,0.98,0.0,0.12,0.0
 dev:no_min_evidence,0.98,0.0,0.12,0.0
-dev:no_perm,0.0,0.0,0.0,0.0
+dev:no_perm,1.0,0.0,0.28,0.0
 dev:no_split,1.0,0.0,0.18,0.0
 dev:no_tiles,1.0,0.0,0.32,0.0
 test:breast_rep1,1.0,0.0,0.06,0.0
 test:breast_rep2,0.96,0.0,0.06,0.0
+test:pancreas,1.0,0.0,0.04,0.0

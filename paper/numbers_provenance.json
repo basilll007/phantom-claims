@@ -1,0 +1,1848 @@
+{
+ "devBreastReponeCpdbKTenPR": {
+  "id": "dev_default_H1_expr_cpdb_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.30000000000000004
+ },
+ "devBreastReponeCpdbKTenPRci": {
+  "id": "dev_default_H1_expr_cpdb_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.16000000000000003,
+   0.45999999999999996
+  ]
+ },
+ "devBreastReponeCpdbKTenPRafter": {
+  "id": "dev_default_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "devBreastReponeCpdbKTenPRafterci": {
+  "id": "dev_default_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "devBreastReponeCpdbKTenRet": {
+  "id": "dev_default_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9714285714285714
+ },
+ "devBreastReponeCpdbKTenRetci": {
+  "id": "dev_default_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.875,
+   1.0
+  ]
+ },
+ "devBreastReponeCpdbKTenRed": {
+  "id": "dev_default_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "devBreastReponeCpdbKTenRedci": {
+  "id": "dev_default_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "devBreastReponeCpdbKTwentyPR": {
+  "id": "dev_default_H1_expr_cpdb_K20",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.55
+ },
+ "devBreastReponeCpdbKTwentyPRci": {
+  "id": "dev_default_H1_expr_cpdb_K20",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.43999999999999995,
+   0.6599999999999999
+  ]
+ },
+ "devBreastReponeCpdbKTwentyPRafter": {
+  "id": "dev_default_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.04347826086956519
+ },
+ "devBreastReponeCpdbKTwentyPRafterci": {
+  "id": "dev_default_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.125
+  ]
+ },
+ "devBreastReponeCpdbKTwentyRet": {
+  "id": "dev_default_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9777777777777777
+ },
+ "devBreastReponeCpdbKTwentyRetci": {
+  "id": "dev_default_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.9069438350153576,
+   1.0
+  ]
+ },
+ "devBreastReponeCpdbKTwentyRed": {
+  "id": "dev_default_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 0.9209486166007905
+ },
+ "devBreastReponeCpdbKTwentyRedci": {
+  "id": "dev_default_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   0.7789240972733973,
+   1.0
+  ]
+ },
+ "devBreastReponeProdKTenPR": {
+  "id": "dev_default_H1_expr_prod_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.24
+ },
+ "devBreastReponeProdKTenPRci": {
+  "id": "dev_default_H1_expr_prod_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.12,
+   0.38
+  ]
+ },
+ "devBreastReponeProdKTenPRafter": {
+  "id": "dev_default_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "devBreastReponeProdKTenPRafterci": {
+  "id": "dev_default_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "devBreastReponeProdKTenRet": {
+  "id": "dev_default_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9736842105263158
+ },
+ "devBreastReponeProdKTenRetci": {
+  "id": "dev_default_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.8823529411764706,
+   1.0
+  ]
+ },
+ "devBreastReponeProdKTenRed": {
+  "id": "dev_default_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "devBreastReponeProdKTenRedci": {
+  "id": "dev_default_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "devBreastReponeProdKTwentyPR": {
+  "id": "dev_default_H1_expr_prod_K20",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.52
+ },
+ "devBreastReponeProdKTwentyPRci": {
+  "id": "dev_default_H1_expr_prod_K20",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.41000000000000003,
+   0.62
+  ]
+ },
+ "devBreastReponeProdKTwentyPRafter": {
+  "id": "dev_default_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.06000000000000005
+ },
+ "devBreastReponeProdKTwentyPRafterci": {
+  "id": "dev_default_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.14584603658536582
+  ]
+ },
+ "devBreastReponeProdKTwentyRet": {
+  "id": "dev_default_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9791666666666666
+ },
+ "devBreastReponeProdKTwentyRetci": {
+  "id": "dev_default_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.9069767441860465,
+   1.0
+  ]
+ },
+ "devBreastReponeProdKTwentyRed": {
+  "id": "dev_default_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 0.8846153846153845
+ },
+ "devBreastReponeProdKTwentyRedci": {
+  "id": "dev_default_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   0.7449885691981709,
+   1.0
+  ]
+ },
+ "testBreastReponeCpdbKTenPR": {
+  "id": "test_final_breast_rep1_H1_expr_cpdb_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.19999999999999996
+ },
+ "testBreastReponeCpdbKTenPRci": {
+  "id": "test_final_breast_rep1_H1_expr_cpdb_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.07999999999999996,
+   0.31999999999999995
+  ]
+ },
+ "testBreastReponeCpdbKTenPRafter": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "testBreastReponeCpdbKTenPRafterci": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "testBreastReponeCpdbKTenRet": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "testBreastReponeCpdbKTenRetci": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReponeCpdbKTenRed": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "testBreastReponeCpdbKTenRedci": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReponeCpdbKTwentyPR": {
+  "id": "test_final_breast_rep1_H1_expr_cpdb_K20",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.5700000000000001
+ },
+ "testBreastReponeCpdbKTwentyPRci": {
+  "id": "test_final_breast_rep1_H1_expr_cpdb_K20",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.48,
+   0.6699999999999999
+  ]
+ },
+ "testBreastReponeCpdbKTwentyPRafter": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.022727272727272707
+ },
+ "testBreastReponeCpdbKTwentyPRafterci": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.09808823529411737
+  ]
+ },
+ "testBreastReponeCpdbKTwentyRet": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "testBreastReponeCpdbKTwentyRetci": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReponeCpdbKTwentyRed": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 0.9601275917065392
+ },
+ "testBreastReponeCpdbKTwentyRedci": {
+  "id": "test_final_breast_rep1_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   0.8386446147640177,
+   1.0
+  ]
+ },
+ "testBreastReponeProdKTenPR": {
+  "id": "test_final_breast_rep1_H1_expr_prod_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.19999999999999996
+ },
+ "testBreastReponeProdKTenPRci": {
+  "id": "test_final_breast_rep1_H1_expr_prod_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.07999999999999996,
+   0.33999999999999997
+  ]
+ },
+ "testBreastReponeProdKTenPRafter": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "testBreastReponeProdKTenPRafterci": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "testBreastReponeProdKTenRet": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "testBreastReponeProdKTenRetci": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReponeProdKTenRed": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "testBreastReponeProdKTenRedci": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReponeProdKTwentyPR": {
+  "id": "test_final_breast_rep1_H1_expr_prod_K20",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.53
+ },
+ "testBreastReponeProdKTwentyPRci": {
+  "id": "test_final_breast_rep1_H1_expr_prod_K20",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.43000000000000005,
+   0.63
+  ]
+ },
+ "testBreastReponeProdKTwentyPRafter": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.02083333333333337
+ },
+ "testBreastReponeProdKTwentyPRafterci": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.08932629870129849
+  ]
+ },
+ "testBreastReponeProdKTwentyRet": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "testBreastReponeProdKTwentyRetci": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReponeProdKTwentyRed": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 0.960691823899371
+ },
+ "testBreastReponeProdKTwentyRedci": {
+  "id": "test_final_breast_rep1_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   0.8475028593213876,
+   1.0
+  ]
+ },
+ "testBreastReptwoCpdbKTenPR": {
+  "id": "test_final_breast_rep2_H1_expr_cpdb_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.18000000000000005
+ },
+ "testBreastReptwoCpdbKTenPRci": {
+  "id": "test_final_breast_rep2_H1_expr_cpdb_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.06000000000000005,
+   0.31999999999999995
+  ]
+ },
+ "testBreastReptwoCpdbKTenPRafter": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "testBreastReptwoCpdbKTenPRafterci": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "testBreastReptwoCpdbKTenRet": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "testBreastReptwoCpdbKTenRetci": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReptwoCpdbKTenRed": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "testBreastReptwoCpdbKTenRedci": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReptwoCpdbKTwentyPR": {
+  "id": "test_final_breast_rep2_H1_expr_cpdb_K20",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.56
+ },
+ "testBreastReptwoCpdbKTwentyPRci": {
+  "id": "test_final_breast_rep2_H1_expr_cpdb_K20",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.44999999999999996,
+   0.6602499999999986
+  ]
+ },
+ "testBreastReptwoCpdbKTwentyPRafter": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "testBreastReptwoCpdbKTwentyPRafterci": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "testBreastReptwoCpdbKTwentyRet": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9772727272727273
+ },
+ "testBreastReptwoCpdbKTwentyRetci": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.8999489795918367,
+   1.0
+  ]
+ },
+ "testBreastReptwoCpdbKTwentyRed": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "testBreastReptwoCpdbKTwentyRedci": {
+  "id": "test_final_breast_rep2_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReptwoProdKTenPR": {
+  "id": "test_final_breast_rep2_H1_expr_prod_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.18000000000000005
+ },
+ "testBreastReptwoProdKTenPRci": {
+  "id": "test_final_breast_rep2_H1_expr_prod_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.06000000000000005,
+   0.31999999999999995
+  ]
+ },
+ "testBreastReptwoProdKTenPRafter": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "testBreastReptwoProdKTenPRafterci": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "testBreastReptwoProdKTenRet": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "testBreastReptwoProdKTenRetci": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReptwoProdKTenRed": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "testBreastReptwoProdKTenRedci": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testBreastReptwoProdKTwentyPR": {
+  "id": "test_final_breast_rep2_H1_expr_prod_K20",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.52
+ },
+ "testBreastReptwoProdKTwentyPRci": {
+  "id": "test_final_breast_rep2_H1_expr_prod_K20",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.42000000000000004,
+   0.62
+  ]
+ },
+ "testBreastReptwoProdKTwentyPRafter": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "testBreastReptwoProdKTwentyPRafterci": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "testBreastReptwoProdKTwentyRet": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9791666666666666
+ },
+ "testBreastReptwoProdKTwentyRetci": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.9106737012987013,
+   1.0
+  ]
+ },
+ "testBreastReptwoProdKTwentyRed": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "testBreastReptwoProdKTwentyRedci": {
+  "id": "test_final_breast_rep2_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testPancreasCpdbKTenPR": {
+  "id": "test_final_pancreas_H1_expr_cpdb_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.12
+ },
+ "testPancreasCpdbKTenPRci": {
+  "id": "test_final_pancreas_H1_expr_cpdb_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.040000000000000036,
+   0.21999999999999997
+  ]
+ },
+ "testPancreasCpdbKTenPRafter": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "testPancreasCpdbKTenPRafterci": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "testPancreasCpdbKTenRet": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "testPancreasCpdbKTenRetci": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testPancreasCpdbKTenRed": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "testPancreasCpdbKTenRedci": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testPancreasCpdbKTwentyPR": {
+  "id": "test_final_pancreas_H1_expr_cpdb_K20",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.53
+ },
+ "testPancreasCpdbKTwentyPRci": {
+  "id": "test_final_pancreas_H1_expr_cpdb_K20",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.43000000000000005,
+   0.63
+  ]
+ },
+ "testPancreasCpdbKTwentyPRafter": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "testPancreasCpdbKTwentyPRafterci": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "testPancreasCpdbKTwentyRet": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "testPancreasCpdbKTwentyRetci": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testPancreasCpdbKTwentyRed": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K20_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "testPancreasCpdbKTwentyRedci": {
+  "id": "test_final_pancreas_H2_expr_cpdb_K20_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testPancreasProdKTenPR": {
+  "id": "test_final_pancreas_H1_expr_prod_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.12
+ },
+ "testPancreasProdKTenPRci": {
+  "id": "test_final_pancreas_H1_expr_prod_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.040000000000000036,
+   0.21999999999999997
+  ]
+ },
+ "testPancreasProdKTenPRafter": {
+  "id": "test_final_pancreas_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "testPancreasProdKTenPRafterci": {
+  "id": "test_final_pancreas_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "testPancreasProdKTenRet": {
+  "id": "test_final_pancreas_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "testPancreasProdKTenRetci": {
+  "id": "test_final_pancreas_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testPancreasProdKTenRed": {
+  "id": "test_final_pancreas_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "testPancreasProdKTenRedci": {
+  "id": "test_final_pancreas_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testPancreasProdKTwentyPR": {
+  "id": "test_final_pancreas_H1_expr_prod_K20",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.51
+ },
+ "testPancreasProdKTwentyPRci": {
+  "id": "test_final_pancreas_H1_expr_prod_K20",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.41000000000000003,
+   0.61
+  ]
+ },
+ "testPancreasProdKTwentyPRafter": {
+  "id": "test_final_pancreas_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "testPancreasProdKTwentyPRafterci": {
+  "id": "test_final_pancreas_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.0,
+   0.0
+  ]
+ },
+ "testPancreasProdKTwentyRet": {
+  "id": "test_final_pancreas_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "testPancreasProdKTwentyRetci": {
+  "id": "test_final_pancreas_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "testPancreasProdKTwentyRed": {
+  "id": "test_final_pancreas_H2_expr_prod_K20_none",
+  "path": [
+   "metrics",
+   "rel_reduction"
+  ],
+  "value": 1.0
+ },
+ "testPancreasProdKTwentyRedci": {
+  "id": "test_final_pancreas_H2_expr_prod_K20_none",
+  "path": [
+   "ci",
+   "rel_reduction"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "agDevBreastReponeGeminiPR": {
+  "id": "agent_dev_breast_rep1_gemini_unguided_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.2666666666666667
+ },
+ "agDevBreastReponeGeminiPRci": {
+  "id": "agent_dev_breast_rep1_gemini_unguided_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.06666666666666665,
+   0.5333333333333333
+  ]
+ },
+ "agDevBreastReponeGeminiRuns": {
+  "id": "agent_dev_breast_rep1_gemini_unguided_K10",
+  "path": [
+   "n_runs"
+  ],
+  "value": 3
+ },
+ "agDevBreastReponeGeminiPRafter": {
+  "id": "agent_dev_breast_rep1_gemini_unguided_gated_K10",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "agDevBreastReponeGeminiRet": {
+  "id": "agent_dev_breast_rep1_gemini_unguided_gated_K10",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9545454545454546
+ },
+ "agDevBreastReponeGeminiRetci": {
+  "id": "agent_dev_breast_rep1_gemini_unguided_gated_K10",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.8095238095238095,
+   1.0
+  ]
+ },
+ "agDevBreastReponeGeminiToolPR": {
+  "id": "agent_dev_breast_rep1_gemini_gate_tool_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.16666666666666663
+ },
+ "agDevBreastReponeGeminiToolPRci": {
+  "id": "agent_dev_breast_rep1_gemini_gate_tool_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.033333333333333326,
+   0.3666666666666667
+  ]
+ },
+ "agDevBreastReponeDeepseekPR": {
+  "id": "agent_dev_breast_rep1_deepseek_unguided_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.1333333333333333
+ },
+ "agDevBreastReponeDeepseekPRci": {
+  "id": "agent_dev_breast_rep1_deepseek_unguided_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.033333333333333326,
+   0.2674999999999955
+  ]
+ },
+ "agDevBreastReponeDeepseekRuns": {
+  "id": "agent_dev_breast_rep1_deepseek_unguided_K10",
+  "path": [
+   "n_runs"
+  ],
+  "value": 3
+ },
+ "agDevBreastReponeDeepseekPRafter": {
+  "id": "agent_dev_breast_rep1_deepseek_unguided_gated_K10",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "agDevBreastReponeDeepseekRet": {
+  "id": "agent_dev_breast_rep1_deepseek_unguided_gated_K10",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9615384615384616
+ },
+ "agDevBreastReponeDeepseekRetci": {
+  "id": "agent_dev_breast_rep1_deepseek_unguided_gated_K10",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.84,
+   1.0
+  ]
+ },
+ "agDevBreastReponeDeepseekToolPR": {
+  "id": "agent_dev_breast_rep1_deepseek_gate_tool_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.1333333333333333
+ },
+ "agDevBreastReponeDeepseekToolPRci": {
+  "id": "agent_dev_breast_rep1_deepseek_gate_tool_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.033333333333333326,
+   0.2666666666666667
+  ]
+ },
+ "agDevBreastReponeBothPR": {
+  "id": "agent_dev_breast_rep1_both_unguided_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.19999999999999996
+ },
+ "agDevBreastReponeBothPRci": {
+  "id": "agent_dev_breast_rep1_both_unguided_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.06666666666666665,
+   0.35
+  ]
+ },
+ "agDevBreastReponeBothRuns": {
+  "id": "agent_dev_breast_rep1_both_unguided_K10",
+  "path": [
+   "n_runs"
+  ],
+  "value": 6
+ },
+ "agDevBreastReponeBothPRafter": {
+  "id": "agent_dev_breast_rep1_both_unguided_gated_K10",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "agDevBreastReponeBothRet": {
+  "id": "agent_dev_breast_rep1_both_unguided_gated_K10",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9583333333333334
+ },
+ "agDevBreastReponeBothRetci": {
+  "id": "agent_dev_breast_rep1_both_unguided_gated_K10",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.8683771929824562,
+   1.0
+  ]
+ },
+ "agDevBreastReponeBothToolPR": {
+  "id": "agent_dev_breast_rep1_both_gate_tool_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.15000000000000002
+ },
+ "agDevBreastReponeBothToolPRci": {
+  "id": "agent_dev_breast_rep1_both_gate_tool_K10",
+  "path": [
+   "ci",
+   "phantom_rate"
+  ],
+  "value": [
+   0.050000000000000044,
+   0.2666666666666667
+  ]
+ },
+ "compDevRuns": {
+  "id": "agent_dev_gate_tool_compliance",
+  "path": [
+   "metrics",
+   "runs"
+  ],
+  "value": 6
+ },
+ "compDevSubmitted": {
+  "id": "agent_dev_gate_tool_compliance",
+  "path": [
+   "metrics",
+   "submitted"
+  ],
+  "value": 60
+ },
+ "compDevVerifiedPass": {
+  "id": "agent_dev_gate_tool_compliance",
+  "path": [
+   "metrics",
+   "verified_pass"
+  ],
+  "value": 50
+ },
+ "compDevVerifiedFailSubmitted": {
+  "id": "agent_dev_gate_tool_compliance",
+  "path": [
+   "metrics",
+   "verified_fail_submitted"
+  ],
+  "value": 5
+ },
+ "compDevUnverified": {
+  "id": "agent_dev_gate_tool_compliance",
+  "path": [
+   "metrics",
+   "unverified"
+  ],
+  "value": 5
+ },
+ "compDevVerifiedFailSubmittedNegatives": {
+  "id": "agent_dev_gate_tool_compliance",
+  "path": [
+   "metrics",
+   "verified_fail_submitted_negatives"
+  ],
+  "value": 3
+ },
+ "calibFullFive": {
+  "id": "dev_gate_null_calibration",
+  "path": [
+   "metrics",
+   "full",
+   "frac_p_lt_0_05"
+  ],
+  "value": 0.05
+ },
+ "calibFullN": {
+  "id": "dev_gate_null_calibration",
+  "path": [
+   "metrics",
+   "full",
+   "n"
+  ],
+  "value": 200
+ },
+ "calibNoTilesFive": {
+  "id": "dev_gate_null_calibration",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "frac_p_lt_0_05"
+  ],
+  "value": 0.09
+ },
+ "calibNoTilesN": {
+  "id": "dev_gate_null_calibration",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "n"
+  ],
+  "value": 200
+ },
+ "plantedFullTrue": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "full",
+   "true"
+  ],
+  "value": 0.98
+ },
+ "plantedFullPhantom": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "full",
+   "phantom"
+  ],
+  "value": 0.0
+ },
+ "plantedFullNiche": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "full",
+   "niche"
+  ],
+  "value": 0.12
+ },
+ "plantedFullRandom": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "full",
+   "random"
+  ],
+  "value": 0.0
+ },
+ "plantedNoTilesTrue": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "true"
+  ],
+  "value": 1.0
+ },
+ "plantedNoTilesPhantom": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "phantom"
+  ],
+  "value": 0.0
+ },
+ "plantedNoTilesNiche": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "niche"
+  ],
+  "value": 0.32
+ },
+ "plantedNoTilesRandom": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "random"
+  ],
+  "value": 0.0
+ },
+ "plantedNoSplitTrue": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_split",
+   "true"
+  ],
+  "value": 1.0
+ },
+ "plantedNoSplitPhantom": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_split",
+   "phantom"
+  ],
+  "value": 0.0
+ },
+ "plantedNoSplitNiche": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_split",
+   "niche"
+  ],
+  "value": 0.18
+ },
+ "plantedNoSplitRandom": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_split",
+   "random"
+  ],
+  "value": 0.0
+ },
+ "plantedNoMinEvidenceTrue": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_min_evidence",
+   "true"
+  ],
+  "value": 0.98
+ },
+ "plantedNoMinEvidencePhantom": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_min_evidence",
+   "phantom"
+  ],
+  "value": 0.0
+ },
+ "plantedNoMinEvidenceNiche": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_min_evidence",
+   "niche"
+  ],
+  "value": 0.12
+ },
+ "plantedNoMinEvidenceRandom": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_min_evidence",
+   "random"
+  ],
+  "value": 0.0
+ },
+ "plantedNoPermTrue": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_perm",
+   "true"
+  ],
+  "value": 1.0
+ },
+ "plantedNoPermPhantom": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_perm",
+   "phantom"
+  ],
+  "value": 0.0
+ },
+ "plantedNoPermNiche": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_perm",
+   "niche"
+  ],
+  "value": 0.28
+ },
+ "plantedNoPermRandom": {
+  "id": "dev_gate_planted_pass_rates",
+  "path": [
+   "metrics",
+   "no_perm",
+   "random"
+  ],
+  "value": 0.0
+ },
+ "testplantedBreastReponeTrue": {
+  "id": "test_final_planted_pass_rates_breast_rep1",
+  "path": [
+   "metrics",
+   "true"
+  ],
+  "value": 1.0
+ },
+ "testplantedBreastReponePhantom": {
+  "id": "test_final_planted_pass_rates_breast_rep1",
+  "path": [
+   "metrics",
+   "phantom"
+  ],
+  "value": 0.0
+ },
+ "testplantedBreastReponeNiche": {
+  "id": "test_final_planted_pass_rates_breast_rep1",
+  "path": [
+   "metrics",
+   "niche"
+  ],
+  "value": 0.06
+ },
+ "testplantedBreastReponeRandom": {
+  "id": "test_final_planted_pass_rates_breast_rep1",
+  "path": [
+   "metrics",
+   "random"
+  ],
+  "value": 0.0
+ },
+ "testplantedBreastReptwoTrue": {
+  "id": "test_final_planted_pass_rates_breast_rep2",
+  "path": [
+   "metrics",
+   "true"
+  ],
+  "value": 0.96
+ },
+ "testplantedBreastReptwoPhantom": {
+  "id": "test_final_planted_pass_rates_breast_rep2",
+  "path": [
+   "metrics",
+   "phantom"
+  ],
+  "value": 0.0
+ },
+ "testplantedBreastReptwoNiche": {
+  "id": "test_final_planted_pass_rates_breast_rep2",
+  "path": [
+   "metrics",
+   "niche"
+  ],
+  "value": 0.06
+ },
+ "testplantedBreastReptwoRandom": {
+  "id": "test_final_planted_pass_rates_breast_rep2",
+  "path": [
+   "metrics",
+   "random"
+  ],
+  "value": 0.0
+ },
+ "testplantedPancreasTrue": {
+  "id": "test_final_planted_pass_rates_pancreas",
+  "path": [
+   "metrics",
+   "true"
+  ],
+  "value": 1.0
+ },
+ "testplantedPancreasPhantom": {
+  "id": "test_final_planted_pass_rates_pancreas",
+  "path": [
+   "metrics",
+   "phantom"
+  ],
+  "value": 0.0
+ },
+ "testplantedPancreasNiche": {
+  "id": "test_final_planted_pass_rates_pancreas",
+  "path": [
+   "metrics",
+   "niche"
+  ],
+  "value": 0.04
+ },
+ "testplantedPancreasRandom": {
+  "id": "test_final_planted_pass_rates_pancreas",
+  "path": [
+   "metrics",
+   "random"
+  ],
+  "value": 0.0
+ },
+ "realPdlPass": {
+  "id": "real_breast_gate_check",
+  "path": [
+   "metrics",
+   "PD-L1/PD-1 case",
+   "pass_both"
+  ],
+  "value": 0
+ },
+ "realPdlN": {
+  "id": "real_breast_gate_check",
+  "path": [
+   "metrics",
+   "PD-L1/PD-1 case",
+   "n"
+  ],
+  "value": 6
+ },
+ "realExprtopPass": {
+  "id": "real_breast_gate_check",
+  "path": [
+   "metrics",
+   "expr_top10_rep1",
+   "pass_both"
+  ],
+  "value": 0
+ },
+ "realExprtopN": {
+  "id": "real_breast_gate_check",
+  "path": [
+   "metrics",
+   "expr_top10_rep1",
+   "n"
+  ],
+  "value": 10
+ },
+ "realPosctlPass": {
+  "id": "real_breast_gate_check",
+  "path": [
+   "metrics",
+   "positive_control_contact",
+   "pass_both"
+  ],
+  "value": 0
+ },
+ "realPosctlN": {
+  "id": "real_breast_gate_check",
+  "path": [
+   "metrics",
+   "positive_control_contact",
+   "n"
+  ],
+  "value": 4
+ }
+}

@@ -1,0 +1,17 @@
+\begin{table*}[t]\centering\small
+\begin{tabular}{llllllll}\toprule
+split & tissue & condition & phantom@10 & H1 & after gate & retention & H2\\\midrule
+dev & breast\_rep1 & expr\_cpdb & 0.30 [0.16, 0.46] & INCONCLUSIVE & 0.00 & 0.97 [0.88, 1.00] & SUPPORTED\\
+dev & breast\_rep1 & expr\_prod & 0.24 [0.12, 0.38] & INCONCLUSIVE & 0.00 & 0.97 [0.88, 1.00] & SUPPORTED\\
+dev & breast\_rep1 & agent\_gemini & 0.27 [0.07, 0.53] & INCONCLUSIVE & 0.00 & 0.95 [0.81, 1.00] & SUPPORTED\\
+dev & breast\_rep1 & agent\_deepseek & 0.13 [0.03, 0.27] & INCONCLUSIVE & 0.00 & 0.96 [0.84, 1.00] & SUPPORTED\\
+dev & breast\_rep1 & agent\_both & 0.20 [0.07, 0.35] & INCONCLUSIVE & 0.00 & 0.96 [0.87, 1.00] & SUPPORTED\\
+test & breast\_rep1 & expr\_cpdb & 0.20 [0.08, 0.32] & INCONCLUSIVE & 0.00 & 1.00 [1.00, 1.00] & SUPPORTED\\
+test & breast\_rep1 & expr\_prod & 0.20 [0.08, 0.34] & INCONCLUSIVE & 0.00 & 1.00 [1.00, 1.00] & SUPPORTED\\
+test & breast\_rep2 & expr\_cpdb & 0.18 [0.06, 0.32] & INCONCLUSIVE & 0.00 & 1.00 [1.00, 1.00] & SUPPORTED\\
+test & breast\_rep2 & expr\_prod & 0.18 [0.06, 0.32] & INCONCLUSIVE & 0.00 & 1.00 [1.00, 1.00] & SUPPORTED\\
+test & pancreas & expr\_cpdb & 0.12 [0.04, 0.22] & INCONCLUSIVE & 0.00 & 1.00 [1.00, 1.00] & SUPPORTED\\
+test & pancreas & expr\_prod & 0.12 [0.04, 0.22] & INCONCLUSIVE & 0.00 & 1.00 [1.00, 1.00] & SUPPORTED\\
+\bottomrule\end{tabular}
+\caption{Pre-registered verdicts (K=10; 95\% hierarchical bootstrap CIs). H3: NOT YET RUN.}\label{tab:verdicts}
+\end{table*}

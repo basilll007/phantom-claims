@@ -1,6 +1,6 @@
 # MORNING REPORT — Phantom Claims (rewritten every cycle)
 
-**Status:** Phase 6 (final eval) running; phases 0–5 and 7 done. ~70% of plan done. Last update 2026-11-07 00:35 CST.
+**Status:** Phase 6 (final eval) running; phases 0–5 and 7 done. ~70% of plan done. Last update 2026-11-07 00:29 CST.
 
 ## 1. Verdicts (all numbers from results/results.jsonl; K = 10; 95% hierarchical bootstrap CIs)
 | Hyp | Verdict | Key numbers (result id) |

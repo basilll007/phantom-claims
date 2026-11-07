@@ -143,3 +143,25 @@ if sw:
     S = pd.DataFrame(sw); S.to_csv("results/tables/dev_sweep.csv", index=False)
 print(T[["split", "tissue", "condition", "pr", "H1", "pr_after", "red", "ret", "H2"]].to_string())
 print("H3:", verd)
+
+# ---- LaTeX verdict table for the paper (numbers from results.jsonl via T)
+def f2(x):
+    return "--" if x is None or (isinstance(x, float) and math.isnan(x)) else f"{x:.2f}"
+def fci(c):
+    return "" if not isinstance(c, list) else f" [{c[0]:.2f}, {c[1]:.2f}]"
+BS = chr(92)  # backslash, avoids escape mangling
+def esc(s):
+    return s.replace("_", BS + "_")
+lines = [BS + "begin{table*}[t]" + BS + "centering" + BS + "small",
+         BS + "begin{tabular}{llllllll}" + BS + "toprule",
+         "split & tissue & condition & phantom@10 & H1 & after gate & retention & H2" + BS + BS + BS + "midrule"]
+for r in T.itertuples():
+    if r.pr is None or (isinstance(r.pr, float) and math.isnan(r.pr)):
+        continue
+    lines.append(f"{r.split} & {esc(r.tissue)} & {esc(r.condition)} & {f2(r.pr)}{fci(r.pr_ci)} & "
+                 f"{r.H1} & {f2(r.pr_after)} & {f2(r.ret)}{fci(r.ret_ci)} & {r.H2}" + BS + BS)
+lines += [BS + "bottomrule" + BS + "end{tabular}",
+          BS + "caption{Pre-registered verdicts (K=10; 95" + BS + "% hierarchical bootstrap CIs). H3: " + verd["H3"]
+          + ".}" + BS + "label{tab:verdicts}",
+          BS + "end{table*}"]
+open("paper/tables/verdicts.tex", "w").write("\n".join(lines) + "\n")
