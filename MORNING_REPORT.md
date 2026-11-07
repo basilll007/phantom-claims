@@ -29,7 +29,7 @@
 ## 5. Risks / possible bugs (harshest-reviewer view)
 - H2/H3 "supported" is partly by construction: never-meet decoys have no contacts, and TRUE plants have a strong target response that the gate reads directly from the listed targets. Reviewers will ask about realism; the effect, noise and responder sweeps are in the paper as exploratory.
 - 3 agent runs per family per dataset is small; agent H1 per tissue is noisy (CIs ±0.15).
-- Pancreas and lung cell types are marker-based (17–20% Unlabeled).
+- Pancreas and lung cell types are marker-based (Unlabeled after QC: pancreas 11.1%, lung 15.7%; `results/tables/cell_counts.csv`).
 - Two amendments were made (the donor-gene range after a degenerate first smoke run, and freezing the gate config). Both are logged before any test data were generated.
 - OOM crash during lung final eval: nothing had been logged, so it was rerun. Documented in PROGRESS.md.
 
