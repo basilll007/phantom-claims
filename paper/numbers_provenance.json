@@ -1845,6 +1845,216 @@
   ],
   "value": 4
  },
+ "swDefaultReceptorOnlyCpdbPR": {
+  "id": "dev_default_H1_expr_cpdb_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.30000000000000004
+ },
+ "swDefaultReceptorOnlyCpdbPRafter": {
+  "id": "dev_default_breast_rep1_H2_expr_cpdb_K10_receptor_only",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "swDefaultReceptorOnlyCpdbRet": {
+  "id": "dev_default_breast_rep1_H2_expr_cpdb_K10_receptor_only",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.2
+ },
+ "swDefaultReceptorOnlyCpdbRetci": {
+  "id": "dev_default_breast_rep1_H2_expr_cpdb_K10_receptor_only",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.05878151260504202,
+   0.39409090909090827
+  ]
+ },
+ "swDefaultReceptorOnlyProdPR": {
+  "id": "dev_default_H1_expr_prod_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.24
+ },
+ "swDefaultReceptorOnlyProdPRafter": {
+  "id": "dev_default_breast_rep1_H2_expr_prod_K10_receptor_only",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "swDefaultReceptorOnlyProdRet": {
+  "id": "dev_default_breast_rep1_H2_expr_prod_K10_receptor_only",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.21052631578947367
+ },
+ "swDefaultReceptorOnlyProdRetci": {
+  "id": "dev_default_breast_rep1_H2_expr_prod_K10_receptor_only",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.06976744186046512,
+   0.39395933014354056
+  ]
+ },
+ "swEffectzeropfiveNoneCpdbPR": {
+  "id": "dev_effect0.5_breast_rep1_H1_expr_cpdb_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.26
+ },
+ "swEffectzeropfiveNoneCpdbPRafter": {
+  "id": "dev_effect0.5_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "swEffectzeropfiveNoneCpdbRet": {
+  "id": "dev_effect0.5_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.8918918918918919
+ },
+ "swEffectzeropfiveNoneCpdbRetci": {
+  "id": "dev_effect0.5_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.7666666666666667,
+   1.0
+  ]
+ },
+ "swEffectzeropfiveNoneProdPR": {
+  "id": "dev_effect0.5_breast_rep1_H1_expr_prod_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.24
+ },
+ "swEffectzeropfiveNoneProdPRafter": {
+  "id": "dev_effect0.5_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "swEffectzeropfiveNoneProdRet": {
+  "id": "dev_effect0.5_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.8947368421052632
+ },
+ "swEffectzeropfiveNoneProdRetci": {
+  "id": "dev_effect0.5_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.7804200542005421,
+   1.0
+  ]
+ },
+ "swResponeNoneCpdbPR": {
+  "id": "dev_resp1_breast_rep1_H1_expr_cpdb_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.24
+ },
+ "swResponeNoneCpdbPRafter": {
+  "id": "dev_resp1_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "swResponeNoneCpdbRet": {
+  "id": "dev_resp1_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "swResponeNoneCpdbRetci": {
+  "id": "dev_resp1_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
+ "swResponeNoneProdPR": {
+  "id": "dev_resp1_breast_rep1_H1_expr_prod_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.19999999999999996
+ },
+ "swResponeNoneProdPRafter": {
+  "id": "dev_resp1_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "swResponeNoneProdRet": {
+  "id": "dev_resp1_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "swResponeNoneProdRetci": {
+  "id": "dev_resp1_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   1.0,
+   1.0
+  ]
+ },
  "realContactRatio": {
   "id": "real_breast_contacts_vs_chance",
   "value": [

@@ -104,6 +104,16 @@ import csv
 for row in csv.DictReader(open("results/tables/cell_counts.csv")):
     if row["cell_type"] == "__TOTAL__":
         out.append(f"\\newcommand{{\\cells{tag(row['tissue'])}}}{{{int(row['n_cells']):,}}}".replace(",", "{,}"))
+# exploratory dev sweeps / controls (K=10, cpdb + prod)
+for tagname, abl in [("default", "receptor_only"), ("effect0.5", "none"), ("effect0.25", "none"), ("noise0.5", "none"),
+                     ("r50", "none"), ("resp1", "none"), ("resp0", "none")]:
+    for m in ("cpdb", "prod"):
+        pre = f"sw{tag(tagname.replace('.', 'p'))}{tag(abl)}{tag(m)}"
+        r1 = first(f"dev_{tagname}_breast_rep1_H1_expr_{m}_K10", f"dev_{tagname}_H1_expr_{m}_K10")
+        r2 = first(f"dev_{tagname}_breast_rep1_H2_expr_{m}_K10_{abl}", f"dev_{tagname}_H2_expr_{m}_K10_{abl}")
+        num(pre + "PR", r1, ["metrics", "phantom_rate"])
+        num(pre + "PRafter", r2, ["metrics", "phantom_rate_after"])
+        num(pre + "Ret", r2, ["metrics", "retention"]); ci(pre + "Retci", r2, "retention")
 os.makedirs("paper", exist_ok=True)
 open("paper/numbers.tex", "w").write("\n".join(out) + "\n")
 json.dump(used, open("paper/numbers_provenance.json", "w"), indent=1, default=float)

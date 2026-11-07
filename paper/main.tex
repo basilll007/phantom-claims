@@ -120,11 +120,11 @@ expression-only top-10 lists on dev (retention \devBreastReponeCpdbKTenRet{} \de
 held-out breast seeds (after: \testBreastReponeCpdbKTenPRafter{}, retention \testBreastReponeCpdbKTenRet{}). Post-hoc
 gating of unguided agent lists on dev gave a phantom rate of \agDevBreastReponeBothPRafter{} with retention
 \agDevBreastReponeBothRet{} \agDevBreastReponeBothRetci{}. The gate is calibrated: \calibFullFive{} of
-\calibFullN{} unplanted claims had $p<0.05$ (global-permutation ablation: \calibNotilesFive{}).
+\calibFullN{} unplanted claims had $p<0.05$ (global-permutation ablation: \calibNoTilesFive{}).
 On all planted claims (dev), pass rates were \plantedFullTrue{} (true), \plantedFullPhantom{} (phantom),
 \plantedFullNiche{} (niche) and \plantedFullRandom{} (random); removing tile restriction raised niche false passes
-to \plantedNotilesNiche{}, removing the permutation test to \plantedNopermNiche{}, and removing split consistency to
-\plantedNosplitNiche{} (Figure~\ref{fig:planted}).
+to \plantedNoTilesNiche{}, removing the permutation test to \plantedNoPermNiche{}, and removing split consistency to
+\plantedNoSplitNiche{} (Figure~\ref{fig:planted}).
 
 \paragraph{H3 (transfer).} \todo{write after final evaluation: pancreas and lung verdicts from tables/verdicts.tex}
 Pancreas: phantom rate \testPancreasCpdbKTenPR{} $\rightarrow$ \testPancreasCpdbKTenPRafter{}, retention
@@ -150,10 +150,14 @@ claims, but they do not show active segregation either. It also passed
 gate is therefore conservative and cannot certify positives without a response readout.
 
 \section{Limitations}
-(1) Semi-synthetic realism: planted effects are additive Poisson counts with a fixed dose response; the default effect
-is strong (exploratory sweeps in the Appendix), and never-meet decoys are easy for any spatial check. (2) The gate
-relies on listed downstream targets; real target priors are noisier, and with the receptor as readout the gate failed
-positive controls on real data. (3) Small panels: \lrBreastRepone{} (breast) and \lrPancreas{} (pancreas, lung)
+(1) Semi-synthetic realism: planted effects are additive Poisson counts with a fixed dose response, and never-meet
+decoys are easy for any spatial check. The default effect is strong; in exploratory dev sweeps, halving it lowered
+retention to \swEffectzeropfiveNoneCpdbRet{} \swEffectzeropfiveNoneCpdbRetci{}, and at a quarter of the effect retention
+was \swEffectzeroptwofiveNoneCpdbRet{} \swEffectzeroptwofiveNoneCpdbRetci{}. (2) The gate depends on a response readout.
+With only one of three listed targets responding, retention was \swResponeNoneCpdbRet{}; with no responding target it was
+\swRespzeroNoneCpdbRet{}. In receptor-only mode (the readout available on real data) retention fell to
+\swDefaultReceptorOnlyCpdbRet{} \swDefaultReceptorOnlyCpdbRetci{} on the benchmark, which is consistent with the gate
+failing every real-data positive control. (3) Small panels: \lrBreastRepone{} (breast) and \lrPancreas{} (pancreas, lung)
 consensus L--R pairs out of \lrConsensus{} \citep{turei2021omnipath,dimitrov2022liana} are measurable.
 (4) Breast Rep1/Rep2 are serial sections of a single donor block; pancreas and lung annotations are marker-based.
 (5) Two LLM families, three runs per dataset per family, one prompt; results may not transfer to other agents.
