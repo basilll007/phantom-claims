@@ -156,7 +156,12 @@ class Env:
         return {k: rec.get(k) for k in ["pass_", "reasons", "rho_within_tile", "p_perm",
                                         "n_expressing_pairs_within_r", "halves"]}
 
+    ALLOWED = {"list_cell_types", "list_lr_database", "expression_summary", "top_expressed_pairs",
+               "spatial_proximity", "colocalization", "compare_near_far", "verify_claim"}
+
     def call(self, name, args):
+        if name not in self.ALLOWED:                     # whitelist (review finding: no getattr on arbitrary names)
+            raise ValueError(f"unknown tool {name}")
         if name == "verify_claim" and self.gate is None:
             raise ValueError("verify_claim not available")
         fn = getattr(self, name)

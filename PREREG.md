@@ -128,3 +128,13 @@ many grid configs tied at post-gate phantom rate 0 with retention >= 0.90; tie b
 Recorded in results/tables/gate_selected_dev.json and results.jsonl id=dev_gate_tuning. No test benchmark
 instance had been generated at this point. Ablation bug fix (no effect on the frozen gate): with use_perm=False
 the split check uses only the sign of rho in both halves.
+
+### Amendment 3 — 2026-11-07 00:53 CST
+**Documentation of post-freeze code edits (no change to the frozen gate's behaviour).** After Amendment 2,
+gate/gate.py gained (i) an exploratory flag use_targets (default True = frozen behaviour) used only for the
+receptor-only control, and (ii) a change to the split rule that applies only when use_perm=False (ablation).
+An independent read-only code review (subagent, this session) confirmed via git diff that both are behaviour-preserving
+for the frozen configuration, so final-eval results (including the lung re-run after an OOM crash) are unaffected.
+Also post hoc, after all agent runs: tool-name whitelist in agent/harness.py (security hardening; no logged run called an
+undeclared tool) and report-script fixes (float rounding in verdict thresholds; PREREG-conformant FALSIFIED rule when
+retention is NaN; missing values no longer drawn as 0). None of these changes any reported verdict.
