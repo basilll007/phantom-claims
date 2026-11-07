@@ -128,7 +128,8 @@ def h2(t, data, cfg, tag, split="dev", tissue="breast_rep1", ablation="none", wr
 
 if __name__ == "__main__":
     stage = sys.argv[1] if len(sys.argv) > 1 else "all"
-    t, data = load_dev()
+    if stage != "sweep":
+        t, data = load_dev()
     if stage in ("tune", "all"):
         h1_tools(data, "default")
         sel = tune(t, data)
@@ -141,8 +142,11 @@ if __name__ == "__main__":
                          ("no_min_evidence", dict(use_min_evidence=False)), ("no_perm", dict(use_perm=False))]:
             h2(t, data, GateConfig(**{**sel, **kw}), "default", ablation=name, write=False)
     if stage in ("sweep", "all"):
+        only = sys.argv[2].split(",") if len(sys.argv) > 2 else None
         for tag, bc in [("effect0.5", dict(effect=0.5)), ("effect0.25", dict(effect=0.25)),
                         ("noise0.5", dict(noise=0.5)), ("r50", dict(r_plant=50.0))]:
+            if only and tag not in only:
+                continue
             t2, d2 = load_dev(bc, tag)
             h1_tools(d2, tag)
             h2(t2, d2, cfg, tag, write=False)
