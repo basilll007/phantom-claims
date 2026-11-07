@@ -3309,6 +3309,118 @@
   ],
   "value": 4
  },
+ "rnullFrozenFive": {
+  "id": "real_gene_null_breast_rep1",
+  "path": [
+   "metrics",
+   "frozen",
+   "frac_p_lt_0_05"
+  ],
+  "value": 0.06
+ },
+ "rnullFrozenPass": {
+  "id": "real_gene_null_breast_rep1",
+  "path": [
+   "metrics",
+   "frozen",
+   "frac_pass"
+  ],
+  "value": 0.0
+ },
+ "rnullFrozenMarkerFive": {
+  "id": "real_gene_null_breast_rep1",
+  "path": [
+   "metrics",
+   "frozen",
+   "frac_p_lt_0_05_marker"
+  ],
+  "value": 0.08333333333333333
+ },
+ "rnullNoTilesFive": {
+  "id": "real_gene_null_breast_rep1",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "frac_p_lt_0_05"
+  ],
+  "value": 0.11
+ },
+ "rnullNoTilesPass": {
+  "id": "real_gene_null_breast_rep1",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "frac_pass"
+  ],
+  "value": 0.01
+ },
+ "rnullNoTilesMarkerFive": {
+  "id": "real_gene_null_breast_rep1",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "frac_p_lt_0_05_marker"
+  ],
+  "value": 0.1875
+ },
+ "rnullN": {
+  "id": "real_gene_null_breast_rep1",
+  "path": [
+   "metrics",
+   "frozen",
+   "n"
+  ],
+  "value": 200
+ },
+ "rnullNMarker": {
+  "id": "real_gene_null_breast_rep1",
+  "path": [
+   "metrics",
+   "frozen",
+   "n_marker_targets"
+  ],
+  "value": 48
+ },
+ "compTenPhantom": {
+  "id": "list_negative_composition",
+  "value": 88
+ },
+ "compTenOther": {
+  "id": "list_negative_composition",
+  "value": 3
+ },
+ "compTenNiche": {
+  "id": "list_negative_composition",
+  "value": 0
+ },
+ "compTenN": {
+  "id": "list_negative_composition",
+  "path": [
+   "metrics",
+   "tools_K10_n_claims"
+  ],
+  "value": 500
+ },
+ "compTwentyPhantom": {
+  "id": "list_negative_composition",
+  "value": 398
+ },
+ "compTwentyOther": {
+  "id": "list_negative_composition",
+  "value": 124
+ },
+ "compTwentyNiche": {
+  "id": "list_negative_composition",
+  "value": 9
+ },
+ "compTwentyN": {
+  "id": "list_negative_composition",
+  "path": [
+   "metrics",
+   "tools_K20_n_claims"
+  ],
+  "value": 1000
+ },
  "swDefaultReceptorOnlyCpdbPR": {
   "id": "dev_default_H1_expr_cpdb_K10",
   "path": [

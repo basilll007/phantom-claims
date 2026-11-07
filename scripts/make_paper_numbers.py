@@ -104,6 +104,23 @@ import csv
 for row in csv.DictReader(open("results/tables/cell_counts.csv")):
     if row["cell_type"] == "__TOTAL__":
         out.append(f"\\newcommand{{\\cells{tag(row['tissue'])}}}{{{int(row['n_cells']):,}}}".replace(",", "{,}"))
+# real-gene null (exploratory) and negative composition of gated lists
+rn = first("real_gene_null_breast_rep1")
+for v in ("frozen", "no_tiles"):
+    num(f"rnull{tag(v)}Five", rn, ["metrics", v, "frac_p_lt_0_05"], pct=True)
+    num(f"rnull{tag(v)}Pass", rn, ["metrics", v, "frac_pass"], pct=True)
+    num(f"rnull{tag(v)}MarkerFive", rn, ["metrics", v, "frac_p_lt_0_05_marker"], pct=True)
+num("rnullN", rn, ["metrics", "frozen", "n"]); num("rnullNMarker", rn, ["metrics", "frozen", "n_marker_targets"])
+lc = first("list_negative_composition")
+for K in (10, 20):
+    for cat in ("phantom", "other", "niche"):
+        nm = f"comp{'Ten' if K == 10 else 'Twenty'}{tag(cat)}"
+        try:
+            v = lc["metrics"][f"tools_K{K}_negatives"].get(cat, 0)
+            out.append(f"\\newcommand{{\\{nm}}}{{{v}}}"); used[nm] = dict(id=lc["id"], value=v)
+        except Exception:
+            out.append(f"\\newcommand{{\\{nm}}}{{\\TODOVERIFY{{{nm}}}}}")
+    num(f"comp{'Ten' if K == 10 else 'Twenty'}N", lc, ["metrics", f"tools_K{K}_n_claims"])
 # exploratory dev sweeps / controls (K=10, cpdb + prod)
 for tagname, abl in [("default", "receptor_only"), ("effect0.5", "none"), ("effect0.25", "none"), ("noise0.5", "none"),
                      ("r50", "none"), ("resp1", "none"), ("resp0", "none")]:

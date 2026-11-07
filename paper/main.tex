@@ -142,8 +142,18 @@ driven by baseline expression), which the frozen gate reduced to \swEffectzeropt
 expression-only top-10 lists on dev (retention \devBreastReponeCpdbKTenRet{} \devBreastReponeCpdbKTenRetci{}) and on
 held-out breast seeds (after: \testBreastReponeCpdbKTenPRafter{}, retention \testBreastReponeCpdbKTenRet{}). Post-hoc
 gating of unguided agent lists on dev gave a phantom rate of \agDevBreastReponeBothPRafter{} with retention
-\agDevBreastReponeBothRet{} \agDevBreastReponeBothRetci{}. The gate is calibrated: \calibFullFive{} of
-\calibFullN{} unplanted claims had $p<0.05$ (global-permutation ablation: \calibNoTilesFive{}).
+\agDevBreastReponeBothRet{} \agDevBreastReponeBothRetci{}. \emph{What these lists test:} across all dev and
+test expression-only top-10 lists (\compTenN{} claims), the negatives were \compTenPhantom{} never-meet phantoms,
+\compTenOther{} wrong-type-pair claims and \compTenNiche{} niche-confounded claims. At $K{=}10$, H2 therefore mainly tests
+the contact-evidence and response rules. The top-20 lists contain harder negatives (\compTwentyOther{} wrong-type-pair and
+\compTwentyNiche{} niche claims among \compTwentyN{}), and the planted-claim analysis below tests every niche pair.
+\paragraph{Calibration.} On unplanted channels, \calibFullFive{} of \calibFullN{} claims had $p<0.05$ (global
+permutation: \calibNoTilesFive{}). Because those channels are shuffled within cell type, this check is weak by
+construction. We therefore also gated \rnullN{} random claims built from \emph{real} panel genes on real breast tissue,
+which retains regional structure and segmentation spillover. With the frozen gate, \rnullFrozenFive{} had $p<0.05$
+(\rnullFrozenMarkerFive{} when the ``targets'' were sender-type markers, $n{=}\rnullNMarker{}$) and \rnullFrozenPass{}
+passed the full gate. With a global null the rates were \rnullNoTilesFive{} (\rnullNoTilesMarkerFive{} for marker
+targets) and \rnullNoTilesPass{}.
 On all planted claims (dev), pass rates were \plantedFullTrue{} (true), \plantedFullPhantom{} (phantom),
 \plantedFullNiche{} (niche) and \plantedFullRandom{} (random); removing tile restriction raised niche false passes
 to \plantedNoTilesNiche{}, removing the permutation test to \plantedNoPermNiche{}, and removing split consistency to
@@ -198,7 +208,10 @@ With only one of three listed targets responding, retention was \swResponeNoneCp
 \swRespzeroNoneCpdbRet{}. In receptor-only mode (the readout available on real data) retention fell to
 \swDefaultReceptorOnlyCpdbRet{} \swDefaultReceptorOnlyCpdbRetci{} on the benchmark, which is consistent with the gate
 failing every real-data positive control. A mismatch between the planted signalling radius (50\,\textmu m) and the
-gate's radius (30\,\textmu m) still gave retention \swRfivezeroNoneCpdbRet{} \swRfivezeroNoneCpdbRetci{}. (3) Small panels: \lrBreastRepone{} (breast) and \lrPancreas{} (pancreas, lung)
+gate's radius (30\,\textmu m) still gave retention \swRfivezeroNoneCpdbRet{} \swRfivezeroNoneCpdbRetci{}. (2b) The gate's exposure kernel matches the generator's ($r{=}30\,\mu m$, $e^{-d/15}$), which is optimistic.
+Phantoms carry no target signal, so any target-response check (spatial or not) would reject them, and the agent's
+\texttt{verify\_claim} tool applies BH to a single claim, making it looser than the post-hoc gate.
+(3) Small panels: \lrBreastRepone{} (breast) and \lrPancreas{} (pancreas, lung)
 consensus L--R pairs out of \lrConsensus{} \citep{turei2021omnipath,dimitrov2022liana} are measurable.
 (4) Breast Rep1/Rep2 are serial sections of a single donor block; pancreas and lung annotations are marker-based.
 (5) Two LLM families, three runs per dataset per family, one prompt; results may not transfer to other agents.
