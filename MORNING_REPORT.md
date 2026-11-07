@@ -1,6 +1,6 @@
 # MORNING REPORT — Phantom Claims (rewritten every cycle)
 
-**Status:** All phases (0�8) done; the paper draft needs a human LaTeX compile and citation and licence checks. ~95% of plan done. Last update 2026-11-07 00:59 CST.
+**Status:** All phases (0–8) done; the paper draft needs a human LaTeX compile and citation and licence checks. ~95% of plan done. Last update 2026-11-07 00:59 CST.
 
 ## 1. Verdicts (pre-registered rules; K = 10; 95% hierarchical bootstrap CIs; all numbers from results/results.jsonl)
 | Hyp | Verdict | Key numbers (result ids) |

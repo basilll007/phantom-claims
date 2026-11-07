@@ -11,3 +11,4 @@
 - **Last update:** 2026-11-07 00:59 CST
 - **Gate config (FROZEN, Amendment 2):** r=30, tile=250, n_min=50, rho_min=0.02, n_perm=1000, alpha_half=0.10, q=0.05
 - **Final eval:** run-once guard in results/tables/final_eval_done.json
+- **Each cycle:** rebuild the dashboard: `python scripts/build_dashboard.py` (stdlib only) before committing.
