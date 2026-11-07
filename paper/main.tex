@@ -57,6 +57,24 @@ contact-dependent interactions, ``never-meet'' phantom decoys, niche-confounded 
 held-out seeds, a held-out replicate section and two other cancer types, and a real-data check. We report negative
 and inconclusive results as such.
 
+\paragraph{Why this matters for medical world models.} Clinical decision support increasingly reasons over tissue
+states, for example about whether PD-1/PD-L1 blockade has a plausible cellular substrate in a tumour. If an
+agent's mechanistic claims about the state are not checked against the state, errors propagate into downstream
+recommendations. We therefore frame the gate as a \emph{verification layer} between a world-state model and any
+consumer of its claims: it is cheap, deterministic, and leaves an audit trail a reviewer can inspect.
+
+\section{Related work}
+\paragraph{Cell--cell communication inference.} Expression-based methods score L--R pairs from cell-type
+expression with permutation nulls \citep{efremova2020cellphonedb} or mass-action models \citep{jin2021cellchat};
+LIANA aggregates many methods and resources \citep{dimitrov2022liana} built on OmniPath
+\citep{turei2021omnipath}. NicheNet links ligands to downstream target genes \citep{browaeys2020nichenet}, which
+motivates our target-response readout. Spatial methods such as COMMOT use spatial distances to constrain signalling
+\citep{cang2023commot}. Our gate does not propose a new CCC score; it is a claim-level filter with a regional
+(tile-restricted) null, split consistency and explicit evidence minima, designed to sit after any scorer or agent.
+\paragraph{LLM agents and verification.} Tool-using LLM agents are being applied to omics analysis
+\todo{cite agentic biology systems}. Our results agree with the broader observation that giving a model a
+verifier does not guarantee it acts on the verifier's output; we enforce the check outside the agent.
+
 \section{Benchmark}
 \paragraph{Tissues.} We use public 10x Genomics Xenium data: the Janesick et al.\ FFPE human breast cancer
 replicates Rep1 (\cellsBreastRepone{} cells after QC) and Rep2 (\cellsBreastReptwo{} cells), with the published
