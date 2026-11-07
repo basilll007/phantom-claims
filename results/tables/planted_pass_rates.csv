@@ -7,3 +7,4 @@ dev:no_tiles,1.0,0.0,0.32,0.0
 test:breast_rep1,1.0,0.0,0.06,0.0
 test:breast_rep2,0.96,0.0,0.06,0.0
 test:pancreas,1.0,0.0,0.04,0.0
+test:lung,1.0,0.0,0.06,0.0

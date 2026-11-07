@@ -1,0 +1,412 @@
+{
+ "run_id": "test_lung_s100_gemini_unguided",
+ "family": "gemini",
+ "model": "gemini-2.5-flash",
+ "condition": "unguided",
+ "temperature": 0.2,
+ "seed": 100,
+ "tissue": "lung",
+ "bench_seed": 100,
+ "started": "2026-11-07T00:39:11-0600",
+ "steps": [
+  {
+   "step": 0,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "list_lr_database",
+     "args": {},
+     "result": "[{\"pair_id\": \"P01\", \"ligand\": \"LIG_01\", \"receptor\": \"REC_01\", \"targets\": [\"TGT_01_a\", \"TGT_01_b\", \"TGT_01_c\"]}, {\"pair_id\": \"P02\", \"ligand\": \"LIG_02\", \"receptor\": \"REC_02\", \"targets\": [\"TGT_02_a\", \"TGT_02_b\", \"TGT_02_c\"]}, {\"pair_id\": \"P03\", \"ligand\": \"LIG_03\", \"receptor\": \"REC_03\", \"targets\": [\"TGT_03_a\", \"TGT_03_b\", \"TGT_03_c\"]}, {\"pair_id\": \"P04\", \"ligand\": \"LIG_04\", \"receptor\": \"REC_04\", \"targets\": [\"TGT_04_a\", \"TGT_04_b\", \"TGT_04_c\"]}, {\"pair_id\": \"P05\", \"ligand\": \"LIG_05\", \"receptor\": \"REC_05\", \"targets\": [\"TGT_05_a\", \"TGT_05_b\", \"TGT_05_c\"]}, {\"pair_id\": \"P06\", \"ligand\": \"LIG_06\", \"receptor\": \"REC_06\", \"targets\": [\"TGT_06_a\", \"TGT_06_b\", \"TGT_06_c\"]}, {\"pair_id\": \"P07\", \"ligand\": \"LIG_07\", \"receptor\": \"REC_07\", \"targets\": [\"TGT_07_a\", \"TGT_07_b\", \"TGT_07_c\"]}, {\"pair_id\": \"P08\", \"ligand\": \"LIG_08\", \"receptor\": \"REC_08\", \"targets\": [\"TGT_08_a\", \"TGT_08_b\", \"TGT_08_c\"]}, {\"pair_id\": \"P09\", \"ligand\": \"LIG_09\", \"receptor\": \"REC_09\", \"targets\": [\"TGT_09_a\", \"TGT_09_b\", \"TGT_09_c\"]}, {\"pair_id\": \"P10\", \"ligand\": \"LIG_10\", \"receptor\": \"REC_10\", \"targets\": [\"TGT_10_a\", \"TGT_10_b\", \"TGT_10_c\"]}, {\"pair_id\": \"P11\", \"ligand\": \"LIG_11\", \"receptor\": \"REC_11\", \"targets\": [\"TGT_11_a\", \"TGT_11_b\", \"TGT_11_c\"]}, {\"pair_id\": \"P12\", \"ligand\": \"LIG_12\", \"receptor\": \"REC_12\", \"targets\": [\"TGT_12_a\", \"TGT_12_b\", \"TGT_12_c\"]}, {\"pair_id\": \"P13\", \"ligand\": \"LIG_13\", \"receptor\": \"REC_13\", \"targets\": [\"TGT_13_a\", \"TGT_13_b\", \"TGT_13_c\"]}, {\"pair_id\": \"P14\", \"ligand\": \"LIG_14\", \"receptor\": \"REC_14\", \"targets\": [\"TGT_14_a\", \"TGT_14_b\", \"TGT_14_c\"]}, {\"pair_id\": \"P15\", \"ligand\": \"LIG_15\", \"receptor\": \"REC_15\", \"targets\": [\"TGT_15_a\", \"TGT_15_b\", \"TGT_15_c\"]}, {\"pair_id\": \"P16\", \"ligand\": \"LIG_16\", \"receptor\": \"REC_16\", \"targets\": [\"TGT_16_a\", \"TGT_16_b\", \"TGT_16_c\"]}, {\"pair_id\": \"P17\", \"ligand\": \"LIG_17\", \"receptor\": \"REC_17\", \"targets\": [\"TGT_17_a\", \"TGT_17_b\", \"TGT_17_c\"]}, {\"pair_id\": \"P18\", \"ligand\": \"LIG_18\", \"receptor\": \"REC_18\", \"targets\": [\"TGT_18_a\", \"TGT_18_b\", \"TGT_18_c\"]}, {\"pair_id\": \"P19\", \"ligand\": \"LIG_19\", \"receptor\": \"REC_19\", \"targets\": [\"TGT_19_a\", \"TGT_19_b\", \"TGT_19_c\"]}, {\"pair_id\": \"P20\", \"ligand\": \"LIG_20\", \"receptor\": \"REC_20\", \"targets\": [\"TGT_20_a\", \"TGT_20_b\", \"TGT_20_c\"]}, {\"pair_id\": \"P21\", \"ligand\": \"LIG_21\", \"receptor\": \"REC_21\", \"targets\": [\"TGT_21_a\", \"TGT_21_b\", \"TGT_21_c\"]}, {\"pair_id\": \"P22\", \"ligand\": \"LIG_22\", \"receptor\": \"REC_22\", \"targets\": [\"TGT_22_a\", \"TGT_22_b\", \"TGT_22_c\"]}, {\"pair_id\": \"P23\", \"ligand\": \"LIG_23\", \"receptor\": \"REC_23\", \"targets\": [\"TGT_23_a\", \"TGT_23_b\", \"TGT_23_c\"]}, {\"pair_id\": \"P24\", \"ligand\": \"LIG_24\", \"receptor\": \"REC_24\", \"targets\": [\"TGT_24_a\", \"TGT_24_b\", \"TGT_24_c\"]}, {\"pair_id\": \"P25\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"targets\": [\"TGT_25_a\", \"TGT_25_b\", \"TGT_25_c\"]}, {\"pair_id\": \"P26\", \"ligand\": \"LIG_26\", \"receptor\": \"REC_26\", \"targets\": [\"TGT_26_a\", \"TGT_26_b\", \"TGT_26_c\"]}, {\"pair_id\": \"P27\", \"ligand\": \"LIG_27\", \"receptor\": \"REC_27\", \"targets\": [\"TGT_27_a\", \"TGT_27_b\", \"TGT_27_c\"]}, {\"pair_id\": \"P28\", \"ligand\": \"LIG_28\", \"receptor\": \"REC_28\", \"targets\": [\"TGT_28_a\", \"TGT_28_b\", \"TGT_28_c\"]}, {\"pair_id\": \"P29\", \"ligand\": \"LIG_29\", \"receptor\": \"REC_29\", \"targets\": [\"TGT_29_a\", \"TGT_29_b\", \"TGT_29_c\"]}, {\"pair_id\": \"P30\", \"ligand\": \"LIG_30\", \"receptor\": \"REC_30\", \"targets\": [\"TGT_30_a\", \"TGT_30_b\", \"TGT_30_c\"]}, {\"pair_id\": \"P31\", \"ligand\": \"LIG_31\", \"receptor\": \"REC_31\", \"targets\": [\"TGT_31_a\", \"TGT_31_b\", \"TGT_31_c\"]}, {\"pair_id\": \"P32\", \"ligand\": \"LIG_32\", \"receptor\": \"REC_32\", \"targets\": [\"TGT_32_a\", \"TGT_32_b\", \"TGT_32_c\"]}, {\"pair_id\": \"P33\", \"ligand\": \"LIG_33\", \"receptor\": \"REC_33\", \"targets\": [\"TGT_33_a\", \"TGT_33_b\", \"TGT_33_c\"]}, {\"pair_id\": \"P34\", \"ligand\": \"LIG_34\", \"receptor\": \"REC_34\", \"targets\": [\"TGT_34_a\", \"TGT_34_b\", \"TGT_34_c\"]}, {\"pair_id\": \"P35\", \"ligand\": \"LIG_35\", \"receptor\": \"REC_35\", \"targets\": [\"TGT_35_a\", \"TGT_35_b\", \"TGT_35_c\"]}, {\"pair_id\": \"P36\", \"ligand\": \"LIG_36\", \"receptor\": \"REC_36\", \"targets\": [\"TGT_36_a\", \"TGT_36_b\", \"TGT_36_c\"]}, {\"pair_id\": \"P37\", \"ligand\": \"LIG_37\", \"receptor\": \"REC_37\", \"targets\": [\"TGT_37_a\", \"TGT_37_b\", \"TGT_37_c\"]}, {\"pair_id\": \"P38\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"targets\": [\"TGT_38_a\", \"TGT_38_b\", \"TGT_38_c\"]}, {\"pair_id\": \"P39\", \"ligand\": \"LIG_39\", \"receptor\": \"REC_39\", \"targets\": [\"TGT_39_a\", \"TGT_39_b\", \"TGT_39_c\"]}, {\"pair_id\": \"P40\", \"ligand\": \"LIG_40\", \"receptor\": \"REC_40\", \"targets\": [\"TGT_40_a\", \"TGT_40_b\", \"TGT_40_c\"]}]"
+    },
+    {
+     "name": "top_expressed_pairs",
+     "args": {
+      "n": 20
+     },
+     "result": "[{\"sender\": \"T_Cells\", \"receiver\": \"Mast_Cells\", \"ligand\": \"LIG_29\", \"receptor\": \"REC_29\", \"score\": 0.896, \"perm_p\": 0.001}, {\"sender\": \"Mast_Cells\", \"receiver\": \"B_Cells\", \"ligand\": \"LIG_25\", \"receptor\": \"REC_25\", \"score\": 0.847, \"perm_p\": 0.001}, {\"sender\": \"Fibroblast\", \"receiver\": \"Mast_Cells\", \"ligand\": \"LIG_15\", \"receptor\": \"REC_15\", \"score\": 0.814, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"Mast_Cells\", \"ligand\": \"LIG_11\", \"receptor\": \"REC_11\", \"score\": 0.781, \"perm_p\": 0.001}, {\"sender\": \"Mast_Cells\", \"receiver\": \"Plasma_Cells\", \"ligand\": \"LIG_12\", \"receptor\": \"REC_12\", \"score\": 0.77, \"perm_p\": 0.001}, {\"sender\": \"Mast_Cells\", \"receiver\": \"Endothelial\", \"ligand\": \"LIG_38\", \"receptor\": \"REC_38\", \"score\": 0.741, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"Plasma_Cells\", \"ligand\": \"LIG_34\", \"receptor\": \"REC_34\", \"score\": 0.739, \"perm_p\": 0.001}, {\"sender\": \"Endothelial\", \"receiver\": \"Mast_Cells\", \"ligand\": \"LIG_31\", \"receptor\": \"REC_31\", \"score\": 0.736, \"perm_p\": 0.001}, {\"sender\": \"Dendritic_Cells\", \"receiver\": \"B_Cells\", \"ligand\": \"LIG_21\", \"receptor\": \"REC_21\", \"score\": 0.701, \"perm_p\": 0.001}, {\"sender\": \"Plasma_Cells\", \"receiver\": \"Dendritic_Cells\", \"ligand\": \"LIG_20\", \"receptor\": \"REC_20\", \"score\": 0.683, \"perm_p\": 0.001}, {\"sender\": \"SMC_Pericyte\", \"receiver\": \"Plasma_Cells\", \"ligand\": \"LIG_36\", \"receptor\": \"REC_36\", \"score\": 0.682, \"perm_p\": 0.001}, {\"sender\": \"Dendritic_Cells\", \"receiver\": \"SMC_Pericyte\", \"ligand\": \"LIG_39\", \"receptor\": \"REC_39\", \"score\": 0.638, \"perm_p\": 0.001}, {\"sender\": \"Epithelial_Tumor\", \"receiver\": \"SMC_Pericyte\", \"ligand\": \"LIG_06\", \"receptor\": \"REC_06\", \"score\": 0.63, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"Ciliated\", \"ligand\": \"LIG_04\", \"receptor\": \"REC_04\", \"score\": 0.629, \"perm_p\": 0.001}, {\"sender\": \"SMC_Pericyte\", \"receiver\": \"Epithelial_Tumor\", \"ligand\": \"LIG_17\", \"receptor\": \"REC_17\", \"score\": 0.625, \"perm_p\": 0.001}, {\"sender\": \"SMC_Pericyte\", \"receiver\": \"Ciliated\", \"ligand\": \"LIG_28\", \"receptor\": \"REC_28\", \"score\": 0.618, \"perm_p\": 0.001}, {\"sender\": \"T_Cells\", \"receiver\": \"SMC_Pericyte\", \"ligand\": \"LIG_13\", \"receptor\": \"REC_13\", \"score\": 0.613, \"perm_p\": 0.001}, {\"sender\": \"Ciliated\", \"receiver\": \"SMC_Pericyte\", \"ligand\": \"LIG_08\", \"receptor\": \"REC_08\", \"score\": 0.605, \"perm_p\": 0.001}, {\"sender\": \"Proliferating\", \"receiver\": \"SMC_Pericyte\", \"ligand\": \"LIG_27\", \"receptor\": \"REC_27\", \"score\": 0.598, \"perm_p\": 0.001}, {\"sender\": \"SMC_Pericyte\", \"receiver\": \"T_Cells\", \"ligand\": \"LIG_36\", \"receptor\": \"REC_36\", \"score\": 0.592, \"perm_p\": 0.001}]"
+    }
+   ],
+   "usage": [
+    830,
+    30
+   ]
+  },
+  {
+   "step": 1,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "radius_um": 10,
+      "receiver": "Mast_Cells",
+      "sender": "T_Cells"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 1817, \"expected_if_random\": 282.7, \"enrichment\": 6.428, \"frac_senders_with_receiver_within_r\": 0.088}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "radius_um": 10,
+      "ligand": "LIG_29",
+      "sender": "T_Cells",
+      "receptor": "REC_29",
+      "receiver": "Mast_Cells"
+     },
+     "result": "{\"n_ligand_pos_senders\": 11744, \"n_receptor_pos_receivers\": 1259, \"n_pairs_within_r\": 869, \"frac_Lpos_senders_near_Rpos_receiver\": 0.068, \"frac_Rpos_receivers_near_Lpos_sender\": 0.427}"
+    },
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "receiver": "B_Cells",
+      "radius_um": 10,
+      "sender": "Mast_Cells"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 97, \"expected_if_random\": 32.9, \"enrichment\": 2.945, \"frac_senders_with_receiver_within_r\": 0.04}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "sender": "Mast_Cells",
+      "ligand": "LIG_25",
+      "radius_um": 10,
+      "receiver": "B_Cells",
+      "receptor": "REC_25"
+     },
+     "result": "{\"n_ligand_pos_senders\": 1149, \"n_receptor_pos_receivers\": 1407, \"n_pairs_within_r\": 44, \"frac_Lpos_senders_near_Rpos_receiver\": 0.03, \"frac_Rpos_receivers_near_Lpos_sender\": 0.028}"
+    },
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "receiver": "Mast_Cells",
+      "sender": "Fibroblast",
+      "radius_um": 10
+     },
+     "result": "{\"n_sender_receiver_pairs\": 1352, \"expected_if_random\": 230.6, \"enrichment\": 5.863, \"frac_senders_with_receiver_within_r\": 0.08}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "receptor": "REC_15",
+      "receiver": "Mast_Cells",
+      "ligand": "LIG_15",
+      "radius_um": 10,
+      "sender": "Fibroblast"
+     },
+     "result": "{\"n_ligand_pos_senders\": 10668, \"n_receptor_pos_receivers\": 1032, \"n_pairs_within_r\": 569, \"frac_Lpos_senders_near_Rpos_receiver\": 0.05, \"frac_Rpos_receivers_near_Lpos_sender\": 0.421}"
+    },
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "receiver": "Mast_Cells",
+      "sender": "B_Cells",
+      "radius_um": 10
+     },
+     "result": "{\"n_sender_receiver_pairs\": 97, \"expected_if_random\": 32.9, \"enrichment\": 2.945, \"frac_senders_with_receiver_within_r\": 0.038}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "radius_um": 10,
+      "sender": "B_Cells",
+      "receptor": "REC_11",
+      "receiver": "Mast_Cells",
+      "ligand": "LIG_11"
+     },
+     "result": "{\"n_ligand_pos_senders\": 1383, \"n_receptor_pos_receivers\": 1070, \"n_pairs_within_r\": 40, \"frac_Lpos_senders_near_Rpos_receiver\": 0.024, \"frac_Rpos_receivers_near_Lpos_sender\": 0.027}"
+    },
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "radius_um": 10,
+      "receiver": "Plasma_Cells",
+      "sender": "Mast_Cells"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 417, \"expected_if_random\": 48.3, \"enrichment\": 8.64, \"frac_senders_with_receiver_within_r\": 0.182}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "sender": "Mast_Cells",
+      "receptor": "REC_12",
+      "receiver": "Plasma_Cells",
+      "radius_um": 10,
+      "ligand": "LIG_12"
+     },
+     "result": "{\"n_ligand_pos_senders\": 1060, \"n_receptor_pos_receivers\": 2062, \"n_pairs_within_r\": 165, \"frac_Lpos_senders_near_Rpos_receiver\": 0.128, \"frac_Rpos_receivers_near_Lpos_sender\": 0.073}"
+    },
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "receiver": "Endothelial",
+      "radius_um": 10,
+      "sender": "Mast_Cells"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 531, \"expected_if_random\": 126.9, \"enrichment\": 4.185, \"frac_senders_with_receiver_within_r\": 0.256}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "radius_um": 10,
+      "sender": "Mast_Cells",
+      "ligand": "LIG_38",
+      "receiver": "Endothelial",
+      "receptor": "REC_38"
+     },
+     "result": "{\"n_ligand_pos_senders\": 1070, \"n_receptor_pos_receivers\": 5292, \"n_pairs_within_r\": 201, \"frac_Lpos_senders_near_Rpos_receiver\": 0.17, \"frac_Rpos_receivers_near_Lpos_sender\": 0.037}"
+    },
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "receiver": "Plasma_Cells",
+      "sender": "B_Cells",
+      "radius_um": 10
+     },
+     "result": "{\"n_sender_receiver_pairs\": 210, \"expected_if_random\": 62.7, \"enrichment\": 3.348, \"frac_senders_with_receiver_within_r\": 0.076}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "ligand": "LIG_34",
+      "receptor": "REC_34",
+      "receiver": "Plasma_Cells",
+      "radius_um": 10,
+      "sender": "B_Cells"
+     },
+     "result": "{\"n_ligand_pos_senders\": 1370, \"n_receptor_pos_receivers\": 1998, \"n_pairs_within_r\": 68, \"frac_Lpos_senders_near_Rpos_receiver\": 0.044, \"frac_Rpos_receivers_near_Lpos_sender\": 0.028}"
+    },
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "radius_um": 10,
+      "receiver": "Mast_Cells",
+      "sender": "Endothelial"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 531, \"expected_if_random\": 126.9, \"enrichment\": 4.185, \"frac_senders_with_receiver_within_r\": 0.058}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "ligand": "LIG_31",
+      "radius_um": 10,
+      "receiver": "Mast_Cells",
+      "receptor": "REC_31",
+      "sender": "Endothelial"
+     },
+     "result": "{\"n_ligand_pos_senders\": 5281, \"n_receptor_pos_receivers\": 1058, \"n_pairs_within_r\": 221, \"frac_Lpos_senders_near_Rpos_receiver\": 0.039, \"frac_Rpos_receivers_near_Lpos_sender\": 0.182}"
+    },
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "radius_um": 10,
+      "receiver": "B_Cells",
+      "sender": "Dendritic_Cells"
+     },
+     "result": "{\"n_sender_receiver_pairs\": 203, \"expected_if_random\": 54.1, \"enrichment\": 3.75, \"frac_senders_with_receiver_within_r\": 0.043}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "sender": "Dendritic_Cells",
+      "radius_um": 10,
+      "ligand": "LIG_21",
+      "receiver": "B_Cells",
+      "receptor": "REC_21"
+     },
+     "result": "{\"n_ligand_pos_senders\": 1757, \"n_receptor_pos_receivers\": 1387, \"n_pairs_within_r\": 88, \"frac_Lpos_senders_near_Rpos_receiver\": 0.034, \"frac_Rpos_receivers_near_Lpos_sender\": 0.059}"
+    },
+    {
+     "name": "spatial_proximity",
+     "args": {
+      "receiver": "Dendritic_Cells",
+      "sender": "Plasma_Cells",
+      "radius_um": 10
+     },
+     "result": "{\"n_sender_receiver_pairs\": 312, \"expected_if_random\": 79.3, \"enrichment\": 3.933, \"frac_senders_with_receiver_within_r\": 0.087}"
+    },
+    {
+     "name": "colocalization",
+     "args": {
+      "sender": "Plasma_Cells",
+      "receptor": "REC_20",
+      "receiver": "Dendritic_Cells",
+      "radius_um": 10,
+      "ligand": "LIG_20"
+     },
+     "result": "{\"n_ligand_pos_senders\": 2058, \"n_receptor_pos_receivers\": 1745, \"n_pairs_within_r\": 132, \"frac_Lpos_senders_near_Rpos_receiver\": 0.058, \"frac_Rpos_receivers_near_Lpos_sender\": 0.064}"
+    }
+   ],
+   "usage": [
+    4623,
+    814
+   ]
+  },
+  {
+   "step": 2,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "submit_claims",
+     "args": {
+      "claims": [
+       {
+        "sender": "T_Cells",
+        "evidence": "High expression score (0.896), strong spatial proximity enrichment (6.428), and 869 colocalized L-R expressing cell pairs.",
+        "receptor": "REC_29",
+        "receiver": "Mast_Cells",
+        "ligand": "LIG_29"
+       },
+       {
+        "ligand": "LIG_25",
+        "sender": "Mast_Cells",
+        "receiver": "B_Cells",
+        "evidence": "High expression score (0.847), good spatial proximity enrichment (2.945), and 44 colocalized L-R expressing cell pairs.",
+        "receptor": "REC_25"
+       },
+       {
+        "sender": "Fibroblast",
+        "evidence": "High expression score (0.814), strong spatial proximity enrichment (5.863), and 569 colocalized L-R expressing cell pairs.",
+        "receptor": "REC_15",
+        "receiver": "Mast_Cells",
+        "ligand": "LIG_15"
+       },
+       {
+        "sender": "B_Cells",
+        "ligand": "LIG_11",
+        "evidence": "High expression score (0.781), good spatial proximity enrichment (2.945), and 40 colocalized L-R expressing cell pairs.",
+        "receptor": "REC_11",
+        "receiver": "Mast_Cells"
+       },
+       {
+        "sender": "Mast_Cells",
+        "ligand": "LIG_12",
+        "evidence": "High expression score (0.770), very strong spatial proximity enrichment (8.640), and 165 colocalized L-R expressing cell pairs.",
+        "receptor": "REC_12",
+        "receiver": "Plasma_Cells"
+       },
+       {
+        "receptor": "REC_38",
+        "evidence": "High expression score (0.741), good spatial proximity enrichment (4.185), and 201 colocalized L-R expressing cell pairs.",
+        "receiver": "Endothelial",
+        "sender": "Mast_Cells",
+        "ligand": "LIG_38"
+       },
+       {
+        "sender": "B_Cells",
+        "evidence": "High expression score (0.739), good spatial proximity enrichment (3.348), and 68 colocalized L-R expressing cell pairs.",
+        "receptor": "REC_34",
+        "receiver": "Plasma_Cells",
+        "ligand": "LIG_34"
+       },
+       {
+        "receiver": "Mast_Cells",
+        "ligand": "LIG_31",
+        "evidence": "High expression score (0.736), good spatial proximity enrichment (4.185), and 221 colocalized L-R expressing cell pairs.",
+        "receptor": "REC_31",
+        "sender": "Endothelial"
+       },
+       {
+        "sender": "Dendritic_Cells",
+        "evidence": "High expression score (0.701), good spatial proximity enrichment (3.750), and 88 colocalized L-R expressing cell pairs.",
+        "receptor": "REC_21",
+        "receiver": "B_Cells",
+        "ligand": "LIG_21"
+       },
+       {
+        "evidence": "High expression score (0.683), good spatial proximity enrichment (3.933), and 132 colocalized L-R expressing cell pairs.",
+        "receptor": "REC_20",
+        "receiver": "Dendritic_Cells",
+        "sender": "Plasma_Cells",
+        "ligand": "LIG_20"
+       }
+      ]
+     },
+     "result": "{\"status\": \"received\", \"n\": 10}"
+    }
+   ],
+   "usage": [
+    7203,
+    772
+   ]
+  }
+ ],
+ "usage": {
+  "prompt": 12656,
+  "completion": 1616
+ },
+ "status": "submitted",
+ "claims": [
+  {
+   "sender": "T_Cells",
+   "evidence": "High expression score (0.896), strong spatial proximity enrichment (6.428), and 869 colocalized L-R expressing cell pairs.",
+   "receptor": "REC_29",
+   "receiver": "Mast_Cells",
+   "ligand": "LIG_29"
+  },
+  {
+   "ligand": "LIG_25",
+   "sender": "Mast_Cells",
+   "receiver": "B_Cells",
+   "evidence": "High expression score (0.847), good spatial proximity enrichment (2.945), and 44 colocalized L-R expressing cell pairs.",
+   "receptor": "REC_25"
+  },
+  {
+   "sender": "Fibroblast",
+   "evidence": "High expression score (0.814), strong spatial proximity enrichment (5.863), and 569 colocalized L-R expressing cell pairs.",
+   "receptor": "REC_15",
+   "receiver": "Mast_Cells",
+   "ligand": "LIG_15"
+  },
+  {
+   "sender": "B_Cells",
+   "ligand": "LIG_11",
+   "evidence": "High expression score (0.781), good spatial proximity enrichment (2.945), and 40 colocalized L-R expressing cell pairs.",
+   "receptor": "REC_11",
+   "receiver": "Mast_Cells"
+  },
+  {
+   "sender": "Mast_Cells",
+   "ligand": "LIG_12",
+   "evidence": "High expression score (0.770), very strong spatial proximity enrichment (8.640), and 165 colocalized L-R expressing cell pairs.",
+   "receptor": "REC_12",
+   "receiver": "Plasma_Cells"
+  },
+  {
+   "receptor": "REC_38",
+   "evidence": "High expression score (0.741), good spatial proximity enrichment (4.185), and 201 colocalized L-R expressing cell pairs.",
+   "receiver": "Endothelial",
+   "sender": "Mast_Cells",
+   "ligand": "LIG_38"
+  },
+  {
+   "sender": "B_Cells",
+   "evidence": "High expression score (0.739), good spatial proximity enrichment (3.348), and 68 colocalized L-R expressing cell pairs.",
+   "receptor": "REC_34",
+   "receiver": "Plasma_Cells",
+   "ligand": "LIG_34"
+  },
+  {
+   "receiver": "Mast_Cells",
+   "ligand": "LIG_31",
+   "evidence": "High expression score (0.736), good spatial proximity enrichment (4.185), and 221 colocalized L-R expressing cell pairs.",
+   "receptor": "REC_31",
+   "sender": "Endothelial"
+  },
+  {
+   "sender": "Dendritic_Cells",
+   "evidence": "High expression score (0.701), good spatial proximity enrichment (3.750), and 88 colocalized L-R expressing cell pairs.",
+   "receptor": "REC_21",
+   "receiver": "B_Cells",
+   "ligand": "LIG_21"
+  },
+  {
+   "evidence": "High expression score (0.683), good spatial proximity enrichment (3.933), and 132 colocalized L-R expressing cell pairs.",
+   "receptor": "REC_20",
+   "receiver": "Dendritic_Cells",
+   "sender": "Plasma_Cells",
+   "ligand": "LIG_20"
+  }
+ ],
+ "runtime_s": 16.9,
+ "n_tool_calls": 23
+}
