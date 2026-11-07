@@ -26,8 +26,8 @@ permutation null, split consistency, minimum-evidence rule, BH-FDR) and writes a
 pre-registered semi-synthetic benchmark built on real 10x Xenium sections of breast, pancreatic and lung cancer, the
 frozen gate reduced the phantom rate of expression-only top-10 lists from \testBreastReponeCpdbKTenPR{} to
 \testBreastReponeCpdbKTenPRafter{} on held-out breast seeds while retaining \testBreastReponeCpdbKTenRet{} of true claims,
-\todo{H3 transfer sentence (pancreas, lung) after final eval}, and was calibrated under the null
-(\calibFullFive{} of unplanted claims at $p<0.05$). Contrary to our pre-registered
+and met the same criteria without retuning on a held-out breast section and on pancreatic and lung cancer sections.
+It was also calibrated under the null (\calibFullFive{} of unplanted claims at $p<0.05$). Contrary to our pre-registered
 H1, phantom rates of expression-only tools and of two LLM agent families at $K{=}10$ did not reach 30\% on this
 benchmark. Agents given the gate as a tool still submitted claims their own verifier had rejected, which
 argues for enforcement outside the agent. On real breast data the gate rejected all PD-L1/PD-1 claims for insufficient contact evidence (the
@@ -131,7 +131,12 @@ None meets the pre-registered criterion (point $\ge$0.30 with CI lower bound $\g
 \textsc{inconclusive}. On held-out breast seeds the rates were lower (\testBreastReponeCpdbKTenPR{}). Ranking by
 log-normalised type means favours true plants over matched never-meet decoys, because the decoys concentrate the
 same count increase in fewer cells. At $K{=}20$ the phantom rate was \testBreastReponeCpdbKTwentyPR{}
-\testBreastReponeCpdbKTwentyPRci{}, but this is partly mechanical (only 10 true plants exist).
+\testBreastReponeCpdbKTwentyPRci{}, but this is partly mechanical (only 10 true plants exist). The H1 outcome
+depends on effect size. In \emph{exploratory, not pre-registered} dev sweeps, a planted effect of one quarter the
+default raised the expression-only phantom rate@10 to \swEffectzeroptwofiveNoneCpdbPR{} (mostly wrong-type-pair claims
+driven by baseline expression), which the frozen gate reduced to \swEffectzeroptwofiveNoneCpdbPRafter{} with retention
+\swEffectzeroptwofiveNoneCpdbRet{}. Thinning the planted counts by half gave \swNoisezeropfiveNoneCpdbPR{} $\rightarrow$
+\swNoisezeropfiveNoneCpdbPRafter{} (retention \swNoisezeropfiveNoneCpdbRet{}).
 
 \paragraph{H2 (gate works): supported on every split we evaluated.} The gate removed all phantoms from
 expression-only top-10 lists on dev (retention \devBreastReponeCpdbKTenRet{} \devBreastReponeCpdbKTenRetci{}) and on
@@ -144,17 +149,34 @@ On all planted claims (dev), pass rates were \plantedFullTrue{} (true), \planted
 to \plantedNoTilesNiche{}, removing the permutation test to \plantedNoPermNiche{}, and removing split consistency to
 \plantedNoSplitNiche{} (Figure~\ref{fig:planted}).
 
-\paragraph{H3 (transfer).} \todo{write after final evaluation: pancreas and lung verdicts from tables/verdicts.tex}
-Pancreas: phantom rate \testPancreasCpdbKTenPR{} $\rightarrow$ \testPancreasCpdbKTenPRafter{}, retention
-\testPancreasCpdbKTenRet{}. Lung: \testLungCpdbKTenPR{} $\rightarrow$ \testLungCpdbKTenPRafter{}, retention
-\testLungCpdbKTenRet{}. Breast Rep2 (held-out section): \testBreastReptwoCpdbKTenPR{} $\rightarrow$
-\testBreastReptwoCpdbKTenPRafter{}, retention \testBreastReptwoCpdbKTenRet{}.
+\paragraph{H3 (transfer): supported, with a caveat.} The gate configuration frozen on breast dev seeds met the H2
+criteria for both expression tools on every held-out set, with no retuning (Table~\ref{tab:verdicts}). Phantom
+rates at $K{=}10$ went from \testPancreasCpdbKTenPR{} to \testPancreasCpdbKTenPRafter{} on pancreatic cancer (retention
+\testPancreasCpdbKTenRet{}), from \testLungCpdbKTenPR{} to \testLungCpdbKTenPRafter{} on lung cancer (retention
+\testLungCpdbKTenRet{}), and from \testBreastReptwoCpdbKTenPR{} to \testBreastReptwoCpdbKTenPRafter{} on the held-out
+breast section (retention \testBreastReptwoCpdbKTenRet{}). At $K{=}20$, where lists also contain wrong-sender and niche
+negatives, phantom rates of \testPancreasCpdbKTwentyPR{} (pancreas) and \testLungCpdbKTwentyPR{} (lung) fell to
+\testPancreasCpdbKTwentyPRafter{} and \testLungCpdbKTwentyPRafter{}. The pancreas and lung sections are much sparser than
+breast and use a different panel and marker-based annotations, so this is a non-trivial transfer of the
+\emph{procedure}. The caveat is that much of the phantom mass in these lists consists of never-meet decoys that any
+contact-evidence rule rejects. The hard negatives are niche-confounded pairs: across all planted claims the frozen gate
+passed \testplantedPancreasNiche{} (pancreas) and \testplantedLungNiche{} (lung) of them, and
+\testplantedBreastReponeTrue{}--\testplantedLungTrue{} of the true plants.
 
-\paragraph{Agents do not enforce their own verifier.} With \texttt{verify\_claim} available, the phantom rate on
-dev was \agDevBreastReponeBothToolPR{} \agDevBreastReponeBothToolPRci{} versus \agDevBreastReponeBothPRafter{} with
-post-hoc enforcement. Of \compDevSubmitted{} submitted claims, \compDevVerifiedFailSubmitted{} had been
-\emph{rejected} by the agent's own \texttt{verify\_claim} call and \compDevUnverified{} were never verified. Several
-transcripts describe a claim as lacking spatial support and still submit it to fill the requested $K$.
+\paragraph{LLM agents on held-out data.} Across all test sets (\agTestAllBothRuns{} unguided runs, two families),
+agents reported \agTestAllBothPR{} \agTestAllBothPRci{} phantom claims at $K{=}10$ (Gemini \agTestAllGeminiPR{},
+DeepSeek \agTestAllDeepseekPR{}). Agents with spatial tools therefore avoided most phantoms on this benchmark, and H1 is
+not supported for agents either. Post-hoc gating removed the remaining phantoms (\agTestAllBothPRafter{}) with
+retention \agTestAllBothRet{} \agTestAllBothRetci{}.
+
+\paragraph{Agents do not fully enforce their own verifier.} With \texttt{verify\_claim} available, the test phantom
+rate was \agTestAllBothToolPR{} \agTestAllBothToolPRci{}, compared with \agTestAllBothPRafter{} under post-hoc
+enforcement (dev: \agDevBreastReponeBothToolPR{} vs.\ \agDevBreastReponeBothPRafter{}). Of \compTestSubmitted{} claims
+submitted on test, \compTestVerifiedFailSubmitted{} (\compTestVerifiedFailSubmittedNegatives{} of them false) had been
+\emph{rejected} by the agent's own \texttt{verify\_claim} call, and \compTestUnverified{} were never verified (dev:
+\compDevVerifiedFailSubmitted{} and \compDevUnverified{} of \compDevSubmitted{}). Several transcripts describe a claim
+as lacking spatial support and still submit it to fill the requested $K$. The effect is small in absolute terms, but it
+is the failure mode a governance layer exists to catch, and placing the check outside the agent removes it.
 
 \paragraph{Real data (no planting).} On breast Rep1/Rep2 the frozen gate, with the receptor as the response (no
 target priors exist for a 313-gene panel), passed \realPdlPass{}/\realPdlN{} PD-L1/PD-1 claims (the top expression-scored type pairs,

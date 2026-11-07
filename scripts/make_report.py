@@ -23,7 +23,7 @@ def fmt(x, nd=2):
 def h1_verdict(r):
     if r is None:
         return "NOT YET RUN"
-    p, lo = r["metrics"]["phantom_rate"], r["ci"]["phantom_rate"][0]
+    p, lo = round(r["metrics"]["phantom_rate"], 9), round(r["ci"]["phantom_rate"][0], 9)   # avoid 6/60 -> 0.0999.. artefact
     if p >= 0.30 and lo >= 0.20:
         return "SUPPORTED"
     if p < 0.10:
@@ -37,6 +37,7 @@ def h2_verdict(r):
     m = r["metrics"]; red, ret = m.get("rel_reduction"), m.get("retention")
     if red is None or ret is None or (isinstance(red, float) and math.isnan(red)) or (isinstance(ret, float) and math.isnan(ret)):
         return "INCONCLUSIVE"
+    red, ret = round(red, 9), round(ret, 9)
     if red >= 0.5 and ret >= 0.8:
         return "SUPPORTED"
     if ret < 0.7 or red < 0.25:
@@ -107,6 +108,10 @@ pa = d.pr_after.astype(float).values
 err = np.array([[p - c[0], c[1] - p] if isinstance(c, list) else [0, 0] for p, c in zip(pr, d.pr_ci)]).T
 ax.bar(x - 0.2, pr, 0.4, yerr=err, capsize=2, color="#c44e52", label="reported (no gate)")
 ax.bar(x + 0.2, np.nan_to_num(pa), 0.4, color="#4c72b0", label="after claim gate")
+ax.scatter(x + 0.2, np.nan_to_num(pa) + 0.012, marker="v", s=14, color="#4c72b0", zorder=3)
+for xi, v in zip(x, pa):
+    if not np.isnan(v):
+        ax.text(xi + 0.2, v + 0.03, f"{v:.2f}", ha="center", fontsize=5, color="#4c72b0")
 ax.axhline(0.30, ls="--", lw=0.8, color="k"); ax.text(len(d) - 0.5, 0.31, "H1 threshold 0.30", ha="right", fontsize=7)
 ax.set_xticks(x); ax.set_xticklabels(lab, fontsize=6, rotation=90); ax.set_ylabel("phantom rate @10"); ax.set_ylim(0, 1)
 ax.legend(fontsize=7, frameon=False); fig.tight_layout(); fig.savefig("figures/fig_phantom_rates.png", dpi=200); plt.close(fig)
