@@ -206,6 +206,8 @@ def run_agent(env, family, condition, run_id, temperature=0.2, seed=0):
             resp = client.chat.completions.create(**kw, seed=seed)
         except Exception as e:
             try:
+                if "tool_choice" in str(e) and "tool_choice" in kw:
+                    kw.pop("tool_choice")       # e.g. DeepSeek thinking mode: no forced tool_choice
                 resp = client.chat.completions.create(**kw)
             except Exception as e2:
                 log["steps"].append(dict(step=step, error=f"{type(e2).__name__}: {str(e2)[:500]}"))
