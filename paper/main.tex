@@ -19,7 +19,7 @@ in Spatial Tissue World Models}
 \begin{abstract}
 LLM agents and expression-only tools increasingly turn spatial omics data into biological claims such as
 ``cell type $A$ signals to $B$ through ligand $L$ and receptor $R$''. Such claims can be \emph{phantoms}: supported
-by expression, contradicted by the tissue state (e.g.\ PD-L1- and PD-1-expressing cells that never meet). We
+by expression but contradicted by the tissue state (e.g.\ ligand- and receptor-expressing cells that never meet). We
 treat a single-cell spatial section as a world state and every claim as an action on it, and we propose a
 deterministic, LLM-free \emph{claim gate} that checks each claim against the state (tile-restricted spatial
 permutation null, split consistency, minimum-evidence rule, BH-FDR) and writes a JSON audit record. On a
@@ -27,7 +27,9 @@ pre-registered semi-synthetic benchmark built on real 10x Xenium sections of bre
 frozen gate reduced the phantom rate of expression-only top-10 lists from \testBreastReponeCpdbKTenPR{} to
 \testBreastReponeCpdbKTenPRafter{} on held-out breast seeds while retaining \testBreastReponeCpdbKTenRet{} of true claims,
 and met the same criteria without retuning on a held-out breast section and on pancreatic and lung cancer sections.
-It was also calibrated under the null (\calibFullFive{} of unplanted claims at $p<0.05$). Contrary to our pre-registered
+It was calibrated on random real-gene claims in real tissue (\rnullFrozenFive{} at $p<0.05$, versus \rnullNoTilesFive{} with
+a global null). On hard lists of true and niche-confounded claims, each spatial component contributed (phantom rate
+\hardFullPRafter{} with the full gate, \hardNoTilesPRafter{} without tile restriction). Contrary to our pre-registered
 H1, phantom rates of expression-only tools and of two LLM agent families at $K{=}10$ did not reach 30\% on this
 benchmark. Agents given the gate as a tool still submitted claims their own verifier had rejected, which
 argues for enforcement outside the agent. On real breast data the gate rejected all PD-L1/PD-1 claims for insufficient contact evidence (the
@@ -94,6 +96,12 @@ effect), 10 \textsc{niche}-confounded pairs (ligand, receptor and targets all dr
 field) and 10 \textsc{random} pairs. Unit tests verify that only the intended channels change, that planted phantom
 cells never meet, and that labels are correct. The claim universe is every planted pair $\times$ every ordered pair
 of distinct cell types; a claim is positive iff it equals a \textsc{true} plant.
+\begin{figure*}[t]\centering
+\includegraphics[width=\linewidth]{../figures/fig_examples.png}
+\caption{(a) A planted \textsc{true} pair: target counts rise in receivers near ligand$^+$ senders. (b) A planted
+\textsc{phantom}: ligand- and receptor-planted cells never meet. (c) Real breast Rep1: CD274$^+$ LAMP3$^+$ DCs and
+PDCD1$^+$ T cells; their contacts are few and at chance level.}\label{fig:examples}
+\end{figure*}
 
 \section{The claim gate}
 For a claim $(A,B,L,R)$, the gate computes for each receiver cell $i\in B$ the ligand exposure
@@ -108,15 +116,17 @@ is deterministic given a seed.
 
 \section{Experimental setup}
 \paragraph{Pre-registration.} Hypotheses, metrics, verdict rules and dev/test splits were frozen in a timestamped,
-version-controlled document before any evaluation; two amendments (benchmark donor-gene range after a degenerate
-first smoke run; freezing the tuned gate configuration, which equalled the defaults) are logged with reasons.
+version-controlled document before any evaluation. Three amendments are logged with reasons: the benchmark donor-gene
+range, changed after a degenerate first smoke run; freezing the tuned gate configuration, which equalled the defaults;
+and documentation of behaviour-preserving post-freeze code edits, verified by an independent code review. Analyses
+marked \emph{exploratory} were not pre-registered.
 \paragraph{Conditions.} \emph{expr\_cpdb} (CellPhoneDB-style mean score, 1000 label permutations, $\ge$10\% expressing
 filter) and \emph{expr\_prod} (LIANA/CellChat-style product score); tool-using LLM agents (Gemini \texttt{gemini-2.5-flash},
 DeepSeek \texttt{deepseek-flash}; temperature 0.2; at most 12 turns / 24 calls of structured, deterministic tools for
 expression summaries, an expression-only ranking, spatial proximity, co-localisation and near/far expression)
 asked to ``report the top-10 cell--cell interactions with evidence''; the same agents with the gate available as a
 \texttt{verify\_claim} tool; and post-hoc gating of every list. Metrics: phantom rate@10 (fraction of reported claims
-that are not planted-true), retention (true claims passing the gate / true claims in the list), relative reduction;
+that are not planted-true; every non-true claim counts as a phantom, whatever its negative type), retention (true claims passing the gate / true claims in the list), relative reduction;
 95\% hierarchical bootstrap CIs (seeds, then claims).
 \paragraph{Splits.} Dev (tuning only): breast Rep1, seeds 0--4. Test (run once, frozen gate): breast Rep1 seeds
 100--104, breast Rep2 seeds 100--104, pancreas and lung seeds 100--104.
@@ -197,7 +207,7 @@ as lacking spatial support and still submit it to fill the requested $K$. The ef
 is the failure mode a governance layer exists to catch, and placing the check outside the agent removes it.
 
 \paragraph{Real data (no planting).} On breast Rep1/Rep2 the frozen gate, with the receptor as the response (no
-target priors exist for a 313-gene panel), passed \realPdlPass{}/\realPdlN{} PD-L1/PD-1 claims (the top expression-scored type pairs,
+target priors were used on real data), passed \realPdlPass{}/\realPdlN{} PD-L1/PD-1 claims (the top expression-scored type pairs,
 LAMP3$^+$ DCs $\rightarrow$ T cells), all for insufficient evidence: fewer than 50 ligand$^+$--receptor$^+$ contacts
 within 30\,\textmu m in both replicates (Figure~\ref{fig:examples}c). An exploratory tile-restricted permutation of
 positivity shows that these contacts are at chance level (observed/expected \realContactRatioLo{}--\realContactRatioHi{};
@@ -236,12 +246,6 @@ response readouts that small panels lack.
 
 \appendix
 \section{Reproducibility}
-\begin{figure*}[h]\centering
-\includegraphics[width=\linewidth]{../figures/fig_examples.png}
-\caption{(a) A planted \textsc{true} pair: target counts rise in receivers near ligand$^+$ senders. (b) A planted
-\textsc{phantom}: ligand- and receptor-planted cells never meet. (c) Real breast Rep1: CD274$^+$ LAMP3$^+$ DCs and
-PDCD1$^+$ T cells; their contacts are few and at chance level.}\label{fig:examples}
-\end{figure*}
 All numbers are generated from \texttt{results/results.jsonl} via \texttt{scripts/make\_paper\_numbers.py}
 (provenance per macro in \texttt{paper/numbers\_provenance.json}). Data sources and licences: \texttt{paper/DATA\_SOURCES.md}.
 Raw files were verified by size and SHA-256 (or by ZIP CRC32 for members extracted from remote archives via HTTP range

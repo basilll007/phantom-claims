@@ -34,8 +34,10 @@
 - Two amendments were made (the donor-gene range after a degenerate first smoke run, and freezing the gate config). Both are logged before any test data were generated.
 - OOM crash during lung final eval: nothing had been logged, so it was rerun. Documented in PROGRESS.md.
 
+**Added this cycle (exploratory, dev): hard-list ablation.** Per seed, a list of 10 TRUE + 10 NICHE planted claims (phantom rate 0.50). The full gate brings it to 0.11 [0.02, 0.22], retention 0.98. Without tiles it is 0.24, without the permutation test 0.22, and without split consistency 0.15 (`dev_hard_list_true_vs_niche`). This is the evidence that the spatial components matter. Lifting the niche expression cap did *not* get niche pairs into tool lists (`dev_nichecap10_*`).
+
 ## 6. Next 3 actions
-1. **Harder benchmark variant (exploratory, dev only):** NICHE pairs without the expression cap, so they actually reach top-K lists; phantoms with target noise. This tests the tile and split machinery inside H2-style lists.
+1. Final paper read-through for coherence and length.
 2. Human: compile the paper (expected ~6 pages plus appendix), verify citations and licences, and decide whether to add a third non-breast cancer.
 3. Optional: more agent runs (budget used: Gemini ~1.8M and DeepSeek ~1.4M of 4M tokens each) to tighten the per-tissue CIs.
 
