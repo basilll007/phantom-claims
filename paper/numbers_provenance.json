@@ -3589,6 +3589,76 @@
    1.0
   ]
  },
+ "swRfivezeroNoneCpdbPR": {
+  "id": "dev_r50_breast_rep1_H1_expr_cpdb_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.16000000000000003
+ },
+ "swRfivezeroNoneCpdbPRafter": {
+  "id": "dev_r50_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "swRfivezeroNoneCpdbRet": {
+  "id": "dev_r50_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9047619047619048
+ },
+ "swRfivezeroNoneCpdbRetci": {
+  "id": "dev_r50_breast_rep1_H2_expr_cpdb_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.8048780487804879,
+   1.0
+  ]
+ },
+ "swRfivezeroNoneProdPR": {
+  "id": "dev_r50_breast_rep1_H1_expr_prod_K10",
+  "path": [
+   "metrics",
+   "phantom_rate"
+  ],
+  "value": 0.16000000000000003
+ },
+ "swRfivezeroNoneProdPRafter": {
+  "id": "dev_r50_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "phantom_rate_after"
+  ],
+  "value": 0.0
+ },
+ "swRfivezeroNoneProdRet": {
+  "id": "dev_r50_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "metrics",
+   "retention"
+  ],
+  "value": 0.9047619047619048
+ },
+ "swRfivezeroNoneProdRetci": {
+  "id": "dev_r50_breast_rep1_H2_expr_prod_K10_none",
+  "path": [
+   "ci",
+   "retention"
+  ],
+  "value": [
+   0.8048780487804879,
+   1.0
+  ]
+ },
  "swResponeNoneCpdbPR": {
   "id": "dev_resp1_breast_rep1_H1_expr_cpdb_K10",
   "path": [
