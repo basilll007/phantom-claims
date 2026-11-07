@@ -12,3 +12,4 @@
 - **Gate config (FROZEN, Amendment 2):** r=30, tile=250, n_min=50, rho_min=0.02, n_perm=1000, alpha_half=0.10, q=0.05
 - **Final eval:** run-once guard in results/tables/final_eval_done.json
 - **Each cycle:** rebuild the dashboard: `python scripts/build_dashboard.py` (stdlib only) before committing.
+- **GitHub:** https://github.com/basilll007/phantom-claims (private). Push every cycle: `git push` (GCM credentials). CI rebuilds dashboard (artifact dashboard-site). Pages NOT enabled: on GitHub Pro a Pages site of a private repo is publicly visible (anonymity/unpublished-results risk) — owner decision.
