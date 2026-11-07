@@ -1,6 +1,6 @@
 # MORNING REPORT — Phantom Claims (rewritten every cycle)
 
-**Status:** Phases 0–7 done; Phase 8 (paper) drafted, needs a LaTeX compile and citation checks. ~92% of plan done. Last update 2026-11-07 00:54 CST.
+**Status:** All phases (0�8) done; the paper draft needs a human LaTeX compile and citation and licence checks. ~95% of plan done. Last update 2026-11-07 00:59 CST.
 
 ## 1. Verdicts (pre-registered rules; K = 10; 95% hierarchical bootstrap CIs; all numbers from results/results.jsonl)
 | Hyp | Verdict | Key numbers (result ids) |
@@ -37,7 +37,7 @@
 **Added this cycle (exploratory, dev): hard-list ablation.** Per seed, a list of 10 TRUE + 10 NICHE planted claims (phantom rate 0.50). The full gate brings it to 0.11 [0.02, 0.22], retention 0.98. Without tiles it is 0.24, without the permutation test 0.22, and without split consistency 0.15 (`dev_hard_list_true_vs_niche`). This is the evidence that the spatial components matter. Lifting the niche expression cap did *not* get niche pairs into tool lists (`dev_nichecap10_*`).
 
 ## 6. Next 3 actions
-1. Final paper read-through for coherence and length.
+1. Done: paper read-through (abstract, amendments, phantom definition, Figure 1 moved into the main text).
 2. Human: compile the paper (expected ~6 pages plus appendix), verify citations and licences, and decide whether to add a third non-breast cancer.
 3. Optional: more agent runs (budget used: Gemini ~1.8M and DeepSeek ~1.4M of 4M tokens each) to tighten the per-tissue CIs.
 
