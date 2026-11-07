@@ -154,6 +154,14 @@ which retains regional structure and segmentation spillover. With the frozen gat
 (\rnullFrozenMarkerFive{} when the ``targets'' were sender-type markers, $n{=}\rnullNMarker{}$) and \rnullFrozenPass{}
 passed the full gate. With a global null the rates were \rnullNoTilesFive{} (\rnullNoTilesMarkerFive{} for marker
 targets) and \rnullNoTilesPass{}.
+\paragraph{Hard negatives and ablations.} Niche-confounded pairs rarely enter expression-ranked lists (their
+signal is regional and diluted across the cell type; lifting the expression cap did not change this in an exploratory
+run). We therefore also gated, per dev seed, a list of all 10 \textsc{true} and all 10 \textsc{niche} planted claims
+(phantom rate 0.50 before gating), the list a spatially aware but confounded method might produce (exploratory). The
+frozen gate reduced the phantom rate to \hardFullPRafter{} \hardFullPRafterci{} with retention \hardFullRet{}.
+Removing the tile restriction gave \hardNoTilesPRafter{} \hardNoTilesPRafterci{}, removing the permutation test
+\hardNoPermPRafter{}, and removing split consistency \hardNoSplitPRafter{}, so each spatial component contributes
+on exactly the negatives that expression cannot distinguish.
 On all planted claims (dev), pass rates were \plantedFullTrue{} (true), \plantedFullPhantom{} (phantom),
 \plantedFullNiche{} (niche) and \plantedFullRandom{} (random); removing tile restriction raised niche false passes
 to \plantedNoTilesNiche{}, removing the permutation test to \plantedNoPermNiche{}, and removing split consistency to

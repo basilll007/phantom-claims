@@ -3421,6 +3421,158 @@
   ],
   "value": 1000
  },
+ "hardFullPRafter": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "full",
+   "phantom_rate_after"
+  ],
+  "value": 0.10909090909090913
+ },
+ "hardFullRet": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "full",
+   "retention"
+  ],
+  "value": 0.98
+ },
+ "hardFullRed": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "full",
+   "rel_reduction"
+  ],
+  "value": 0.7818181818181817
+ },
+ "hardFullPRafterci": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.019230769230769273,
+   0.22388703036541424
+  ]
+ },
+ "hardNoTilesPRafter": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "phantom_rate_after"
+  ],
+  "value": 0.24242424242424243
+ },
+ "hardNoTilesRet": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "hardNoTilesRed": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "no_tiles",
+   "rel_reduction"
+  ],
+  "value": 0.5151515151515151
+ },
+ "hardNoTilesPRafterci": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.1428571428571429,
+   0.3529638009049772
+  ]
+ },
+ "hardNoPermPRafter": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "no_perm",
+   "phantom_rate_after"
+  ],
+  "value": 0.21875
+ },
+ "hardNoPermRet": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "no_perm",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "hardNoPermRed": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "no_perm",
+   "rel_reduction"
+  ],
+  "value": 0.5625
+ },
+ "hardNoPermPRafterci": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.11940298507462688,
+   0.323943661971831
+  ]
+ },
+ "hardNoSplitPRafter": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "no_split",
+   "phantom_rate_after"
+  ],
+  "value": 0.15254237288135597
+ },
+ "hardNoSplitRet": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "no_split",
+   "retention"
+  ],
+  "value": 1.0
+ },
+ "hardNoSplitRed": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "metrics",
+   "no_split",
+   "rel_reduction"
+  ],
+  "value": 0.6949152542372881
+ },
+ "hardNoSplitPRafterci": {
+  "id": "dev_hard_list_true_vs_niche",
+  "path": [
+   "ci",
+   "phantom_rate_after"
+  ],
+  "value": [
+   0.06663934426229506,
+   0.2615384615384615
+  ]
+ },
  "swDefaultReceptorOnlyCpdbPR": {
   "id": "dev_default_H1_expr_cpdb_K10",
   "path": [

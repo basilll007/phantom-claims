@@ -121,6 +121,13 @@ for K in (10, 20):
         except Exception:
             out.append(f"\\newcommand{{\\{nm}}}{{\\TODOVERIFY{{{nm}}}}}")
     num(f"comp{'Ten' if K == 10 else 'Twenty'}N", lc, ["metrics", f"tools_K{K}_n_claims"])
+# hard lists: 10 TRUE + 10 NICHE per seed (dev, exploratory)
+hl = first("dev_hard_list_true_vs_niche")
+for v in ("full", "no_tiles", "no_perm", "no_split"):
+    num(f"hard{tag(v)}PRafter", hl, ["metrics", v, "phantom_rate_after"])
+    num(f"hard{tag(v)}Ret", hl, ["metrics", v, "retention"])
+    num(f"hard{tag(v)}Red", hl, ["metrics", v, "rel_reduction"])
+    ci(f"hard{tag(v)}PRafterci", {"id": hl["id"], "ci": hl["metrics"][v]["ci"]} if hl else None, "phantom_rate_after")
 # exploratory dev sweeps / controls (K=10, cpdb + prod)
 for tagname, abl in [("default", "receptor_only"), ("effect0.5", "none"), ("effect0.25", "none"), ("noise0.5", "none"),
                      ("r50", "none"), ("resp1", "none"), ("resp0", "none")]:
