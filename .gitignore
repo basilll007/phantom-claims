@@ -1,0 +1,12 @@
+.venv/
+.uv_cache/
+.pip_cache/
+data/raw/
+data/processed/*.h5ad
+data/processed/*.npz
+data/processed/*.parquet
+data/bench/
+__pycache__/
+*.pyc
+logs/*.log
+.env

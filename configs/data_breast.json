@@ -1,0 +1,8 @@
+[
+ {"url": "https://cf.10xgenomics.com/samples/xenium/1.0.1/Xenium_FFPE_Human_Breast_Cancer_Rep1/Xenium_FFPE_Human_Breast_Cancer_Rep1_cell_feature_matrix.h5", "dest": "data/raw/breast_rep1/cell_feature_matrix.h5", "source_page": "https://www.10xgenomics.com/products/xenium-in-situ/preview-dataset-human-breast"},
+ {"url": "https://cf.10xgenomics.com/samples/xenium/1.0.1/Xenium_FFPE_Human_Breast_Cancer_Rep1/Xenium_FFPE_Human_Breast_Cancer_Rep1_cells.csv.gz", "dest": "data/raw/breast_rep1/cells.csv.gz", "source_page": "https://www.10xgenomics.com/products/xenium-in-situ/preview-dataset-human-breast"},
+ {"url": "https://cf.10xgenomics.com/samples/xenium/1.0.1/Xenium_FFPE_Human_Breast_Cancer_Rep2/Xenium_FFPE_Human_Breast_Cancer_Rep2_cell_feature_matrix.h5", "dest": "data/raw/breast_rep2/cell_feature_matrix.h5", "source_page": "https://www.10xgenomics.com/products/xenium-in-situ/preview-dataset-human-breast"},
+ {"url": "https://cf.10xgenomics.com/samples/xenium/1.0.1/Xenium_FFPE_Human_Breast_Cancer_Rep2/Xenium_FFPE_Human_Breast_Cancer_Rep2_cells.csv.gz", "dest": "data/raw/breast_rep2/cells.csv.gz", "source_page": "https://www.10xgenomics.com/products/xenium-in-situ/preview-dataset-human-breast"},
+ {"url": "https://ftp.ncbi.nlm.nih.gov/geo/samples/GSM7780nnn/GSM7780153/suppl/GSM7780153_Xenium_R1_Fig1-5_supervised.csv.gz", "dest": "data/raw/breast_rep1/Xenium_R1_Fig1-5_supervised.csv.gz", "source_page": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE243280"},
+ {"url": "https://ftp.ncbi.nlm.nih.gov/geo/samples/GSM7780nnn/GSM7780154/suppl/GSM7780154_Xenium_R2_Fig1-5_supervised.csv.gz", "dest": "data/raw/breast_rep2/Xenium_R2_Fig1-5_supervised.csv.gz", "source_page": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE243280"}
+]
