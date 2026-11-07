@@ -8,3 +8,4 @@
 - 2026-11-06 23:55 CST — Blocker: 10x dataset pages HTTP 429; a background retry loop with a browser UA was denied by the permission system as bot-check circumvention -> dropped; will use occasional single WebFetch.
 - 2026-11-06 23:55 CST — L-R pool: LIANA consensus (4620 pairs) ∩ breast panel (313 genes) = 23 pairs (all complex subunits required).
 - 2026-11-06 23:55 CST — PREREG.md frozen in commit da1b81c (before any evaluation).
+- 2026-11-06 23:59 CST — Phase 1 (breast): processed Rep1 164000 cells / Rep2 118370 cells after QC (>=10 transcripts), 313 genes, 20 published types (Janesick supervised). figures/spatial_breast_rep*.png, results/tables/cell_counts.csv. Phase 2: bench/generate.py + 8 unit tests pass (labels, exact injection, phantom never-meet, niche regional, determinism, real genes untouched). Gen ~22 s/instance on Rep1.
