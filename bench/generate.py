@@ -13,7 +13,8 @@ from bench.tissue import Tissue, load_tissue, type_pair_contacts
 DEFAULTS = dict(n_true=10, n_phantom=10, n_niche=10, n_random=10, n_targets=3, n_responders=2,
                 r_plant=30.0, lam=None, mu_L=1.0, mu_R=1.0, mu_T=2.0, effect=1.0, noise=0.0,
                 r_seg_mult=3.0, phantom_cap=3.0, niche_sigma=400.0, niche_blobs=2, niche_cap=3.0,
-                min_type_cells=200, min_true_contacts=500, min_far_frac=0.3, donor_min_mean=0.05)
+                min_type_cells=200, min_true_contacts=500, min_far_frac=0.3, donor_min_mean=0.02,
+                donor_max_mean=0.3, donor_max_type_mean=0.5)
 CATS = ("true", "phantom", "niche", "random")
 
 
@@ -146,7 +147,12 @@ def generate(t: Tissue, seed: int, cfg=None) -> BenchInstance:
     nT = c["n_targets"]
     syn_genes, truth = [], []
     real_means = np.asarray(t.counts.mean(0)).ravel()
-    donor_pool = np.flatnonzero(real_means >= c["donor_min_mean"])
+    type_max = np.zeros_like(real_means)
+    for k in t.type_list():
+        type_max = np.maximum(type_max, np.asarray(t.counts[t.types == k].mean(0)).ravel())
+    donor_pool = np.flatnonzero((real_means >= c["donor_min_mean"]) & (real_means <= c["donor_max_mean"]) &
+                                (type_max <= c["donor_max_type_mean"]))
+    assert len(donor_pool) >= 2 + c["n_targets"], "donor pool too small"
     n = t.n
     nch = len(plan) * (2 + nT)
     base = np.zeros((n, nch), dtype=np.int32)
@@ -210,7 +216,7 @@ def generate(t: Tissue, seed: int, cfg=None) -> BenchInstance:
     truth.sort(key=lambda p: p["pair_id"])
     database = [dict(pair_id=p["pair_id"], ligand=p["ligand"], receptor=p["receptor"], targets=p["targets"])
                 for p in truth]
-    meta = dict(cfg_hash=cfg_hash(c), types=types, gen_seconds=round(time.time() - t0, 1),
+    meta = dict(cfg_hash=cfg_hash(c), types=types, donor_pool_size=int(len(donor_pool)), gen_seconds=round(time.time() - t0, 1),
                 n_true_candidates=len(true_c), n_phantom_candidates=len(ph_c))
     return BenchInstance(tissue=t.name, seed=seed, cfg=c, syn_genes=syn_genes,
                          baseline=sp.csr_matrix(base), added=sp.csr_matrix(add), truth=truth,

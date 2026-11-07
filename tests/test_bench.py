@@ -19,7 +19,7 @@ def toy_tissue(seed=0, n=6000):
     return Tissue("toy", xy, types.astype(str), counts, np.array([f"G{i}" for i in range(30)]), lib)
 
 
-CFG = dict(n_true=3, n_phantom=3, n_niche=3, n_random=3, min_type_cells=100, min_true_contacts=50,
+CFG = dict(n_true=3, n_phantom=3, n_niche=3, n_random=3, min_type_cells=100, min_true_contacts=50, donor_max_mean=10.0, donor_max_type_mean=10.0,
            niche_sigma=300.0, donor_min_mean=0.0)
 
 

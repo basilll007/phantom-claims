@@ -109,3 +109,14 @@ stops when either is hit and this is reported.
 
 ## Amendments
 (append-only; timestamp + reason)
+
+### Amendment 1 — 2026-11-07 00:07 CST
+**What:** benchmark donor pool restricted to real panel genes with overall mean 0.02–0.30 counts/cell and
+max per-type mean <= 0.5 counts/cell (generator knobs donor_max_mean, donor_max_type_mean); previously
+any gene with mean >= 0.05. Gate: complex-subunit splitting on '_' only applies when the full name is not a
+gene (bug fix: anonymized names contain '_').
+**Why:** first dev smoke run (seed 0, before any gate tuning or gate metric was inspected) showed the
+expression-only top-10 contained zero planted pairs: donor genes with strong type-specific baselines (e.g.
+DST in myoepithelium) dominated type means, so top-K was all wrong-type-pair claims and retention would be
+undefined. The restricted range matches real L-R genes on the panel (e.g. CD274 0.037, CTLA4 0.13, EGFR 0.30).
+**Effect on hypotheses/verdict rules:** none. Seeds/splits unchanged.
