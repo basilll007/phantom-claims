@@ -204,7 +204,8 @@ class Gate:
             if c.use_perm and not (r.get("q_bh", 1.0) <= c.q):
                 reasons.append(f"perm_null_not_rejected(q={r.get('q_bh', 1.0):.3g}>{c.q})")
             if c.use_split:
-                ok = all(h["rho"] is not None and h["rho"] > 0 and h["p"] is not None and h["p"] < c.alpha_half
+                ok = all(h["rho"] is not None and h["rho"] > 0 and
+                         ((not c.use_perm) or (h["p"] is not None and h["p"] < c.alpha_half))
                          for h in r["halves"])
                 if not ok:
                     reasons.append("split_inconsistent")

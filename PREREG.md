@@ -120,3 +120,11 @@ expression-only top-10 contained zero planted pairs: donor genes with strong typ
 DST in myoepithelium) dominated type means, so top-K was all wrong-type-pair claims and retention would be
 undefined. The restricted range matches real L-R genes on the panel (e.g. CD274 0.037, CTLA4 0.13, EGFR 0.30).
 **Effect on hypotheses/verdict rules:** none. Seeds/splits unchanged.
+
+### Amendment 2 — 2026-11-07 00:13 CST
+**Gate config frozen (dev tuning complete):** r = 30 um, tile = 250 um, n_min = 50, rho_min = 0.02,
+n_perm = 1000, alpha_half = 0.10, q = 0.05 — identical to the pre-registered defaults (selection rule s.4:
+many grid configs tied at post-gate phantom rate 0 with retention >= 0.90; tie broken toward defaults).
+Recorded in results/tables/gate_selected_dev.json and results.jsonl id=dev_gate_tuning. No test benchmark
+instance had been generated at this point. Ablation bug fix (no effect on the frozen gate): with use_perm=False
+the split check uses only the sign of rho in both halves.
