@@ -43,7 +43,7 @@ def h1_tools(data, tag, split="dev", tissue="breast_rep1"):
                 for sb in subs:
                     cats[sb] = cats.get(sb, 0) + 1
             point, ci = summarize(groups)
-            rec = log_result(dict(id=f"{split}_{tag}_H1_expr_{m}_K{K}", phase=3, split=split, tissue=tissue,
+            rec = log_result(dict(id=f"{split}_{tag}_{tissue}_H1_expr_{m}_K{K}", phase=3, split=split, tissue=tissue,
                                   seeds=[d[0] for d in data], condition=f"expr_{m}", K=K, hypothesis="H1",
                                   bench_tag=tag, metrics=point, ci=ci, claim_breakdown=cats))
             out[(m, K)] = rec
@@ -115,7 +115,7 @@ def h2(t, data, cfg, tag, split="dev", tissue="breast_rep1", ablation="none", wr
             point, ci = summarize(groups)
             if write and K == 10:
                 write_audit(audits, f"results/audit/{split}_{tag}_{tissue}_{m}_K{K}_{ablation}.jsonl")
-            rec = log_result(dict(id=f"{split}_{tag}_H2_expr_{m}_K{K}_{ablation}", phase=4, split=split,
+            rec = log_result(dict(id=f"{split}_{tag}_{tissue}_H2_expr_{m}_K{K}_{ablation}", phase=4, split=split,
                                   tissue=tissue, seeds=[d[0] for d in data], condition=f"expr_{m}_gated", K=K,
                                   hypothesis="H2", ablation=ablation, bench_tag=tag, gate_config=asdict(cfg),
                                   metrics=point, ci=ci))
