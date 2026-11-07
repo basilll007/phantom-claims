@@ -1,0 +1,197 @@
+{
+ "run_id": "dev_breast_rep1_s2_gemini_unguided",
+ "family": "gemini",
+ "model": "gemini-2.5-flash",
+ "condition": "unguided",
+ "temperature": 0.2,
+ "seed": 2,
+ "tissue": "breast_rep1",
+ "bench_seed": 2,
+ "started": "2026-11-07T00:25:49-0600",
+ "steps": [
+  {
+   "step": 0,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "top_expressed_pairs",
+     "args": {
+      "n": 50
+     },
+     "result": "[{\"sender\": \"Endothelial\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_21\", \"receptor\": \"REC_21\", \"score\": 0.956, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"Perivascular-Like\", \"ligand\": \"LIG_07\", \"receptor\": \"REC_07\", \"score\": 0.882, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"Stromal_&_T_Cell_Hybrid\", \"ligand\": \"LIG_32\", \"receptor\": \"REC_32\", \"score\": 0.84, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"IRF7+_DCs\", \"ligand\": \"LIG_29\", \"receptor\": \"REC_29\", \"score\": 0.815, \"perm_p\": 0.001}, {\"sender\": \"LAMP3+_DCs\", \"receiver\": \"Myoepi_KRT15+\", \"ligand\": \"LIG_28\", \"receptor\": \"REC_28\", \"score\": 0.802, \"perm_p\": 0.001}, {\"sender\": \"Myoepi_KRT15+\", \"receiver\": \"LAMP3+_DCs\", \"ligand\": \"LIG_35\", \"receptor\": \"REC_35\", \"score\": 0.799, \"perm_p\": 0.001}, {\"sender\": \"Endothelial\", \"receiver\": \"Stromal_&_T_Cell_Hybrid\", \"ligand\": \"LIG_30\", \"receptor\": \"REC_30\", \"score\": 0.768, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_21\", \"receptor\": \"REC_21\", \"score\": 0.758, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_21\", \"receptor\": \"REC_21\", \"score\": 0.748, \"perm_p\": 0.001}, {\"sender\": \"Stromal_&_T_Cell_Hybrid\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_21\", \"receptor\": \"REC_21\", \"score\": 0.74, \"perm_p\": 0.001}, {\"sender\": \"Macrophages_1\", \"receiver\": \"Endothelial\", \"ligand\": \"LIG_33\", \"receptor\": \"REC_33\", \"score\": 0.738, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"Stromal\", \"ligand\": \"LIG_27\", \"receptor\": \"REC_27\", \"score\": 0.736, \"perm_p\": 0.001}, {\"sender\": \"IRF7+_DCs\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_21\", \"receptor\": \"REC_21\", \"score\": 0.732, \"perm_p\": 0.001}, {\"sender\": \"CD4+_T_Cells\", \"receiver\": \"DCIS_2\", \"ligand\": \"LIG_01\", \"receptor\": \"REC_01\", \"score\": 0.725, \"perm_p\": 0.001}, {\"sender\": \"DCIS_2\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_10\", \"receptor\": \"REC_10\", \"score\": 0.72, \"perm_p\": 0.001}, {\"sender\": \"Perivascular-Like\", \"receiver\": \"Myoepi_KRT15+\", \"ligand\": \"LIG_09\", \"receptor\": \"REC_09\", \"score\": 0.71, \"perm_p\": 0.001}, {\"sender\": \"T_Cell_&_Tumor_Hybrid\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_21\", \"receptor\": \"REC_21\", \"score\": 0.682, \"perm_p\": 0.001}, {\"sender\": \"Perivascular-Like\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_09\", \"receptor\": \"REC_09\", \"score\": 0.676, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_10\", \"receptor\": \"REC_10\", \"score\": 0.667, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_27\", \"receptor\": \"REC_27\", \"score\": 0.661, \"perm_p\": 0.001}, {\"sender\": \"DCIS_2\", \"receiver\": \"B_Cells\", \"ligand\": \"LIG_04\", \"receptor\": \"REC_04\", \"score\": 0.641, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"DCIS_2\", \"ligand\": \"LIG_36\", \"receptor\": \"REC_36\", \"score\": 0.627, \"perm_p\": 0.001}, {\"sender\": \"Myoepi_ACTA2+\", \"receiver\": \"Myoepi_KRT15+\", \"ligand\": \"LIG_12\", \"receptor\": \"REC_12\", \"score\": 0.619, \"perm_p\": 0.001}, {\"sender\": \"T_Cell_&_Tumor_Hybrid\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_10\", \"receptor\": \"REC_10\", \"score\": 0.616, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"Stromal_&_T_Cell_Hybrid\", \"ligand\": \"LIG_29\", \"receptor\": \"REC_29\", \"score\": 0.615, \"perm_p\": 0.001}, {\"sender\": \"DCIS_1\", \"receiver\": \"Myoepi_KRT15+\", \"ligand\": \"LIG_26\", \"receptor\": \"REC_26\", \"score\": 0.607, \"perm_p\": 0.001}, {\"sender\": \"CD4+_T_Cells\", \"receiver\": \"Macrophages_1\", \"ligand\": \"LIG_01\", \"receptor\": \"REC_01\", \"score\": 0.604, \"perm_p\": 0.001}, {\"sender\": \"CD4+_T_Cells\", \"receiver\": \"LAMP3+_DCs\", \"ligand\": \"LIG_01\", \"receptor\": \"REC_01\", \"score\": 0.598, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_29\", \"receptor\": \"REC_29\", \"score\": 0.59, \"perm_p\": 0.001}, {\"sender\": \"Myoepi_KRT15+\", \"receiver\": \"DCIS_2\", \"ligand\": \"LIG_11\", \"receptor\": \"REC_11\", \"score\": 0.585, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"B_Cells\", \"ligand\": \"LIG_29\", \"receptor\": \"REC_29\", \"score\": 0.578, \"perm_p\": 0.001}, {\"sender\": \"CD4+_T_Cells\", \"receiver\": \"Myoepi_KRT15+\", \"ligand\": \"LIG_01\", \"receptor\": \"REC_01\", \"score\": 0.576, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"T_Cell_&_Tumor_Hybrid\", \"ligand\": \"LIG_29\", \"receptor\": \"REC_29\", \"score\": 0.572, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"Perivascular-Like\", \"ligand\": \"LIG_36\", \"receptor\": \"REC_36\", \"score\": 0.571, \"perm_p\": 0.001}, {\"sender\": \"Perivascular-Like\", \"receiver\": \"CD8+_T_Cells\", \"ligand\": \"LIG_09\", \"receptor\": \"REC_09\", \"score\": 0.569, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"Stromal\", \"ligand\": \"LIG_29\", \"receptor\": \"REC_29\", \"score\": 0.565, \"perm_p\": 0.001}, {\"sender\": \"Stromal_&_T_Cell_Hybrid\", \"receiver\": \"CD4+_T_Cells\", \"ligand\": \"LIG_10\", \"receptor\": \"REC_10\", \"score\": 0.564, \"perm_p\": 0.001}, {\"sender\": \"Perivascular-Like\", \"receiver\": \"B_Cells\", \"ligand\": \"LIG_09\", \"receptor\": \"REC_09\", \"score\": 0.561, \"perm_p\": 0.001}, {\"sender\": \"Perivascular-Like\", \"receiver\": \"Stromal_&_T_Cell_Hybrid\", \"ligand\": \"LIG_09\", \"receptor\": \"REC_09\", \"score\": 0.556, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"CD8+_T_Cells\", \"ligand\": \"LIG_27\", \"receptor\": \"REC_27\", \"score\": 0.555, \"perm_p\": 0.001}, {\"sender\": \"Endothelial\", \"receiver\": \"LAMP3+_DCs\", \"ligand\": \"LIG_35\", \"receptor\": \"REC_35\", \"score\": 0.551, \"perm_p\": 0.001}, {\"sender\": \"Endothelial\", \"receiver\": \"CD8+_T_Cells\", \"ligand\": \"LIG_21\", \"receptor\": \"REC_21\", \"score\": 0.546, \"perm_p\": 0.001}, {\"sender\": \"Prolif_Invasive_Tumor\", \"receiver\": \"Myoepi_KRT15+\", \"ligand\": \"LIG_20\", \"receptor\": \"REC_20\", \"score\": 0.544, \"perm_p\": 0.001}, {\"sender\": \"B_Cells\", \"receiver\": \"Stromal_&_T_Cell_Hybrid\", \"ligand\": \"LIG_27\", \"receptor\": \"REC_27\", \"score\": 0.543, \"perm_p\": 0.001}, {\"sender\": \"Perivascular-Like\", \"receiver\": \"IRF7+_DCs\", \"ligand\": \"LIG_09\", \"receptor\": \"REC_09\", \"score\": 0.54, \"perm_p\": 0.001}, {\"sender\": \"CD8+_T_Cells\", \"receiver\": \"Mast_Cells\", \"ligand\": \"LIG_2"
+    }
+   ],
+   "usage": [
+    830,
+    18
+   ]
+  },
+  {
+   "step": 1,
+   "content": null,
+   "tool_calls": [
+    {
+     "name": "submit_claims",
+     "args": {
+      "claims": [
+       {
+        "receiver": "CD4+_T_Cells",
+        "ligand": "LIG_21",
+        "receptor": "REC_21",
+        "evidence": "High expression score (0.956) and significant permutation p-value (0.001).",
+        "sender": "Endothelial"
+       },
+       {
+        "sender": "CD8+_T_Cells",
+        "ligand": "LIG_07",
+        "receiver": "Perivascular-Like",
+        "receptor": "REC_07",
+        "evidence": "High expression score (0.882) and significant permutation p-value (0.001)."
+       },
+       {
+        "sender": "B_Cells",
+        "evidence": "High expression score (0.84) and significant permutation p-value (0.001).",
+        "receptor": "REC_32",
+        "ligand": "LIG_32",
+        "receiver": "Stromal_&_T_Cell_Hybrid"
+       },
+       {
+        "receiver": "IRF7+_DCs",
+        "ligand": "LIG_29",
+        "sender": "CD8+_T_Cells",
+        "evidence": "High expression score (0.815) and significant permutation p-value (0.001).",
+        "receptor": "REC_29"
+       },
+       {
+        "receiver": "Myoepi_KRT15+",
+        "ligand": "LIG_28",
+        "sender": "LAMP3+_DCs",
+        "evidence": "High expression score (0.802) and significant permutation p-value (0.001).",
+        "receptor": "REC_28"
+       },
+       {
+        "receiver": "LAMP3+_DCs",
+        "sender": "Myoepi_KRT15+",
+        "ligand": "LIG_35",
+        "evidence": "High expression score (0.799) and significant permutation p-value (0.001).",
+        "receptor": "REC_35"
+       },
+       {
+        "receptor": "REC_30",
+        "evidence": "High expression score (0.768) and significant permutation p-value (0.001).",
+        "sender": "Endothelial",
+        "ligand": "LIG_30",
+        "receiver": "Stromal_&_T_Cell_Hybrid"
+       },
+       {
+        "receiver": "CD4+_T_Cells",
+        "sender": "CD8+_T_Cells",
+        "ligand": "LIG_21",
+        "receptor": "REC_21",
+        "evidence": "High expression score (0.758) and significant permutation p-value (0.001)."
+       },
+       {
+        "sender": "B_Cells",
+        "receiver": "CD4+_T_Cells",
+        "ligand": "LIG_21",
+        "receptor": "REC_21",
+        "evidence": "High expression score (0.748) and significant permutation p-value (0.001)."
+       },
+       {
+        "ligand": "LIG_21",
+        "evidence": "High expression score (0.74) and significant permutation p-value (0.001).",
+        "receptor": "REC_21",
+        "sender": "Stromal_&_T_Cell_Hybrid",
+        "receiver": "CD4+_T_Cells"
+       }
+      ]
+     },
+     "result": "{\"status\": \"received\", \"n\": 10}"
+    }
+   ],
+   "usage": [
+    3782,
+    708
+   ]
+  }
+ ],
+ "usage": {
+  "prompt": 4612,
+  "completion": 726
+ },
+ "status": "submitted",
+ "claims": [
+  {
+   "receiver": "CD4+_T_Cells",
+   "ligand": "LIG_21",
+   "receptor": "REC_21",
+   "evidence": "High expression score (0.956) and significant permutation p-value (0.001).",
+   "sender": "Endothelial"
+  },
+  {
+   "sender": "CD8+_T_Cells",
+   "ligand": "LIG_07",
+   "receiver": "Perivascular-Like",
+   "receptor": "REC_07",
+   "evidence": "High expression score (0.882) and significant permutation p-value (0.001)."
+  },
+  {
+   "sender": "B_Cells",
+   "evidence": "High expression score (0.84) and significant permutation p-value (0.001).",
+   "receptor": "REC_32",
+   "ligand": "LIG_32",
+   "receiver": "Stromal_&_T_Cell_Hybrid"
+  },
+  {
+   "receiver": "IRF7+_DCs",
+   "ligand": "LIG_29",
+   "sender": "CD8+_T_Cells",
+   "evidence": "High expression score (0.815) and significant permutation p-value (0.001).",
+   "receptor": "REC_29"
+  },
+  {
+   "receiver": "Myoepi_KRT15+",
+   "ligand": "LIG_28",
+   "sender": "LAMP3+_DCs",
+   "evidence": "High expression score (0.802) and significant permutation p-value (0.001).",
+   "receptor": "REC_28"
+  },
+  {
+   "receiver": "LAMP3+_DCs",
+   "sender": "Myoepi_KRT15+",
+   "ligand": "LIG_35",
+   "evidence": "High expression score (0.799) and significant permutation p-value (0.001).",
+   "receptor": "REC_35"
+  },
+  {
+   "receptor": "REC_30",
+   "evidence": "High expression score (0.768) and significant permutation p-value (0.001).",
+   "sender": "Endothelial",
+   "ligand": "LIG_30",
+   "receiver": "Stromal_&_T_Cell_Hybrid"
+  },
+  {
+   "receiver": "CD4+_T_Cells",
+   "sender": "CD8+_T_Cells",
+   "ligand": "LIG_21",
+   "receptor": "REC_21",
+   "evidence": "High expression score (0.758) and significant permutation p-value (0.001)."
+  },
+  {
+   "sender": "B_Cells",
+   "receiver": "CD4+_T_Cells",
+   "ligand": "LIG_21",
+   "receptor": "REC_21",
+   "evidence": "High expression score (0.748) and significant permutation p-value (0.001)."
+  },
+  {
+   "ligand": "LIG_21",
+   "evidence": "High expression score (0.74) and significant permutation p-value (0.001).",
+   "receptor": "REC_21",
+   "sender": "Stromal_&_T_Cell_Hybrid",
+   "receiver": "CD4+_T_Cells"
+  }
+ ],
+ "runtime_s": 6.8,
+ "n_tool_calls": 2
+}
