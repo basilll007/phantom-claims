@@ -1,0 +1,14 @@
+split,tissue,condition,pr,pr_ci,H1,pr_after,red,red_ci,ret,ret_ci,H2,ids,gate_tool_pr,gate_tool_ci,n_runs
+dev,breast_rep1,expr_cpdb,0.30000000000000004,"[0.16000000000000003, 0.45999999999999996]",INCONCLUSIVE,0.0,1.0,"[1.0, 1.0]",0.9714285714285714,"[0.875, 1.0]",SUPPORTED,"['dev_default_H1_expr_cpdb_K10', 'dev_default_H2_expr_cpdb_K10_none']",,,
+dev,breast_rep1,expr_prod,0.24,"[0.12, 0.38]",INCONCLUSIVE,0.0,1.0,"[1.0, 1.0]",0.9736842105263158,"[0.8823529411764706, 1.0]",SUPPORTED,"['dev_default_H1_expr_prod_K10', 'dev_default_H2_expr_prod_K10_none']",,,
+dev,breast_rep1,agent_gemini,0.2666666666666667,"[0.06666666666666665, 0.5333333333333333]",INCONCLUSIVE,0.0,1.0,"[1.0, 1.0]",0.9545454545454546,"[0.8095238095238095, 1.0]",SUPPORTED,"['agent_dev_breast_rep1_gemini_unguided_K10', 'agent_dev_breast_rep1_gemini_unguided_gated_K10', 'agent_dev_breast_rep1_gemini_gate_tool_K10']",0.16666666666666663,"[0.033333333333333326, 0.3666666666666667]",3.0
+dev,breast_rep1,agent_deepseek,0.1333333333333333,"[0.033333333333333326, 0.2674999999999955]",INCONCLUSIVE,0.0,1.0,"[1.0, 1.0]",0.9615384615384616,"[0.84, 1.0]",SUPPORTED,"['agent_dev_breast_rep1_deepseek_unguided_K10', 'agent_dev_breast_rep1_deepseek_unguided_gated_K10', 'agent_dev_breast_rep1_deepseek_gate_tool_K10']",0.1333333333333333,"[0.033333333333333326, 0.2666666666666667]",3.0
+dev,breast_rep1,agent_both,0.19999999999999996,"[0.06666666666666665, 0.35]",INCONCLUSIVE,0.0,1.0,"[1.0, 1.0]",0.9583333333333334,"[0.8683771929824562, 1.0]",SUPPORTED,"['agent_dev_breast_rep1_both_unguided_K10', 'agent_dev_breast_rep1_both_unguided_gated_K10', 'agent_dev_breast_rep1_both_gate_tool_K10']",0.15000000000000002,"[0.050000000000000044, 0.2666666666666667]",6.0
+test,breast_rep1,expr_cpdb,0.19999999999999996,"[0.07999999999999996, 0.31999999999999995]",INCONCLUSIVE,0.0,1.0,"[1.0, 1.0]",1.0,"[1.0, 1.0]",SUPPORTED,"['test_final_breast_rep1_H1_expr_cpdb_K10', 'test_final_breast_rep1_H2_expr_cpdb_K10_none']",,,
+test,breast_rep1,expr_prod,0.19999999999999996,"[0.07999999999999996, 0.33999999999999997]",INCONCLUSIVE,0.0,1.0,"[1.0, 1.0]",1.0,"[1.0, 1.0]",SUPPORTED,"['test_final_breast_rep1_H1_expr_prod_K10', 'test_final_breast_rep1_H2_expr_prod_K10_none']",,,
+test,breast_rep2,expr_cpdb,0.18000000000000005,"[0.06000000000000005, 0.31999999999999995]",INCONCLUSIVE,0.0,1.0,"[1.0, 1.0]",1.0,"[1.0, 1.0]",SUPPORTED,"['test_final_breast_rep2_H1_expr_cpdb_K10', 'test_final_breast_rep2_H2_expr_cpdb_K10_none']",,,
+test,breast_rep2,expr_prod,0.18000000000000005,"[0.06000000000000005, 0.31999999999999995]",INCONCLUSIVE,0.0,1.0,"[1.0, 1.0]",1.0,"[1.0, 1.0]",SUPPORTED,"['test_final_breast_rep2_H1_expr_prod_K10', 'test_final_breast_rep2_H2_expr_prod_K10_none']",,,
+test,pancreas,expr_cpdb,,,NOT YET RUN,,,,,,NOT YET RUN,[],,,
+test,pancreas,expr_prod,,,NOT YET RUN,,,,,,NOT YET RUN,[],,,
+test,lung,expr_cpdb,,,NOT YET RUN,,,,,,NOT YET RUN,[],,,
+test,lung,expr_prod,,,NOT YET RUN,,,,,,NOT YET RUN,[],,,

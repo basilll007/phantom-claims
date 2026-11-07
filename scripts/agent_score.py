@@ -80,3 +80,33 @@ for tissue in sorted(d.tissue.unique()) + (["all"] if d.tissue.nunique() > 1 els
                                 hypothesis="H2", n_runs=len(groups), gate_config=sel, metrics=point, ci=ci))
                 print(f"   gated: PR {point['phantom_rate']:.3f}->{point['phantom_rate_after']:.3f} red={point['rel_reduction']:.3f} "
                       f"CI={np.round(ci['rel_reduction'], 3)} ret={point['retention']:.3f} CI={np.round(ci['retention'], 3)}")
+
+# ---- gate_tool compliance: submitted claims vs. the agent's own verify_claim results in its transcript
+comp = dict(runs=0, submitted=0, verified_pass=0, verified_fail_submitted=0, unverified=0, n_verify_calls=0,
+            verified_fail_submitted_negatives=0)
+for r in runs:
+    if r["cond"] != "gate_tool":
+        continue
+    ver = {}
+    for s in r["log"]["steps"]:
+        for tc in s.get("tool_calls", []):
+            if tc["name"] == "verify_claim":
+                a = tc["args"]; k = (a.get("sender"), a.get("receiver"), a.get("ligand"), a.get("receptor"))
+                try:
+                    ver[k] = json.loads(tc["result"]).get("pass_")
+                except Exception:
+                    pass
+    comp["runs"] += 1; comp["n_verify_calls"] += len(ver)
+    sub = d[(d.run_id == r["run_id"])]
+    for c in sub.itertuples():
+        k = (c.sender, c.receiver, c.ligand, c.receptor)
+        comp["submitted"] += 1
+        if ver.get(k) is True:
+            comp["verified_pass"] += 1
+        elif ver.get(k) is False:
+            comp["verified_fail_submitted"] += 1
+            comp["verified_fail_submitted_negatives"] += int(c.label == 0)
+        else:
+            comp["unverified"] += 1
+log_result(dict(id=f"agent_{split}_gate_tool_compliance", phase=5 if split == "dev" else 6, split=split, metrics=comp))
+print("gate_tool compliance", comp)

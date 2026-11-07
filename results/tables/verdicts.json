@@ -1,0 +1,365 @@
+{
+ "table": [
+  {
+   "split": "dev",
+   "tissue": "breast_rep1",
+   "condition": "expr_cpdb",
+   "pr": 0.30000000000000004,
+   "pr_ci": [
+    0.16000000000000003,
+    0.45999999999999996
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 0.9714285714285714,
+   "ret_ci": [
+    0.875,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "dev_default_H1_expr_cpdb_K10",
+    "dev_default_H2_expr_cpdb_K10_none"
+   ],
+   "gate_tool_pr": NaN,
+   "gate_tool_ci": NaN,
+   "n_runs": NaN
+  },
+  {
+   "split": "dev",
+   "tissue": "breast_rep1",
+   "condition": "expr_prod",
+   "pr": 0.24,
+   "pr_ci": [
+    0.12,
+    0.38
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 0.9736842105263158,
+   "ret_ci": [
+    0.8823529411764706,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "dev_default_H1_expr_prod_K10",
+    "dev_default_H2_expr_prod_K10_none"
+   ],
+   "gate_tool_pr": NaN,
+   "gate_tool_ci": NaN,
+   "n_runs": NaN
+  },
+  {
+   "split": "dev",
+   "tissue": "breast_rep1",
+   "condition": "agent_gemini",
+   "pr": 0.2666666666666667,
+   "pr_ci": [
+    0.06666666666666665,
+    0.5333333333333333
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 0.9545454545454546,
+   "ret_ci": [
+    0.8095238095238095,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "agent_dev_breast_rep1_gemini_unguided_K10",
+    "agent_dev_breast_rep1_gemini_unguided_gated_K10",
+    "agent_dev_breast_rep1_gemini_gate_tool_K10"
+   ],
+   "gate_tool_pr": 0.16666666666666663,
+   "gate_tool_ci": [
+    0.033333333333333326,
+    0.3666666666666667
+   ],
+   "n_runs": 3.0
+  },
+  {
+   "split": "dev",
+   "tissue": "breast_rep1",
+   "condition": "agent_deepseek",
+   "pr": 0.1333333333333333,
+   "pr_ci": [
+    0.033333333333333326,
+    0.2674999999999955
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 0.9615384615384616,
+   "ret_ci": [
+    0.84,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "agent_dev_breast_rep1_deepseek_unguided_K10",
+    "agent_dev_breast_rep1_deepseek_unguided_gated_K10",
+    "agent_dev_breast_rep1_deepseek_gate_tool_K10"
+   ],
+   "gate_tool_pr": 0.1333333333333333,
+   "gate_tool_ci": [
+    0.033333333333333326,
+    0.2666666666666667
+   ],
+   "n_runs": 3.0
+  },
+  {
+   "split": "dev",
+   "tissue": "breast_rep1",
+   "condition": "agent_both",
+   "pr": 0.19999999999999996,
+   "pr_ci": [
+    0.06666666666666665,
+    0.35
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 0.9583333333333334,
+   "ret_ci": [
+    0.8683771929824562,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "agent_dev_breast_rep1_both_unguided_K10",
+    "agent_dev_breast_rep1_both_unguided_gated_K10",
+    "agent_dev_breast_rep1_both_gate_tool_K10"
+   ],
+   "gate_tool_pr": 0.15000000000000002,
+   "gate_tool_ci": [
+    0.050000000000000044,
+    0.2666666666666667
+   ],
+   "n_runs": 6.0
+  },
+  {
+   "split": "test",
+   "tissue": "breast_rep1",
+   "condition": "expr_cpdb",
+   "pr": 0.19999999999999996,
+   "pr_ci": [
+    0.07999999999999996,
+    0.31999999999999995
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 1.0,
+   "ret_ci": [
+    1.0,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "test_final_breast_rep1_H1_expr_cpdb_K10",
+    "test_final_breast_rep1_H2_expr_cpdb_K10_none"
+   ],
+   "gate_tool_pr": NaN,
+   "gate_tool_ci": NaN,
+   "n_runs": NaN
+  },
+  {
+   "split": "test",
+   "tissue": "breast_rep1",
+   "condition": "expr_prod",
+   "pr": 0.19999999999999996,
+   "pr_ci": [
+    0.07999999999999996,
+    0.33999999999999997
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 1.0,
+   "ret_ci": [
+    1.0,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "test_final_breast_rep1_H1_expr_prod_K10",
+    "test_final_breast_rep1_H2_expr_prod_K10_none"
+   ],
+   "gate_tool_pr": NaN,
+   "gate_tool_ci": NaN,
+   "n_runs": NaN
+  },
+  {
+   "split": "test",
+   "tissue": "breast_rep2",
+   "condition": "expr_cpdb",
+   "pr": 0.18000000000000005,
+   "pr_ci": [
+    0.06000000000000005,
+    0.31999999999999995
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 1.0,
+   "ret_ci": [
+    1.0,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "test_final_breast_rep2_H1_expr_cpdb_K10",
+    "test_final_breast_rep2_H2_expr_cpdb_K10_none"
+   ],
+   "gate_tool_pr": NaN,
+   "gate_tool_ci": NaN,
+   "n_runs": NaN
+  },
+  {
+   "split": "test",
+   "tissue": "breast_rep2",
+   "condition": "expr_prod",
+   "pr": 0.18000000000000005,
+   "pr_ci": [
+    0.06000000000000005,
+    0.31999999999999995
+   ],
+   "H1": "INCONCLUSIVE",
+   "pr_after": 0.0,
+   "red": 1.0,
+   "red_ci": [
+    1.0,
+    1.0
+   ],
+   "ret": 1.0,
+   "ret_ci": [
+    1.0,
+    1.0
+   ],
+   "H2": "SUPPORTED",
+   "ids": [
+    "test_final_breast_rep2_H1_expr_prod_K10",
+    "test_final_breast_rep2_H2_expr_prod_K10_none"
+   ],
+   "gate_tool_pr": NaN,
+   "gate_tool_ci": NaN,
+   "n_runs": NaN
+  },
+  {
+   "split": "test",
+   "tissue": "pancreas",
+   "condition": "expr_cpdb",
+   "pr": NaN,
+   "pr_ci": null,
+   "H1": "NOT YET RUN",
+   "pr_after": NaN,
+   "red": NaN,
+   "red_ci": null,
+   "ret": NaN,
+   "ret_ci": null,
+   "H2": "NOT YET RUN",
+   "ids": [],
+   "gate_tool_pr": NaN,
+   "gate_tool_ci": NaN,
+   "n_runs": NaN
+  },
+  {
+   "split": "test",
+   "tissue": "pancreas",
+   "condition": "expr_prod",
+   "pr": NaN,
+   "pr_ci": null,
+   "H1": "NOT YET RUN",
+   "pr_after": NaN,
+   "red": NaN,
+   "red_ci": null,
+   "ret": NaN,
+   "ret_ci": null,
+   "H2": "NOT YET RUN",
+   "ids": [],
+   "gate_tool_pr": NaN,
+   "gate_tool_ci": NaN,
+   "n_runs": NaN
+  },
+  {
+   "split": "test",
+   "tissue": "lung",
+   "condition": "expr_cpdb",
+   "pr": NaN,
+   "pr_ci": null,
+   "H1": "NOT YET RUN",
+   "pr_after": NaN,
+   "red": NaN,
+   "red_ci": null,
+   "ret": NaN,
+   "ret_ci": null,
+   "H2": "NOT YET RUN",
+   "ids": [],
+   "gate_tool_pr": NaN,
+   "gate_tool_ci": NaN,
+   "n_runs": NaN
+  },
+  {
+   "split": "test",
+   "tissue": "lung",
+   "condition": "expr_prod",
+   "pr": NaN,
+   "pr_ci": null,
+   "H1": "NOT YET RUN",
+   "pr_after": NaN,
+   "red": NaN,
+   "red_ci": null,
+   "ret": NaN,
+   "ret_ci": null,
+   "H2": "NOT YET RUN",
+   "ids": [],
+   "gate_tool_pr": NaN,
+   "gate_tool_ci": NaN,
+   "n_runs": NaN
+  }
+ ],
+ "H3": "NOT YET RUN",
+ "H3_detail": {
+  "breast_rep1_heldout": true,
+  "rep2": true,
+  "pancreas": null,
+  "lung": null
+ }
+}

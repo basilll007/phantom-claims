@@ -1,14 +1,14 @@
 {
  "gemini": {
-  "prompt": 466715,
-  "completion": 12820,
-  "usd_est": 0.1720645,
-  "runs": 7
+  "prompt": 537805,
+  "completion": 15694,
+  "usd_est": 0.20057650000000007,
+  "runs": 8
  },
  "deepseek": {
-  "prompt": 239591,
-  "completion": 43301,
-  "usd_est": 0.2063975,
-  "runs": 7
+  "prompt": 290862,
+  "completion": 53842,
+  "usd_est": 0.25311500000000003,
+  "runs": 8
  }
 }
