@@ -138,3 +138,30 @@ for the frozen configuration, so final-eval results (including the lung re-run a
 Also post hoc, after all agent runs: tool-name whitelist in agent/harness.py (security hardening; no logged run called an
 undeclared tool) and report-script fixes (float rounding in verdict thresholds; PREREG-conformant FALSIFIED rule when
 retention is NaN; missing values no longer drawn as 0). None of these changes any reported verdict.
+
+### Amendment 4 — 2026-11-07 15:00 CST (Phase 2 Pre-Registration)
+**Prior git commit:** 397b964
+**Purpose:** Pre-register Phase 2 confirmatory hypotheses H4-H7, evaluation protocols, thresholds, and a fresh seed set N2 never used for tuning or Phase 1 evaluation. Gate configuration remains FROZEN at the Amendment 2 defaults (r=30.0, tile=250.0, n_perm=1000, alpha_half=0.10, n_min=50, rho_min=0.02, q=0.05).
+
+#### 1. New Seed Set N2
+- Confirmatory seed set N2 = [200, 201, 202, 203, 204, 205, 206, 207, 208, 209] (10 seeds).
+- Completely disjoint from dev seeds [0, 1, 2, 3, 4] and Phase 1 test seeds [100, 101, 102, 103, 104].
+- Never touched during tuning or Phase 1. Any result generated on non-N2 seeds or before this amendment is labeled EXPLORATORY.
+
+#### 2. Pre-Registered Hypotheses & Thresholds (Confirmatory on N2)
+- **H4 (Misspecification Robustness):** Under planted interactions whose kernel or mechanism differs from the gate's assumed exponential contact kernel (r=30 um), the frozen gate keeps true-claim retention >= 0.60 and post-gate phantom rate <= 0.10 in at least 4 of 5 misspecification variants (A1-A5):
+  - A1 (kernel shape): non-exponential kernel (ring / annulus kernel).
+  - A2 (radius mismatch): planting radius 0.5x (15 um) and 2.0x (60 um) relative to gate's assumed 30 um.
+  - A3 (diffusive paracrine): long-range gradient (r_plant = 80 um, lam = 40 um).
+  - A4 (receptor-only response): no target genes respond (n_responders = 0).
+  - A5 (mixed mechanism): heterogeneous mechanisms within single tissue, plus hard niche-confounded and wrong-type-pair negatives in candidate universe.
+  Verdict: SUPPORTED if retention >= 0.60 and phantom rate <= 0.10 in >= 4/5 variants; FALSIFIED if retention < 0.50 in >= 2 variants or phantom rate > 0.15 in >= 2 variants; else INCONCLUSIVE.
+- **H5 (Dose-Response Sweep):** Across planted effect-size levels {1.0, 0.5, 0.25, 0.125} x default across >= 10 seeds from N2 on breast Rep1, breast Rep2, pancreas, and lung:
+  - Expression-only baseline phantom rate increases monotonically as effect size falls (Spearman rho <= -0.80 over levels, per seed).
+  - The gated phantom rate stays <= 0.15 at every effect-size level.
+  Verdict: SUPPORTED if both criteria hold; FALSIFIED if Spearman rho > -0.50 or gated phantom rate > 0.20 at any level; else INCONCLUSIVE.
+- **H6 (Enforced Gating for LLM Agents):** An agent harness that refuses to accept unverified claims (submit_claims fails unless verify_claim was executed and passed on that exact claim) brings agent phantom rate to <= 0.02 and compliance to 100%, compared with the gate-as-optional-tool condition. Evaluated on >= 5 runs per family per dataset on N2 across available model families.
+  Verdict: SUPPORTED if enforced phantom rate <= 0.02 and compliance == 100%; FALSIFIED if phantom rate > 0.05 or compliance < 95%; else INCONCLUSIVE.
+- **H7 (Positive Controls on Real Data):** Across a pre-specified list of >= 10 literature-supported contact-dependent or short-range L-R pairs (selection rules fixed and committed in `reports/controls_prespec.md` BEFORE running the gate), the frozen gate passes >= 30% of pairs in real tissue where both ligand and receptor are expressed in the candidate cell types.
+  Verdict: SUPPORTED if pass rate >= 30%; FALSIFIED if pass rate < 10%; else INCONCLUSIVE.
+- **Falsification & Reporting Rule:** Any miss or negative outcome is reported honestly and prominently in the results, tables, and abstract, without burying or post hoc rationalization.

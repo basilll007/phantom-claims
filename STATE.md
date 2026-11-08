@@ -1,15 +1,14 @@
 # STATE (read at start of every cycle)
-- **Phase:** 8 done (draft). All phases complete. Verdicts: H1 INCONCLUSIVE, H2 SUPPORTED, H3 SUPPORTED
-- **Deadline (loop stop):** 2026-11-07 07:30 local (CST)
+- **Phase:** Phase 2 active (Lanes A-G & L). AMENDMENT4=committed. Confirmatory seeds N2=[200, 201, 202, 203, 204, 205, 206, 207, 208, 209].
+- **Deadline (loop stop):** 2026-11-14 23:59 local (CST); submission deadline **2026-11-15 AoE**.
 - **Workshop:** First Workshop on Medical World Models @ AAAI-27 (Montreal, Feb 16-23 2027). Site: https://med-wm.github.io/aaai27-mwm/ . Submission deadline **2026-11-15 AoE**; notification 2026-12-02; camera-ready 2026-12-15. Full paper <= 8 pages excl. refs (AAAI 2-col), abstract <= 2 pages; non-archival; OpenReview (link TBA). Scope = clinical patient-state world models -> frame the gate as a verification/safety layer for decision support.
-- **PREREG commit:** da1b81c
+- **PREREG commit:** da1b81c; Amendment 4 active.
+- **AMENDMENT4:** committed
+- **THRESHOLDS:** default (H4 retention>=0.60 PR<=0.10 in >=4/5; H5 rho<=-0.80 PR<=0.15; H6 PR<=0.02 comp=100%; H7 pass>=30%)
 - **Env:** .venv (uv, Python 3.12), torch 2.11.0+cu128, RTX 5060 Laptop sm_120 verified. UV_CACHE_DIR=.uv_cache (C: drive nearly full — keep caches on F:).
-- **LLM agent:** Gemini key in .env (GeminiAPI), DeepSeek key in env (DEEPSEEK_API_KEY). Models pinned: gemini-2.5-flash, deepseek-flash. Budget per family: 4M tokens / USD 5 hard cap. Tokens used: results/agent_logs/budget.json (all agent runs done: gemini ~1.9M, deepseek ~1.4M of 4M cap).
-- **Next task:** HUMAN: compile paper on Overleaf (AAAI-27 kit), verify refs.bib + 3 TODO-VERIFY items + licences. Optional: third non-breast cancer URL; more agent runs.
-- **Blockers:** colorectal/ovarian IO-panel URLs not found (10x pages 429; not guessed). No LaTeX locally (compile paper on Overleaf). Pancreas+lung obtained => >=2 other tissues satisfied.
-- **Failure counts:** 10x page fetch: 4 (429). DeepSeek forced tool_choice: 1 (fixed).
-- **Last update:** 2026-11-07 00:59 CST
+- **LLM agent:** Gemini key in .env (GeminiAPI), DeepSeek key in env (DEEPSEEK_API_KEY). Models pinned: gemini-2.5-flash, deepseek-flash. Local family: ollama (llama3-groq-tool-use:8b or qwen2.5-coder:7b). Budget per family: 4M tokens / USD 5 hard cap.
+- **Next task:** Execute Phase 2 lanes across branches: Lane A (misspecified), B (dose-response), C (positive controls), D (PD-L1/PD-1 reconciliation), E (agents), F (reproduce & audit), G (red team), L (integrator).
+- **Blockers:** None currently blocking.
 - **Gate config (FROZEN, Amendment 2):** r=30, tile=250, n_min=50, rho_min=0.02, n_perm=1000, alpha_half=0.10, q=0.05
-- **Final eval:** run-once guard in results/tables/final_eval_done.json
 - **Each cycle:** rebuild the dashboard: `python scripts/build_dashboard.py` (stdlib only) before committing.
-- **GitHub:** https://github.com/basilll007/phantom-claims (private). Push every cycle: `git push` (GCM credentials). CI rebuilds dashboard (artifact dashboard-site). Pages NOT enabled: on GitHub Pro a Pages site of a private repo is publicly visible (anonymity/unpublished-results risk) — owner decision.
+- **GitHub:** https://github.com/basilll007/phantom-claims (private). Push every cycle: `git push` (GCM credentials).
