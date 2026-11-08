@@ -1,5 +1,5 @@
 # Lane A report: H4 misspecification robustness
-Agent `claude-opus-5.5-laneA`, branch `lane-A`. Updated 2026-11-08 11:32 CST. Status: **N2 confirmatory run complete and
+Agent `claude-opus-5.5-laneA`, branch `lane-A`. Updated 2026-11-08 11:56 CST. Status: **N2 confirmatory run complete and
 logged.** Every number below comes from `results/results.jsonl` (record ids are given in brackets).
 
 ## 1. Verdict
@@ -60,6 +60,15 @@ Figure: `figures/fig_laneA_h4_N2.png`. Tables: `results/tables/laneA_N2_*.csv`. 
    - Biological reading: long-range signals saturate the response within the gate's 30 um window, so the within-tile
      gradient flattens.
    - Planted TRUE pass rates: A1 0.948, A2b 0.858, A3 0.762 [`laneA_N2_planted_pass_rates`].
+6. **Failure map by gate component (exploratory, dev seeds 0-4, breast Rep1; N2 not used).**
+   No single component stops the hard negatives; the tile-restricted permutation does the most work.
+   - A5 post-gate phantom rate (K=10): full gate 0.233; without tiles 0.387; without split-half 0.346; without
+     permutation 0.310; without minimum-evidence 0.233 (no effect).
+   - Planted hard-niche pass rate: 0.18 full; 0.50 without tiles; 0.34 without split-half or without permutation.
+   - Decoy senders: 0.00 full (25 claims) vs 0.12-0.16 under ablation.
+   - A4: dropping the permutation test lifts "retention" from 0.041 to 0.219, but those passes have no planted
+     response, so the permutation test is what keeps no-readout claims out.
+   - [`laneA_dev_ablation_failure_map`]
 
 ## 3. Caveats (for the paper's limitations)
 - **Post-gate phantom rate = 0 in A0-A4 tests little.** The default K=10 lists again contain no niche items:
@@ -86,8 +95,20 @@ Figure: `figures/fig_laneA_h4_N2.png`. Tables: `results/tables/laneA_N2_*.csv`. 
   commit time is authoritative, and it precedes all lane-A N2 data (first N2 file about 00:12 on 11-08).
   Lane A's own first PROGRESS entries had a wrong time stamp; a correction was appended.
 
-## 6. Next
-1. Spare time, all exploratory: per-tissue A5 breakdown by negative type; K=20 composition; more N2-disjoint seeds are
-   not needed for the verdict.
-2. Re-run the A5 hard-niche analysis with the normalisation-free readout as a *proposal demo* on dev seeds only,
-   clearly labelled.
+## 6. Reproduce
+`scripts/laneA_reproduce.sh [OUT_DIR]` (env `PYTHON`, `PC_DATA`) is a one-command rebuild of everything Lane A
+committed for N2:
+- the 280 per-claim files;
+- the summary, composition, planted-pass, fail-reason, decoy and confound tables;
+- the verdict JSON and the figure.
+
+It starts from `data/processed/<tissue>.h5ad`, regenerates every benchmark instance into a fresh cache, then diffs the
+rebuild against the committed results (`scripts/laneA_compare.py`, exit 1 on any mismatch). It never writes to
+results.jsonl. Raw 10x download -> processed h5ad is upstream (lane F's project-wide target).
+**Clean-checkout test: MATCH** [`laneA_N2_rebuild_check`]. Run on a clean checkout of `lane-A` @595ef46, all instances regenerated:
+280/280 files, 31,000/31,000 rows, 0 decision mismatches (label, negative type, mechanism, pass/fail), max float diff
+3.3e-16, same verdict, byte-identical figure. Wall time about 20 min with 2 tissues in parallel.
+
+## 7. Next
+1. Waiting for lane L to merge `lane-A`, and for lane G to verify the confound finding independently.
+2. Not started, by rule: gate v2 (lane H) needs `GATEV2=go` in STATE.md and Amendment 5 with fresh seeds (N3).
