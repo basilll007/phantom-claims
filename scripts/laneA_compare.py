@@ -13,13 +13,18 @@ import numpy as np, pandas as pd
 KEY = ["tissue", "seed", "variant", "list", "rank", "sender", "receiver", "ligand", "receptor"]
 DECISION = ["label", "neg_type", "category", "mechanism", "passed"]
 CONT = ["rho", "p_perm", "q_bh", "n_expr_pairs", "effect_d"]
-TOL = 1e-9
+TOL = 1e-9          # continuous columns: float summation-order noise only
 
 
 def claims(d, seed_set):
     fs = sorted(glob.glob(f"{d}/{seed_set}_*.csv"))
     x = pd.concat([pd.read_csv(f, keep_default_na=False, na_values=[""]) for f in fs], ignore_index=True)
     return x, len(fs)
+
+
+def txt(s):
+    """Text view with missing values made explicit: with pandas' string dtype NaN survives astype(str), and NaN != NaN."""
+    return s.astype(object).where(s.notna(), "<NA>").astype(str).values
 
 
 def num_diff(a, b, cols):
@@ -39,11 +44,11 @@ def main(rb, seed_set="N2"):
     report["claim_files"] = dict(reference=n_ref, rebuild=n_new)
     ok &= n_ref == n_new
     a = ref_c.sort_values(KEY).reset_index(drop=True); b = new_c.sort_values(KEY).reset_index(drop=True)
-    same_keys = len(a) == len(b) and (a[KEY].astype(str).values == b[KEY].astype(str).values).all()
+    same_keys = len(a) == len(b) and all((txt(a[k]) == txt(b[k])).all() for k in KEY)
     report["claim_rows"] = dict(reference=len(a), rebuild=len(b), same_lists_and_order=bool(same_keys))
     ok &= bool(same_keys)
     if same_keys:
-        mism = {c: int((a[c].astype(str).values != b[c].astype(str).values).sum()) for c in DECISION}
+        mism = {c: int((txt(a[c]) != txt(b[c])).sum()) for c in DECISION}
         report["decision_mismatches"] = mism
         ok &= sum(mism.values()) == 0
         nd = num_diff(a, b, CONT)
@@ -58,9 +63,9 @@ def main(rb, seed_set="N2"):
         r, n = pd.read_csv(fr), pd.read_csv(fn)
         if r.shape != n.shape or list(r.columns) != list(n.columns):
             report[name] = f"shape/columns differ {r.shape} vs {n.shape}"; ok = False; continue
-        txt = [c for c in r.columns if not pd.api.types.is_numeric_dtype(r[c])]
-        tdiff = int(sum((r[c].astype(str).values != n[c].astype(str).values).sum() for c in txt))
-        nd = num_diff(r, n, [c for c in r.columns if c not in txt])
+        tcols = [c for c in r.columns if not pd.api.types.is_numeric_dtype(r[c])]
+        tdiff = int(sum((txt(r[c]) != txt(n[c])).sum() for c in tcols))
+        nd = num_diff(r, n, [c for c in r.columns if c not in tcols])
         mx = max(nd.values()) if nd else 0.0
         report[name] = dict(text_cells_differing=tdiff, max_abs_numeric_diff=mx)
         ok &= tdiff == 0 and mx <= TOL
