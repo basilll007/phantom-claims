@@ -1,0 +1,7 @@
+variant,n_true_failed,split_inconsistent,perm_null_not_rejected,effect_below_min
+A0,6,6,2,0.0
+A1,21,21,13,0.0
+A2b,68,68,39,15.0
+A3,130,130,59,40.0
+A4,637,631,627,524.0
+A5,61,61,49,31.0
