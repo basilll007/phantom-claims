@@ -83,10 +83,13 @@ def load_results():
     out = []
     for rid, r in latest.items():
         m = r.get("metrics") or {}
-        flat = {k: v for k, v in m.items() if isinstance(v, (int, float)) and not isinstance(v, bool)}
-        out.append(dict(id=rid, phase=r.get("phase"), split=r.get("split"), tissue=r.get("tissue"),
+        # Phase-2 records may log metrics as a list of table rows; only flat dicts feed the numeric columns
+        flat = {k: v for k, v in m.items() if isinstance(v, (int, float)) and not isinstance(v, bool)} \
+            if isinstance(m, dict) else {}
+        out.append(dict(id=rid, phase=r.get("phase"), split=r.get("split") or r.get("seed_set"), tissue=r.get("tissue"),
                         condition=r.get("condition"), K=r.get("K"), hypothesis=r.get("hypothesis"),
-                        ablation=r.get("ablation"), family=r.get("family"), exploratory=bool(r.get("exploratory")),
+                        ablation=r.get("ablation"), family=r.get("family"),
+                        exploratory=bool(r.get("exploratory")) or r.get("labelled") == "exploratory",
                         timestamp=r.get("timestamp"), git=r.get("git_hash"), versions=versions[rid],
                         metrics=flat, ci=r.get("ci") or {}, raw=json.dumps(r, default=str)[:4000]))
     out.sort(key=lambda x: x.get("timestamp") or "")

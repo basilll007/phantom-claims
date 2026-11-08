@@ -165,3 +165,14 @@ retention is NaN; missing values no longer drawn as 0). None of these changes an
 - **H7 (Positive Controls on Real Data):** Across a pre-specified list of >= 10 literature-supported contact-dependent or short-range L-R pairs (selection rules fixed and committed in `reports/controls_prespec.md` BEFORE running the gate), the frozen gate passes >= 30% of pairs in real tissue where both ligand and receptor are expressed in the candidate cell types.
   Verdict: SUPPORTED if pass rate >= 30%; FALSIFIED if pass rate < 10%; else INCONCLUSIVE.
 - **Falsification & Reporting Rule:** Any miss or negative outcome is reported honestly and prominently in the results, tables, and abstract, without burying or post hoc rationalization.
+
+### Erratum to Amendment 4 — appended 2026-11-08 12:06 CST by lane L (no change to hypotheses, thresholds, seeds or gate)
+- The Amendment 4 header says "2026-11-07 15:00 CST". That time was not read from the clock. The amendment was first
+  committed in `216b498`, at **2026-11-07 23:57:32 CST** (`git log`). The commit time is authoritative.
+- Ordering, which is what pre-registration needs, still holds:
+  - Amendment 4 commit: 2026-11-07 23:57:32.
+  - Lane A H4 pre-spec (`reports/laneA_prespec.md`, commit `95cf788`): 2026-11-08 00:08:52.
+  - First N2 benchmark instance file (`data/bench/pancreas_s200_25894fed60_truth.json`, mtime): 2026-11-08 00:12:11.
+  - First N2 per-claim gate file: 2026-11-08 00:12:16.
+- The text of Amendment 4 is left unchanged on purpose. This erratum discloses the discrepancy; the paper's appendix
+  repeats the disclosure.
