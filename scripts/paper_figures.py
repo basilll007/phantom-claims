@@ -487,8 +487,52 @@ def figA2():
     save(fig, "figA2_real_pdl1")
 
 
+SENS_LAB = {"frozen": "frozen gate", "tile125": "tiles 125 µm", "tile500": "tiles 500 µm", "r15": "range 15 µm",
+            "r60": "range 60 µm", "nmin25": "min. contacts 25", "nmin100": "min. contacts 100",
+            "split_checker": "checkerboard halves", "null_global": "global null",
+            "null_density": "density-stratified null", "drop_edge": "border tiles dropped",
+            "resp_raw": "raw-count response"}
+
+
+def figA3():
+    """Lane R sensitivity diagnostics (exploratory, dev seeds 0-4, breast Rep1)."""
+    S = pd.read_csv("results/tables/laneR_sens_summary.csv")
+    P = pd.read_csv("results/tables/laneR_sens_planted.csv")
+    order = [s for s in SENS_LAB if s in set(S.setting)]
+    fig = plt.figure(figsize=(W2, 3.3))
+    gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1], wspace=0.12, left=0.19, right=0.985, bottom=0.14, top=0.9)
+    y = np.arange(len(order))[::-1]
+    panels = [("A5", "phantom_after", "a", "A5: phantom rate after gate", (-0.03, 0.7)),
+              ("A0-A3", "retention", "b", "A0–A3: retention", (0, 1.05))]
+    for k, (grp, key, letter, ttl, xl) in enumerate(panels):
+        ax = fig.add_subplot(gs[0, k]); tidy(ax, grid="x")
+        f = S[(S.group == grp)].set_index("setting")
+        ref = f.loc["frozen", key]
+        ax.axvline(ref, color=GATE, lw=1.0, ls=(0, (4, 2)))
+        for yi, s in zip(y, order):
+            p, lo, hi = f.loc[s, key], f.loc[s, f"{key}_lo"], f.loc[s, f"{key}_hi"]
+            ax.plot([lo, hi], [yi, yi], color=GATE, lw=1.5, solid_capstyle="butt")
+            ax.scatter([p], [yi], s=36, color=GATE if s == "frozen" else "white", edgecolor=GATE, lw=1.5, zorder=3)
+        ax.set_yticks(y); ax.set_yticklabels([SENS_LAB[s] for s in order] if k == 0 else [])
+        ax.tick_params(axis="y", length=0); ax.set_xlim(*xl); ax.set_ylim(-0.6, len(order) - 0.4)
+        ax.set_xlabel("95% CI over dev seeds")
+        title(ax, letter, ttl)
+    ax = fig.add_subplot(gs[0, 2]); tidy(ax, grid="x")
+    q = P[(P.group == "A5") & (P.category == "niche_hard")].set_index("setting")
+    ref = q.loc["frozen", "pass_rate"]
+    ax.axvline(ref, color=GATE, lw=1.0, ls=(0, (4, 2)))
+    ax.barh(y, [q.loc[s, "pass_rate"] for s in order], 0.6, color=[GATE if s == "frozen" else MUTED for s in order])
+    for yi, s in zip(y, order):
+        ax.text(max(q.loc[s, "pass_rate"], ref) + 0.02, yi, f"{q.loc[s, 'pass_rate']:.2f}", va="center", fontsize=FS)
+    ax.set_yticks(y); ax.set_yticklabels([]); ax.tick_params(axis="y", length=0)
+    ax.set_xlim(0, 0.75); ax.set_ylim(-0.6, len(order) - 0.4)
+    ax.set_xlabel(f"pass rate (n = {int(q.loc['frozen', 'n'])} per setting)")
+    title(ax, "c", "A5 hard-niche claims passed")
+    save(fig, "figA3_sensitivity")
+
+
 if __name__ == "__main__":
-    want = set(sys.argv[1:]) or {"fig1", "fig2", "fig3", "fig4", "figA1", "figA2"}
+    want = set(sys.argv[1:]) or {"fig1", "fig2", "fig3", "fig4", "figA1", "figA2", "figA3"}
     R = records()
     if "fig1" in want: fig1()
     if "fig2" in want: fig2(R)
@@ -496,3 +540,4 @@ if __name__ == "__main__":
     if "fig4" in want: fig4(R)
     if "figA1" in want: figA1()
     if "figA2" in want: figA2()
+    if "figA3" in want: figA3()

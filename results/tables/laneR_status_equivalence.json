@@ -1,0 +1,132 @@
+{
+ "files_ref": 280,
+ "files_new": 280,
+ "rows_ref": 31000,
+ "rows_new": 31000,
+ "rows_matched": 31000,
+ "rows_unmatched": 0,
+ "decision_mismatches": {
+  "label": 0,
+  "neg_type": 0,
+  "category": 0,
+  "mechanism": 0,
+  "passed": 0
+ },
+ "continuous_max_abs_diff": {
+  "q_bh": 0.0,
+  "rho": 2.220446049250313e-16,
+  "p_perm": 0.0,
+  "n_expr_pairs": 0.0,
+  "effect_d": 0.0
+ },
+ "status_consistent_with_passed": true,
+ "status_by_variant": [
+  {
+   "variant": "A0",
+   "status": "fail",
+   "readout": "targets",
+   "n": 2212
+  },
+  {
+   "variant": "A0",
+   "status": "pass",
+   "readout": "targets",
+   "n": 2188
+  },
+  {
+   "variant": "A1",
+   "status": "fail",
+   "readout": "targets",
+   "n": 2263
+  },
+  {
+   "variant": "A1",
+   "status": "pass",
+   "readout": "targets",
+   "n": 2137
+  },
+  {
+   "variant": "A2a",
+   "status": "fail",
+   "readout": "targets",
+   "n": 2201
+  },
+  {
+   "variant": "A2a",
+   "status": "pass",
+   "readout": "targets",
+   "n": 2199
+  },
+  {
+   "variant": "A2b",
+   "status": "fail",
+   "readout": "targets",
+   "n": 2431
+  },
+  {
+   "variant": "A2b",
+   "status": "pass",
+   "readout": "targets",
+   "n": 1969
+  },
+  {
+   "variant": "A3",
+   "status": "fail",
+   "readout": "targets",
+   "n": 2642
+  },
+  {
+   "variant": "A3",
+   "status": "pass",
+   "readout": "targets",
+   "n": 1758
+  },
+  {
+   "variant": "A4",
+   "status": "fail",
+   "readout": "targets",
+   "n": 4351
+  },
+  {
+   "variant": "A4",
+   "status": "pass",
+   "readout": "targets",
+   "n": 49
+  },
+  {
+   "variant": "A5",
+   "status": "fail",
+   "readout": "targets",
+   "n": 3318
+  },
+  {
+   "variant": "A5",
+   "status": "pass",
+   "readout": "targets",
+   "n": 1282
+  }
+ ],
+ "status_by_kind": [
+  {
+   "kind": "lists",
+   "status": "fail",
+   "n": 10342
+  },
+  {
+   "kind": "lists",
+   "status": "pass",
+   "n": 9258
+  },
+  {
+   "kind": "planted",
+   "status": "fail",
+   "n": 9076
+  },
+  {
+   "kind": "planted",
+   "status": "pass",
+   "n": 2324
+  }
+ ],
+ "result": "IDENTICAL"
+}

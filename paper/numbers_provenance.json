@@ -5883,6 +5883,374 @@
   "id": "laneB_N2_A5_e1_consistency_with_laneA",
   "value": 0
  },
+ "statusEqRows": {
+  "id": "laneR_status_equivalence_laneA_N2",
+  "value": 31000
+ },
+ "statusEqFiles": {
+  "id": "laneR_status_equivalence_laneA_N2",
+  "value": 280
+ },
+ "statusEqMismatch": {
+  "id": "laneR_status_equivalence_laneA_N2",
+  "value": 0
+ },
+ "statusRealUntestable": {
+  "id": "laneR_status_equivalence_laneA_N2",
+  "value": 40
+ },
+ "statusRealN": {
+  "id": "laneR_status_equivalence_laneA_N2",
+  "value": 40
+ },
+ "senFrozenAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.9397260273972603
+ },
+ "senFrozenAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senFrozenAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.673469387755102
+ },
+ "senFrozenAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.2325581395348837
+ },
+ "senFrozenNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.18
+ },
+ "senFrozenDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senTileonetwofiveAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.8054794520547945
+ },
+ "senTileonetwofiveAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senTileonetwofiveAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.673469387755102
+ },
+ "senTileonetwofiveAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.19512195121951215
+ },
+ "senTileonetwofiveNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.16
+ },
+ "senTileonetwofiveDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senTilefivezerozeroAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.9506849315068493
+ },
+ "senTilefivezerozeroAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senTilefivezerozeroAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.7346938775510204
+ },
+ "senTilefivezerozeroAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.3076923076923077
+ },
+ "senTilefivezerozeroNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.24
+ },
+ "senTilefivezerozeroDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.12
+ },
+ "senRonefiveAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.7753424657534247
+ },
+ "senRonefiveAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senRonefiveAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.5306122448979592
+ },
+ "senRonefiveAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.23529411764705888
+ },
+ "senRonefiveNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.12
+ },
+ "senRonefiveDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senRsixzeroAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.9287671232876712
+ },
+ "senRsixzeroAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senRsixzeroAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.7346938775510204
+ },
+ "senRsixzeroAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.21739130434782605
+ },
+ "senRsixzeroNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.2
+ },
+ "senRsixzeroDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.08
+ },
+ "senNmintwofiveAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.9397260273972603
+ },
+ "senNmintwofiveAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senNmintwofiveAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.673469387755102
+ },
+ "senNmintwofiveAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.2325581395348837
+ },
+ "senNmintwofiveNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.18
+ },
+ "senNmintwofiveDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senNminonezerozeroAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.9397260273972603
+ },
+ "senNminonezerozeroAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senNminonezerozeroAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.673469387755102
+ },
+ "senNminonezerozeroAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.2325581395348837
+ },
+ "senNminonezerozeroNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.18
+ },
+ "senNminonezerozeroDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senSplitCheckerAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.9178082191780822
+ },
+ "senSplitCheckerAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0029761904761904656
+ },
+ "senSplitCheckerAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.6938775510204082
+ },
+ "senSplitCheckerAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.29166666666666663
+ },
+ "senSplitCheckerNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.28
+ },
+ "senSplitCheckerDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.08
+ },
+ "senNullGlobalAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.9945205479452055
+ },
+ "senNullGlobalAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0027472527472527375
+ },
+ "senNullGlobalAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.7755102040816326
+ },
+ "senNullGlobalAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.3870967741935484
+ },
+ "senNullGlobalNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.5
+ },
+ "senNullGlobalDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.12
+ },
+ "senNullDensityAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.8246575342465754
+ },
+ "senNullDensityAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senNullDensityAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.673469387755102
+ },
+ "senNullDensityAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.19512195121951215
+ },
+ "senNullDensityNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.14
+ },
+ "senNullDensityDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senDropEdgeAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.9123287671232877
+ },
+ "senDropEdgeAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0029940119760478723
+ },
+ "senDropEdgeAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.6938775510204082
+ },
+ "senDropEdgeAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.26086956521739135
+ },
+ "senDropEdgeNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.22
+ },
+ "senDropEdgeDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.04
+ },
+ "senRespRawAzeroAthreeRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.8794520547945206
+ },
+ "senRespRawAzeroAthreePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senRespRawAfiveRet": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.673469387755102
+ },
+ "senRespRawAfivePRafter": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senRespRawNicheHard": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senRespRawDecoy": {
+  "id": "laneR_dev_sensitivity",
+  "value": 0.0
+ },
+ "senNicheHardN": {
+  "id": "laneR_dev_sensitivity",
+  "value": 50
+ },
+ "edgeNClaims": {
+  "id": "laneR_dev_edge_handling",
+  "value": 1825
+ },
+ "edgeNFlipped": {
+  "id": "laneR_dev_edge_handling",
+  "value": 36
+ },
+ "edgeNPassToFail": {
+  "id": "laneR_dev_edge_handling",
+  "value": 25
+ },
+ "edgeNFailToPass": {
+  "id": "laneR_dev_edge_handling",
+  "value": 11
+ },
+ "edgeMedFrac": {
+  "id": "laneR_dev_edge_handling",
+  "value": 0.12780979827089337
+ },
+ "normNicheRawBreastRepone": {
+  "id": "laneR_N2_A5_niche_normalisation_by_tissue",
+  "value": 0.14285714285714285
+ },
+ "normNicheNBreastRepone": {
+  "id": "laneR_N2_A5_niche_normalisation_by_tissue",
+  "value": 14
+ },
+ "normNicheRawBreastReptwo": {
+  "id": "laneR_N2_A5_niche_normalisation_by_tissue",
+  "value": 0.0
+ },
+ "normNicheNBreastReptwo": {
+  "id": "laneR_N2_A5_niche_normalisation_by_tissue",
+  "value": 10
+ },
+ "normNicheRawLung": {
+  "id": "laneR_N2_A5_niche_normalisation_by_tissue",
+  "value": 0.2727272727272727
+ },
+ "normNicheNLung": {
+  "id": "laneR_N2_A5_niche_normalisation_by_tissue",
+  "value": 11
+ },
+ "normNicheRawPancreas": {
+  "id": "laneR_N2_A5_niche_normalisation_by_tissue",
+  "value": 0.2857142857142857
+ },
+ "normNicheNPancreas": {
+  "id": "laneR_N2_A5_niche_normalisation_by_tissue",
+  "value": 7
+ },
+ "sensitivity_table": {
+  "id": "laneR_dev_sensitivity",
+  "value": "paper/tables/sensitivity.tex"
+ },
  "realContactRatio": {
   "id": "real_breast_contacts_vs_chance",
   "value": [
