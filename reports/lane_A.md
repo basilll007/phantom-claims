@@ -1,5 +1,5 @@
 # Lane A report: H4 misspecification robustness
-Agent `claude-opus-5.5-laneA`, branch `lane-A`. Updated 2026-11-08 ~01:00 CST. Status: **N2 confirmatory run complete and
+Agent `claude-opus-5.5-laneA`, branch `lane-A`. Updated 2026-11-08 00:34 CST. Status: **N2 confirmatory run complete and
 logged.** Every number below comes from `results/results.jsonl` (record ids are given in brackets).
 
 ## 1. Verdict
