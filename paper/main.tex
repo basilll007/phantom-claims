@@ -1,266 +1,481 @@
-% Phantom Claims -- AAAI-27 Workshop on Medical World Models (draft)
-% Compile on Overleaf with the official AAAI-27 author kit. TODO-VERIFY: replace the two lines below with the
-% kit's exact \documentclass / \usepackage lines (the kit's .sty name for 2027 is not verified here).
-\documentclass[letterpaper]{article}
-\IfFileExists{aaai2026.sty}{\usepackage[submission]{aaai2026}}{\usepackage[margin=0.75in]{geometry}}
-\usepackage{times}\usepackage{helvet}\usepackage{courier}
-\usepackage{graphicx}\usepackage{booktabs}\usepackage{amsmath}\usepackage{amssymb}\usepackage{xcolor}
-\usepackage{natbib}
+%File: main.tex -- Phantom Claims, AAAI-27 Workshop on Medical World Models (full paper, 6-8 pages + references + appendix)
+% Preamble copied from the AAAI-27 author kit (AuthorKit27/AnonymousSubmission2027.tex, https://aaai.org/authorkit27/).
+% Every number in the text is a macro from numbers.tex, generated from results/results.jsonl by
+% scripts/make_paper_numbers.py (provenance per macro: numbers_provenance.json). Figures: scripts/paper_figures.py.
+% For camera-ready, scripts/flatten_paper.py writes the single-file source the kit requires (no \input).
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai2027}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+\usepackage{booktabs}
+\usepackage{amsmath}
+\pdfinfo{
+/TemplateVersion (2027.1)
+}
+\setcounter{secnumdepth}{0}
 \input{numbers.tex}
-\newcommand{\todo}[1]{\textcolor{red}{[TODO-VERIFY: #1]}}
+\newcommand{\um}{\,\textmu m}
 
-\title{Phantom Claims: State-Grounded Verification of Cell--Cell Communication Claims\\
-in Spatial Tissue World Models}
-\author{Anonymous submission}
+\title{Phantom Claims: Checking Cell--Cell Communication Claims against the Tissue State, and Where the Check Breaks}
+\author{
+    Anonymous Submission
+}
+\affiliations{
+}
 
 \begin{document}
+
 \maketitle
 
 \begin{abstract}
-LLM agents and expression-only tools increasingly turn spatial omics data into biological claims such as
-``cell type $A$ signals to $B$ through ligand $L$ and receptor $R$''. Such claims can be \emph{phantoms}: supported
-by expression but contradicted by the tissue state (e.g.\ ligand- and receptor-expressing cells that never meet). We
-treat a single-cell spatial section as a world state and every claim as an action on it, and we propose a
-deterministic, LLM-free \emph{claim gate} that checks each claim against the state (tile-restricted spatial
-permutation null, split consistency, minimum-evidence rule, BH-FDR) and writes a JSON audit record. On a
-pre-registered semi-synthetic benchmark built on real 10x Xenium sections of breast, pancreatic and lung cancer, the
-frozen gate reduced the phantom rate of expression-only top-10 lists from \testBreastReponeCpdbKTenPR{} to
-\testBreastReponeCpdbKTenPRafter{} on held-out breast seeds while retaining \testBreastReponeCpdbKTenRet{} of true claims,
-and met the same criteria without retuning on a held-out breast section and on pancreatic and lung cancer sections.
-It was calibrated on random real-gene claims in real tissue (\rnullFrozenFive{} at $p<0.05$, versus \rnullNoTilesFive{} with
-a global null). On hard lists of true and niche-confounded claims, each spatial component contributed (phantom rate
-\hardFullPRafter{} with the full gate, \hardNoTilesPRafter{} without tile restriction). Contrary to our pre-registered
-H1, phantom rates of expression-only tools and of two LLM agent families at $K{=}10$ did not reach 30\% on this
-benchmark. Agents given the gate as a tool still submitted claims their own verifier had rejected, which
-argues for enforcement outside the agent. On real breast data the gate rejected all PD-L1/PD-1 claims for insufficient contact evidence (the
-contacts were at chance level rather than depleted), but it also rejected all contact-dependent positive controls, a
-limitation we report.
+Analysis agents and expression-only tools now turn spatial omics data into mechanistic statements such as ``cell type
+$A$ signals to $B$ through ligand $L$ and receptor $R$''. Many of these statements are \emph{phantoms}: the expression
+data support them, but the tissue does not, because the cells involved never meet. We treat a single-cell spatial
+section as the state of a tissue world model and check every claim against that state. Our claim gate is
+deterministic and contains no language model. It tests each claim with a spatial permutation null restricted to local
+tiles, a split-half replication rule and a minimum-evidence rule, and writes an audit record. On a pre-registered
+semi-synthetic benchmark built on real 10x Xenium sections of breast, pancreatic and lung cancer, the frozen gate
+removed every phantom from expression-only top-10 lists on held-out seeds and tissues while keeping nearly all true
+claims. We then tried to break it, again under pre-registration and on fresh seeds. The gate tolerated wrong signalling
+ranges and kernel shapes but missed our robustness criterion, meeting it in \hfourNmet{} of 5 misspecified settings
+where 4 were required. It cannot see signalling that changes no measured transcript, and on lists seeded with hard
+negatives, the false share of the claims it passed was \hfourAfivePRafter{}. When the planted signal fell to one eighth,
+its phantom rate rose to \hfiveDefaultEighthPRafter{}, falsifying our dose-response hypothesis. The cause was not a
+weaker test but a candidate list in which only \baseEighthPrevalenceTrue{} of the claims were true. We turn these misses into a failure map that a verification layer for
+medical world models should report rather than hide.
 \end{abstract}
 
 \section{Introduction}
-Medical world models represent a patient or tissue state and predict how it responds to actions
-\todo{cite medical world model surveys, e.g. arXiv 2506.02327}. In spatial biology the state is unusually
-explicit: single-cell spatial transcriptomics (e.g.\ 10x Xenium) records, for every cell, a position, a type and an
-expression profile \citep{janesick2023}. Cell--cell communication (CCC) inference turns this state into
-mechanistic claims, and is increasingly automated by tool-using LLM agents \todo{cite biology agent papers}.
-Many widely used CCC methods score ligand--receptor (L--R) pairs from cell-type expression alone
-\citep{efremova2020cellphonedb,jin2021cellchat,dimitrov2022liana}. A claim can therefore be well supported by
-expression yet unsupported, or contradicted, by the spatial state, for example when ligand- and
-receptor-expressing cells are rarely within contact distance. Our parent analysis of the Janesick et al.\ breast
-sections examined this question for PD-L1 (\textit{CD274}) and PD-1 (\textit{PDCD1})
-\todo{cite and verify the parent thesis finding}. We call such outputs \emph{phantom claims}.
+Ask an analysis agent what is happening in a breast tumour section and it may answer with a sentence like
+\emph{macrophages signal to CD4$^+$ T cells through ligand $L$ and receptor $R$}. The sentence sounds mechanistic, and
+the expression data may well support it: the ligand is high in macrophages and the receptor is high in T cells.
+Whether the tissue supports it is a different question. If the two populations sit in different parts of the section,
+the claimed signal has nowhere to happen. We call such a statement a \emph{phantom claim}.
 
-We argue that claims produced over a world state should be \emph{governed at the claim level}: every claim is
-checked against the state before it is reported, and the check leaves an auditable record. Our contributions:
-(i) a semi-synthetic benchmark with known ground truth, planted on real Xenium cancer sections, containing true
-contact-dependent interactions, ``never-meet'' phantom decoys, niche-confounded and random negatives;
-(ii) a fast, deterministic, LLM-free claim gate with per-claim JSON audit records;
-(iii) a pre-registered evaluation of expression-only tools and two LLM agent families (Gemini, DeepSeek), including
-held-out seeds, a held-out replicate section and two other cancer types, and a real-data check. We report negative
-and inconclusive results as such.
+Phantom claims matter more as medical world models mature. A world model keeps an explicit state and predicts what
+follows from it \cite{ha2018worldmodels}; medical versions already simulate how a tumour evolves under treatment
+\cite{yang2025mwm}. Single-cell spatial transcriptomics makes the state of a tissue unusually concrete. For each of
+more than a hundred thousand cells in a section it records a position, a type and an expression profile
+\cite{janesick2023}. Cell--cell communication (CCC) analysis turns that state into mechanistic statements
+\cite{armingol2021}, much of it still scored from cell-type expression alone
+\cite{efremova2020cellphonedb,jin2021cellchat,dimitrov2022liana}, and tool-using LLM agents now run such analyses from
+start to finish \cite{huang2025biomni,xiao2024cellagent}. Nothing in this pipeline checks a claim against the state it
+is about.
 
-\paragraph{Why this matters for medical world models.} Clinical decision support increasingly reasons over tissue
-states, for example about whether PD-1/PD-L1 blockade has a plausible cellular substrate in a tumour. If an
-agent's mechanistic claims about the state are not checked against the state, errors propagate into downstream
-recommendations. We therefore frame the gate as a \emph{verification layer} between a world-state model and any
-consumer of its claims: it is cheap, deterministic, and leaves an audit trail a reviewer can inspect.
+We propose doing exactly that, one claim at a time. Our \emph{claim gate} is a small deterministic program with no
+language model inside. Given a claim and a tissue section, it asks whether receiver cells that are more exposed to
+ligand-expressing senders also show more of the response the claim implies, whether that relation survives a null
+that keeps the tissue's regional structure, whether it replicates in both halves of the section, and whether it rests
+on enough cell contacts. Each decision goes into an audit record that a reviewer can read.
 
-\section{Related work}
-\paragraph{Cell--cell communication inference.} Expression-based methods score L--R pairs from cell-type
-expression with permutation nulls \citep{efremova2020cellphonedb} or mass-action models \citep{jin2021cellchat};
-LIANA aggregates many methods and resources \citep{dimitrov2022liana} built on OmniPath
-\citep{turei2021omnipath}. NicheNet links ligands to downstream target genes \citep{browaeys2020nichenet}, which
-motivates our target-response readout. Spatial methods such as COMMOT use spatial distances to constrain signalling
-\citep{cang2023commot}. Our gate does not propose a new CCC score; it is a claim-level filter with a regional
-(tile-restricted) null, split consistency and explicit evidence minima, designed to sit after any scorer or agent.
-\paragraph{LLM agents and verification.} Tool-using LLM agents are being applied to omics analysis
-\todo{cite agentic biology systems}. Our results agree with the broader observation that giving a model a
-verifier does not guarantee it acts on the verifier's output; we enforce the check outside the agent.
+The paper has two halves. The first is a pre-registered test of whether the gate works. On a benchmark planted on real
+Xenium sections it removed every phantom from expression-only top-10 lists on held-out seeds and tissues and kept
+almost all true claims. That result is real, but the test was easy, and we say why below. The second half is a
+pre-registered attempt to break the gate on fresh seeds that had never been used. We planted true interactions with
+mechanisms the gate does not assume, added negatives designed to fool it, and weakened the planted signal step by step.
+The gate missed two of our pre-registered hypotheses. We report both misses as misses and turn them into a failure
+map: four concrete ways in which a state-grounded verifier goes wrong, each with the mechanism behind it.
 
-\section{Benchmark}
-\paragraph{Tissues.} We use public 10x Genomics Xenium data: the Janesick et al.\ FFPE human breast cancer
-replicates Rep1 (\cellsBreastRepone{} cells after QC) and Rep2 (\cellsBreastReptwo{} cells), with the published
-supervised cell-type labels \citep{janesick2023}; an FFPE human pancreatic cancer section
-(\cellsPancreas{} cells) and an FFPE human lung cancer section (\cellsLung{} cells), both on the 377-gene
-multi-tissue panel and annotated by marker scoring of the vendor's graph-based clusters (Appendix). Only cells with
-$\geq 10$ transcripts are kept.
+Our contributions are (i) a benchmark of planted true, phantom, niche-confounded and decoy-sender claims on real
+Xenium cancer sections; (ii) a deterministic, auditable claim gate; (iii) a two-phase pre-registered evaluation with
+expression-only tools and two LLM agent families, including the results that went against us; and (iv) a failure map
+of state-grounded verification: no transcriptional readout, co-localised senders, a normalisation--density confound,
+and candidate lists with few true claims.
 
-\paragraph{Planting.} Real positions, types and expression are kept; signal is planted on added, anonymised gene
-channels (\texttt{LIG\_k}, \texttt{REC\_k}, \texttt{TGT\_k\_m}) whose baseline is a real panel gene permuted within
-cell type. Anonymisation makes every claim in the evaluation universe labelled and prevents LLMs from using
-memorised priors. Each instance plants 10 \textsc{true} pairs (ligand added in sender type $A$, receptor in receiver
-type $B$, and two of three listed targets raised in $B$ cells with a distance-decaying dose response
-$\mu_T(1-e^{-E_i})$, $E_i=\sum_{j\in A, d_{ij}\le 30\mu m} e^{-d_{ij}/15}$), 10 \textsc{phantom} decoys (ligand
-only in $A$ cells with no $B$ cell within 90\,\textmu m and vice versa, matched type-level count increase, no target
-effect), 10 \textsc{niche}-confounded pairs (ligand, receptor and targets all driven by a shared smooth regional
-field) and 10 \textsc{random} pairs. Unit tests verify that only the intended channels change, that planted phantom
-cells never meet, and that labels are correct. The claim universe is every planted pair $\times$ every ordered pair
-of distinct cell types; a claim is positive iff it equals a \textsc{true} plant.
-\begin{figure*}[t]\centering
-\includegraphics[width=\linewidth]{../figures/fig_examples.png}
-\caption{(a) A planted \textsc{true} pair: target counts rise in receivers near ligand$^+$ senders. (b) A planted
-\textsc{phantom}: ligand- and receptor-planted cells never meet. (c) Real breast Rep1: CD274$^+$ LAMP3$^+$ DCs and
-PDCD1$^+$ T cells; their contacts are few and at chance level.}\label{fig:examples}
+\section{Related Work}
+\paragraph{Cell--cell communication inference.} Most CCC tools score ligand--receptor pairs from the expression of cell
+types: CellPhoneDB with label permutations \cite{efremova2020cellphonedb}, CellChat with a mass-action model
+\cite{jin2021cellchat}, and LIANA as a consensus over methods and resources \cite{dimitrov2022liana} built on OmniPath
+\cite{turei2021omnipath}; \citeauthor{armingol2021} \shortcite{armingol2021} review the field. NicheNet links ligands
+to downstream target genes \cite{browaeys2020nichenet}, the kind of readout our gate tests. Spatial methods such as
+COMMOT constrain signalling by distance \cite{cang2023commot}, Squidpy provides spatial statistics for such data
+\cite{palla2022squidpy}, and, lacking ground truth, \citeauthor{liu2022evaluation} \shortcite{liu2022evaluation} used
+spatial distance to benchmark 16 interaction tools. Our gate is not another CCC score. It is a filter that sits after
+any scorer or agent and decides, claim by claim, whether the tissue state supports the claim.
+
+\paragraph{Normalisation in imaging-based spatial data.} Library size is associated with tissue structure, and
+normalising it away with single-cell methods can harm spatial analyses \cite{bhuva2024}. Normalising by detected counts
+per cell shifts expression in a region- and cell-type-specific way and produces false positives, which normalising by
+cell area or volume avoids \cite{atta2024}. We ran into this effect inside our own gate.
+
+\paragraph{Agents and verification.} LLM agents for biology now plan and run analyses
+\cite{huang2025biomni,xiao2024cellagent,roohani2024biodiscoveryagent}. LLMs struggle to correct their own reasoning
+without external feedback \cite{huang2023selfcorrect}. In our runs, agents that \emph{had} external feedback, in the
+form of the gate as a tool, still submitted claims it had rejected. We therefore enforce the check outside the agent.
+
+\paragraph{Pre-registration.} Fixing hypotheses and analysis plans before seeing the outcomes separates prediction from
+postdiction \cite{nosek2018}. We fixed hypotheses, thresholds and seeds before generating the data that test them, and
+we label every other analysis exploratory.
+
+\section{Benchmark and Claim Gate}
+\paragraph{Tissues.} We use public 10x Genomics Xenium data: two serial FFPE breast cancer sections, Rep1
+(\cellsBreastRepone{} cells after quality control) and Rep2 (\cellsBreastReptwo{}), with published cell-type labels
+\cite{janesick2023}, and FFPE pancreatic (\cellsPancreas{}) and lung (\cellsLung{}) cancer sections on the 377-gene
+multi-tissue panel, which we annotated by marker scoring (Appendix).
+
+\paragraph{Planting claims with known truth.} We keep every cell's position, type and measured expression and add
+anonymised gene channels (\texttt{LIG\_k}, \texttt{REC\_k}, \texttt{TGT\_k\_m}) whose baseline is a real panel gene
+permuted within cell type. Anonymous names give every claim a known label and stop an LLM from falling back on
+memorised biology. Each benchmark instance plants ten pairs of each of four kinds (Figure~\ref{fig:overview}a,b).
+In a \textsc{true} pair the ligand rises in sender type $A$, the receptor in receiver type $B$, and two of three listed
+target genes rise in $B$ cells with exposure $E_i=\sum_{j\in A,\,d_{ij}\le 30\um} e^{-d_{ij}/15}$ through a
+saturating dose response $\mu_T(1-e^{-E_i})$. A \textsc{phantom} gets the same type-level increase in ligand and
+receptor, but only in $A$ and $B$ cells that have no partner within 90\um, and no target response. In a
+\textsc{niche}-confounded pair, ligand, receptor and targets all follow one smooth regional field, so they co-vary
+across the section with no contact-dependent mechanism. \textsc{random} pairs complete the set. A claim is true if and
+only if it names a planted true pair with its sender and receiver. Unit tests check that only the intended channels
+change and that phantom cells never meet.
+
+\paragraph{The claim gate.} For a claim $(A,B,L,R)$ the gate computes, for each receiver $i\in B$, the ligand exposure
+$E_i=\sum_{j\in A,\,d_{ij}\le r} L_j\,e^{-2d_{ij}/r}$ with $r=30\um$, and a response $Y_i$: the mean $z$-scored,
+library-size-normalised log expression of the listed targets, or of the receptor if none are listed. A claim passes
+only if four rules hold (Figure~\ref{fig:overview}d). First, a tile-restricted permutation null: the statistic is the
+correlation of $E$ and $Y$ after centring both within 250\um\ tiles, and the null permutes $Y$ among receivers of the
+same tile (1,000 permutations). This keeps the regional structure that a global null would destroy
+(Figure~\ref{fig:overview}c). Second, split-half replication: the effect must be positive with $p<0.10$ in both halves
+of the section. Third, minimum evidence: at least 50 ligand$^+$ sender--receptor$^+$ receiver pairs within $r$, and
+$\rho\geq0.02$. Fourth, Benjamini--Hochberg control at $q=0.05$ over the claims in the list \cite{benjamini1995}. Every
+decision is written as a JSON record with the claim, the statistics, the $p$- and $q$-values and the reasons for
+failure. Given a seed, the gate is deterministic.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1_overview.png}
+\caption{The claim gate on a real tissue state: breast Rep1 with one benchmark instance planted (dev seed 0, used for
+illustration only). (a) A planted true claim in a 600\um\ window: receivers near ligand$^+$ senders respond. (b) A
+planted phantom: ligand and receptor rise in cells that never come within contact range. (c) A niche-confounded claim
+looks significant under a global permutation null but not under the gate's within-tile null (nulls redrawn for
+display, 1,000 permutations each). (d) The gate's four checks for the three claims, as written to the audit record.}
+\label{fig:overview}
 \end{figure*}
 
-\section{The claim gate}
-For a claim $(A,B,L,R)$, the gate computes for each receiver cell $i\in B$ the ligand exposure
-$E_i=\sum_{j\in A, d_{ij}\le r} L_j e^{-2d_{ij}/r}$ and a response $Y_i$ (mean $z$-scored expression of the pair's
-listed targets; the receptor if none are listed). (a) The statistic is the within-tile Pearson correlation of
-$(E,Y)$; its null permutes $Y$ among $B$ cells within the same $250\,\mu m$ tile (1000 permutations), which
-preserves regional structure and therefore controls niche confounding. (b) The effect must be positive with
-$p<0.10$ in both spatial halves. (c) At least 50 ligand$^+$ sender--receptor$^+$ receiver pairs within $r=30\,\mu m$
-and $\rho\ge0.02$ are required. BH-FDR ($q=0.05$) is applied over the gated claims. Every decision is written as a JSON
-audit record (claim, statistics, $p$/$q$-values, effect sizes, pass/fail, reasons). The gate has no LLM inside and
-is deterministic given a seed.
+\section{Experimental Design}
+\paragraph{Two pre-registered phases.} In Phase~1 we fixed hypotheses H1--H3, metrics, verdict rules and data splits in
+a version-controlled document before any evaluation. We tuned the gate on dev seeds 0--4 of breast Rep1 and froze it;
+the configuration chosen equalled the pre-registered defaults. Test data (seeds 100--104 on all four sections) were run
+once. Phase~2, a later amendment (Amendment~4), added hypotheses H4--H7 and a new confirmatory seed set, N2 (seeds
+200--209), never used for tuning or for Phase~1. The gate stayed frozen. This paper reports H1--H5; H6 (enforced gating
+for agents) and H7 (real-data positive controls) are still being evaluated. Analyses not named in the pre-registration
+are labelled exploratory, and the Appendix lists all amendments, including a disclosure about the timestamp of
+Amendment~4.
+% LANE-C/E PENDING (lane L): add H6 and H7 here, to Table 1 and to Results when lanes E and C report.
 
-\section{Experimental setup}
-\paragraph{Pre-registration.} Hypotheses, metrics, verdict rules and dev/test splits were frozen in a timestamped,
-version-controlled document before any evaluation. Three amendments are logged with reasons: the benchmark donor-gene
-range, changed after a degenerate first smoke run; freezing the tuned gate configuration, which equalled the defaults;
-and documentation of behaviour-preserving post-freeze code edits, verified by an independent code review. Analyses
-marked \emph{exploratory} were not pre-registered.
-\paragraph{Conditions.} \emph{expr\_cpdb} (CellPhoneDB-style mean score, 1000 label permutations, $\ge$10\% expressing
-filter) and \emph{expr\_prod} (LIANA/CellChat-style product score); tool-using LLM agents (Gemini \texttt{gemini-2.5-flash},
-DeepSeek \texttt{deepseek-flash}; temperature 0.2; at most 12 turns / 24 calls of structured, deterministic tools for
-expression summaries, an expression-only ranking, spatial proximity, co-localisation and near/far expression)
-asked to ``report the top-10 cell--cell interactions with evidence''; the same agents with the gate available as a
-\texttt{verify\_claim} tool; and post-hoc gating of every list. Metrics: phantom rate@10 (fraction of reported claims
-that are not planted-true; every non-true claim counts as a phantom, whatever its negative type), retention (true claims passing the gate / true claims in the list), relative reduction;
-95\% hierarchical bootstrap CIs (seeds, then claims).
-\paragraph{Splits.} Dev (tuning only): breast Rep1, seeds 0--4. Test (run once, frozen gate): breast Rep1 seeds
-100--104, breast Rep2 seeds 100--104, pancreas and lung seeds 100--104.
+\paragraph{Conditions and metrics.} We use two expression-only tools: a CellPhoneDB-style mean score with 1,000 label
+permutations (\emph{cpdb}) and a LIANA/CellChat-style product score (\emph{prod}). Phase~1 also ran tool-using LLM
+agents (\texttt{gemini-2.5-flash} and \texttt{deepseek-flash}) asked for the top-10 interactions with evidence, with and
+without the gate available as a \texttt{verify\_claim} tool. The \emph{phantom rate} of a list is the share of its claims
+that are not planted-true; every non-true claim counts, whatever its kind. \emph{Retention} is the share of the list's
+true claims that pass the gate, and the \emph{post-gate phantom rate} is the non-true share of the claims that pass.
+Confidence intervals (95\%) come from a hierarchical bootstrap over (tissue, seed) units and then claims. Phase~2 pools
+the top-10 lists of both tools over four tissues and ten N2 seeds: 80 lists and 800 claims per condition.
+
+\paragraph{H4: misspecified mechanisms.} We re-planted the targets of true pairs with mechanisms the gate does not
+assume and left every other channel untouched, so that variants differ only in how receivers respond. A1 uses a ring
+kernel (15--30\um). A2 uses half or double the gate's range (15 or 60\um). A3 is diffusive paracrine signalling with an
+80\um\ range and a 40\um\ decay length, the scale measured for cytokine communication in vivo \cite{oyleryaniv2017}.
+In A4 the receptor is bound but no target responds. A5 mixes A1--A4 within each tissue and adds two kinds of hard
+negative: \emph{decoy senders}, a second cell type that also expresses the true ligand but does not signal, and
+stronger niche-confounded pairs that reach the top-10. A0 is the gate-matched reference. H4 holds if retention
+$\geq0.60$ and post-gate phantom rate $\leq0.10$ in at least four of the five variants (A2 counts once, and both of its
+ranges must pass). It is falsified if retention falls below 0.50, or the phantom rate exceeds 0.15, in at least two.
+
+\paragraph{H5: weaker signals.} Effect levels of 1, 1/2, 1/4 and 1/8 scale the planted means of every planted
+category. H5 holds if the expression-only phantom rate rises as the effect falls (median Spearman $\rho\leq-0.80$
+across levels over 40 tissue--seed units) and the post-gate phantom rate stays $\leq0.15$ at every level. It is
+falsified if $\rho>-0.50$ or the post-gate rate exceeds 0.20 at any level.
+
+\begin{table*}[t]
+\centering
+\small
+\begin{tabular}{@{}lp{6.3cm}p{5.4cm}l@{}}
+\toprule
+ & Pre-registered criterion & Outcome & Verdict \\
+\midrule
+H1 & Expression-only tools and unguided agents report $\geq$30\% phantoms at $K{=}10$ (CI lower bound $\geq$0.20)
+   & dev \devBreastReponeProdKTenPR{}--\devBreastReponeCpdbKTenPR{}; held-out tools
+     \testPancreasCpdbKTenPR{}--\testBreastReponeCpdbKTenPR{}; agents \agTestAllBothPR{}
+   & not supported \\
+H2 & The gate cuts the phantom rate by $\geq$50\% and keeps $\geq$80\% of true claims
+   & no phantom left after gating in any list set; retention $\geq$\agDevBreastReponeGeminiRet{}
+   & supported \\
+H3 & H2 holds without retuning on held-out breast seeds and $\geq$2 other tissues
+   & held-out breast Rep1 and Rep2, pancreas, lung
+   & supported \\
+H4 & Retention $\geq$0.60 and post-gate phantom rate $\leq$0.10 in $\geq$4 of 5 misspecified variants (N2)
+   & \hfourNmet{} of 5; A4 retention \hfourAfourRet{}, A5 post-gate phantom rate \hfourAfivePRafter{}
+   & \textbf{not met} \\
+H5 & Expression-only phantom rate rises as effect falls (median $\rho\leq-0.80$); post-gate rate $\leq$0.15 at every
+     level (N2)
+   & median $\rho=$ \hfiveMedRho{}; post-gate rate \hfiveDefaultEighthPRafter{} at effect 1/8
+   & \textbf{falsified} \\
+\bottomrule
+\end{tabular}
+\caption{Pre-registered hypotheses and outcomes. H1--H3 are Phase~1 (test seeds 100--104), H4--H5 Phase~2 (fresh
+seeds 200--209); all at $K{=}10$ with the frozen gate. H1 was inconclusive for most conditions and falsified for three
+agent conditions on held-out tissues. H4's formal category under the pre-registered rules is \emph{inconclusive} (one
+variant fails each criterion, and falsification needs two failing the same one); it is a miss. Per-condition Phase~1
+results: Appendix Table~\ref{tab:verdicts}.}
+\label{tab:hyp}
+\end{table*}
 
 \section{Results}
-\input{tables/verdicts.tex}
+\subsection{Phase 1: The Gate Removes Easy Phantoms}
+Expression-only tools did produce phantoms, but fewer than we expected. Their dev top-10 lists were
+\devBreastReponeCpdbKTenPR{} (cpdb) and \devBreastReponeProdKTenPR{} (prod) phantom, held-out lists
+\testPancreasCpdbKTenPR{}--\testBreastReponeCpdbKTenPR{}, and LLM agents with spatial tools
+\agTestAllBothPR{} \agTestAllBothPRci{} over \agTestAllBothRuns{} held-out runs. None reached the pre-registered 0.30,
+so H1 is not supported (Table~\ref{tab:hyp}). One reason is that ranking by log-normalised type means favours true
+plants over matched decoys, because a decoy concentrates the same count increase in fewer cells.
 
-\paragraph{H1 (problem is real): not supported at $K{=}10$.} On dev, expression-only top-10 lists contained
-\devBreastReponeCpdbKTenPR{} \devBreastReponeCpdbKTenPRci{} (cpdb) and \devBreastReponeProdKTenPR{}
-\devBreastReponeProdKTenPRci{} (prod) phantoms; unguided agents \agDevBreastReponeBothPR{} \agDevBreastReponeBothPRci{}.
-None meets the pre-registered criterion (point $\ge$0.30 with CI lower bound $\ge$0.20); verdict
-\textsc{inconclusive}. On held-out breast seeds the rates were lower (\testBreastReponeCpdbKTenPR{}). Ranking by
-log-normalised type means favours true plants over matched never-meet decoys, because the decoys concentrate the
-same count increase in fewer cells. At $K{=}20$ the phantom rate was \testBreastReponeCpdbKTwentyPR{}
-\testBreastReponeCpdbKTwentyPRci{}, but this is partly mechanical (only 10 true plants exist). The H1 outcome
-depends on effect size. In \emph{exploratory, not pre-registered} dev sweeps, a planted effect of one quarter the
-default raised the expression-only phantom rate@10 to \swEffectzeroptwofiveNoneCpdbPR{} (mostly wrong-type-pair claims
-driven by baseline expression), which the frozen gate reduced to \swEffectzeroptwofiveNoneCpdbPRafter{} with retention
-\swEffectzeroptwofiveNoneCpdbRet{}. Thinning the planted counts by half gave \swNoisezeropfiveNoneCpdbPR{} $\rightarrow$
-\swNoisezeropfiveNoneCpdbPRafter{} (retention \swNoisezeropfiveNoneCpdbRet{}).
+The gate itself did what H2 and H3 ask. It removed every phantom from the expression-only top-10 lists on dev and on
+every held-out set, including a second breast section and pancreatic and lung cancer, whose panel and annotation differ
+from the breast data it was tuned on, and it kept at least \agDevBreastReponeGeminiRet{} of the true claims (Appendix
+Figure~\ref{fig:phase1}). Gating the agents' lists after the fact left a phantom rate of \agTestAllBothPRafter{}, with
+retention \agTestAllBothRet{}. Agents that had the gate as a tool did worse. Their held-out phantom rate was
+\agTestAllBothToolPR{} \agTestAllBothToolPRci{}, and \compTestVerifiedFailSubmitted{} of \compTestSubmitted{} submitted
+claims had been rejected by the agent's own \texttt{verify\_claim} call; another \compTestUnverified{} were never
+checked. Several transcripts describe a claim as lacking spatial support and submit it anyway to fill the requested ten.
 
-\paragraph{H2 (gate works): supported on every split we evaluated.} The gate removed all phantoms from
-expression-only top-10 lists on dev (retention \devBreastReponeCpdbKTenRet{} \devBreastReponeCpdbKTenRetci{}) and on
-held-out breast seeds (after: \testBreastReponeCpdbKTenPRafter{}, retention \testBreastReponeCpdbKTenRet{}). Post-hoc
-gating of unguided agent lists on dev gave a phantom rate of \agDevBreastReponeBothPRafter{} with retention
-\agDevBreastReponeBothRet{} \agDevBreastReponeBothRetci{}. \emph{What these lists test:} across all dev and
-test expression-only top-10 lists (\compTenN{} claims), the negatives were \compTenPhantom{} never-meet phantoms,
-\compTenOther{} wrong-type-pair claims and \compTenNiche{} niche-confounded claims. At $K{=}10$, H2 therefore mainly tests
-the contact-evidence and response rules. The top-20 lists contain harder negatives (\compTwentyOther{} wrong-type-pair and
-\compTwentyNiche{} niche claims among \compTwentyN{}), and the planted-claim analysis below tests every niche pair.
-\paragraph{Calibration.} On unplanted channels, \calibFullFive{} of \calibFullN{} claims had $p<0.05$ (global
-permutation: \calibNoTilesFive{}). Because those channels are shuffled within cell type, this check is weak by
-construction. We therefore also gated \rnullN{} random claims built from \emph{real} panel genes on real breast tissue,
-which retains regional structure and segmentation spillover. With the frozen gate, \rnullFrozenFive{} had $p<0.05$
-(\rnullFrozenMarkerFive{} when the ``targets'' were sender-type markers, $n{=}\rnullNMarker{}$) and \rnullFrozenPass{}
-passed the full gate. With a global null the rates were \rnullNoTilesFive{} (\rnullNoTilesMarkerFive{} for marker
-targets) and \rnullNoTilesPass{}.
-\paragraph{Hard negatives and ablations.} Niche-confounded pairs rarely enter expression-ranked lists (their
-signal is regional and diluted across the cell type; lifting the expression cap did not change this in an exploratory
-run). We therefore also gated, per dev seed, a list of all 10 \textsc{true} and all 10 \textsc{niche} planted claims
-(phantom rate 0.50 before gating), the list a spatially aware but confounded method might produce (exploratory). The
-frozen gate reduced the phantom rate to \hardFullPRafter{} \hardFullPRafterci{} with retention \hardFullRet{}.
-Removing the tile restriction gave \hardNoTilesPRafter{} \hardNoTilesPRafterci{}, removing the permutation test
-\hardNoPermPRafter{}, and removing split consistency \hardNoSplitPRafter{}, so each spatial component contributes
-on exactly the negatives that expression cannot distinguish.
-On all planted claims (dev), pass rates were \plantedFullTrue{} (true), \plantedFullPhantom{} (phantom),
-\plantedFullNiche{} (niche) and \plantedFullRandom{} (random); removing tile restriction raised niche false passes
-to \plantedNoTilesNiche{}, removing the permutation test to \plantedNoPermNiche{}, and removing split consistency to
-\plantedNoSplitNiche{} (Figure~\ref{fig:planted}).
+Two checks went beyond planted phantoms. On \rnullN{} random claims built from real panel genes in real breast tissue,
+\rnullFrozenFive{} reached $p<0.05$ under the gate's tile-restricted null and \rnullNoTilesFive{} under a global one, so
+the tile restriction matters for calibration on real data. On real breast tissue, where the receptor is the only
+readout available, the gate passed \realPdlPass{} of the \realPdlN{} PD-L1/PD-1 claims that an expression tool ranked
+highest. The ligand- and receptor-positive cells had too few contacts, at chance level (Appendix
+Figure~\ref{fig:pdl1}). It also passed \realPosctlPass{} of \realPosctlN{} contact-dependent positive controls. Without
+a target readout the gate cannot certify a real positive, a limit that Phase~2 made precise.
 
-\paragraph{H3 (transfer): supported, with a caveat.} The gate configuration frozen on breast dev seeds met the H2
-criteria for both expression tools on every held-out set, with no retuning (Table~\ref{tab:verdicts}). Phantom
-rates at $K{=}10$ went from \testPancreasCpdbKTenPR{} to \testPancreasCpdbKTenPRafter{} on pancreatic cancer (retention
-\testPancreasCpdbKTenRet{}), from \testLungCpdbKTenPR{} to \testLungCpdbKTenPRafter{} on lung cancer (retention
-\testLungCpdbKTenRet{}), and from \testBreastReptwoCpdbKTenPR{} to \testBreastReptwoCpdbKTenPRafter{} on the held-out
-breast section (retention \testBreastReptwoCpdbKTenRet{}). At $K{=}20$, where lists also contain wrong-sender and niche
-negatives, phantom rates of \testPancreasCpdbKTwentyPR{} (pancreas) and \testLungCpdbKTwentyPR{} (lung) fell to
-\testPancreasCpdbKTwentyPRafter{} and \testLungCpdbKTwentyPRafter{}. The pancreas and lung sections are much sparser than
-breast and use a different panel and marker-based annotations, so this is a non-trivial transfer of the
-\emph{procedure}. The caveat is that much of the phantom mass in these lists consists of never-meet decoys that any
-contact-evidence rule rejects. The hard negatives are niche-confounded pairs: across all planted claims the frozen gate
-passed \testplantedPancreasNiche{} (pancreas) and \testplantedLungNiche{} (lung) of them, and
-\testplantedBreastReponeTrue{}--\testplantedLungTrue{} of the true plants.
+A caveat bounds all of this. The phantoms in these lists carry no target response, so any response check rejects them,
+and the default top-10 lists hardly contain the hard negatives: across Phase~1 tool lists, \compTenNiche{} of
+\compTenN{} claims were niche-confounded. Phase~1 shows that the gate does its basic job. It does not show that the gate
+is hard to fool.
 
-\paragraph{LLM agents on held-out data.} Across all test sets (\agTestAllBothRuns{} unguided runs, two families),
-agents reported \agTestAllBothPR{} \agTestAllBothPRci{} phantom claims at $K{=}10$ (Gemini \agTestAllGeminiPR{},
-DeepSeek \agTestAllDeepseekPR{}). Agents with spatial tools therefore avoided most phantoms on this benchmark, and H1 is
-not supported for agents either. Post-hoc gating removed the remaining phantoms (\agTestAllBothPRafter{}) with
-retention \agTestAllBothRet{} \agTestAllBothRetci{}.
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig2_h4_misspecification.png}
+\caption{H4 on fresh seeds (N2: ten seeds $\times$ four tissues, $K{=}10$, cpdb and prod pooled). (a) The planted
+response kernel of each variant (grey) against the kernel the gate assumes (dashed blue); the shaded band is the
+gate's 30\um\ window. (b) Retention of true claims and (c) post-gate phantom rate, with 95\% CIs and the pre-registered
+thresholds. Filled markers meet the variant's criterion. Three of five variants meet both criteria (A2 needs both
+ranges); four were required.}
+\label{fig:h4}
+\end{figure*}
 
-\paragraph{Agents do not fully enforce their own verifier.} With \texttt{verify\_claim} available, the test phantom
-rate was \agTestAllBothToolPR{} \agTestAllBothToolPRci{}, compared with \agTestAllBothPRafter{} under post-hoc
-enforcement (dev: \agDevBreastReponeBothToolPR{} vs.\ \agDevBreastReponeBothPRafter{}). Of \compTestSubmitted{} claims
-submitted on test, \compTestVerifiedFailSubmitted{} (\compTestVerifiedFailSubmittedNegatives{} of them false) had been
-\emph{rejected} by the agent's own \texttt{verify\_claim} call, and \compTestUnverified{} were never verified (dev:
-\compDevVerifiedFailSubmitted{} and \compDevUnverified{} of \compDevSubmitted{}). Several transcripts describe a claim
-as lacking spatial support and still submit it to fill the requested $K$. The effect is small in absolute terms, but it
-is the failure mode a governance layer exists to catch, and placing the check outside the agent removes it.
+\subsection{H4: Misspecified Mechanisms}
+The gate tolerated getting the shape and range of the mechanism wrong (Figure~\ref{fig:h4}). Retention was
+\hfourAoneRet{} with a ring kernel, \hfourAtwoaRet{} with a 15\um\ range, \hfourAtwobRet{} with a 60\um\ range and
+\hfourAthreeRet{} with 80\um\ paracrine signalling, against \hfourAzeroRet{} for the matched reference. Retention falls
+as the true range outgrows the gate's 30\um\ window, and the losses are all of one kind. Every true claim the gate
+dropped in A2b and A3 failed split-half replication (\hfourFailAthreeSplitInconsistent{} of
+\hfourFailAthreeNTrueFailed{} in A3). Long-range signals saturate the response inside the window, so the within-tile
+gradient that the gate looks for flattens.
 
-\paragraph{Real data (no planting).} On breast Rep1/Rep2 the frozen gate, with the receptor as the response (no
-target priors were used on real data), passed \realPdlPass{}/\realPdlN{} PD-L1/PD-1 claims (the top expression-scored type pairs,
-LAMP3$^+$ DCs $\rightarrow$ T cells), all for insufficient evidence: fewer than 50 ligand$^+$--receptor$^+$ contacts
-within 30\,\textmu m in both replicates (Figure~\ref{fig:examples}c). An exploratory tile-restricted permutation of
-positivity shows that these contacts are at chance level (observed/expected \realContactRatioLo{}--\realContactRatioHi{};
-\realContactNDepleted{} of \realContactN{} tests nominally depleted, not replicated). The data do not support the
-claims, but they do not show active segregation either. It also passed
-\realExprtopPass{}/\realExprtopN{} of the expression-only real top-10 claims, \emph{and}
-\realPosctlPass{}/\realPosctlN{} contact-dependent positive controls (CD80/CD86--CTLA4, MMRN2--CD93). The real-data
-gate is therefore conservative and cannot certify positives without a response readout.
+Two variants failed, one more than H4 allows. With no responding target (A4), the gate kept \hfourAfourRet{}
+\hfourAfourRetci{} of true claims. We predicted this before seeing the data, and it is not a bug: the gate looks for a
+response, and A4 has none. With mixed mechanisms and hard negatives (A5), retention was acceptable (\hfourAfiveRet{}),
+but \hfourAfivePRafter{} \hfourAfivePRafterci{} of the passed claims were false: \hfourAfiveFalseTotal{} of
+\hfourAfiveNpass{} passes, \hfourAfiveFalseNiche{} of them hard-niche and \hfourAfiveFalseDecoy{} decoy-sender claims.
+The miss is smallest in breast Rep1, the tuning tissue, where the rate (\hfourAfivePRafterBreastRepone{}) stays under
+the threshold, and largest in lung (\hfourAfivePRafterLung{}). Three of five variants met both criteria where four were required, so \textbf{H4 is
+not met}. The formal category under our rules is inconclusive rather than falsified, because falsification needs two
+variants failing the same criterion and here one fails each. We read it as a miss, not a partial success.
 
-\section{Limitations}
-(1) Semi-synthetic realism: planted effects are additive Poisson counts with a fixed dose response, and never-meet
-decoys are easy for any spatial check. The default effect is strong; in exploratory dev sweeps, halving it lowered
-retention to \swEffectzeropfiveNoneCpdbRet{} \swEffectzeropfiveNoneCpdbRetci{}, and at a quarter of the effect retention
-was \swEffectzeroptwofiveNoneCpdbRet{} \swEffectzeroptwofiveNoneCpdbRetci{}. (2) The gate depends on a response readout.
-With only one of three listed targets responding, retention was \swResponeNoneCpdbRet{}; with no responding target it was
-\swRespzeroNoneCpdbRet{}. In receptor-only mode (the readout available on real data) retention fell to
-\swDefaultReceptorOnlyCpdbRet{} \swDefaultReceptorOnlyCpdbRetci{} on the benchmark, which is consistent with the gate
-failing every real-data positive control. A mismatch between the planted signalling radius (50\,\textmu m) and the
-gate's radius (30\,\textmu m) still gave retention \swRfivezeroNoneCpdbRet{} \swRfivezeroNoneCpdbRetci{}. (2b) The gate's exposure kernel matches the generator's ($r{=}30\,\mu m$, $e^{-d/15}$), which is optimistic.
-Phantoms carry no target signal, so any target-response check (spatial or not) would reject them, and the agent's
-\texttt{verify\_claim} tool applies BH to a single claim, making it looser than the post-hoc gate.
-(3) Small panels: \lrBreastRepone{} (breast) and \lrPancreas{} (pancreas, lung)
-consensus L--R pairs out of \lrConsensus{} \citep{turei2021omnipath,dimitrov2022liana} are measurable.
-(4) Breast Rep1/Rep2 are serial sections of a single donor block; pancreas and lung annotations are marker-based.
-(5) Two LLM families, three runs per dataset per family, one prompt; results may not transfer to other agents.
-(6) Phantom rates at $K{=}10$ depend on the true:decoy ratio we fixed.
+The zero post-gate phantom rates of A0--A4 say little, by construction. Those variants share the default lists, which
+over 80 lists held \hfourCompAzeroTrue{} true, \hfourCompAzeroPhantom{} phantom, \hfourCompAzeroOther{} wrong-type-pair
+and \hfourCompAzeroNiche{} niche-confounded claims. A5 is the only H4 variant whose lists contain negatives that can
+pass, and it is the one that failed. Its high expression-only phantom rate (\hfourAfivePR{}) is also built in, since we
+strengthened the hard negatives until they reached the lists.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig3_h5_dose_response.png}
+\caption{H5 on fresh seeds (40 tissue--seed units, $K{=}10$, cpdb and prod pooled, 95\% CIs). (a) Phantom rate of
+expression-only lists before and after the frozen gate as the planted effect falls. (b) What the gate passed at each
+level: true passes and false passes (labels: false/all), with the true share of the lists under each effect level.
+(c) The same as (a) for exploratory hard-negative lists (gate-matched true response plus the decoy senders and hard
+niche pairs of A5).}
+\label{fig:h5}
+\end{figure*}
+
+\subsection{H5: Weaker Signals}
+Weakening the planted effect hurt the expression-only tools exactly as predicted (Figure~\ref{fig:h5}a). Their phantom
+rate rose from \hfiveDefaultOnePR{} at full effect to \hfiveDefaultEighthPR{} at one eighth; the median per-unit
+Spearman $\rho$ was \hfiveMedRho{}, and all \hfiveNunitsLe{} units were at or below $-0.80$. The gate held at half
+effect (\hfiveDefaultHalfPRafter{}) and, narrowly, at a quarter (\hfiveDefaultQuarterPRafter{}
+\hfiveDefaultQuarterPRafterci{}). At one eighth, \hfiveDefaultEighthPRafter{} \hfiveDefaultEighthPRafterci{} of what
+it passed was false, above both the 0.15 target and the 0.20 line. \textbf{H5 is falsified.}
+
+The more useful finding is why. The gate did not get worse per claim. The share of negatives it let through stayed low
+and roughly flat: \baseHalfNegPassRate{} at 1/2, \baseQuarterNegPassRate{} at 1/4 and \baseEighthNegPassRate{} at 1/8.
+What collapsed was the list it was given. The true share of the expression-only lists fell from
+\baseOnePrevalenceTrue{} to \baseEighthPrevalenceTrue{}, and with only \hfiveDefaultEighthNtrue{} true claims among 800,
+a negative pass rate of \baseEighthNegPassRate{} is enough to make \baseEighthNegPassed{} of \hfiveDefaultEighthNpass{} passes
+false (Figure~\ref{fig:h5}b). This is the base-rate effect familiar from the false-discovery literature: whether a
+positive finding is true depends on the share of true relationships among those tested, not only on the test
+\cite{ioannidis2005}. The one-eighth estimate rests on \hfiveDefaultEighthNpass{} passes and varies across tissues,
+from \hfiveEighthPRafterPancreas{} in pancreas to \hfiveEighthPRafterBreastRepone{} in breast Rep1, but the mechanism
+behind it does not depend on that spread. Hard-negative lists (exploratory) show the same pattern from a worse start:
+\hfiveAfivemOnePRafter{} of passes were false at full effect and \hfiveAfivemEighthPRafter{} at one eighth
+(Figure~\ref{fig:h5}c).
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig4_failure_map.png}
+\caption{Failure map (exploratory analyses of the frozen gate). (a) Post-gate phantom rate on A5 lists with one gate
+component removed at a time (dev seeds 0--4, breast Rep1). (b) Pass rate of decoy-sender claims by the co-localisation
+of decoy and true sender (correlation of their exposures across receivers; N2). (c) Share of gate passes whose signal
+is also supported by raw counts (N2). (d) Post-gate phantom rate against the true share of the candidate list, for
+default and hard-negative lists at all four effect levels (N2). Grey curves: the expected rate for a gate that keeps
+95\% of true claims and passes a fraction $f$ of negatives.}
+\label{fig:failure}
+\end{figure*}
+
+\subsection{A Failure Map}
+Together, the misses point to four distinct ways in which the gate fails (Figure~\ref{fig:failure}). Each has a
+mechanism we can name. We fixed none of them: the gate stays frozen, and any change would need fresh seeds and a new
+amendment.
+
+\paragraph{No readout, no detection.} The gate tests whether exposure predicts a response. Signalling that changes no
+measured transcript is invisible to it, as in A4, where retention was \hfourAfourRet{}. Removing the permutation test
+lifts this to \ablAfourRetNoPerm{} on dev seeds, but those extra passes have no planted response behind them; the
+permutation null is what keeps unsupported claims out. On real tissue with small panels, where target genes are often
+unmeasured, this is the common case. Only \lrBreastRepone{} of \lrConsensus{} consensus ligand--receptor pairs are
+measurable on the breast panel, and missing readouts are why the gate failed every real positive control.
+
+\paragraph{Co-localised senders.} A decoy sender expresses the true ligand but does not signal. When its cells sit
+apart from the true sender's, the gate rejects it: the pass rate was \decoyPassLow{} ($n=\decoyNLow{}$). When the two
+exposures overlap (co-localisation 0.1--0.3), the pass rate rises to \decoyPassMid{} ($n=\decoyNMid{}$;
+Figure~\ref{fig:failure}b). The response is real, since \rawSupDecoy{} of passed decoys are also supported by raw
+counts, but it is attributed to the wrong sender. A correlational test cannot tell apart senders that occupy the same
+neighbourhoods. Conditioning on the exposure from the other ligand-expressing types would.
+
+\paragraph{Normalisation and density.} The gate normalises each cell's counts by its library size. In these sections
+library size correlates with local cell density, with a sign that depends on the tissue: Spearman $\rho$ with the number
+of cells within 30\um\ was \libDensBreastRepone{} and \libDensBreastReptwo{} in the two breast sections,
+\libDensLung{} in lung and \libDensPancreas{} in pancreas. The normalisation factor can therefore co-vary with exposure.
+Only \rawSupNicheHard{} of hard-niche passes are supported by raw counts, against \rawSupTrue{} of true passes
+(Figure~\ref{fig:failure}c). This matches reports that library size carries tissue structure \cite{bhuva2024} and that
+count-based normalisation creates region-specific false positives in imaging-based data \cite{atta2024}. Normalising by
+cell area, or permuting within density strata, are the obvious candidates to test.
+
+\paragraph{The base rate of the list.} A per-claim filter can reject most negatives and still return a list that is
+mostly false if the list it was given was mostly false (Figure~\ref{fig:failure}d). The observed points follow the
+expected curves: what moves them up is the true share of the list, not a change in the gate.
+
+\paragraph{Which components do the work.} On hard-negative lists (dev seeds, exploratory), no single component is
+enough (Figure~\ref{fig:failure}a). Removing the tile restriction raised the post-gate phantom rate from
+\ablAfiveFull{} to \ablAfiveNoTiles{}, removing split-half replication raised it to \ablAfiveNoSplit{}, and removing
+the permutation null raised it to \ablAfiveNoPerm{}; the minimum-evidence rule made no difference (\ablAfiveNoMinEvidence{}).
+
+\section{Discussion}
+\paragraph{What a verifier should report.} A verification layer for a medical world model is useful only if its limits
+travel with its verdicts. Our results suggest four things an audit record should state next to each pass or fail:
+whether a response readout exists for the claim; whether other candidate senders share the claimed sender's
+neighbourhood; how the response was normalised; and how many true claims the candidate list could plausibly contain.
+The last point is the least obvious. A gate that is excellent claim by claim can still hand a clinician a list that is
+half wrong, and nothing in the per-claim verdicts would show it. In a decision-support setting, for example when asking
+whether PD-1/PD-L1 blockade has a cellular substrate in a tumour, the honest output of the gate is often ``no evidence
+either way'', and the record should say so.
+
+\paragraph{What we would test next.} Each failure suggests a change, and each change needs its own pre-registered test
+on seeds the gate has never seen; tuning on the seeds reported here would turn our misses into overfitting. A
+readout-aware gate would return ``untestable'' rather than ``fail'' when no target of the claimed pair is measured, which
+separates absence of evidence from evidence against. A sender-aware test would ask whether the claimed sender explains
+the response beyond the exposure from every other cell type that expresses the ligand. Normalising responses by cell
+area, or permuting within density strata of each tile, would target the normalisation confound. Finally, a gate could
+estimate the true share of its input list, for example from the pass rate of matched decoy claims, and report the
+expected false share of its output next to the verdicts. The remaining Phase~2 hypotheses test two further parts of
+the same picture: whether an agent harness that refuses unverified claims removes the compliance gap we saw in
+Phase~1, and whether the gate can pass literature-supported contact-dependent pairs on real tissue.
+
+\paragraph{Limitations.} The benchmark is semi-synthetic: planted effects are additive Poisson counts, phantoms are
+easy for any response check by construction, and the effect knob scales all planted categories together. The gate's
+kernel equals the generator's in the reference setting, which is optimistic, and breast Rep1 was the tuning tissue (its
+A5 miss is the smallest). Panels are small, with \lrBreastRepone{} (breast) and \lrPancreas{} (pancreas, lung) of
+\lrConsensus{} consensus ligand--receptor pairs measurable \cite{turei2021omnipath,dimitrov2022liana}. The two breast
+sections come from one donor block, and the pancreas and lung annotations are marker-based. Phase~1 used two LLM families
+with three runs per dataset and one prompt. The failure-map analyses are exploratory, and the normalisation account in
+particular should be confirmed independently.
 
 \section{Conclusion}
-A deterministic, auditable claim gate grounded in the tissue state removed phantom interaction claims from both
-expression-only tools and LLM agents on held-out data while keeping true claims, and agents did not reliably enforce
-the same check themselves. The open problem is validating \emph{positive} claims on real tissue, which needs
-response readouts that small panels lack.
+A deterministic claim gate grounded in the tissue state removed phantom interaction claims from expression-only tools
+and LLM agents on held-out data, while agents did not reliably enforce the same check themselves. When we tried to
+break it under pre-registration, it failed in four specific ways: it is blind without a transcriptional readout, it
+confuses senders that share a neighbourhood, it inherits a normalisation--density confound, and it cannot make a list
+with few true claims trustworthy. These are not reasons to drop state-grounded verification. They are what such a
+verifier must disclose with every verdict.
 
-\bibliographystyle{plainnat}
 \bibliography{refs}
 
 \appendix
-\section{Reproducibility}
-All numbers are generated from \texttt{results/results.jsonl} via \texttt{scripts/make\_paper\_numbers.py}
-(provenance per macro in \texttt{paper/numbers\_provenance.json}). Data sources and licences: \texttt{paper/DATA\_SOURCES.md}.
-Raw files were verified by size and SHA-256 (or by ZIP CRC32 for members extracted from remote archives via HTTP range
-requests). The pre-registration, its amendments, and all code are under version control.
 
-\section{Example audit records}
+\section{Appendix}
+\subsection{Reproducibility}
+All numbers in the paper are LaTeX macros generated from \texttt{results/results.jsonl} by
+\texttt{scripts/make\_paper\_numbers.py}, with the source record of each macro in
+\texttt{paper/numbers\_provenance.json}. All figures are drawn by \texttt{scripts/paper\_figures.py} into
+\texttt{paper/figures/}. Data sources and licences are listed in \texttt{paper/DATA\_SOURCES.md}; raw files were verified
+by size and SHA-256 (or by ZIP CRC32 for members extracted from remote archives). The H4 analyses were rebuilt from a
+clean checkout with every benchmark instance regenerated: all \rebuildFiles{} per-claim files and \rebuildRows{} rows
+matched, with \rebuildMismatch{} decision mismatches and the same verdict. A re-run of a random 10\% of H4 design cells
+(\auditCells{} cells) on different seeds flagged \auditFlagged{} cells. The H5 analysis reproduces the H4 hard-negative
+lists claim for claim (\consRows{} rows, \consMismatch{} mismatches). An independent red-team review of the Phase~2
+analyses is pending.
+
+\subsection{Pre-registration Record and the Amendment~4 Timestamp}
+Amendments 1--3 (Phase~1) restricted the donor-gene range after a degenerate first smoke run, froze the tuned gate
+configuration (equal to the defaults), and documented behaviour-preserving code edits after the freeze. Amendment~4
+registered H4--H7 and the N2 seeds. Its header gives the time ``2026-11-07 15:00 CST'', which was not read from a clock.
+The amendment was first committed at 2026-11-07 23:57:32 CST (commit \texttt{216b498}); the commit time is
+authoritative. The order that pre-registration requires still holds: the H4 analysis specification was committed at
+2026-11-08 00:08:52, and the first N2 benchmark instance was written at 00:12:11. We left the amendment text unchanged
+and appended an erratum to the pre-registration document. The H5 specification was committed before any N2 instance
+with an effect below 1 existed; the full-effect N2 lists had already been seen through H4's reference variant, which we
+disclosed in that specification.
+
+\subsection{Phase 1 Details}
+Table~\ref{tab:verdicts} gives the Phase~1 verdict for every condition and split, and Figure~\ref{fig:phase1} shows the
+phantom rates and the gate's pass rates on all planted claims. On dev, removing the tile restriction raised the niche
+pass rate from \plantedFullNiche{} to \plantedNoTilesNiche{}. On hard dev lists of all ten true and all ten niche
+claims (exploratory), the frozen gate gave a post-gate phantom rate of \hardFullPRafter{}, against \hardNoTilesPRafter{}
+without tile restriction. With the receptor as the only readout (the situation on real data), retention on the
+benchmark fell to \swDefaultReceptorOnlyCpdbRet{} \swDefaultReceptorOnlyCpdbRetci{}, and with no responding target to
+\swRespzeroNoneCpdbRet{}.
+
+\input{tables/verdicts.tex}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/figA1_phase1.png}
+\caption{Phase~1. (a) Phantom rate at $K{=}10$ before (95\% CI) and after the frozen gate for each split and condition
+(agents: both families pooled). (b) Gate pass rate on all planted claims by category: dev ablations and held-out test
+tissues.}
+\label{fig:phase1}
+\end{figure*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figA2_real_pdl1.png}
+\caption{Real breast Rep1, no planting: CD274$^+$ (PD-L1) LAMP3$^+$ dendritic cells and PDCD1$^+$ (PD-1) T cells,
+the type pairs an expression tool ranks highest for PD-L1/PD-1. Their contacts are few, and at chance level
+(observed/expected \realContactRatioLo{}--\realContactRatioHi{}).}
+\label{fig:pdl1}
+\end{figure}
+
+\subsection{Example Audit Records}
 Two records from the held-out breast evaluation (\texttt{results/audit/test\_final\_breast\_rep1\_cpdb\_K10\_none.jsonl};
-fields abridged, numbers rounded). A planted \textsc{true} claim:
+fields abridged, numbers rounded). A planted true claim:
 {\scriptsize\begin{verbatim}
 {"claim": {"sender": "Macrophages_1", "receiver": "CD4+_T_Cells", "ligand": "LIG_38",
  "receptor": "REC_38"}, "n_expressing_pairs_within_r": 13147, "rho_within_tile": 0.3684,
  "p_perm": 0.001, "q_bh": 0.0011, "effect_d": 0.9754, "halves": [{"rho": 0.3716, "p": 0.001},
  {"rho": 0.3657, "p": 0.001}], "pass_": true, "reasons": []}
 \end{verbatim}}
-\noindent A planted \textsc{phantom} reported by the expression-only tool:
+\noindent A planted phantom reported by an expression-only tool:
 {\scriptsize\begin{verbatim}
 {"claim": {"sender": "Myoepi_KRT15+", "receiver": "LAMP3+_DCs", "ligand": "LIG_36",
  "receptor": "REC_36"}, "n_expressing_pairs_within_r": 0, "rho_within_tile": 0.0,
@@ -268,30 +483,23 @@ fields abridged, numbers rounded). A planted \textsc{true} claim:
  "split_inconsistent", "too_few_expressing_pairs(0<50)", "effect_below_min(rho=0<0.02)"]}
 \end{verbatim}}
 
-\section{Agent protocol}
+\subsection{Agent Protocol}
 System prompt (abridged): ``You are a computational biology agent analysing a spatial transcriptomics section
 (10x Xenium, single-cell resolution, coordinates in micrometres) \ldots{} gene names are anonymized \ldots{} each pair
 lists putative downstream target genes \ldots{} at most 24 tool calls in total. Finish by calling submit\_claims
 exactly once.'' Task: ``Report the top-10 cell-cell interactions in this tissue with evidence \ldots{} Call
 submit\_claims with exactly 10 claims ranked from most to least confident.'' Tools: \texttt{list\_cell\_types},
 \texttt{list\_lr\_database}, \texttt{expression\_summary}, \texttt{top\_expressed\_pairs} (CellPhoneDB-like ranking),
-\texttt{spatial\_proximity}, \texttt{colocalization}, \texttt{compare\_near\_far}, \texttt{submit\_claims}; plus
-\texttt{verify\_claim} in the gate-as-tool condition. Full transcripts, including every tool call and result, are in
-\texttt{results/agent\_logs/}. API keys were read from the environment at runtime and are never logged.
+\texttt{spatial\_proximity}, \texttt{colocalization}, \texttt{compare\_near\_far} and \texttt{submit\_claims}, plus
+\texttt{verify\_claim} in the gate-as-tool condition. Temperature 0.2, at most 12 turns. Full transcripts, including
+every tool call and result, are in \texttt{results/agent\_logs/}. API keys were read from the environment at run time and
+never logged.
 
-\section{Cell-type annotation of pancreas and lung}
+\subsection{Cell-Type Annotation of Pancreas and Lung}
 No published labels exist for these sections. Each vendor graph-based cluster was assigned the lineage whose marker set
-had the highest mean $z$-scored log expression (e.g.\ T cells: CD3D, CD3E, CD2, TRAC; macrophages: CD68, CD163, MRC1,
-MARCO; endothelial: PECAM1, VWF, CLEC14A; epithelial/tumour: EPCAM, KRT7, KRT20, CFTR; plus acinar and endocrine markers
-for pancreas and ciliated and alveolar markers for lung). A cluster was left \texttt{Unlabeled} if its best score was
-below 0.3 or less than 0.1 above the runner-up (rule fixed before any evaluation; tables in
-\texttt{results/tables/annotation\_*.csv}).
-\begin{figure}[h]\centering
-\includegraphics[width=\linewidth]{../figures/fig_planted_pass_rates.png}
-\caption{Gate pass rates on all planted claims by category (dev ablations, test tissues).}\label{fig:planted}
-\end{figure}
-\begin{figure}[h]\centering
-\includegraphics[width=\linewidth]{../figures/fig_phantom_rates.png}
-\caption{Phantom rate@10 before and after the gate (bars: 95\% CI before gating).}\label{fig:pr}
-\end{figure}
+had the highest mean $z$-scored log expression (for example T cells: CD3D, CD3E, CD2, TRAC; macrophages: CD68, CD163,
+MRC1, MARCO; endothelial: PECAM1, VWF, CLEC14A; epithelial and tumour: EPCAM, KRT7, KRT20, CFTR; plus acinar and
+endocrine markers for pancreas and ciliated and alveolar markers for lung). A cluster was left unlabelled if its best
+score was below 0.3 or less than 0.1 above the runner-up; this rule was fixed before any evaluation.
+
 \end{document}

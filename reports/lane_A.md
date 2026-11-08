@@ -28,7 +28,9 @@ Figure: `figures/fig_laneA_h4_N2.png`. Tables: `results/tables/laneA_N2_*.csv`. 
 
 ## 2. Findings, negatives first
 1. **Hard negatives defeat the 0.10 phantom-rate target (A5).** In A5's K=10 lists, 55 of 269 passed claims are false:
-   42 hard-niche and 13 decoy-sender claims [`laneA_N2_false_pass_composition`]. The miss holds in every tissue, with pooled CI [0.119, 0.288].
+   42 hard-niche and 13 decoy-sender claims [`laneA_N2_false_pass_composition`]. Pooled CI [0.119, 0.288].
+   [Correction 2026-11-08 16:14 CST, lane L: this line originally said "The miss holds in every tissue". That was wrong:
+   breast Rep1 is 0.081, under the 0.10 threshold (next line). The pooled miss stands.]
    Per-tissue post-gate phantom rate: breast Rep1 0.081, Rep2 0.222, lung 0.364, pancreas 0.241 [`laneA_N2_H4_secondary_summary`].
    Planted-claim pass rates: hard niche 0.105 [0.065, 0.150], decoy sender 0.140 [0.075, 0.210]. For comparison, the
    Phase-1-strength niche passes 0.062 [0.035, 0.095], phantoms 0.000 and random 0.005 [`laneA_N2_planted_pass_rates`].

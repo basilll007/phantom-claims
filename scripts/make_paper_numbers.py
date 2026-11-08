@@ -45,7 +45,8 @@ def ci(name, rec, key):
 
 L = "ABCDEFGHIJ"
 def tag(s):  # macro-safe (digits spelled out so breast_rep1 / breast_rep2 do not collide)
-    s = s.replace("0", "zero").replace("1", "one").replace("2", "two").replace("5", "five")
+    for d, w in zip("0123456789", ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")):
+        s = s.replace(d, w)
     return "".join(c for c in s.title() if c.isalpha())
 
 # expression tools, H1/H2, K=10 and K=20
@@ -138,6 +139,139 @@ for tagname, abl in [("default", "receptor_only"), ("effect0.5", "none"), ("effe
         num(pre + "PR", r1, ["metrics", "phantom_rate"])
         num(pre + "PRafter", r2, ["metrics", "phantom_rate_after"])
         num(pre + "Ret", r2, ["metrics", "retention"]); ci(pre + "Retci", r2, "retention")
+# ---------------- Phase 2 (Amendment 4; confirmatory on N2 unless the record says exploratory) ----------------
+def ci3(name, rec, key, path=("ci",)):
+    try:
+        v = rec
+        for p in path:
+            v = v[p]
+        lo, hi = v[key]
+        out.append(f"\\newcommand{{\\{name}}}{{[{lo:.3f}, {hi:.3f}]}}")
+        used[name] = dict(id=rec["id"], path=list(path) + [key], value=[lo, hi])
+    except Exception:
+        out.append(f"\\newcommand{{\\{name}}}{{\\TODOVERIFY{{{name}}}}}")
+
+
+def val(name, rec, getter, fmt):
+    """Macro from an arbitrary field of a record (rows lists etc.); getter(rec) -> value."""
+    try:
+        v = getter(rec)
+        if v is None or (isinstance(v, float) and math.isnan(v)):
+            raise KeyError
+        out.append(f"\\newcommand{{\\{name}}}{{{fmt(v)}}}")
+        used[name] = dict(id=rec["id"], value=v)
+    except Exception:
+        out.append(f"\\newcommand{{\\{name}}}{{\\TODOVERIFY{{{name}}}}}")
+
+
+f3 = lambda v: f"{v:.3f}"
+f2_ = lambda v: f"{v:.2f}"
+fint = lambda v: f"{int(round(v)):,}".replace(",", "{,}")
+fpct = lambda v: f"{100 * v:.0f}\\%"
+def fsigned(v):
+    return f"$-${abs(v):.2f}" if v < 0 else f"$+${v:.2f}"
+def row(rec, **kw):
+    return next(r for r in rec["rows"] if all(r.get(k) == v for k, v in kw.items()))
+
+# H4: per-variant K=10 pooled (cpdb+prod) [laneA_N2_H4_<v>_K10_pooled]
+for v in ("A0", "A1", "A2a", "A2b", "A3", "A4", "A5"):
+    r = first(f"laneA_N2_H4_{v}_K10_pooled"); pre = f"hfour{tag(v)}"
+    num(pre + "PR", r, ["metrics", "phantom_rate"], nd=3)
+    num(pre + "PRafter", r, ["metrics", "phantom_rate_after"], nd=3); ci3(pre + "PRafterci", r, "phantom_rate_after")
+    num(pre + "Ret", r, ["metrics", "retention"], nd=3); ci3(pre + "Retci", r, "retention")
+    num(pre + "Npass", r, ["metrics", "n_pass"]); num(pre + "Ntrue", r, ["metrics", "n_true"]); num(pre + "N", r, ["metrics", "n"])
+hv = first("laneA_N2_H4_verdict")
+num("hfourNmet", hv, ["metrics", "n_units_met"]); num("hfourVerdictLogged", hv, ["metrics", "verdict"])
+num("hfourAtwoRet", hv, ["metrics", "units", "A2", "retention"], nd=3)
+lc4 = first("laneA_N2_list_composition")
+for cat in ("true", "phantom", "other", "niche"):
+    val(f"hfourCompAzero{tag(cat)}", lc4, lambda r, c=cat: row(r, variant="A0", K=10)[c], fint)
+val("hfourCompAzeroLists", lc4, lambda r: row(r, variant="A0", K=10)["n_lists"], fint)
+fp4 = first("laneA_N2_false_pass_composition")
+val("hfourAfiveFalseNiche", fp4, lambda r: r["metrics"]["A5_K10"]["false_by_type"]["niche"], fint)
+val("hfourAfiveFalseDecoy", fp4, lambda r: r["metrics"]["A5_K10"]["false_by_type"]["decoy_sender"], fint)
+val("hfourAfiveFalseTotal", fp4, lambda r: r["metrics"]["A5_K10"]["n_pass"] - r["metrics"]["A5_K10"]["n_true"], fint)
+pp4 = first("laneA_N2_planted_pass_rates")
+for cat, nm in (("niche_hard", "NicheHard"), ("decoy_sender", "Decoy")):
+    val(f"hfourPlanted{nm}", pp4, lambda r, c=cat: row(r, variant="A5", category=c)["pass_rate"], f3)
+val("hfourPlantedNicheAzero", pp4, lambda r: row(r, variant="A0", category="niche")["pass_rate"], f3)
+for v in ("A1", "A2b", "A3"):
+    val(f"hfourPlantedTrue{tag(v)}", pp4, lambda r, v=v: row(r, variant=v, category="true")["pass_rate"], f3)
+ss4 = first("laneA_N2_H4_secondary_summary")
+for t in ("breast_rep1", "breast_rep2", "lung", "pancreas"):
+    val(f"hfourAfivePRafter{tag(t)}", ss4, lambda r, t=t: row(r, variant="A5", K=10, tissue=t)["phantom_rate_after"], f3)
+tf4 = first("laneA_N2_true_fail_reasons")
+for v in ("A4", "A2b", "A3"):
+    for k in ("n_true_failed", "split_inconsistent", "perm_null_not_rejected"):
+        val(f"hfourFail{tag(v)}{tag(k)}", tf4, lambda r, v=v, k=k: row(r, variant=v)[k], fint)
+dc = first("laneA_N2_A5_decoy_colocalisation")
+val("decoyN", dc, lambda r: r["n_decoy_claims"], fint)
+val("decoyPass", dc, lambda r: r["pass_rate"], f2_)
+val("decoyPassLow", dc, lambda r: r["by_coloc_bin"][0]["pass_rate"], f2_)
+val("decoyNLow", dc, lambda r: r["by_coloc_bin"][0]["n"], fint)
+val("decoyPassMid", dc, lambda r: r["by_coloc_bin"][1]["pass_rate"], f2_)
+val("decoyNMid", dc, lambda r: r["by_coloc_bin"][1]["n"], fint)
+val("decoyMedPassed", dc, lambda r: r["median_coloc_passed"], f2_)
+val("decoyMedFailed", dc, lambda r: r["median_coloc_failed"], fsigned)
+val("decoyMWp", dc, lambda r: r["mannwhitney_p"], lambda v: f"${v:.1e}".replace("e-0", "\\times10^{-") + "}$")
+cf = first("laneA_N2_normalisation_confound")
+for t in ("breast_rep1", "breast_rep2", "lung", "pancreas"):
+    val(f"libDens{tag(t)}", cf, lambda r, t=t: next(x for x in r["lib_vs_density"] if x["tissue"] == t)["spearman_lib_vs_n30"], fsigned)
+def cfm(r, v, c, p, key):
+    return next(x for x in r["metrics"] if x["variant"] == v and x["category"] == c and x["passed"] == p)[key]
+val("rawSupNicheHard", cf, lambda r: cfm(r, "A5", "niche_hard", True, "frac_raw_supports"), fpct)
+val("rawSupNicheHardN", cf, lambda r: cfm(r, "A5", "niche_hard", True, "n"), fint)
+val("rawSupDecoy", cf, lambda r: cfm(r, "A5", "decoy_sender", True, "frac_raw_supports"), fpct)
+val("rawSupTrue", cf, lambda r: cfm(r, "A0", "true", True, "frac_raw_supports"), fpct)
+val("rawSupNicheAzero", cf, lambda r: cfm(r, "A0", "niche", True, "frac_raw_supports"), fpct)
+val("rhoRawTrue", cf, lambda r: cfm(r, "A0", "true", True, "rho_raw_med"), f2_)
+val("rhoGateTrue", cf, lambda r: cfm(r, "A0", "true", True, "rho_gate_med"), f2_)
+val("rhoScaleAfourPass", cf, lambda r: cfm(r, "A4", "true", True, "rho_scale_med"), f2_)
+val("rhoScaleAfourFail", cf, lambda r: cfm(r, "A4", "true", False, "rho_scale_med"), f2_)
+val("nAfourTruePass", cf, lambda r: cfm(r, "A4", "true", True, "n"), fint)
+ab = first("laneA_dev_ablation_failure_map")
+def abm(r, v, a, key):
+    return next(x for x in r["metrics"] if x["variant"] == v and x["ablation"] == a)[key]
+for a in ("full", "no_tiles", "no_split", "no_perm", "no_min_evidence"):
+    val(f"ablAfive{tag(a)}", ab, lambda r, a=a: abm(r, "A5", a, "K10_phantom_after"), f3)
+    val(f"ablNicheHard{tag(a)}", ab, lambda r, a=a: abm(r, "A5", a, "pass_niche_hard"), f2_)
+val("ablAfourRetFull", ab, lambda r: abm(r, "A4", "full", "K10_retention"), f3)
+val("ablAfourRetNoPerm", ab, lambda r: abm(r, "A4", "no_perm", "K10_retention"), f3)
+rb = first("laneA_N2_rebuild_check")
+val("rebuildFiles", rb, lambda r: r["claim_files"]["rebuild"], fint)
+val("rebuildRows", rb, lambda r: r["claim_rows"]["rebuild"], fint)
+val("rebuildMismatch", rb, lambda r: sum(r["decision_mismatches"].values()), fint)
+au = first("laneL_audit_rerun_laneA_10pct")
+val("auditCells", au, lambda r: r["n_cells"], fint); val("auditFlagged", au, lambda r: r["n_flagged"], fint)
+
+# H5: dose-response [laneB_N2_H5_<list>_e<level>_K10_pooled]
+LV = {"1": "One", "0.5": "Half", "0.25": "Quarter", "0.125": "Eighth"}
+for lt in ("default", "A5m", "A5"):
+    for e, nm in LV.items():
+        r = first(f"laneB_N2_H5_{lt}_e{e}_K10_pooled"); pre = f"hfive{tag(lt)}{nm}"
+        num(pre + "PR", r, ["metrics", "phantom_rate"], nd=3); ci3(pre + "PRci", r, "phantom_rate")
+        num(pre + "PRafter", r, ["metrics", "phantom_rate_after"], nd=3); ci3(pre + "PRafterci", r, "phantom_rate_after")
+        num(pre + "Ret", r, ["metrics", "retention"], nd=3); ci3(pre + "Retci", r, "retention")
+        num(pre + "Npass", r, ["metrics", "n_pass"]); num(pre + "Ntrue", r, ["metrics", "n_true"])
+h5 = first("laneB_N2_H5_verdict")
+num("hfiveVerdict", h5, ["metrics", "verdict"]); val("hfiveMedRho", h5, lambda r: r["metrics"]["median_unit_rho"], fsigned)
+val("hfiveMaxRho", h5, lambda r: r["metrics"]["max_unit_rho"], fsigned); num("hfiveNunits", h5, ["metrics", "n_units"])
+val("hfiveNunitsLe", h5, lambda r: r["metrics"]["frac_units_rho_le_m080"] * r["metrics"]["n_units"], fint)
+nb = first("laneB_N2_negative_pass_rate_by_level")
+for e, nm in LV.items():
+    for k, f in (("neg_pass_rate", f3), ("prevalence_true", f3), ("true_passed", fint), ("neg_passed", fint), ("n_items", fint)):
+        val(f"base{nm}{tag(k)}", nb, lambda r, e=e, k=k: row(r, list_type="default", effect=float(e))[k], f)
+fp5 = first("laneB_N2_false_pass_composition")
+for k in ("other", "random", "niche"):
+    val(f"hfiveFalseEighth{tag(k)}", fp5, lambda r, k=k: row(r, list_type="default", effect=0.125)[k], fint)
+ss5 = first("laneB_N2_secondary_summary")
+for t in ("breast_rep1", "breast_rep2", "lung", "pancreas"):
+    val(f"hfiveEighthPRafter{tag(t)}", ss5, lambda r, t=t: row(r, list_type="default", effect=0.125, K=10, tissue=t)["phantom_rate_after"], f3)
+    val(f"hfiveEighthNpass{tag(t)}", ss5, lambda r, t=t: row(r, list_type="default", effect=0.125, K=10, tissue=t)["n_pass"], fint)
+cs = first("laneB_N2_A5_e1_consistency_with_laneA")
+val("consRows", cs, lambda r: r["rows_matched"], fint)
+val("consMismatch", cs, lambda r: r["passed_mismatches"] + r["label_mismatches"], fint)
+
 os.makedirs("paper", exist_ok=True)
 open("paper/numbers.tex", "w").write("\n".join(out) + "\n")
 json.dump(used, open("paper/numbers_provenance.json", "w"), indent=1, default=float)
