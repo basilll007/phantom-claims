@@ -193,3 +193,31 @@ def test_determinism(tis, base):
     assert (a.added != b.added).nnz == 0 and a.truth == b.truth
     c = make_variant(tis, base, "A2b", 7)
     assert (a.added != c.added).nnz > 0
+
+
+def test_variant_codes_stable():
+    """Lane A results depend on these RNG codes; appending variants must not renumber them."""
+    from bench.variants import VCODE
+    assert [VCODE[k] for k in ["A0", "A1", "A2a", "A2b", "A3", "A4", "A5"]] == [1, 2, 3, 4, 5, 6, 7]
+
+
+def test_a5m_matched_true_with_hard_negatives(tis, base10):
+    v = make_variant(tis, base10, "A5m", 5)
+    mech = [p["mechanism"] for p in v.truth if p["category"] == "true"]
+    assert mech == ["exp30"] * 10
+    assert sum(1 for p in v.truth if p.get("decoy_sender")) == DECOY["n_decoy"]
+    assert all(p.get("niche_hard") for p in v.truth if p["category"] == "niche")
+    for p in [q for q in v.truth if q["category"] == "true"]:
+        assert len(p["responders"]) == 2
+
+
+def test_effect_scaling_reaches_variants(tis):
+    """Effect-size levels scale the A5-style hard negatives too (lane B): weaker base -> weaker decoy ligand."""
+    import numpy as np
+    b1 = generate(tis, 5, CFG10); b8 = generate(tis, 5, dict(CFG10, effect=0.125))
+    v1 = make_variant(tis, b1, "A5m", 5); v8 = make_variant(tis, b8, "A5m", 5)
+    d1 = [p for p in v1.truth if p.get("decoy_sender")]
+    m1 = np.mean([colv(v1, p["ligand"])[tis.types == p["decoy_sender"]].mean() for p in d1])
+    d8 = [p for p in v8.truth if p.get("decoy_sender")]
+    m8 = np.mean([colv(v8, p["ligand"])[tis.types == p["decoy_sender"]].mean() for p in d8])
+    assert m8 < 0.5 * m1
