@@ -1,0 +1,4 @@
+variant,n_true_failed,perm_null_not_rejected,split_inconsistent,effect_below_min
+A3,4,2,4,0.0
+A4,12,12,12,12.0
+A5,4,4,4,4.0

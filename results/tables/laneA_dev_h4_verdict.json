@@ -1,0 +1,68 @@
+{
+ "verdict": {
+  "verdict": "INCONCLUSIVE",
+  "n_units_met": 3,
+  "n_units_retention_below_050": 1,
+  "n_units_phantom_above_015": 1,
+  "units": {
+   "A1": {
+    "variants": [
+     "A1"
+    ],
+    "retention": 1.0,
+    "phantom_rate_after": 0.0,
+    "met": true
+   },
+   "A2": {
+    "variants": [
+     "A2a",
+     "A2b"
+    ],
+    "retention": 1.0,
+    "phantom_rate_after": 0.0,
+    "met": true
+   },
+   "A3": {
+    "variants": [
+     "A3"
+    ],
+    "retention": 0.7142857142857143,
+    "phantom_rate_after": 0.0,
+    "met": true
+   },
+   "A4": {
+    "variants": [
+     "A4"
+    ],
+    "retention": 0.14285714285714285,
+    "phantom_rate_after": 0.0,
+    "met": false
+   },
+   "A5": {
+    "variants": [
+     "A5"
+    ],
+    "retention": 0.6,
+    "phantom_rate_after": 0.4,
+    "met": false
+   }
+  },
+  "thresholds": {
+   "ret_min": 0.6,
+   "pr_max": 0.1,
+   "n_needed": 4,
+   "fals_ret": 0.5,
+   "fals_pr": 0.15
+  }
+ },
+ "complete": false,
+ "design": {
+  "A0": 1,
+  "A1": 1,
+  "A2a": 1,
+  "A2b": 1,
+  "A3": 1,
+  "A4": 1,
+  "A5": 1
+ }
+}

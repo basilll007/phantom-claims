@@ -1,0 +1,67 @@
+{
+ "claim_files": {
+  "reference": 280,
+  "rebuild": 280
+ },
+ "claim_rows": {
+  "reference": 31000,
+  "rebuild": 31000,
+  "same_lists_and_order": true
+ },
+ "decision_mismatches": {
+  "label": 0,
+  "neg_type": 0,
+  "category": 0,
+  "mechanism": 0,
+  "passed": 0
+ },
+ "continuous_max_abs_diff": {
+  "rho": 2.220446049250313e-16,
+  "p_perm": 0.0,
+  "q_bh": 0.0,
+  "n_expr_pairs": 0.0,
+  "effect_d": 0.0
+ },
+ "summary": {
+  "text_cells_differing": 0,
+  "max_abs_numeric_diff": 0.0
+ },
+ "list_composition": {
+  "text_cells_differing": 0,
+  "max_abs_numeric_diff": 0.0
+ },
+ "planted_pass_rates": {
+  "text_cells_differing": 0,
+  "max_abs_numeric_diff": 0.0
+ },
+ "true_fail_reasons": {
+  "text_cells_differing": 0,
+  "max_abs_numeric_diff": 0.0
+ },
+ "decoy_coloc": {
+  "text_cells_differing": 0,
+  "max_abs_numeric_diff": 5.551115123125783e-17
+ },
+ "confound": {
+  "text_cells_differing": 0,
+  "max_abs_numeric_diff": 3.3306690738754696e-16
+ },
+ "confound_summary": {
+  "text_cells_differing": 0,
+  "max_abs_numeric_diff": 5.551115123125783e-17
+ },
+ "lib_density": {
+  "text_cells_differing": 0,
+  "max_abs_numeric_diff": 0.0
+ },
+ "verdict": {
+  "reference": "INCONCLUSIVE",
+  "rebuild": "INCONCLUSIVE",
+  "same": true
+ },
+ "figure_sha256": {
+  "reference": "3ed6c8e4fd5d97c4",
+  "rebuild": "3ed6c8e4fd5d97c4"
+ },
+ "RESULT": "MATCH"
+}
