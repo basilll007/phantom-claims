@@ -23,8 +23,7 @@ from gate.gate import GateConfig
 SEEDS = {"dev": [0, 1, 2, 3, 4], "N2": [200, 201, 202, 203, 204, 205, 206, 207, 208, 209]}
 FORBIDDEN = {100, 101, 102, 103, 104}                       # Phase-1 test1 seeds: never used here
 FROZEN = dict(r=30.0, tile=250.0, n_perm=1000, alpha_half=0.10, n_min=50, rho_min=0.02, q=0.05)
-DATA = os.environ.get("PC_DATA", "data")
-OUT = "results/claims/laneA"
+from scripts.laneA_paths import DATA, BENCH, CLAIMS as OUT, TABLES
 KS = (5, 10, 20)
 GIT = __import__("subprocess").run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True).stdout.strip()
 
@@ -39,7 +38,7 @@ def frozen_cfg():
 
 def load_base(t, seed):
     try:
-        return get_or_make(t, seed, None, root=f"{DATA}/bench")
+        return get_or_make(t, seed, None, root=BENCH)
     except Exception as e:                                   # concurrent writer from another lane: rebuild in memory
         print(f"[warn] base cache read failed ({e!r}); regenerating in memory", flush=True)
         return generate(t, seed, None)
@@ -107,7 +106,7 @@ def run(tissue, seed_set, seeds=None, variants=None):
             df.insert(0, "variant", v); df.insert(0, "seed", s); df.insert(0, "tissue", tissue)
             df.insert(0, "seed_set", seed_set)
             df["git_hash"] = GIT
-            save_truth(inst, f"{DATA}/bench/laneA/{seed_set}")
+            save_truth(inst, f"{BENCH}/laneA/{seed_set}")
             tmp = f"{OUT}/{seed_set}_{tissue}_s{s}_{v}.csv.tmp"
             df.to_csv(tmp, index=False)
             os.replace(tmp, f"{OUT}/{seed_set}_{tissue}_s{s}_{v}.csv")
@@ -149,6 +148,6 @@ if __name__ == "__main__":
                  ("c3_s600_b3_x1", dict(sigma=600.0, blobs=3, boost=1.0, cap=20.0)),
                  ("c4_s600_b3_x2", dict(sigma=600.0, blobs=3, boost=2.0, cap=20.0))]
         df = pilot(sys.argv[2], [int(x) for x in sys.argv[3].split(",")], PILOT)
-        os.makedirs("results/tables", exist_ok=True)
-        df.to_csv("results/tables/laneA_pilot_dev_composition.csv", index=False)
+        os.makedirs(TABLES, exist_ok=True)
+        df.to_csv(f"{TABLES}/laneA_pilot_dev_composition.csv", index=False)
         print(df.groupby(["config", "K"]).mean(numeric_only=True).round(2).to_string())

@@ -24,7 +24,7 @@ from bench.pipeline import make_gate
 from gate.gate import GateConfig
 from scipy.stats import spearmanr
 
-DATA = os.environ.get("PC_DATA", "data")
+from scripts.laneA_paths import DATA, BENCH, CLAIMS, TABLES
 
 
 def diag(g, t, claim, targets):
@@ -43,7 +43,7 @@ def diag(g, t, claim, targets):
 
 
 def main(seed_set, tissues=None):
-    fs = sorted(glob.glob(f"results/claims/laneA/{seed_set}_*.csv"))
+    fs = sorted(glob.glob(f"{CLAIMS}/{seed_set}_*.csv"))
     d = pd.concat([pd.read_csv(f) for f in fs], ignore_index=True)
     d["passed"] = d.passed.astype(str).str.lower().eq("true")
     pl = d[d.list == "planted"]
@@ -59,7 +59,7 @@ def main(seed_set, tissues=None):
         dens.append(dict(tissue=tissue, spearman_lib_vs_n30=float(rs.statistic), n_cells_sampled=int(len(cnt))))
         W = {}
         for s, gs in gt.groupby("seed"):
-            base = get_or_make(t, int(s), None, root=f"{DATA}/bench")
+            base = get_or_make(t, int(s), None, root=BENCH)
             for v, gv in gs.groupby("variant"):
                 inst = make_variant(t, base, v, int(s))
                 g = make_gate(t, inst, GateConfig()); g._W = W
@@ -70,15 +70,15 @@ def main(seed_set, tissues=None):
                                      **c, passed=bool(r.passed), **diag(g, t, c, tg[(r.ligand, r.receptor)])))
             print(tissue, s, len(rows), flush=True)
     out = pd.DataFrame(rows)
-    out.to_csv(f"results/tables/laneA_{seed_set}_confound.csv", index=False)
+    out.to_csv(f"{TABLES}/laneA_{seed_set}_confound.csv", index=False)
     dens = pd.DataFrame(dens)
-    dens.to_csv(f"results/tables/laneA_{seed_set}_lib_density.csv", index=False)
+    dens.to_csv(f"{TABLES}/laneA_{seed_set}_lib_density.csv", index=False)
     out["raw_supports"] = (out.p_raw < 0.05) & (out.rho_raw >= 0.02)
     summ = out.groupby(["variant", "category", "passed"]).agg(
         n=("rho_gate", "size"), rho_gate_med=("rho_gate", "median"), rho_raw_med=("rho_raw", "median"),
         rho_scale_med=("rho_scale", "median"), frac_raw_supports=("raw_supports", "mean")).reset_index()
     print(dens.to_string(index=False)); print(summ.round(3).to_string(index=False))
-    summ.to_csv(f"results/tables/laneA_{seed_set}_confound_summary.csv", index=False)
+    summ.to_csv(f"{TABLES}/laneA_{seed_set}_confound_summary.csv", index=False)
     return out, summ, dens
 
 

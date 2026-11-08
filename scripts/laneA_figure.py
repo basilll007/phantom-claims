@@ -9,6 +9,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
+from scripts.laneA_paths import TABLES, FIGS
 
 SURF, INK, INK2, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e4e3df"
 GATE, EXPR = "#2a78d6", "#eb6834"
@@ -18,7 +19,7 @@ NAMES = {"A0": "A0\nref", "A1": "A1\nring", "A2a": "A2a\nr15", "A2b": "A2b\nr60"
 
 
 def main(seed_set):
-    s = pd.read_csv(f"results/tables/laneA_{seed_set}_summary.csv")
+    s = pd.read_csv(f"{TABLES}/laneA_{seed_set}_summary.csv")
     s = s[(s.K == 10) & (s.tissue == "ALL") & (s.method == "cpdb+prod")].set_index("variant").loc[ORDER]
     x = range(len(ORDER))
     plt.rcParams.update({"font.size": 8, "axes.edgecolor": INK2, "axes.labelcolor": INK, "xtick.color": INK2,
@@ -46,7 +47,7 @@ def main(seed_set):
     fig.suptitle(f"H4 ({seed_set} seeds x 4 tissues, K=10, 2 tools pooled, 95% CI; shaded A0 = gate-matched reference)",
                  fontsize=7, color=INK2)
     fig.tight_layout()
-    out = f"figures/fig_laneA_h4_{seed_set}.png"
+    out = f"{FIGS}/fig_laneA_h4_{seed_set}.png"
     fig.savefig(out, dpi=300, facecolor=SURF)
     print(out)
 

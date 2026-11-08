@@ -1,12 +1,14 @@
 # Lane A report: H4 misspecification robustness
-Agent `claude-opus-5.5-laneA`, branch `lane-A`. Updated 2026-11-08 00:34 CST. Status: **N2 confirmatory run complete and
+Agent `claude-opus-5.5-laneA`, branch `lane-A`. Updated 2026-11-08 11:32 CST. Status: **N2 confirmatory run complete and
 logged.** Every number below comes from `results/results.jsonl` (record ids are given in brackets).
 
 ## 1. Verdict
-**H4: INCONCLUSIVE (confirmatory, N2).** 3 of 5 variants meet retention >= 0.60 and post-gate phantom rate <= 0.10:
+**H4: NOT MET (confirmatory, N2).** 3 of 5 variants meet retention >= 0.60 and post-gate phantom rate <= 0.10:
 A1 ring, A2 (both radii) and A3 paracrine. 4 were required. A4 misses on retention and A5 misses on phantom rate.
-The FALSIFIED rule needs 2 variants on the same criterion, and here only 1 variant misses on each, so H4 is not falsified.
-[`laneA_N2_H4_verdict`]
+The robustness claim H4 makes is therefore not supported and must be reported as a miss.
+Formal Amendment-4 category, as logged: INCONCLUSIVE. That means "not SUPPORTED, and not FALSIFIED": the FALSIFIED rule
+needs 2 variants failing on the same criterion, and here exactly 1 fails on each. The category is a bookkeeping
+detail; it does not soften the miss. [`laneA_N2_H4_verdict`]
 
 Design: K=10 lists of the two expression-only tools (cpdb, prod), pooled; 4 tissues (breast Rep1, Rep2, pancreas, lung)
 x N2 seeds 200-209; frozen gate; 95% hierarchical bootstrap CI. [`laneA_N2_H4_<v>_K10_pooled`]

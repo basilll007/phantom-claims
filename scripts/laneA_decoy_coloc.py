@@ -12,12 +12,12 @@ import numpy as np, pandas as pd
 from bench.tissue import load_tissue
 from bench.variants import exposure, MECHS
 
-DATA = os.environ.get("PC_DATA", "data")
+from scripts.laneA_paths import DATA, BENCH, CLAIMS, TABLES
 
 
 def main(seed_set):
     rows = []
-    fs = sorted(glob.glob(f"results/claims/laneA/{seed_set}_*_A5.csv"))
+    fs = sorted(glob.glob(f"{CLAIMS}/{seed_set}_*_A5.csv"))
     by_tissue = {}
     for f in fs:
         d = pd.read_csv(f)
@@ -26,7 +26,7 @@ def main(seed_set):
         t = load_tissue(tissue, f"{DATA}/processed/{tissue}.h5ad")
         for d in ds:
             seed = int(d.seed.iloc[0])
-            truth = json.load(open(glob.glob(f"{DATA}/bench/laneA/{seed_set}/{tissue}_s{seed}_A5_*_truth.json")[0]))
+            truth = json.load(open(glob.glob(f"{BENCH}/laneA/{seed_set}/{tissue}_s{seed}_A5_*_truth.json")[0]))
             pl = d[(d.list == "planted") & (d.category == "decoy_sender")]
             for p in [q for q in truth["truth"] if q.get("decoy_sender")]:
                 iA = np.flatnonzero(t.types == p["sender"]); iD = np.flatnonzero(t.types == p["decoy_sender"])
@@ -39,7 +39,7 @@ def main(seed_set):
                                  coloc=coloc, frac_B_exposed_decoy=float((ED > 0).mean()),
                                  passed=bool(r.passed), rho=r.rho, reasons=r.reasons))
     out = pd.DataFrame(rows)
-    out.to_csv(f"results/tables/laneA_{seed_set}_decoy_coloc.csv", index=False)
+    out.to_csv(f"{TABLES}/laneA_{seed_set}_decoy_coloc.csv", index=False)
     if len(out):
         out["coloc_bin"] = pd.cut(out.coloc, [-1, 0.1, 0.3, 0.5, 1.0])
         print(out.groupby("coloc_bin", observed=True).passed.agg(["mean", "size"]))

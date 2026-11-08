@@ -10,6 +10,7 @@ only when the design is complete (4 tissues x 10 seeds x 7 variants for N2). Con
 import glob, json, os, sys
 import numpy as np, pandas as pd
 from bench.metrics import hier_bootstrap, list_metrics
+from scripts.laneA_paths import CLAIMS, TABLES
 
 TISSUES = ["breast_rep1", "breast_rep2", "pancreas", "lung"]
 VARS = ["A0", "A1", "A2a", "A2b", "A3", "A4", "A5"]
@@ -21,7 +22,7 @@ NSEEDS = {"N2": 10, "dev": 5}
 
 
 def load(seed_set):
-    fs = sorted(glob.glob(f"results/claims/laneA/{seed_set}_*.csv"))
+    fs = sorted(glob.glob(f"{CLAIMS}/{seed_set}_*.csv"))
     if not fs:
         sys.exit(f"no claim files for {seed_set}")
     d = pd.concat([pd.read_csv(f, keep_default_na=False, na_values=[""]) for f in fs], ignore_index=True)
@@ -78,7 +79,7 @@ def verdict(prim):
 
 def main(seed_set, do_log):
     d = load(seed_set)
-    os.makedirs("results/tables", exist_ok=True)
+    os.makedirs(TABLES, exist_ok=True)
     have = d.groupby("variant")[["tissue", "seed"]].apply(lambda x: len(x.drop_duplicates())).to_dict()
     complete = all(have.get(v, 0) == len(TISSUES) * NSEEDS[seed_set] for v in VARS) and \
         set(d.tissue) == set(TISSUES)
@@ -105,7 +106,7 @@ def main(seed_set, do_log):
                                  **{f"{k}_lo": cim[k][0] for k in KEYS}, **{f"{k}_hi": cim[k][1] for k in KEYS},
                                  n_claims=mm["n"], n_true=mm["n_true"], n_pass=mm["n_pass"]))
     summ = pd.DataFrame(rows)
-    summ.to_csv(f"results/tables/laneA_{seed_set}_summary.csv", index=False)
+    summ.to_csv(f"{TABLES}/laneA_{seed_set}_summary.csv", index=False)
     ver = verdict(prim)
     print(json.dumps({k: v for k, v in ver.items() if k != "units"}, indent=1))
     for u, x in ver["units"].items():
@@ -118,7 +119,7 @@ def main(seed_set, do_log):
         vc = g.apply(lambda r: "true" if r.label == 1 else r.neg_type, axis=1).value_counts()
         comp.append(dict(variant=v, K=K, n_lists=g.groupby(["tissue", "seed", "method"]).ngroups, **vc.to_dict()))
     comp = pd.DataFrame(comp).fillna(0)
-    comp.to_csv(f"results/tables/laneA_{seed_set}_list_composition.csv", index=False)
+    comp.to_csv(f"{TABLES}/laneA_{seed_set}_list_composition.csv", index=False)
     print(comp.to_string(index=False))
 
     # planted-claim pass rates by category, and by mechanism for TRUE pairs
@@ -135,7 +136,7 @@ def main(seed_set, do_log):
             r, ci, n = rate_ci(gb)
             prow.append(dict(variant=v, category=cat, mechanism=mech, pass_rate=r, lo=ci[0], hi=ci[1], n=n))
     prow = pd.DataFrame(prow)
-    prow.to_csv(f"results/tables/laneA_{seed_set}_planted_pass_rates.csv", index=False)
+    prow.to_csv(f"{TABLES}/laneA_{seed_set}_planted_pass_rates.csv", index=False)
     print(prow.round(3).to_string(index=False))
 
     # why TRUE claims fail (K=10 lists, pooled tools) — first failing reason class
@@ -150,9 +151,9 @@ def main(seed_set, do_log):
                     cnt[c] = cnt.get(c, 0) + 1
         rs.append(dict(variant=v, n_true_failed=len(g), **cnt))
     rs = pd.DataFrame(rs).fillna(0)
-    rs.to_csv(f"results/tables/laneA_{seed_set}_true_fail_reasons.csv", index=False)
+    rs.to_csv(f"{TABLES}/laneA_{seed_set}_true_fail_reasons.csv", index=False)
     print(rs.to_string(index=False))
-    json.dump(dict(verdict=ver, complete=complete, design=have), open(f"results/tables/laneA_{seed_set}_h4_verdict.json", "w"),
+    json.dump(dict(verdict=ver, complete=complete, design=have), open(f"{TABLES}/laneA_{seed_set}_h4_verdict.json", "w"),
               indent=1, default=float)
 
     if do_log:
