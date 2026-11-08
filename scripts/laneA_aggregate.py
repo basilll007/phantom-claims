@@ -72,8 +72,8 @@ def verdict(prim):
         v = "FALSIFIED"
     else:
         v = "INCONCLUSIVE"
-    return dict(verdict=v, n_units_met=n_met, n_units_retention_below_0.5=n_low_ret,
-                n_units_phantom_above_0.15=n_high_pr, units=units, thresholds=THR)
+    return dict(verdict=v, n_units_met=n_met, n_units_retention_below_050=n_low_ret,
+                n_units_phantom_above_015=n_high_pr, units=units, thresholds=THR)
 
 
 def main(seed_set, do_log):

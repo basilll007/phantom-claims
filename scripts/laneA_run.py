@@ -26,6 +26,7 @@ FROZEN = dict(r=30.0, tile=250.0, n_perm=1000, alpha_half=0.10, n_min=50, rho_mi
 DATA = os.environ.get("PC_DATA", "data")
 OUT = "results/claims/laneA"
 KS = (5, 10, 20)
+GIT = __import__("subprocess").run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True).stdout.strip()
 
 
 def frozen_cfg():
@@ -105,6 +106,7 @@ def run(tissue, seed_set, seeds=None, variants=None):
             df = eval_variant(t, inst, lv, cfg, shared_W)
             df.insert(0, "variant", v); df.insert(0, "seed", s); df.insert(0, "tissue", tissue)
             df.insert(0, "seed_set", seed_set)
+            df["git_hash"] = GIT
             save_truth(inst, f"{DATA}/bench/laneA/{seed_set}")
             tmp = f"{OUT}/{seed_set}_{tissue}_s{s}_{v}.csv.tmp"
             df.to_csv(tmp, index=False)
