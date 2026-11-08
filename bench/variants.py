@@ -44,6 +44,10 @@ VARIANTS = {
     "A3": dict(mech="para80"),
     "A4": dict(mech="none"),
     "A5": dict(mech="mix", decoy=DECOY, niche_hard=NICHE_HARD),
+    # Lane B (H5 secondary, exploratory): gate-matched TRUE response + the A5 hard negatives, so that the dose-response of
+    # the hard-negative false-pass share is not confounded with mechanism misspecification. Appended last: VCODEs of
+    # A0-A5 (and therefore their outputs) are unchanged.
+    "A5m": dict(mech="exp30", decoy=DECOY, niche_hard=NICHE_HARD),
 }
 VCODE = {k: i + 1 for i, k in enumerate(VARIANTS)}
 
