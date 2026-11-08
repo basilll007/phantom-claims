@@ -1,0 +1,37 @@
+{
+ "verdict": {
+  "verdict": "FALSIFIED",
+  "H5a_met": false,
+  "H5b_met": false,
+  "median_unit_rho": -0.7999999999999999,
+  "n_units": 1,
+  "frac_units_rho_le_m080": 0.0,
+  "min_unit_rho": -0.7999999999999999,
+  "max_unit_rho": -0.7999999999999999,
+  "post_gate_phantom_rate_by_level": {
+   "1": 0.0,
+   "0.5": 0.0,
+   "0.25": 0.2857142857142857,
+   "0.125": 0.0
+  },
+  "n_pass_by_level": {
+   "1": 17,
+   "0.5": 16,
+   "0.25": 7,
+   "0.125": 2
+  },
+  "retention_by_level": {
+   "1": 1.0,
+   "0.5": 0.8888888888888888,
+   "0.25": 1.0,
+   "0.125": 1.0
+  },
+  "thresholds": {
+   "rho_max": -0.8,
+   "pr_max": 0.15,
+   "fals_rho": -0.5,
+   "fals_pr": 0.2
+  }
+ },
+ "complete": false
+}
