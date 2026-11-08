@@ -1,6 +1,6 @@
 # Lane A pre-specification: H4 misspecification robustness (fixed before any N2 data)
 
-- Written 2026-11-08 ~00:30 CST by lane A (agent `claude-opus-5.5-laneA`), branch `lane-A`, parent commit 216b498
+- Written 2026-11-08 (first committed in 95cf788 at 00:08:52 CST; an earlier draft line said '~00:30', which was wrong) by lane A (agent `claude-opus-5.5-laneA`), branch `lane-A`, parent commit 216b498
   (Amendment 4 commit). This file is committed **before** any N2 instance is generated or any gate is run on a variant.
 - Governs: PREREG Amendment 4, H4. Here I only make the amendment's variant descriptions concrete; thresholds and verdict
   rules are copied from the amendment unchanged. `STATE.md` has `THRESHOLDS: default`.
