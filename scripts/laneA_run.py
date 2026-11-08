@@ -19,6 +19,7 @@ from bench.generate import get_or_make, generate
 from bench.pipeline import tool_lists, make_gate, evaluate_records, decide_list, claim_key
 from bench.variants import VARIANTS, make_variant, label_claim_v, planted_claims, save_truth
 from gate.gate import GateConfig
+from gate.status import status_of, readout_of
 
 SEEDS = {"dev": [0, 1, 2, 3, 4], "N2": [200, 201, 202, 203, 204, 205, 206, 207, 208, 209]}
 FORBIDDEN = {100, 101, 102, 103, 104}                       # Phase-1 test1 seeds: never used here
@@ -66,7 +67,8 @@ def eval_variant(t, inst, lists, cfg, shared_W):
                              mechanism=mech.get(c["ligand"], "") if (lab or (cats and cats[rank] == "decoy_sender")) else "",
                              passed=bool(d["pass_"]), q_bh=d.get("q_bh"), rho=d.get("rho_within_tile"),
                              p_perm=d.get("p_perm"), n_expr_pairs=d.get("n_expressing_pairs_within_r"),
-                             effect_d=d.get("effect_d"), reasons=";".join(d.get("reasons", []))))
+                             effect_d=d.get("effect_d"), reasons=";".join(d.get("reasons", [])),
+                             status=status_of(d), readout=readout_of(d)))   # lane R: output-only, after the decision
 
     for (m, K), cl in lists.items():
         add_rows(f"{m}_K{K}", m, K, cl)

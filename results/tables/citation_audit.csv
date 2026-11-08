@@ -1,0 +1,23 @@
+key,id,ok,match_first_author,match_page,match_title,match_volume,match_year,registry_first_author,registry_page,registry_title,registry_venue,registry_volume,registry_years
+janesick2023,10.1038/s41467-023-43458-x,True,True,True,True,True,True,Janesick,8353,"High resolution mapping of the tumor microenvironment using integrated single-cell, spatial and in situ analysis",Nature Communications,14,2023
+efremova2020cellphonedb,10.1038/s41596-020-0292-x,True,True,True,True,True,True,Efremova,1484-1506,CellPhoneDB: inferring cell–cell communication from combined expression of multi-subunit ligand–receptor complexes,Nature Protocols,15,2020
+jin2021cellchat,10.1038/s41467-021-21246-9,True,True,True,True,True,True,Jin,1088,Inference and analysis of cell-cell communication using CellChat,Nature Communications,12,2021
+dimitrov2022liana,10.1038/s41467-022-30755-0,True,True,True,True,True,True,Dimitrov,3224,Comparison of methods and resources for cell-cell communication inference from single-cell RNA-Seq data,Nature Communications,13,2022
+turei2021omnipath,10.15252/msb.20209923,True,True,True,True,True,True,Türei,MSB20209923,Integrated intra‐ and intercellular signaling knowledge for multicellular omics analysis,Molecular Systems Biology,17,2021
+benjamini1995,10.1111/j.2517-6161.1995.tb02031.x,True,True,True,True,True,True,Benjamini,289-300,Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing,Journal of the Royal Statistical Society Series B: Statistical Methodology,57,1995;2018
+browaeys2020nichenet,10.1038/s41592-019-0667-5,True,True,True,True,True,True,Browaeys,159-162,NicheNet: modeling intercellular communication by linking ligands to target genes,Nature Methods,17,2019;2020
+cang2023commot,10.1038/s41592-022-01728-4,True,True,True,True,True,True,Cang,218-228,Screening cell–cell communication in spatial transcriptomics via collective optimal transport,Nature Methods,20,2023
+armingol2021,10.1038/s41576-020-00292-x,True,True,True,True,True,True,Armingol,71-88,Deciphering cell–cell interactions and communication from gene expression,Nature Reviews Genetics,22,2020;2021
+palla2022squidpy,10.1038/s41592-021-01358-2,True,True,True,True,True,True,Palla,171-178,Squidpy: a scalable framework for spatial omics analysis,Nature Methods,19,2022
+liu2022evaluation,10.1186/s13059-022-02783-y,True,True,True,True,True,True,Liu,218,Evaluation of cell-cell interaction methods by integrating single-cell RNA sequencing data with spatial information,Genome Biology,23,2022
+bhuva2024,10.1186/s13059-024-03241-7,True,True,True,True,True,True,Bhuva,99,Library size confounds biology in spatial transcriptomics data,Genome Biology,25,2024
+atta2024,10.1186/s13059-024-03303-w,True,True,True,True,True,True,Atta,153,Gene count normalization in single-cell imaging-based spatially resolved transcriptomics,Genome Biology,25,2024
+oyleryaniv2017,10.1016/j.immuni.2017.03.011,True,True,True,True,True,True,Oyler-Yaniv,609-620,A Tunable Diffusion-Consumption Mechanism of Cytokine Propagation Enables Plasticity in Cell-to-Cell Communication in the Immune System,Immunity,46,2017
+ioannidis2005,10.1371/journal.pmed.0020124,True,True,True,True,True,True,Ioannidis,e124,Why Most Published Research Findings Are False,PLoS Medicine,2,2005
+nosek2018,10.1073/pnas.1708274114,True,True,True,True,True,True,Nosek,2600-2606,The preregistration revolution,Proceedings of the National Academy of Sciences,115,2018
+huang2025biomni,10.1101/2025.05.30.656746,True,True,,True,,True,Huang,,Biomni: A General-Purpose Biomedical AI Agent,,,2025
+ha2018worldmodels,arXiv:1803.10122,True,True,,True,,True,Ha,,World Models,arXiv,,2018
+yang2025mwm,arXiv:2506.02327,True,True,,True,,True,Yang,,Medical World Model: Generative Simulation of Tumor Evolution for Treatment Planning,arXiv,,2025
+huang2023selfcorrect,arXiv:2310.01798,True,True,,True,,True,Huang,,Large Language Models Cannot Self-Correct Reasoning Yet,arXiv,,2023
+roohani2024biodiscoveryagent,arXiv:2405.17631,True,True,,True,,True,Roohani,,BioDiscoveryAgent: An AI Agent for Designing Genetic Perturbation Experiments,arXiv,,2024
+xiao2024cellagent,arXiv:2407.09811,True,True,,True,,True,Xiao,,CellAgent: An LLM-driven Multi-Agent Framework for Automated Single-cell Data Analysis,arXiv,,2024

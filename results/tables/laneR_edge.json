@@ -1,0 +1,15 @@
+{
+ "n_claims": 1825,
+ "n_flipped": 36,
+ "n_pass_to_fail": 25,
+ "n_fail_to_pass": 11,
+ "flipped_by_category": {
+  "decoy_sender": 3,
+  "niche": 9,
+  "niche_hard": 4,
+  "other": 1,
+  "true": 19
+ },
+ "median_frac_receivers_in_edge_tiles": 0.12780979827089337,
+ "note": "unique claims per (seed, variant, list); decisions with the frozen gate vs the same gate with receivers in border tiles removed (border tile: any of 8 neighbours empty)"
+}

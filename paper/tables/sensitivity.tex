@@ -1,0 +1,24 @@
+\begin{table*}[t]
+\centering
+\small
+\begin{tabular}{@{}lllll@{}}
+\toprule
+setting & A0--A3 retention & A5 retention & A5 phantom rate after gate & A5 hard-niche / decoy pass rate \\
+\midrule
+frozen gate & 0.94 [0.89, 0.98] & 0.67 [0.48, 0.88] & 0.23 [0.04, 0.44] & 0.18 / 0.00 \\
+tiles 125\um & 0.81 [0.74, 0.87] & 0.67 [0.48, 0.88] & 0.20 [0.02, 0.38] & 0.16 / 0.00 \\
+tiles 500\um & 0.95 [0.91, 0.98] & 0.73 [0.55, 0.93] & 0.31 [0.10, 0.52] & 0.24 / 0.12 \\
+range 15\um & 0.78 [0.67, 0.87] & 0.53 [0.38, 0.69] & 0.24 [0.00, 0.45] & 0.12 / 0.00 \\
+range 60\um & 0.93 [0.88, 0.97] & 0.73 [0.55, 0.93] & 0.22 [0.00, 0.43] & 0.20 / 0.08 \\
+min.\ contacts 25 & 0.94 [0.89, 0.98] & 0.67 [0.48, 0.88] & 0.23 [0.04, 0.44] & 0.18 / 0.00 \\
+min.\ contacts 100 & 0.94 [0.89, 0.98] & 0.67 [0.48, 0.88] & 0.23 [0.04, 0.44] & 0.18 / 0.00 \\
+checkerboard halves & 0.92 [0.86, 0.97] & 0.69 [0.50, 0.91] & 0.29 [0.07, 0.52] & 0.28 / 0.08 \\
+global null & 0.99 [0.98, 1.00] & 0.78 [0.62, 0.94] & 0.39 [0.22, 0.56] & 0.50 / 0.12 \\
+density-stratified null & 0.82 [0.75, 0.89] & 0.67 [0.48, 0.88] & 0.20 [0.02, 0.40] & 0.14 / 0.00 \\
+border tiles dropped & 0.91 [0.86, 0.96] & 0.69 [0.50, 0.91] & 0.26 [0.04, 0.47] & 0.22 / 0.04 \\
+raw-count response & 0.88 [0.81, 0.94] & 0.67 [0.48, 0.88] & 0.00 [0.00, 0.00] & 0.00 / 0.00 \\
+\bottomrule
+\end{tabular}
+\caption{Sensitivity of the frozen gate's decisions (exploratory; dev seeds 0, 1, 2, 3, 4 of breast Rep1; one setting changed at a time; $K{=}10$ lists of both expression tools; 95\% hierarchical bootstrap CIs). Hard-niche and decoy pass rates are over all planted A5 claims of that kind. Source: results record \texttt{laneR\_dev\_sensitivity}.}
+\label{tab:sens}
+\end{table*}

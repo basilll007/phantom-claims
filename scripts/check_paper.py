@@ -70,5 +70,8 @@ print(f"macros used {len(used)}, citations {len(cites)}, bib entries {len(keys)}
       f"{len(re.findall(r'includegraphics', full))}")
 if uncited:
     print("note: bib entries not cited (BibTeX drops them):", uncited)
+tv = re.findall(r"\\TODOVERIFY\{([^}]*)\}", body)
+if tv:
+    print(f"note: {len(tv)} TODO-VERIFY placeholder(s) in the text (print in bold in the PDF): {tv}")
 print("\n".join("PROBLEM: " + b for b in bad) if bad else "OK: no problems found")
 sys.exit(1 if bad else 0)
