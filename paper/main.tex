@@ -126,7 +126,8 @@ we label every other analysis exploratory.
 \paragraph{Tissues.} We use public 10x Genomics Xenium data: two serial FFPE breast cancer sections, Rep1
 (\cellsBreastRepone{} cells after quality control) and Rep2 (\cellsBreastReptwo{}), with published cell-type labels
 \cite{janesick2023}, and FFPE pancreatic (\cellsPancreas{}) and lung (\cellsLung{}) cancer sections on the 377-gene
-multi-tissue panel, which we annotated by marker scoring (Appendix).
+multi-tissue panel, which we annotated by marker scoring (Appendix). Figure~\ref{fig:tissues} shows all four sections at
+one scale, with the tiles and halves the gate works on.
 
 \paragraph{Planting claims with known truth.} We keep every cell's position, type and measured expression and add
 anonymised gene channels (\texttt{LIG\_k}, \texttt{REC\_k}, \texttt{TGT\_k\_m}) whose baseline is a real panel gene
@@ -309,7 +310,8 @@ response, and A4 has none. With mixed mechanisms and hard negatives (A5), retent
 but \hfourAfivePRafter{} \hfourAfivePRafterci{} of the passed claims were false: \hfourAfiveFalseTotal{} of
 \hfourAfiveNpass{} passes, \hfourAfiveFalseNiche{} of them hard-niche and \hfourAfiveFalseDecoy{} decoy-sender claims.
 The miss is smallest in breast Rep1, the tuning tissue, where the rate (\hfourAfivePRafterBreastRepone{}) stays under
-the threshold, and largest in lung (\hfourAfivePRafterLung{}). Three of five variants met both criteria where four were required, so \textbf{H4 is
+the threshold, and largest in lung (\hfourAfivePRafterLung{}; every tissue is shown in Figure~\ref{fig:pertissue}).
+Three of five variants met both criteria where four were required, so \textbf{H4 is
 not met}. The formal category under our rules is inconclusive rather than falsified, because falsification needs two
 variants failing the same criterion and here one fails each. We read it as a miss, not a partial success.
 
@@ -346,8 +348,8 @@ a negative pass rate of \baseEighthNegPassRate{} is enough to make \baseEighthNe
 false (Figure~\ref{fig:h5}b). This is the base-rate effect familiar from the false-discovery literature: whether a
 positive finding is true depends on the share of true relationships among those tested, not only on the test
 \cite{ioannidis2005}. The one-eighth estimate rests on \hfiveDefaultEighthNpass{} passes and varies across tissues,
-from \hfiveEighthPRafterPancreas{} in pancreas to \hfiveEighthPRafterBreastRepone{} in breast Rep1, but the mechanism
-behind it does not depend on that spread. Hard-negative lists (exploratory) show the same pattern from a worse start:
+from \hfiveEighthPRafterPancreas{} in pancreas to \hfiveEighthPRafterBreastRepone{} in breast Rep1
+(Figure~\ref{fig:pertissue}c), but the mechanism behind it does not depend on that spread. Hard-negative lists (exploratory) show the same pattern from a worse start:
 \hfiveAfivemOnePRafter{} of passes were false at full effect and \hfiveAfivemEighthPRafter{} at one eighth
 (Figure~\ref{fig:h5}c).
 
@@ -385,7 +387,8 @@ neighbourhoods. Conditioning on the exposure from the other ligand-expressing ty
 \paragraph{Normalisation and density.} The gate normalises each cell's counts by its library size. In these sections
 library size correlates with local cell density, with a sign that depends on the tissue: Spearman $\rho$ with the number
 of cells within 30\um\ was \libDensBreastRepone{} and \libDensBreastReptwo{} in the two breast sections,
-\libDensLung{} in lung and \libDensPancreas{} in pancreas. The normalisation factor can therefore co-vary with exposure.
+\libDensLung{} in lung and \libDensPancreas{} in pancreas (Figure~\ref{fig:libsize}). The normalisation factor can
+therefore co-vary with exposure.
 Only \rawSupNicheHard{} of hard-niche passes are supported by raw counts, against \rawSupTrue{} of true passes
 (Figure~\ref{fig:failure}c), and the share is low in every tissue, from \normNicheRawBreastReptwo{} in breast Rep2 to
 \normNicheRawPancreas{} in pancreas, where library size and density correlate positively. This matches reports that library size carries tissue structure \cite{bhuva2024} and that
@@ -401,6 +404,28 @@ enough (Figure~\ref{fig:failure}a). Removing the tile restriction raised the pos
 \ablAfiveFull{} to \ablAfiveNoTiles{}, removing split-half replication raised it to \ablAfiveNoSplit{}, and removing
 the permutation null raised it to \ablAfiveNoPerm{}; the minimum-evidence rule made no difference (\ablAfiveNoMinEvidence{}).
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig5_claim_fate.png}
+\caption{Where each planted claim stops (frozen gate on fresh seeds: 4 tissues, seeds 200--209, variants A0--A5;
+\fateNplanted{} planted claims, all planted claims of an instance gated as one list). This is a description of the
+committed decisions; nothing was re-run. (a) The first check each claim fails, taking the checks in the order shown;
+the gate itself applies all four and passes a claim only if none fails. Blue: passed. (b) Percentage of claims that
+fail each check; a claim can fail several.}
+\label{fig:fate}
+\end{figure*}
+
+\paragraph{Which check stops which claim.} The ablations remove a component and rerun the gate on dev seeds. The
+committed decisions on fresh seeds tell the same story without a rerun (Figure~\ref{fig:fate}), and they show that each
+kind of false claim meets a different check. Phantoms fall at the first one: \fatePhantomFirstContacts{} have too few
+contacts between ligand- and receptor-expressing cells, because their cells never meet. Most random pairs fall there
+too (\fateRandomFirstContacts{}). Niche claims are the hard case, and they are spread over all four checks. For
+\fateNicheOnlyHalves{} of them split-half replication is the only check they fail, so without it they would pass.
+That protection has a price: replication is also the only check failed by \fateTrueAoneathreeOnlyHalves{} of the true
+claims planted with the wrong kernel (A1--A3). True claims with no responding target (A4) stop mostly at the effect
+threshold (\fateTrueAfourFirstEffect{}), the readout problem seen from inside the gate. What gets through is what the
+failure map predicts: \fateNicheHardPassRate{} of hard-niche claims and \fateDecoySenderPassRate{} of decoy senders.
+
 \section{Discussion}
 \paragraph{What a verifier should report.} A verification layer for a medical world model is useful only if its limits
 travel with its verdicts. Our results suggest four things an audit record should state next to each pass or fail:
@@ -411,35 +436,19 @@ half wrong, and nothing in the per-claim verdicts would show it. In a decision-s
 whether PD-1/PD-L1 blockade has a cellular substrate in a tumour, the honest output of the gate is often ``no evidence
 either way'', and the record should say so.
 
-\paragraph{What we would test next.} Each proposal below targets one logged failure. Each needs its own pre-registered
-test on seeds the gate has never seen, because tuning on the seeds reported here would turn our misses into
-overfitting. The audit record already separates absence of evidence from evidence against: the \emph{untestable}
-status marks claims with no measured target readout, which on real breast tissue was \statusRealUntestable{} of the
-\statusRealN{} claims we gated.
-(a)~\emph{Sender conditioning}, for co-localised decoys: regress the response jointly on the exposure from the claimed
-sender and from every other cell type that expresses the ligand, and test the claimed sender's partial coefficient
-rather than its marginal correlation.
-(b)~\emph{A density-aware response model}, for the normalisation confound: model target counts with a generalised linear
-model that takes log library size, or cell area, and local density as offsets or covariates, instead of testing a
-library-size-normalised score. Two exploratory diagnostics on dev seeds point the same way. Permuting within density
-strata of each tile lowered the A5 post-gate phantom rate only from \senFrozenAfivePRafter{} to
-\senNullDensityAfivePRafter{} and cost retention, whereas computing the response from raw counts removed every false
-pass on the A5 lists (\senRespRawAfivePRafter{}) with A5 retention unchanged (\senRespRawAfiveRet{}). Our generator
-adds planted counts without regard to library size, so the raw-count result is partly matched to the simulation by
-construction; on real tissue, raw counts carry cell size and capture efficiency \cite{bhuva2024,atta2024}.
-(c)~\emph{Data-driven distance windows}, for range misspecification: choose the exposure range per pair from the data,
-for example by profile likelihood over a grid, with the choice repeated inside every permutation so that the null
-accounts for it. A fixed window trades off: a 15\um\ window lowered retention on A0--A3 lists to
-\senRonefiveAzeroAthreeRet{}, and a 60\um\ window kept \senRsixzeroAzeroAthreeRet{}.
-(d)~\emph{Decoy-based or empirical-Bayes false-discovery estimates}, for the base rate: gate matched decoy claims of
-known status alongside every list, or fit an empirical-Bayes mixture to the list's statistics, so that the output
-carries an estimate of its own false share rather than a per-claim $q$.
-(e)~\emph{Protein and perturbation readouts}, for missing readouts and real positives: multiplexed protein imaging such
-as IMC, MIBI or CosMx protein panels \TODOVERIFY{citations for IMC, MIBI and CosMx protein}, or perturbation data, would
-give real positive controls with a measured downstream response, which our transcript panels lack.
-The remaining Phase~2 hypotheses test two further parts of the same picture: whether an agent harness that refuses
-unverified claims removes the compliance gap we saw in Phase~1, and whether the gate can pass literature-supported
-contact-dependent pairs on real tissue.
+\paragraph{What we would test next.} Each failure suggests a fix, and each fix needs its own pre-registered test on seeds
+the gate has never seen, because tuning on the seeds reported here would turn our misses into overfitting.
+Co-localised decoys call for \emph{sender conditioning}: test the claimed sender's partial effect given the exposure
+from every other ligand-expressing type. The normalisation confound calls for \emph{a density-aware response model}
+with library size or cell area and local density as covariates; on dev seeds, a raw-count response removed every A5
+false pass (\senRespRawAfivePRafter{}), partly by construction of our generator. Range misspecification calls for
+\emph{data-driven distance windows} chosen inside every permutation, the base rate for \emph{list-level false-discovery
+estimates} from matched decoy claims or an empirical-Bayes mixture, and missing readouts for \emph{protein or
+perturbation readouts}. The Appendix gives each proposal in detail with its supporting diagnostics. The audit record
+already separates absence of evidence from evidence against: the \emph{untestable} status marks claims with no measured
+target readout, which on real breast tissue was \statusRealUntestable{} of the \statusRealN{} claims we gated. The
+remaining Phase~2 hypotheses test whether an agent harness that refuses unverified claims removes the compliance gap
+we saw in Phase~1, and whether the gate can pass literature-supported contact-dependent pairs on real tissue.
 
 \paragraph{What the $q$-values do and do not control.} The gate applies Benjamini--Hochberg to the claims of one
 candidate list, and an upstream tool or agent chose that list. The $q$-values therefore describe the listed claims,
@@ -498,6 +507,82 @@ the frozen gate with the status module on every H4 cell (\statusEqFiles{} files,
 \statusEqMismatch{} decision mismatches against the committed results. Every reference was checked against its
 registry record (Crossref or arXiv: title, first author, year, volume, page) by \texttt{scripts/citation\_audit.py}.
 An independent red-team review of the Phase~2 analyses is pending.
+
+\subsection{Proposed Tests in Detail}
+Each proposal targets one failure in the failure map and would need its own pre-registered test on fresh seeds.
+(a)~\emph{Sender conditioning}, for co-localised decoys: regress the response jointly on the exposure from the claimed
+sender and from every other cell type that expresses the ligand, and test the claimed sender's partial coefficient
+rather than its marginal correlation.
+(b)~\emph{A density-aware response model}, for the normalisation confound: model target counts with a generalised linear
+model that takes log library size, or cell area, and local density as offsets or covariates, instead of testing a
+library-size-normalised score. Two exploratory diagnostics on dev seeds point the same way. Permuting within density
+strata of each tile lowered the A5 post-gate phantom rate only from \senFrozenAfivePRafter{} to
+\senNullDensityAfivePRafter{} and cost retention, whereas computing the response from raw counts removed every false
+pass on the A5 lists (\senRespRawAfivePRafter{}) with A5 retention unchanged (\senRespRawAfiveRet{}). Our generator
+adds planted counts without regard to library size, so the raw-count result is partly matched to the simulation by
+construction; on real tissue, raw counts carry cell size and capture efficiency \cite{bhuva2024,atta2024}.
+(c)~\emph{Data-driven distance windows}, for range misspecification: choose the exposure range per pair from the data,
+for example by profile likelihood over a grid, with the choice repeated inside every permutation so that the null
+accounts for it. A fixed window trades off: a 15\um\ window lowered retention on A0--A3 lists to
+\senRonefiveAzeroAthreeRet{}, and a 60\um\ window kept \senRsixzeroAzeroAthreeRet{}.
+(d)~\emph{Decoy-based or empirical-Bayes false-discovery estimates}, for the base rate: gate matched decoy claims of
+known status alongside every list, or fit an empirical-Bayes mixture to the list's statistics, so that the output
+carries an estimate of its own false share rather than a per-claim $q$.
+(e)~\emph{Protein and perturbation readouts}, for missing readouts and real positives: multiplexed protein imaging such
+as IMC, MIBI or CosMx protein panels \TODOVERIFY{citations for IMC, MIBI and CosMx protein}, or perturbation data, would
+give real positive controls with a measured downstream response, which our transcript panels lack.
+
+\subsection{The Four Sections and Per-Tissue Results}
+Figure~\ref{fig:tissues} shows the four sections with the geometry of the frozen gate: the 250\um\ tiles within which the
+permutation null shuffles responses, and the split at the median $x$ coordinate into the two halves that must both
+replicate a claim. The inset shows the scale of one tile against the 30\um\ interaction range: a receiver is compared
+only with receivers of the same tile, which share far more of its surroundings than a random receiver elsewhere in
+the section would. Figure~\ref{fig:pertissue} gives every
+confirmatory H4 and H5 cell per tissue. The pooled values are the ones the hypotheses were tested on; the per-tissue
+values show where the pooled misses come from and how few passes some of them rest on.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/figA4_tissues.png}
+\caption{The four sections at one scale, coloured by broad compartment (for display only; the gate uses the fine cell
+types). Grey lines: the gate's 250\um\ tiles, anchored at the origin. Dashed line: the median-$x$ split into two
+halves. Inset: a $2\times2$-tile window of breast Rep1 with the 30\um\ interaction range drawn around one cell.}
+\label{fig:tissues}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/figA6_per_tissue.png}
+\caption{Per-tissue results on fresh seeds ($K{=}10$, cpdb and prod lists, seeds 200--209 pooled within each tissue).
+Outlined cells miss the pre-registered threshold. (a, b) H4 retention and post-gate phantom rate for each variant.
+(c) H5 post-gate phantom rate for each effect level, with the number of passed claims behind each rate. (d) The same
+for the exploratory hard-negative lists; the outline uses the H5 threshold for reference only.}
+\label{fig:pertissue}
+\end{figure*}
+
+\subsection{Library Size and Local Density}
+Figure~\ref{fig:libsize} shows the association behind the normalisation account of the failure map. In breast Rep1,
+cells with more neighbours carry fewer counts, and this holds within each broad compartment (Spearman $\rho$
+\lcBreastReponeEpithelialTumourRho{} for epithelial and tumour cells, \lcBreastReponeImmuneRho{} for immune cells and
+\lcBreastReponeStromaVesselsRho{} for stroma and vessels), so it is not only a matter of which cell types are dense.
+Dividing by library size therefore inflates the normalised expression of crowded cells. In pancreas the positive
+association is mostly one of composition: epithelial and tumour cells are the most crowded (median
+\lcPancreasEpithelialTumourDens{} neighbours within 30\um) and carry larger libraries (\lcPancreasEpithelialTumourLib{}
+times the section median), while within each compartment $\rho$ lies between \lcPancreasEpithelialTumourRho{} and
+\lcPancreasImmuneRho{}. Either way, a response normalised by library size can follow crowding rather than signalling,
+in a direction that depends on the tissue. The maps, curves and compartment values use all cells (record
+\texttt{laneL\_libsize\_density\_by\_compartment}); the correlations printed in panel (b) are the logged values from
+the Phase~2 diagnostic, computed on a cell sample.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/figA5_libsize_density.png}
+\caption{Library size and local density. (a) Median number of cells within 30\um\ and median library size relative to
+the section median, in 125\um\ bins, for breast Rep1 and pancreas (colour scales clipped at the 5th and 95th
+percentiles). (b) Median and interquartile range of relative library size across density bins, all cells; $\rho$ is
+the logged Spearman correlation between library size and density.}
+\label{fig:libsize}
+\end{figure*}
 
 \subsection{Sensitivity Analyses (Exploratory)}
 Table~\ref{tab:sens} and Figure~\ref{fig:sens} change one setting of the frozen gate at a time on the dev seeds of

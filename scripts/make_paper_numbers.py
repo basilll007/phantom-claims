@@ -330,6 +330,25 @@ if sens:
     open("paper/tables/sensitivity.tex", "w").write("\n".join(T) + "\n")
     used["sensitivity_table"] = dict(id=sens["id"], value="paper/tables/sensitivity.tex")
 
+# ---------------- Lane L: where each planted claim stops (descriptive, committed N2 decisions) ----------------
+fate = first("laneL_N2_claim_fate")
+def fpct_fine(v):  # one decimal where a whole percent would print 0% or 100% without being exact
+    return f"{100 * v:.1f}\\%" if (0 < v < 1 and f"{100 * v:.0f}" in ("0", "100")) else fpct(v)
+FATE_GROUPS = ("true_A0", "true_A1A3", "true_A4", "true_A5", "phantom", "random", "niche", "niche_hard", "decoy_sender")
+for g in FATE_GROUPS:
+    for k in ("pass_rate", "first_contacts", "first_effect", "first_tile_null", "first_halves", "any_contacts",
+              "any_effect", "any_tile_null", "any_halves", "only_halves"):
+        val(f"fate{tag(g)}{tag(k)}", fate, lambda r, g=g, k=k: row(r, group=g)[k], fpct_fine)
+    val(f"fate{tag(g)}N", fate, lambda r, g=g: row(r, group=g)["n"], fint)
+val("fateNplanted", fate, lambda r: sum(x["n"] for x in r["rows"]), fint)
+lcd = first("laneL_libsize_density_by_compartment")
+for t in ("breast_rep1", "breast_rep2", "lung", "pancreas"):
+    for c in ("all", "epithelial_tumour", "immune", "stroma_vessels"):
+        val(f"lc{tag(t)}{tag(c)}Rho", lcd, lambda r, t=t, c=c: row(r, tissue=t, compartment=c)["spearman_lib_vs_n30"],
+            fsigned)
+        val(f"lc{tag(t)}{tag(c)}Lib", lcd, lambda r, t=t, c=c: row(r, tissue=t, compartment=c)["median_rel_lib"], f2_)
+        val(f"lc{tag(t)}{tag(c)}Dens", lcd, lambda r, t=t, c=c: row(r, tissue=t, compartment=c)["median_n30"], fint)
+
 os.makedirs("paper", exist_ok=True)
 open("paper/numbers.tex", "w").write("\n".join(out) + "\n")
 json.dump(used, open("paper/numbers_provenance.json", "w"), indent=1, default=float)

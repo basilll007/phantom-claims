@@ -1,0 +1,10 @@
+group,label,category,variants,n,pass_rate,first_contacts,any_contacts,only_contacts,first_effect,any_effect,only_effect,first_tile_null,any_tile_null,only_tile_null,first_halves,any_halves,only_halves,first_other
+true_A0,"true, matched kernel (A0)",true,A0,400,0.98,0.0,0.0,0.0,0.0,0.0,0.0,0.0025,0.0025,0.0,0.0175,0.02,0.0175,0.0
+true_A1A3,"true, other kernels (A1–A3)",true,A1+A2a+A2b+A3,1600,0.886875,0.0,0.0,0.0,0.02,0.02,0.0,0.038125,0.058125,0.00375,0.055,0.109375,0.055,0.0
+true_A4,"true, no target readout (A4)",true,A4,400,0.0125,0.0,0.0,0.0,0.81,0.81,0.0025,0.1625,0.97,0.01,0.015,0.97,0.015,0.0
+true_A5,"true, in A5 lists",true,A5,400,0.7075,0.0,0.0,0.0,0.17,0.17,0.0025,0.0625,0.23,0.0025,0.06,0.285,0.06,0.0
+phantom,phantom (cells never meet),phantom,all,2800,0.0,0.9975,0.9975,0.0,0.0025,0.9475,0.0,0.0,0.9946428571428572,0.0,0.0,0.9975,0.0,0.0
+random,random pair,random,all,2800,0.005,0.9275,0.9275,0.004642857142857143,0.0625,0.8925,0.0,0.005,0.9832142857142857,0.0,0.0,0.9825,0.0,0.0
+niche,niche (A0–A4),niche,A0+A1+A2a+A2b+A3+A4,2400,0.05875,0.3225,0.3225,0.0,0.2825,0.4775,0.0,0.19708333333333333,0.7858333333333334,0.02375,0.13916666666666666,0.915,0.13916666666666666,0.0
+niche_hard,hard niche (A5),niche_hard,A5,400,0.105,0.1775,0.1775,0.0025,0.3675,0.48,0.0,0.215,0.74,0.0125,0.135,0.875,0.135,0.0
+decoy_sender,decoy sender (A5),decoy_sender,A5,200,0.14,0.15,0.15,0.0,0.58,0.685,0.0,0.095,0.81,0.0,0.035,0.855,0.035,0.0

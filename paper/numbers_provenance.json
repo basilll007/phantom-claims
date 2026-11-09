@@ -6251,6 +6251,598 @@
   "id": "laneR_dev_sensitivity",
   "value": "paper/tables/sensitivity.tex"
  },
+ "fateTrueAzeroPassRate": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.98
+ },
+ "fateTrueAzeroFirstContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateTrueAzeroFirstEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateTrueAzeroFirstTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0025
+ },
+ "fateTrueAzeroFirstHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0175
+ },
+ "fateTrueAzeroAnyContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateTrueAzeroAnyEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateTrueAzeroAnyTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0025
+ },
+ "fateTrueAzeroAnyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.02
+ },
+ "fateTrueAzeroOnlyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0175
+ },
+ "fateTrueAzeroN": {
+  "id": "laneL_N2_claim_fate",
+  "value": 400
+ },
+ "fateTrueAoneathreePassRate": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.886875
+ },
+ "fateTrueAoneathreeFirstContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateTrueAoneathreeFirstEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.02
+ },
+ "fateTrueAoneathreeFirstTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.038125
+ },
+ "fateTrueAoneathreeFirstHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.055
+ },
+ "fateTrueAoneathreeAnyContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateTrueAoneathreeAnyEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.02
+ },
+ "fateTrueAoneathreeAnyTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.058125
+ },
+ "fateTrueAoneathreeAnyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.109375
+ },
+ "fateTrueAoneathreeOnlyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.055
+ },
+ "fateTrueAoneathreeN": {
+  "id": "laneL_N2_claim_fate",
+  "value": 1600
+ },
+ "fateTrueAfourPassRate": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0125
+ },
+ "fateTrueAfourFirstContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateTrueAfourFirstEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.81
+ },
+ "fateTrueAfourFirstTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.1625
+ },
+ "fateTrueAfourFirstHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.015
+ },
+ "fateTrueAfourAnyContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateTrueAfourAnyEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.81
+ },
+ "fateTrueAfourAnyTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.97
+ },
+ "fateTrueAfourAnyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.97
+ },
+ "fateTrueAfourOnlyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.015
+ },
+ "fateTrueAfourN": {
+  "id": "laneL_N2_claim_fate",
+  "value": 400
+ },
+ "fateTrueAfivePassRate": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.7075
+ },
+ "fateTrueAfiveFirstContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateTrueAfiveFirstEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.17
+ },
+ "fateTrueAfiveFirstTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0625
+ },
+ "fateTrueAfiveFirstHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.06
+ },
+ "fateTrueAfiveAnyContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateTrueAfiveAnyEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.17
+ },
+ "fateTrueAfiveAnyTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.23
+ },
+ "fateTrueAfiveAnyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.285
+ },
+ "fateTrueAfiveOnlyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.06
+ },
+ "fateTrueAfiveN": {
+  "id": "laneL_N2_claim_fate",
+  "value": 400
+ },
+ "fatePhantomPassRate": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fatePhantomFirstContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.9975
+ },
+ "fatePhantomFirstEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0025
+ },
+ "fatePhantomFirstTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fatePhantomFirstHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fatePhantomAnyContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.9975
+ },
+ "fatePhantomAnyEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.9475
+ },
+ "fatePhantomAnyTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.9946428571428572
+ },
+ "fatePhantomAnyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.9975
+ },
+ "fatePhantomOnlyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fatePhantomN": {
+  "id": "laneL_N2_claim_fate",
+  "value": 2800
+ },
+ "fateRandomPassRate": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.005
+ },
+ "fateRandomFirstContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.9275
+ },
+ "fateRandomFirstEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0625
+ },
+ "fateRandomFirstTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.005
+ },
+ "fateRandomFirstHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateRandomAnyContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.9275
+ },
+ "fateRandomAnyEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.8925
+ },
+ "fateRandomAnyTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.9832142857142857
+ },
+ "fateRandomAnyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.9825
+ },
+ "fateRandomOnlyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.0
+ },
+ "fateRandomN": {
+  "id": "laneL_N2_claim_fate",
+  "value": 2800
+ },
+ "fateNichePassRate": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.05875
+ },
+ "fateNicheFirstContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.3225
+ },
+ "fateNicheFirstEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.2825
+ },
+ "fateNicheFirstTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.19708333333333333
+ },
+ "fateNicheFirstHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.13916666666666666
+ },
+ "fateNicheAnyContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.3225
+ },
+ "fateNicheAnyEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.4775
+ },
+ "fateNicheAnyTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.7858333333333334
+ },
+ "fateNicheAnyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.915
+ },
+ "fateNicheOnlyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.13916666666666666
+ },
+ "fateNicheN": {
+  "id": "laneL_N2_claim_fate",
+  "value": 2400
+ },
+ "fateNicheHardPassRate": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.105
+ },
+ "fateNicheHardFirstContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.1775
+ },
+ "fateNicheHardFirstEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.3675
+ },
+ "fateNicheHardFirstTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.215
+ },
+ "fateNicheHardFirstHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.135
+ },
+ "fateNicheHardAnyContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.1775
+ },
+ "fateNicheHardAnyEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.48
+ },
+ "fateNicheHardAnyTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.74
+ },
+ "fateNicheHardAnyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.875
+ },
+ "fateNicheHardOnlyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.135
+ },
+ "fateNicheHardN": {
+  "id": "laneL_N2_claim_fate",
+  "value": 400
+ },
+ "fateDecoySenderPassRate": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.14
+ },
+ "fateDecoySenderFirstContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.15
+ },
+ "fateDecoySenderFirstEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.58
+ },
+ "fateDecoySenderFirstTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.095
+ },
+ "fateDecoySenderFirstHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.035
+ },
+ "fateDecoySenderAnyContacts": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.15
+ },
+ "fateDecoySenderAnyEffect": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.685
+ },
+ "fateDecoySenderAnyTileNull": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.81
+ },
+ "fateDecoySenderAnyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.855
+ },
+ "fateDecoySenderOnlyHalves": {
+  "id": "laneL_N2_claim_fate",
+  "value": 0.035
+ },
+ "fateDecoySenderN": {
+  "id": "laneL_N2_claim_fate",
+  "value": 200
+ },
+ "fateNplanted": {
+  "id": "laneL_N2_claim_fate",
+  "value": 11400
+ },
+ "lcBreastReponeAllRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.3983732928571078
+ },
+ "lcBreastReponeAllLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 1.0
+ },
+ "lcBreastReponeAllDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 18.0
+ },
+ "lcBreastReponeEpithelialTumourRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.31264516221365857
+ },
+ "lcBreastReponeEpithelialTumourLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 1.3035714285714286
+ },
+ "lcBreastReponeEpithelialTumourDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 19.0
+ },
+ "lcBreastReponeImmuneRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.4733468979658036
+ },
+ "lcBreastReponeImmuneLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 0.5654761904761905
+ },
+ "lcBreastReponeImmuneDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 23.0
+ },
+ "lcBreastReponeStromaVesselsRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.5531068844114949
+ },
+ "lcBreastReponeStromaVesselsLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 1.0297619047619047
+ },
+ "lcBreastReponeStromaVesselsDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 12.0
+ },
+ "lcBreastReptwoAllRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.36549852116095566
+ },
+ "lcBreastReptwoAllLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 1.0
+ },
+ "lcBreastReptwoAllDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 17.0
+ },
+ "lcBreastReptwoEpithelialTumourRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.2761861069202054
+ },
+ "lcBreastReptwoEpithelialTumourLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 1.406060606060606
+ },
+ "lcBreastReptwoEpithelialTumourDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 19.0
+ },
+ "lcBreastReptwoImmuneRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.4342059319891043
+ },
+ "lcBreastReptwoImmuneLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 0.5818181818181818
+ },
+ "lcBreastReptwoImmuneDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 23.0
+ },
+ "lcBreastReptwoStromaVesselsRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.47237208532843983
+ },
+ "lcBreastReptwoStromaVesselsLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 1.0242424242424242
+ },
+ "lcBreastReptwoStromaVesselsDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 11.0
+ },
+ "lcLungAllRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.2291967896606226
+ },
+ "lcLungAllLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 1.0
+ },
+ "lcLungAllDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 28.0
+ },
+ "lcLungEpithelialTumourRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.24604955752048732
+ },
+ "lcLungEpithelialTumourLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 1.25
+ },
+ "lcLungEpithelialTumourDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 27.0
+ },
+ "lcLungImmuneRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.201277640539619
+ },
+ "lcLungImmuneLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 0.7708333333333334
+ },
+ "lcLungImmuneDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 32.0
+ },
+ "lcLungStromaVesselsRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 0.05754450426014093
+ },
+ "lcLungStromaVesselsLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 0.7708333333333334
+ },
+ "lcLungStromaVesselsDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 28.0
+ },
+ "lcPancreasAllRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 0.17953021789578566
+ },
+ "lcPancreasAllLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 1.0
+ },
+ "lcPancreasAllDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 26.0
+ },
+ "lcPancreasEpithelialTumourRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": -0.05025192948491694
+ },
+ "lcPancreasEpithelialTumourLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 1.2777777777777777
+ },
+ "lcPancreasEpithelialTumourDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 31.0
+ },
+ "lcPancreasImmuneRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 0.1328995519174737
+ },
+ "lcPancreasImmuneLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 0.6111111111111112
+ },
+ "lcPancreasImmuneDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 20.0
+ },
+ "lcPancreasStromaVesselsRho": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 0.047862696778495785
+ },
+ "lcPancreasStromaVesselsLib": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 0.8333333333333334
+ },
+ "lcPancreasStromaVesselsDens": {
+  "id": "laneL_libsize_density_by_compartment",
+  "value": 16.0
+ },
  "realContactRatio": {
   "id": "real_breast_contacts_vs_chance",
   "value": [

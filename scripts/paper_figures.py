@@ -427,6 +427,75 @@ def fig4(R):
     save(fig, "fig4_failure_map")
 
 
+# ------------------------------------------------------------------------------- Figure 5 (where each planted claim stops)
+STAGES = [("contacts", "≥ 50 contacts", "#e9e7df"), ("effect", "ρ ≥ 0.02", "#cbc8bc"),
+          ("tile_null", "tile null", "#a3a095"), ("halves", "both halves", "#6c6a62"), ("passed", "passed", GATE)]
+
+
+def fig5():
+    """Descriptive: the frozen gate's committed N2 decisions on all planted claims (table from laneL_claim_fate.py)."""
+    T = pd.read_csv("results/tables/laneL_N2_claim_fate.csv")
+    T["first_passed"] = T["pass_rate"]
+    lab = {"true_A0": "true, matched kernel (A0)", "true_A1A3": "true, other kernels (A1–A3)",
+           "true_A4": "true, no target readout (A4)", "true_A5": "true, in A5 lists",
+           "phantom": "phantom: cells never meet", "random": "random pair", "niche": "niche (A0–A4)",
+           "niche_hard": "hard niche (A5)", "decoy_sender": "decoy sender (A5)"}
+    n = len(T)
+    gap = 0.55                                                      # space between true claims and negatives
+    ys = np.array([n - 1 - i + (gap if g.startswith("true") else 0.0) for i, g in enumerate(T.group)])
+    fig = plt.figure(figsize=(W2, 2.75))
+    gs = fig.add_gridspec(1, 2, width_ratios=[3.1, 2.1], wspace=0.06, left=0.228, right=0.995, bottom=0.125,
+                          top=0.835)
+    ax = fig.add_subplot(gs[0, 0])
+    for s in ("top", "right", "left"):
+        ax.spines[s].set_visible(False)
+    for yi, r in zip(ys, T.itertuples()):
+        left = 0.0
+        for k, _, colr in STAGES:
+            w = getattr(r, f"first_{k}")
+            if w <= 0:
+                continue
+            ax.barh(yi, w, 0.72, left=left, color=colr, edgecolor="white", lw=0.8)
+            if w >= 0.075:
+                txt = f"{100 * w:.1f}%" if f"{100 * w:.0f}" in ("0", "100") and w < 1 else f"{100 * w:.0f}%"
+                dark = k in ("halves", "passed")
+                ax.text(left + w / 2, yi, txt, ha="center", va="center", fontsize=FS,
+                        color="white" if dark else INK)
+            left += w
+        ax.text(1.16, yi, f"{r.n:,}", ha="right", va="center", fontsize=FS, color=INK2)
+    ax.text(1.16, ys[0] + 0.8, "n", ha="right", va="center", fontsize=FS, color=INK2)
+    ax.set_yticks(ys); ax.set_yticklabels([lab[g] for g in T.group]); ax.tick_params(axis="y", length=0)
+    ax.set_xlim(0, 1.165); ax.set_xticks([]); ax.spines["bottom"].set_visible(False)
+    ax.set_ylim(ys.min() - 0.5, ys.max() + 0.5)
+    fig.canvas.draw()
+    x0 = ax.get_position().x0
+    fig.text(x0, 0.955, "$\\bf{a}$  Where each planted claim stops: the first check it fails", fontsize=FS,
+             va="baseline")
+    fig.legend([Patch(facecolor=c, edgecolor="none") for _, _, c in STAGES], [l for _, l, _ in STAGES],
+               loc="lower left", bbox_to_anchor=(x0 + 0.07, 0.0), ncol=5, handlelength=1.0, handletextpad=0.35,
+               columnspacing=1.1, borderaxespad=0.1)
+    fig.text(x0, 0.047, "failed:", ha="left", va="center", fontsize=FS, color=INK2)
+    # (b) every check each group fails (a claim can fail several)
+    ax = fig.add_subplot(gs[0, 1])
+    cols = [("any_contacts", "contacts"), ("any_effect", "ρ ≥ 0.02"), ("any_tile_null", "tile\nnull"),
+            ("any_halves", "both\nhalves")]
+    cmap = LinearSegmentedColormap.from_list("warm", ["#f6f5f1", "#e9e7df", "#cbc8bc", "#a3a095", "#6c6a62",
+                                                      "#45443f"])
+    for j, (c, _) in enumerate(cols):
+        for yi, v in zip(ys, T[c].values):
+            ax.add_patch(Rectangle((j + 0.04, yi - 0.4), 0.92, 0.8, facecolor=cmap(v), edgecolor="none"))
+            lab_v = f"{100 * v:.1f}" if f"{100 * v:.0f}" in ("0", "100") and 0 < v < 1 else f"{100 * v:.0f}"
+            ax.text(j + 0.5, yi, lab_v, ha="center", va="center", fontsize=FS,
+                    color="white" if v > 0.62 else INK)
+    ax.set_xlim(0, len(cols)); ax.set_ylim(ys.min() - 0.5, ys.max() + 0.5)
+    ax.set_xticks(np.arange(len(cols)) + 0.5); ax.set_xticklabels([l for _, l in cols], linespacing=0.95)
+    ax.xaxis.tick_top(); ax.tick_params(axis="x", length=0, pad=2); ax.set_yticks([])
+    for s in ax.spines.values():
+        s.set_visible(False)
+    fig.text(ax.get_position().x0, 0.955, "$\\bf{b}$  % failing each check", fontsize=FS, va="baseline")
+    save(fig, "fig5_claim_fate")
+
+
 # ---------------------------------------------------------------------------------------------- appendix figures
 def figA1():
     T = pd.read_csv("results/tables/verdict_table.csv")
@@ -487,6 +556,241 @@ def figA2():
     save(fig, "figA2_real_pdl1")
 
 
+COMPARTMENT = {  # broad compartments for display only (the gate uses the fine cell types)
+    "epithelial / tumour": ["Invasive_Tumor", "Prolif_Invasive_Tumor", "DCIS_1", "DCIS_2", "Myoepi_ACTA2+",
+                            "Myoepi_KRT15+", "Epithelial_Tumor", "Acinar", "Endocrine", "Ciliated"],
+    "immune": ["CD4+_T_Cells", "CD8+_T_Cells", "B_Cells", "Macrophages_1", "Macrophages_2", "Macrophages", "T_Cells",
+               "IRF7+_DCs", "LAMP3+_DCs", "Dendritic_Cells", "Mast_Cells", "Plasma_Cells"],
+    "stroma / vessels": ["Stromal", "Fibroblast", "Endothelial", "Perivascular-Like", "SMC_Pericyte"],
+}
+TISSUE_LAB = {"breast_rep1": "Breast Rep1", "breast_rep2": "Breast Rep2", "pancreas": "Pancreas", "lung": "Lung"}
+
+
+def figA4():
+    """The four sections at one scale, with the frozen gate's geometry: 250 um tiles anchored at the origin and the
+    split into halves at the median x of all cells (gate.py). Compartments are for display only."""
+    from bench.tissue import load_tissue
+    from gate.gate import GateConfig
+    tile = GateConfig().tile
+    CC = pd.read_csv("results/tables/cell_counts.csv")
+    tot = CC[CC.cell_type == "__TOTAL__"].set_index("tissue").n_cells
+    colr = {"epithelial / tumour": EXPR, "immune": GATE, "stroma / vessels": AQUA}
+    T = {n: load_tissue(n) for n in TISSUE_LAB}
+    s = 0.372 / 1000.0                                               # inches per micrometre (same scale everywhere)
+    box = {n: (t.xy[:, 0].min(), t.xy[:, 1].min(), t.xy[:, 0].max(), t.xy[:, 1].max()) for n, t in T.items()}
+    wid = {n: (b[2] - b[0]) * s for n, b in box.items()}; hei = {n: (b[3] - b[1]) * s for n, b in box.items()}
+    top1, gap_mid, leg = 0.24, 0.62, 0.42
+    y2 = top1 + max(hei["breast_rep1"], hei["breast_rep2"]) + gap_mid
+    FH = y2 + max(hei["pancreas"], hei["lung"]) + leg
+    fig = plt.figure(figsize=(W2, FH))
+    pos = {"breast_rep1": (0.08, top1), "breast_rep2": (W2 - 0.04 - wid["breast_rep2"], top1),
+           "pancreas": (0.02, y2), "lung": (W2 - 0.01 - wid["lung"], y2)}
+    for n, t in T.items():
+        x0, y0, x1, y1 = box[n]; px, py = pos[n]
+        ax = fig.add_axes([px / W2, 1 - (py + hei[n]) / FH, wid[n] / W2, hei[n] / FH])
+        other = ~np.isin(t.types, sum(COMPARTMENT.values(), []))
+        ax.scatter(t.xy[other, 0], t.xy[other, 1], s=0.12, c=CELL, lw=0, rasterized=True)
+        for comp, types in COMPARTMENT.items():
+            m = np.isin(t.types, types)
+            ax.scatter(t.xy[m, 0], t.xy[m, 1], s=0.12, c=colr[comp], lw=0, rasterized=True)
+        for gx in np.arange(np.ceil(x0 / tile) * tile, x1, tile):
+            ax.plot([gx, gx], [y0, y1], color=INK, lw=0.2, alpha=0.4)
+        for gy in np.arange(np.ceil(y0 / tile) * tile, y1, tile):
+            ax.plot([x0, x1], [gy, gy], color=INK, lw=0.2, alpha=0.4)
+        xmid = np.median(t.xy[:, 0])
+        ax.plot([xmid, xmid], [y0, y1], color=INK, lw=1.2, ls=(0, (4, 2)))
+        ax.set_xlim(x0, x1); ax.set_ylim(y1, y0); ax.set_aspect("equal"); ax.axis("off")
+        ax.text(x0, y0 - 0.06 / s, f"{TISSUE_LAB[n]}  ({int(tot[n]):,} cells)", fontsize=FS, va="bottom", ha="left")
+    # zoom: a 2 x 2-tile window of breast Rep1 (the most mixed tile-aligned window), with the 30 um interaction range
+    t = T["breast_rep1"]; Z = 2 * tile
+    comp = np.full(t.n, -1)
+    for k, types in enumerate(COMPARTMENT.values()):
+        comp[np.isin(t.types, types)] = k
+    best, wbest = -1.0, None
+    for wx in np.arange(0, box["breast_rep1"][2] - Z, tile):
+        for wy in np.arange(0, box["breast_rep1"][3] - Z, tile):
+            m = (t.xy[:, 0] >= wx) & (t.xy[:, 0] < wx + Z) & (t.xy[:, 1] >= wy) & (t.xy[:, 1] < wy + Z) & (comp >= 0)
+            if m.sum() < 1500:
+                continue
+            f = np.bincount(comp[m], minlength=3) / m.sum()
+            h = -(f[f > 0] * np.log(f[f > 0])).sum()
+            if h > best:
+                best, wbest = h, (wx, wy)
+    wx, wy = wbest
+    zw = W2 - wid["breast_rep2"] - wid["breast_rep1"] - 0.08 - 0.04 - 0.36
+    zx = 0.08 + wid["breast_rep1"] + 0.18
+    zy = top1 + 0.05
+    ax = fig.add_axes([zx / W2, 1 - (zy + zw) / FH, zw / W2, zw / FH])
+    m = (t.xy[:, 0] >= wx) & (t.xy[:, 0] < wx + Z) & (t.xy[:, 1] >= wy) & (t.xy[:, 1] < wy + Z)
+    for k, c in enumerate([CELL] + list(colr.values())):
+        mm = m & (comp == k - 1)
+        ax.scatter(t.xy[mm, 0], t.xy[mm, 1], s=1.6, c=c, lw=0, rasterized=True)
+    for g in (wx + tile,):
+        ax.plot([g, g], [wy, wy + Z], color=INK, lw=0.6, alpha=0.7)
+    ax.plot([wx, wx + Z], [wy + tile, wy + tile], color=INK, lw=0.6, alpha=0.7)
+    ix = np.flatnonzero(m)
+    c0 = ix[np.argmin(((t.xy[ix] - [wx + 0.72 * Z, wy + 0.72 * Z]) ** 2).sum(1))]
+    from matplotlib.patches import Circle
+    ax.add_patch(Circle(t.xy[c0], 30.0, facecolor="none", edgecolor=INK, lw=1.0))
+    ax.text(t.xy[c0, 0], t.xy[c0, 1] + 38, "30 µm", ha="center", va="top", fontsize=FS,
+            bbox=dict(boxstyle="square,pad=0.1", facecolor="white", edgecolor="none", alpha=0.85))
+    ax.set_xlim(wx, wx + Z); ax.set_ylim(wy + Z, wy); ax.set_aspect("equal")
+    ax.set_xticks([]); ax.set_yticks([])
+    for sp in ax.spines.values():
+        sp.set_color(INK); sp.set_linewidth(0.8)
+    ax.text(wx + Z / 2, wy + Z * 1.04, f"zoom: 2 × 2 tiles\n({Z:.0f} × {Z:.0f} µm)", fontsize=FS, va="top",
+            ha="center", linespacing=1.0)
+    a0 = fig.axes[0]
+    a0.add_patch(Rectangle((wx, wy), Z, Z, facecolor="none", edgecolor=INK, lw=1.0))
+    fig.add_artist(matplotlib.patches.ConnectionPatch((wx + Z, wy), (wx, wy), coordsA="data", coordsB="data",
+                                                      axesA=a0, axesB=ax, color=INK, lw=0.6))
+    fig.add_artist(matplotlib.patches.ConnectionPatch((wx + Z, wy + Z), (wx, wy + Z), coordsA="data",
+                                                      coordsB="data", axesA=a0, axesB=ax, color=INK, lw=0.6))
+    ax = fig.axes[0]
+    x0, y0, x1, y1 = box["breast_rep1"]
+    ax.plot([x0, x0 + 1000], [y1 + 0.1 / s, y1 + 0.1 / s], color=INK, lw=1.5, solid_capstyle="butt", clip_on=False)
+    ax.text(x0 + 1000 + 0.06 / s, y1 + 0.1 / s, "1 mm", ha="left", va="center", fontsize=FS)
+    handles = [Line2D([], [], ls="", marker="o", ms=5, color=c) for c in colr.values()] +               [Line2D([], [], ls="", marker="o", ms=5, color=CELL),
+               Line2D([], [], color=INK, lw=0.6, alpha=0.6), Line2D([], [], color=INK, lw=1.2, ls=(0, (4, 2)))]
+    labels = list(colr) + ["unlabelled / other", f"{tile:.0f} µm tiles (the null permutes within)",
+                           "median-x split into two halves"]
+    fig.legend(handles, labels, loc="lower center", ncol=3, bbox_to_anchor=(0.5, 0.0), handlelength=1.6,
+               columnspacing=1.4, labelspacing=0.3, handletextpad=0.4, borderaxespad=0.1)
+    save(fig, "figA4_tissues")
+
+
+def figA5(R):
+    """Library size against local density (illustration on all cells; the printed Spearman values are the logged ones,
+    record laneA_N2_normalisation_confound, computed on a cell sample)."""
+    from scipy.spatial import cKDTree
+    from bench.tissue import load_tissue
+    rec = {x["tissue"]: x["spearman_lib_vs_n30"] for x in R["laneA_N2_normalisation_confound"]["lib_vs_density"]}
+    order = ["breast_rep1", "breast_rep2", "lung", "pancreas"]
+    T = {n: load_tissue(n) for n in order}
+    n30 = {n: cKDTree(t.xy).query_ball_point(t.xy, 30.0, return_length=True) - 1 for n, t in T.items()}
+    fig = plt.figure(figsize=(W2, 4.0))
+    # top: maps for the two tissues with opposite signs
+    maps = [("breast_rep1", "dens"), ("breast_rep1", "lib"), ("pancreas", "dens"), ("pancreas", "lib")]
+    s = 1.62 / 7600.0                                                       # inches per um, same scale for all maps
+    FW, FH = fig.get_size_inches()
+    x, TOP = 0.08, 0.60
+    BIN = 125.0
+    for k, (n, what) in enumerate(maps):
+        t = T[n]
+        v = n30[n].astype(float) if what == "dens" else t.lib / np.median(t.lib)
+        xe = np.arange(0, t.xy[:, 0].max() + BIN, BIN); ye = np.arange(0, t.xy[:, 1].max() + BIN, BIN)
+        ix = np.digitize(t.xy[:, 0], xe) - 1; iy = np.digitize(t.xy[:, 1], ye) - 1
+        key = ix * 10000 + iy
+        df = pd.DataFrame(dict(k=key, v=v)).groupby("k").v.agg(["median", "size"])
+        df = df[df["size"] >= 3]
+        M = np.full((len(xe), len(ye)), np.nan)
+        M[(df.index // 10000).values, (df.index % 10000).values] = df["median"].values
+        w, h = t.xy[:, 0].max() * s, t.xy[:, 1].max() * s
+        ax = fig.add_axes([x / FW, 1 - (TOP + h) / FH, w / FW, h / FH])
+        lo, hi = np.nanpercentile(M, [5, 95])
+        im = ax.imshow(M.T, cmap=BLUES, vmin=lo, vmax=hi, origin="upper", interpolation="nearest",
+                       extent=[0, len(xe) * BIN, len(ye) * BIN, 0])
+        ax.set_xlim(0, t.xy[:, 0].max()); ax.set_ylim(t.xy[:, 1].max(), 0); ax.axis("off")
+        lab = "cells within 30 µm" if what == "dens" else "library size / median"
+        fig.text(x / FW, 1 - (TOP - 0.05) / FH, f"{TISSUE_LAB[n]}\n{lab}", fontsize=FS, va="bottom",
+                 linespacing=1.0)
+        cax = fig.add_axes([x / FW, 1 - (TOP + h + 0.12) / FH, 0.75 * w / FW, 0.055 / FH])
+        cb = fig.colorbar(im, cax=cax, orientation="horizontal")
+        cb.outline.set_visible(False); cb.ax.tick_params(length=2, pad=1)
+        fmt = (lambda z: f"{z:.1f}") if what == "lib" else (lambda z: f"{z:.0f}")
+        cb.set_ticks([lo, hi]); cb.set_ticklabels([fmt(lo), fmt(hi)])
+        x += w + (0.10 if k % 2 == 0 else 0.28)
+    fig.text(0.08 / FW, 1 - 0.14 / FH, "$\\bf{a}$  The same cells mapped two ways; the sign of the link differs "
+             "between sections (125 µm bins, medians)", fontsize=FS, va="baseline")
+    # bottom: library size vs density in every tissue
+    gs = fig.add_gridspec(1, 4, left=0.085, right=0.99, bottom=0.115, top=0.36, wspace=0.28)
+    for j, n in enumerate(order):
+        t = T[n]; ax = fig.add_subplot(gs[0, j]); tidy(ax, grid="both")
+        d = n30[n]; rl = t.lib / np.median(t.lib)
+        edges = np.unique(np.quantile(d, np.linspace(0, 1, 13)))
+        b = np.clip(np.digitize(d, edges[1:-1]), 0, len(edges) - 2)
+        g = pd.DataFrame(dict(b=b, d=d, r=rl)).groupby("b")
+        xm = g.d.median().values; med = g.r.median().values
+        q1 = g.r.quantile(0.25).values; q3 = g.r.quantile(0.75).values
+        ax.fill_between(xm, q1, q3, color=GATE, alpha=0.18, lw=0)
+        ax.plot(xm, med, color=GATE, lw=1.5, marker="o", ms=3)
+        ax.axhline(1.0, color=INK2, lw=0.8, ls=(0, (4, 2)))
+        ax.set_ylim(0, 2.3); ax.set_yticks([0, 1, 2])
+        ax.set_xlabel("cells within 30 µm", labelpad=1)
+        if j == 0:
+            ax.set_ylabel("library size / median")
+        else:
+            ax.set_yticklabels([])
+        rr = rec[n]
+        ax.set_title(f"{TISSUE_LAB[n]}  ρ = {'−' if rr < 0 else ''}{abs(rr):.2f}", fontsize=FS, loc="left")
+    fig.text(0.085, 0.425, "$\\bf{b}$  Library size against local density (median and IQR over density bins; "
+             "ρ: logged Spearman)", fontsize=FS, va="baseline")
+    save(fig, "figA5_libsize_density")
+
+
+WARM = LinearSegmentedColormap.from_list("warm", ["#f6f5f1", "#e9e7df", "#cbc8bc", "#a3a095", "#6c6a62", "#45443f"])
+
+
+def figA6(R):
+    """Per-tissue view of the H4/H5 cells (K = 10, cpdb + prod lists); outlined cells miss the threshold.
+    (d) hard-negative lists are exploratory; their outline uses the H5 line for reference only."""
+    a = pd.DataFrame(R["laneA_N2_H4_secondary_summary"]["rows"])
+    a = a[(a.K == 10) & (a.method == "cpdb+prod")]
+    b = pd.DataFrame(R["laneB_N2_secondary_summary"]["rows"])
+    b = b[b.K == 10]
+    if "method" in b:
+        b = b[b.method == "cpdb+prod"]
+    th4 = R["laneA_N2_H4_verdict"]["metrics"]["thresholds"]; th5 = R["laneB_N2_H5_verdict"]["metrics"]["thresholds"]
+    tis = [("breast_rep1", "Breast\nRep1"), ("breast_rep2", "Breast\nRep2"), ("lung", "Lung"),
+           ("pancreas", "Pan-\ncreas"), ("ALL", "All")]
+    vars_ = ["A0", "A1", "A2a", "A2b", "A3", "A4", "A5"]
+    fig = plt.figure(figsize=(W2, 4.3))
+    gs = fig.add_gridspec(2, 2, height_ratios=[7 * 0.25, 4 * 0.36], wspace=0.2, hspace=0.42, left=0.055,
+                          right=0.995, bottom=0.01, top=0.87)
+
+    def heat(ax, M, rows, cmap, vmax, miss, letter, ttl, sub=None, ylab=None):
+        nr, nc = M.shape
+        for i in range(nr):
+            for j in range(nc):
+                v = M[i, j]; y = nr - 1 - i
+                if np.isnan(v):
+                    ax.text(j + 0.5, y + 0.5, "–", ha="center", va="center", fontsize=FS, color=INK2); continue
+                ax.add_patch(Rectangle((j + 0.04, y + 0.06), 0.92, 0.88, facecolor=cmap(min(v / vmax, 1.0)),
+                                       edgecolor=INK if miss(v) else "none", lw=1.3 if miss(v) else 0))
+                dark = v / vmax > 0.62
+                txt = f"{v:.2f}" if sub is None else f"{v:.2f}\n{sub[i, j]}"
+                ax.text(j + 0.5, y + 0.5, txt, ha="center", va="center", fontsize=FS, linespacing=1.0,
+                        color="white" if dark else INK)
+        ax.set_xlim(0, nc); ax.set_ylim(0, nr)
+        ax.set_xticks(np.arange(nc) + 0.5); ax.set_xticklabels([l for _, l in tis], linespacing=0.95)
+        ax.xaxis.tick_top(); ax.tick_params(length=0, pad=2)
+        ax.set_yticks(np.arange(nr) + 0.5); ax.set_yticklabels(rows[::-1])
+        if ylab:
+            ax.set_ylabel(ylab, labelpad=2)
+        for sp in ax.spines.values():
+            sp.set_visible(False)
+        fig.canvas.draw()
+        bb = ax.get_position()
+        fig.text(bb.x0 - 0.045, bb.y1 + 0.085 * (2.55 / 4.3) * 1.6, f"$\\bf{{{letter}}}$  {ttl}", fontsize=FS,
+                 va="baseline")
+
+    Ra = np.array([[a[(a.variant == v) & (a.tissue == t)].retention.iloc[0] for t, _ in tis] for v in vars_])
+    Pa = np.array([[a[(a.variant == v) & (a.tissue == t)].phantom_rate_after.iloc[0] for t, _ in tis] for v in vars_])
+    heat(fig.add_subplot(gs[0, 0]), Ra, vars_, BLUES, 1.0, lambda v: v < th4["ret_min"],
+         "a", f"H4: retention of true claims (needs ≥ {th4['ret_min']:.2f})")
+    heat(fig.add_subplot(gs[0, 1]), Pa, vars_, WARM, 0.8, lambda v: v > th4["pr_max"],
+         "b", f"H4: phantom rate after gate (needs ≤ {th4['pr_max']:.2f})")
+    for k, (lt, letter, ttl) in enumerate((("default", "c", f"H5: phantom rate after gate (needs ≤ {th5['pr_max']:.2f})"),
+                                           ("A5m", "d", "Hard-negative lists (exploratory)"))):
+        d = b[b.list_type == lt]
+        P = np.array([[d[(d.effect == e) & (d.tissue == t)].phantom_rate_after.iloc[0] for t, _ in tis] for e in LEVELS])
+        N = np.array([[f"n = {int(d[(d.effect == e) & (d.tissue == t)].n_pass.iloc[0])}" for t, _ in tis]
+                      for e in LEVELS])
+        heat(fig.add_subplot(gs[1, k]), P, LEVLAB, WARM, 0.8, lambda v: v > th5["pr_max"], letter, ttl, sub=N,
+             ylab="planted effect")
+    save(fig, "figA6_per_tissue")
+
+
 SENS_LAB = {"frozen": "frozen gate", "tile125": "tiles 125 µm", "tile500": "tiles 500 µm", "r15": "range 15 µm",
             "r60": "range 60 µm", "nmin25": "min. contacts 25", "nmin100": "min. contacts 100",
             "split_checker": "checkerboard halves", "null_global": "global null",
@@ -532,7 +836,7 @@ def figA3():
 
 
 if __name__ == "__main__":
-    want = set(sys.argv[1:]) or {"fig1", "fig2", "fig3", "fig4", "figA1", "figA2", "figA3"}
+    want = set(sys.argv[1:]) or {"fig1", "fig2", "fig3", "fig4", "fig5", "figA1", "figA2", "figA3", "figA4", "figA5", "figA6"}
     R = records()
     if "fig1" in want: fig1()
     if "fig2" in want: fig2(R)
@@ -541,3 +845,7 @@ if __name__ == "__main__":
     if "figA1" in want: figA1()
     if "figA2" in want: figA2()
     if "figA3" in want: figA3()
+    if "fig5" in want: fig5()
+    if "figA4" in want: figA4()
+    if "figA5" in want: figA5(R)
+    if "figA6" in want: figA6(R)
