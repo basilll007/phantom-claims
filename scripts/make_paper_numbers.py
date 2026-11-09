@@ -349,6 +349,68 @@ for t in ("breast_rep1", "breast_rep2", "lung", "pancreas"):
         val(f"lc{tag(t)}{tag(c)}Lib", lcd, lambda r, t=t, c=c: row(r, tissue=t, compartment=c)["median_rel_lib"], f2_)
         val(f"lc{tag(t)}{tag(c)}Dens", lcd, lambda r, t=t, c=c: row(r, tissue=t, compartment=c)["median_n30"], fint)
 
+# ---------------- Lane S (Amendment 5; confirmatory on fresh seeds N3 = 300-309 unless noted) ----------------
+h4n3 = first("laneS_N3_H4_replication_verdict")
+num("hfourNthreeNmet", h4n3, ["metrics", "n_units_met"])
+for v in ("A0", "A1", "A2a", "A2b", "A3", "A4", "A5"):
+    pre = f"hfourNthree{tag(v)}"
+    num(pre + "Ret", h4n3, ["metrics", "prim", v, "metrics", "retention"], nd=3)
+    num(pre + "PRafter", h4n3, ["metrics", "prim", v, "metrics", "phantom_rate_after"], nd=3)
+    ci3(pre + "Retci", h4n3, "retention", path=("metrics", "prim", v, "ci"))
+    ci3(pre + "PRafterci", h4n3, "phantom_rate_after", path=("metrics", "prim", v, "ci"))
+num("hfourNthreeAfiveN", h4n3, ["metrics", "prim", "A5", "metrics", "n"])
+num("hfourNthreeAfiveNtrue", h4n3, ["metrics", "prim", "A5", "metrics", "n_true"])
+num("hfourNthreeAfiveNpass", h4n3, ["metrics", "prim", "A5", "metrics", "n_pass"])
+num("hfourNthreeAfivePR", h4n3, ["metrics", "prim", "A5", "metrics", "phantom_rate"], nd=3)
+h8 = first("laneS_N3_H8_spatial_baselines_verdict")
+SB = (("Gate", "frozen_gate"), ("Spatialdm", "spatialdm"), ("Ligrec", "squidpy_ligrec"), ("Nhood", "squidpy_spatial"))
+for nm, k in SB:
+    num(f"sb{nm}FPS", h8, ["metrics", "filters", k, "false_pass_share"], nd=3)
+    ci3(f"sb{nm}FPSci", h8, "false_pass_share_ci", path=("metrics", "filters", k))
+    num(f"sb{nm}Ret", h8, ["metrics", "filters", k, "retention"], nd=3)
+    num(f"sb{nm}Npass", h8, ["metrics", "filters", k, "n_pass"])
+    if k != "frozen_gate":
+        num(f"sb{nm}Margin", h8, ["metrics", "margins", k, "margin"], nd=2)
+h9 = first("laneS_N3_H9_base_rate_law_verdict")
+PC = (("Gate", "class_rates"), ("Spatialdm", "spatialdm_class_rates"), ("Ligrec", "squidpy_class_rates"),
+      ("Nhood", "squidpy_spatial_class_rates"))
+for nm, k in PC:
+    for c, cn in (("true", "True"), ("niche", "Niche"), ("decoy_sender", "Decoy"), ("phantom", "Phantom"),
+                  ("random", "Random")):
+        val(f"pc{nm}{cn}", h9, lambda r, k=k, c=c: r["metrics"][k][c], fpct_fine)
+val("brRho", h9, lambda r: r["metrics"]["spearman_rho"], f2_)
+val("brMaxDiff", h9, lambda r: r["metrics"]["max_abs_diff"], f3)
+f3lt = lambda v: "$<$0.001" if 0 < v < 0.0005 else f3(v)   # do not print a non-zero rate as 0.000
+for a, an in ((0.0, "Zero"), (0.1, "Ten"), (0.25, "TwentyFive"), (0.5, "Fifty"), (0.75, "SeventyFive")):
+    g = lambda r, a=a: next(x for x in r["metrics"]["grid_results"] if abs(x["niche_decoy_frac"] - a) < 1e-9)
+    val(f"brA{an}PiTrue", h9, lambda r, g=g: g(r)["pi"]["true"], f3)
+    val(f"brA{an}Pred", h9, lambda r, g=g: g(r)["pred_gate_fps"], f3lt)
+    val(f"brA{an}Emp", h9, lambda r, g=g: g(r)["emp_gate_fps"], f3lt)
+    val(f"brA{an}Sdm", h9, lambda r, g=g: g(r)["pred_sdm_fps"], f3)
+od = first("laneL_N3_base_rate_odds")
+f1 = lambda v: f"{v:.1f}"
+flr = lambda v: fint(v) if v >= 100 else f"{v:.1f}"
+for nm, k in (("Gate", "gate"), ("Spatialdm", "spatialdm"), ("Ligrec", "squidpy_ligrec"), ("Nhood", "squidpy_ligrec_nhood")):
+    val(f"odds{nm}LrHard", od, lambda r, k=k: row(r, method=k)["lr_hard"], f1)
+    val(f"odds{nm}LrEasy", od, lambda r, k=k: row(r, method=k)["lr_easy"], flr)
+    val(f"odds{nm}PiMinHard", od, lambda r, k=k: row(r, method=k)["pi_min_hard_phi10"], fpct)
+    val(f"odds{nm}FHard", od, lambda r, k=k: row(r, method=k)["f_hard"], f3)
+tl = first("laneL_N3_A5_true_losses_by_mechanism")
+val("lossNtrue", tl, lambda r: r["metrics"]["n_true"], fint)
+val("lossNlost", tl, lambda r: r["metrics"]["n_lost"], fint)
+for m, nm in (("none", "None"), ("para80", "Para"), ("ring", "Ring"), ("exp60", "Expsixty"), ("exp15", "Expfifteen")):
+    val(f"loss{nm}Lost", tl, lambda r, m=m: r["metrics"]["by_mechanism"][m]["n_lost"], fint)
+    val(f"loss{nm}Ntrue", tl, lambda r, m=m: r["metrics"]["by_mechanism"][m]["n_true"], fint)
+nc = first("laneS_anatomical_negcontrols_real_data")
+num("ncN", nc, ["metrics", "n_total"]); num("ncPassed", nc, ["metrics", "n_passed"])
+val("ncCIhi", nc, lambda r: r["metrics"]["ci_95"][1], f3)
+ncr = first("laneL_S4_negcontrol_reasons")
+for k, nm in (("n_fail_contacts", "FailContacts"), ("n_fail_tile_null", "FailTileNull"), ("n_fail_halves", "FailHalves"),
+              ("n_contacts_ge50", "ContactsGeFifty"), ("n_untestable", "Untestable"), ("n_type_pairs", "TypePairs")):
+    val(f"nc{nm}", ncr, lambda r, k=k: r["metrics"][k], fint)
+for t in ("breast_rep1", "breast_rep2", "pancreas", "lung"):
+    val(f"nc{tag(t)}", ncr, lambda r, t=t: r["metrics"]["n_by_tissue"][t], fint)
+
 os.makedirs("paper", exist_ok=True)
 open("paper/numbers.tex", "w").write("\n".join(out) + "\n")
 json.dump(used, open("paper/numbers_provenance.json", "w"), indent=1, default=float)

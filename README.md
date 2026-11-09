@@ -56,6 +56,7 @@ results) before citing any of these.
 ```bash
 uv venv .venv --python 3.12
 uv pip install -r requirements.lock      # torch from the CUDA 12.8 index: --index-url https://download.pytorch.org/whl/cu128
+# spatial baselines (lane S, H8: SpatialDM 0.3.1, Squidpy 1.8.4): the full pinned environment is requirements-laneS.lock
 python scripts/download.py configs/data_breast.json
 python scripts/download.py configs/data_lr.json
 # pancreas / lung: scripts/zip_remote_extract.py <official outs.zip URL> data/raw/<tissue> cell_feature_matrix.h5 cells.csv.gz analysis.tar.gz

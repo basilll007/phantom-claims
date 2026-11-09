@@ -21,3 +21,12 @@ yang2025mwm,arXiv:2506.02327,True,True,,True,,True,Yang,,Medical World Model: Ge
 huang2023selfcorrect,arXiv:2310.01798,True,True,,True,,True,Huang,,Large Language Models Cannot Self-Correct Reasoning Yet,arXiv,,2023
 roohani2024biodiscoveryagent,arXiv:2405.17631,True,True,,True,,True,Roohani,,BioDiscoveryAgent: An AI Agent for Designing Genetic Perturbation Experiments,arXiv,,2024
 xiao2024cellagent,arXiv:2407.09811,True,True,,True,,True,Xiao,,CellAgent: An LLM-driven Multi-Agent Framework for Automated Single-cell Data Analysis,arXiv,,2024
+li2023spatialdm,10.1038/s41467-023-39608-w,True,True,True,True,True,True,Li,3995,SpatialDM for rapid identification of spatially co-expressed ligand–receptor and revealing cell–cell communication patterns,Nature Communications,14,2023
+tanevski2022misty,10.1186/s13059-022-02663-5,True,True,True,True,True,True,Tanevski,97,Explainable multiview framework for dissecting spatial relationships from highly multiplexed data,Genome Biology,23,2022
+shao2022spatalk,10.1038/s41467-022-32111-8,True,True,True,True,True,True,Shao,4429,Knowledge-graph-based cell-cell communication inference for spatially resolved transcriptomic data with SpaTalk,Nature Communications,13,2022
+dries2021giotto,10.1186/s13059-021-02286-2,True,True,True,True,True,True,Dries,78,Giotto: a toolbox for integrative analysis and visualization of spatial expression data,Genome Biology,22,2021
+baddeley2000inhomogeneous,10.1111/1467-9574.00144,True,True,True,True,True,True,Baddeley,329-350,Non‐ and semi‐parametric estimation of interaction in inhomogeneous point patterns,Statistica Neerlandica,54,2000;2001
+jiang2021cytosig,10.1038/s41592-021-01274-5,True,True,True,True,True,True,Jiang,1181-1191,Systematic investigation of cytokine signaling activity at the tissue and single-cell levels,Nature Methods,18,2021
+giesen2014imc,10.1038/nmeth.2869,True,True,True,True,True,True,Giesen,417-422,Highly multiplexed imaging of tumor tissues with subcellular resolution by mass cytometry,Nature Methods,11,2014
+angelo2014mibi,10.1038/nm.3488,True,True,True,True,True,True,Angelo,436-442,Multiplexed ion beam imaging of human breast tumors,Nature Medicine,20,2014
+he2022cosmx,10.1038/s41587-022-01483-z,True,True,True,True,True,True,He,1794-1806,High-plex imaging of RNA and proteins at subcellular resolution in fixed tissue by spatial molecular imaging,Nature Biotechnology,40,2022
