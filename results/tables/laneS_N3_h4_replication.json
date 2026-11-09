@@ -1,0 +1,282 @@
+{
+  "verdict": "INCONCLUSIVE",
+  "n_units_met": 3,
+  "n_units_retention_below_050": 1,
+  "n_units_phantom_above_015": 1,
+  "units": {
+    "A1": {
+      "variants": [
+        "A1"
+      ],
+      "retention": 0.9565891472868217,
+      "phantom_rate_after": 0.0,
+      "met": true
+    },
+    "A2": {
+      "variants": [
+        "A2a",
+        "A2b"
+      ],
+      "retention": 0.8852713178294573,
+      "phantom_rate_after": 0.0,
+      "met": true
+    },
+    "A3": {
+      "variants": [
+        "A3"
+      ],
+      "retention": 0.7891472868217054,
+      "phantom_rate_after": 0.0,
+      "met": true
+    },
+    "A4": {
+      "variants": [
+        "A4"
+      ],
+      "retention": 0.013953488372093023,
+      "phantom_rate_after": 0.0,
+      "met": false
+    },
+    "A5": {
+      "variants": [
+        "A5"
+      ],
+      "retention": 0.6666666666666666,
+      "phantom_rate_after": 0.21285140562248994,
+      "met": false
+    }
+  },
+  "thresholds": {
+    "ret_min": 0.6,
+    "pr_max": 0.1,
+    "n_needed": 4,
+    "fals_ret": 0.5,
+    "fals_pr": 0.15
+  },
+  "prim": {
+    "A0": {
+      "variant": "A0",
+      "K": 10,
+      "metrics": {
+        "n": 800,
+        "n_true": 645,
+        "phantom_rate": 0.19374999999999998,
+        "precision": 0.80625,
+        "n_pass": 643,
+        "phantom_rate_after": 0.0,
+        "retention": 0.9968992248062015,
+        "rel_reduction": 1.0
+      },
+      "ci": {
+        "phantom_rate": [
+          0.15000000000000002,
+          0.23750000000000004
+        ],
+        "phantom_rate_after": [
+          0.0,
+          0.0
+        ],
+        "retention": [
+          0.9865052225393328,
+          1.0
+        ],
+        "rel_reduction": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "A1": {
+      "variant": "A1",
+      "K": 10,
+      "metrics": {
+        "n": 800,
+        "n_true": 645,
+        "phantom_rate": 0.19374999999999998,
+        "precision": 0.80625,
+        "n_pass": 617,
+        "phantom_rate_after": 0.0,
+        "retention": 0.9565891472868217,
+        "rel_reduction": 1.0
+      },
+      "ci": {
+        "phantom_rate": [
+          0.15000000000000002,
+          0.23750000000000004
+        ],
+        "phantom_rate_after": [
+          0.0,
+          0.0
+        ],
+        "retention": [
+          0.9260387311450815,
+          0.9814312278184701
+        ],
+        "rel_reduction": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "A2a": {
+      "variant": "A2a",
+      "K": 10,
+      "metrics": {
+        "n": 800,
+        "n_true": 645,
+        "phantom_rate": 0.19374999999999998,
+        "precision": 0.80625,
+        "n_pass": 645,
+        "phantom_rate_after": 0.0,
+        "retention": 1.0,
+        "rel_reduction": 1.0
+      },
+      "ci": {
+        "phantom_rate": [
+          0.15000000000000002,
+          0.23750000000000004
+        ],
+        "phantom_rate_after": [
+          0.0,
+          0.0
+        ],
+        "retention": [
+          1.0,
+          1.0
+        ],
+        "rel_reduction": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "A2b": {
+      "variant": "A2b",
+      "K": 10,
+      "metrics": {
+        "n": 800,
+        "n_true": 645,
+        "phantom_rate": 0.19374999999999998,
+        "precision": 0.80625,
+        "n_pass": 571,
+        "phantom_rate_after": 0.0,
+        "retention": 0.8852713178294573,
+        "rel_reduction": 1.0
+      },
+      "ci": {
+        "phantom_rate": [
+          0.15000000000000002,
+          0.23750000000000004
+        ],
+        "phantom_rate_after": [
+          0.0,
+          0.0
+        ],
+        "retention": [
+          0.8460266998982323,
+          0.9213357098920099
+        ],
+        "rel_reduction": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "A3": {
+      "variant": "A3",
+      "K": 10,
+      "metrics": {
+        "n": 800,
+        "n_true": 645,
+        "phantom_rate": 0.19374999999999998,
+        "precision": 0.80625,
+        "n_pass": 509,
+        "phantom_rate_after": 0.0,
+        "retention": 0.7891472868217054,
+        "rel_reduction": 1.0
+      },
+      "ci": {
+        "phantom_rate": [
+          0.15000000000000002,
+          0.23750000000000004
+        ],
+        "phantom_rate_after": [
+          0.0,
+          0.0
+        ],
+        "retention": [
+          0.7364943276248285,
+          0.8401828290272239
+        ],
+        "rel_reduction": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "A4": {
+      "variant": "A4",
+      "K": 10,
+      "metrics": {
+        "n": 800,
+        "n_true": 645,
+        "phantom_rate": 0.19374999999999998,
+        "precision": 0.80625,
+        "n_pass": 9,
+        "phantom_rate_after": 0.0,
+        "retention": 0.013953488372093023,
+        "rel_reduction": 1.0
+      },
+      "ci": {
+        "phantom_rate": [
+          0.15000000000000002,
+          0.23750000000000004
+        ],
+        "phantom_rate_after": [
+          0.0,
+          0.0
+        ],
+        "retention": [
+          0.0,
+          0.03433060851845834
+        ],
+        "rel_reduction": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "A5": {
+      "variant": "A5",
+      "K": 10,
+      "metrics": {
+        "n": 800,
+        "n_true": 294,
+        "phantom_rate": 0.6325000000000001,
+        "precision": 0.3675,
+        "n_pass": 249,
+        "phantom_rate_after": 0.21285140562248994,
+        "retention": 0.6666666666666666,
+        "rel_reduction": 0.6634760385415179
+      },
+      "ci": {
+        "phantom_rate": [
+          0.575,
+          0.6875
+        ],
+        "phantom_rate_after": [
+          0.1416648230088496,
+          0.2876290272130122
+        ],
+        "retention": [
+          0.5830260043226183,
+          0.7539444774795658
+        ],
+        "rel_reduction": [
+          0.5535841683669793,
+          0.7716036947709516
+        ]
+      }
+    }
+  }
+}

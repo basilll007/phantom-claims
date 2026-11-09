@@ -1,0 +1,14 @@
+tissue,sender,receiver,ligand,receptor,category,gate_pass,status,readout
+breast_5k,Fibroblast,Mast_Cells,TIMP3,CD44,expr_top10,False,untestable,receptor_only
+breast_5k,Fibroblast,T_Cells,TIMP3,CD44,expr_top10,False,untestable,receptor_only
+breast_5k,Fibroblast,Macrophages,TIMP3,CD44,expr_top10,False,untestable,receptor_only
+breast_5k,Fibroblast,Endothelial,TIMP3,KDR,expr_top10,False,untestable,receptor_only
+breast_5k,Fibroblast,Macrophages,SERPINE1,PLAUR,expr_top10,False,untestable,receptor_only
+breast_5k,Endothelial,Mast_Cells,COL4A1,CD44,expr_top10,False,untestable,receptor_only
+breast_5k,Endothelial,T_Cells,COL4A1,CD44,expr_top10,False,untestable,receptor_only
+breast_5k,Endothelial,Mast_Cells,TIMP3,CD44,expr_top10,False,untestable,receptor_only
+breast_5k,Endothelial,T_Cells,TIMP3,CD44,expr_top10,False,untestable,receptor_only
+breast_5k,Fibroblast,Macrophages,CCN2,ITGB2,expr_top10,False,untestable,receptor_only
+breast_5k,Macrophages,T_Cells,CD80,CTLA4,contact_positive_control,False,untestable,receptor_only
+breast_5k,Macrophages,T_Cells,CD86,CTLA4,contact_positive_control,False,untestable,receptor_only
+breast_5k,Endothelial,Fibroblast,MMRN2,CD93,contact_positive_control,False,untestable,receptor_only

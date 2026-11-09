@@ -40,7 +40,7 @@ def log_result(rec, lane=None, agent_id="gemini-lead", seed_set="N2", labelled="
     if "labelled" not in record:
         record["labelled"] = labelled
         
-    assert record["seed_set"] in ("dev", "test1", "N2"), f"Invalid seed_set: {record['seed_set']}"
+    assert record["seed_set"] in ("dev", "test1", "N2", "N3"), f"Invalid seed_set: {record['seed_set']}"
     assert record["labelled"] in ("confirmatory", "exploratory"), f"Invalid labelled: {record['labelled']}"
     assert "lane" in record and record["lane"], "Missing lane in result record"
     assert "agent_id" in record and record["agent_id"], "Missing agent_id in result record"

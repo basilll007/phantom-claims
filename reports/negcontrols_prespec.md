@@ -116,3 +116,4 @@ def select_anatomical_negatives(tissue_obj, lr_pairs_df, min_frac=0.05):
      - Check $n_{\text{expressing\_pairs\_within\_r}}$.
      - Check tile spatial distribution and correlation $\rho$.
      - Diagnostic check: examine whether total cell density or library size (sum of transcripts per cell) accounts for the correlation.
+

@@ -25,8 +25,15 @@ def score_all(t, expr_lognorm, expr_raw, genes, pairs, n_perm=1000, seed=0, devi
     gi = {g: i for i, g in enumerate(genes)}
     Li = torch.tensor([gi[l] for l, _ in pairs], device=device)
     Ri = torch.tensor([gi[r] for _, r in pairs], device=device)
-    X = torch.tensor(np.asarray(expr_lognorm)[keep], dtype=torch.float32, device=device)
-    B = torch.tensor((np.asarray(expr_raw)[keep] > 0).astype(np.float32), device=device)
+    log_sub = expr_lognorm[keep] if hasattr(expr_lognorm, "__getitem__") else np.asarray(expr_lognorm)[keep]
+    log_arr = log_sub.toarray() if hasattr(log_sub, "toarray") else np.asarray(log_sub)
+    X = torch.as_tensor(log_arr, dtype=torch.float32, device=device)
+    del log_sub, log_arr
+
+    raw_sub = expr_raw[keep] if hasattr(expr_raw, "__getitem__") else np.asarray(expr_raw)[keep]
+    raw_arr = raw_sub.toarray() if hasattr(raw_sub, "toarray") else np.asarray(raw_sub)
+    B = torch.as_tensor(raw_arr > 0, dtype=torch.float32, device=device)
+    del raw_sub, raw_arr
     code = torch.tensor(code_np[keep], device=device)
     M = _type_means(X, code, T)
     F = _type_means(B, code, T)

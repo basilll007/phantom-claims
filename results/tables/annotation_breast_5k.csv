@@ -1,0 +1,17 @@
+cluster,n_cells,label,best,score,second,second_score
+0,1022,T_Cells,T_Cells,0.496,Plasma_Cells,0.048
+1,2498,T_Cells,T_Cells,0.508,NK_Cells,0.037
+2,927,Mast_Cells,Mast_Cells,0.44,Dendritic_Cells,0.057
+3,678,Unlabeled,T_Cells,0.106,Proliferating,0.041
+4,1544,Unlabeled,pDC,0.104,Dendritic_Cells,0.045
+5,1428,Macrophages,Macrophages,0.563,Monocytes_Neutrophils,0.229
+6,513,Unlabeled,T_Cells,0.235,NK_Cells,0.062
+7,1858,Unlabeled,Fibroblast,0.251,SMC_Pericyte,0.154
+8,839,Fibroblast,Fibroblast,0.383,SMC_Pericyte,0.173
+9,59,Unlabeled,Dendritic_Cells,0.141,Monocytes_Neutrophils,0.109
+10,695,B_Cells,B_Cells,1.406,Dendritic_Cells,0.039
+11,1117,Unlabeled,Lymphatic_Endo,0.014,Monocytes_Neutrophils,0.004
+12,1906,Unlabeled,Epithelial_Tumor,0.125,Proliferating,0.118
+13,1097,Unlabeled,Epithelial_Tumor,0.155,Proliferating,0.059
+14,802,Unlabeled,Epithelial_Tumor,0.127,Proliferating,0.036
+15,676,Endothelial,Endothelial,0.744,pDC,0.232
