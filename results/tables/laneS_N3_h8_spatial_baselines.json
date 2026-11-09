@@ -1,0 +1,81 @@
+{
+  "verdict": "SUPPORTED",
+  "margins": {
+    "spatialdm": {
+      "baseline_fps": 0.6428571428571428,
+      "gate_fps": 0.21285140562248994,
+      "margin": 0.43000573723465285,
+      "met_010": true
+    },
+    "squidpy_ligrec": {
+      "baseline_fps": 0.6325000000000001,
+      "gate_fps": 0.21285140562248994,
+      "margin": 0.4196485943775101,
+      "met_010": true
+    },
+    "squidpy_spatial": {
+      "baseline_fps": 0.4473684210526315,
+      "gate_fps": 0.21285140562248994,
+      "margin": 0.23451701543014158,
+      "met_010": true
+    }
+  },
+  "filters": {
+    "frozen_gate": {
+      "false_pass_share": 0.21285140562248994,
+      "false_pass_share_ci": [
+        0.1416648230088496,
+        0.2876290272130122
+      ],
+      "retention": 0.6666666666666666,
+      "retention_ci": [
+        0.5830260043226183,
+        0.7539444774795658
+      ],
+      "n_pass": 249,
+      "runtime_s": 0.5
+    },
+    "spatialdm": {
+      "false_pass_share": 0.6428571428571428,
+      "false_pass_share_ci": [
+        0.5764638339678251,
+        0.7071144293120405
+      ],
+      "retention": 0.6292517006802721,
+      "retention_ci": [
+        0.5266856758422092,
+        0.7335941605172374
+      ],
+      "n_pass": 518,
+      "runtime_s": 1.9209518253803253
+    },
+    "squidpy_ligrec": {
+      "false_pass_share": 0.6325000000000001,
+      "false_pass_share_ci": [
+        0.575,
+        0.6875
+      ],
+      "retention": 1.0,
+      "retention_ci": [
+        1.0,
+        1.0
+      ],
+      "n_pass": 800,
+      "runtime_s": 1.3756570935249328
+    },
+    "squidpy_spatial": {
+      "false_pass_share": 0.4473684210526315,
+      "false_pass_share_ci": [
+        0.3821277025474544,
+        0.5134331777128145
+      ],
+      "retention": 1.0,
+      "retention_ci": [
+        1.0,
+        1.0
+      ],
+      "n_pass": 532,
+      "runtime_s": 1.3756570935249328
+    }
+  }
+}

@@ -1,0 +1,11 @@
+tissue,sender,receiver,ligand,receptor,category,gate_pass,status,readout
+skin_melanoma_5k,Endothelial,Melanoma,COL4A1,CD44,expr_top10,False,untestable,receptor_only
+skin_melanoma_5k,Endothelial,Melanoma,COL4A2,CD44,expr_top10,False,untestable,receptor_only
+skin_melanoma_5k,Endothelial,Keratinocyte,COL4A1,CD44,expr_top10,False,untestable,receptor_only
+skin_melanoma_5k,Endothelial,T_Cells,COL4A1,CD44,expr_top10,False,untestable,receptor_only
+skin_melanoma_5k,Endothelial,Keratinocyte,COL4A2,CD44,expr_top10,False,untestable,receptor_only
+skin_melanoma_5k,Endothelial,T_Cells,COL4A2,CD44,expr_top10,False,untestable,receptor_only
+skin_melanoma_5k,Endothelial,T_Cells,COL4A1,CD47,expr_top10,False,untestable,receptor_only
+skin_melanoma_5k,Endothelial,Melanoma,COL4A1,CD47,expr_top10,False,untestable,receptor_only
+skin_melanoma_5k,Endothelial,Keratinocyte,COL4A1,CD47,expr_top10,False,untestable,receptor_only
+skin_melanoma_5k,Endothelial,Melanoma,APP,NOTCH2,expr_top10,False,untestable,receptor_only

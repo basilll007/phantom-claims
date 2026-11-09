@@ -1,0 +1,38 @@
+{
+  "breast_5k": {
+    "n_cells": 17659,
+    "n_genes": 5101,
+    "unlabeled_fraction": 0.5422,
+    "cell_type_counts": {
+      "Unlabeled": 9574,
+      "T_Cells": 3520,
+      "Macrophages": 1428,
+      "Mast_Cells": 927,
+      "Fibroblast": 839,
+      "B_Cells": 695,
+      "Endothelial": 676
+    },
+    "license": "CC BY-4.0",
+    "source_url": "https://www.10xgenomics.com/datasets/xenium-prime-ffpe-human-breast-cancer",
+    "zenodo_doi": "10.5281/zenodo.10839956",
+    "lr_pairs_in_panel": 1645,
+    "has_CD274_PDCD1": true
+  },
+  "skin_melanoma_5k": {
+    "n_cells": 10722,
+    "n_genes": 4761,
+    "unlabeled_fraction": 0.599,
+    "cell_type_counts": {
+      "Unlabeled": 6422,
+      "Melanoma": 3287,
+      "Keratinocyte": 686,
+      "T_Cells": 231,
+      "Endothelial": 96
+    },
+    "license": "CC BY-4.0",
+    "source_url": "https://www.10xgenomics.com/datasets/xenium-prime-ffpe-human-skin",
+    "zenodo_doi": "10.5281/zenodo.12788050",
+    "lr_pairs_in_panel": 1408,
+    "has_CD274_PDCD1": true
+  }
+}

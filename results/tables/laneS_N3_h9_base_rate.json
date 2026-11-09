@@ -1,0 +1,127 @@
+{
+  "verdict": "SUPPORTED",
+  "spearman_rho": 0.9999999999999999,
+  "max_abs_diff": 0.005840463311041766,
+  "class_rates": {
+    "true": 0.7740625,
+    "niche": 0.0634375,
+    "decoy_sender": 0.1275,
+    "phantom": 0.0,
+    "random": 0.0021875
+  },
+  "class_cis": {
+    "true": [
+      0.750625,
+      0.7950078125
+    ],
+    "niche": [
+      0.045625,
+      0.083125
+    ],
+    "decoy_sender": [
+      0.0875,
+      0.1725
+    ],
+    "phantom": [
+      0.0,
+      0.0
+    ],
+    "random": [
+      0.0,
+      0.007507812499999957
+    ]
+  },
+  "spatialdm_class_rates": {
+    "true": 0.648125,
+    "niche": 0.631875,
+    "decoy_sender": 0.6025,
+    "phantom": 0.265,
+    "random": 0.49
+  },
+  "squidpy_class_rates": {
+    "true": 1.0,
+    "niche": 0.99625,
+    "decoy_sender": 1.0,
+    "phantom": 1.0,
+    "random": 0.178125
+  },
+  "squidpy_spatial_class_rates": {
+    "true": 1.0,
+    "niche": 0.33,
+    "decoy_sender": 0.415,
+    "phantom": 0.0,
+    "random": 0.0296875
+  },
+  "grid_results": [
+    {
+      "niche_decoy_frac": 0.0,
+      "pi": {
+        "true": 0.85,
+        "niche": 0.0,
+        "decoy_sender": 0.0,
+        "phantom": 0.1,
+        "random": 0.05
+      },
+      "pred_gate_fps": 0.00016620761705765034,
+      "emp_gate_fps": 0.0001111111111111111,
+      "abs_diff": 5.509650594653924e-05,
+      "pred_sdm_fps": 0.08473080317740513
+    },
+    {
+      "niche_decoy_frac": 0.1,
+      "pi": {
+        "true": 0.765,
+        "niche": 0.06,
+        "decoy_sender": 0.04000000000000001,
+        "phantom": 0.09000000000000001,
+        "random": 0.045000000000000005
+      },
+      "pred_gate_fps": 0.01497879109225875,
+      "emp_gate_fps": 0.014637014211278917,
+      "abs_diff": 0.0003417768809798327,
+      "pred_sdm_fps": 0.17874353625648964
+    },
+    {
+      "niche_decoy_frac": 0.25,
+      "pi": {
+        "true": 0.6375,
+        "niche": 0.15,
+        "decoy_sender": 0.1,
+        "phantom": 0.07500000000000001,
+        "random": 0.037500000000000006
+      },
+      "pred_gate_fps": 0.04332515448927664,
+      "emp_gate_fps": 0.0424923011628894,
+      "abs_diff": 0.0008328533263872381,
+      "pred_sdm_fps": 0.31870354387004524
+    },
+    {
+      "niche_decoy_frac": 0.5,
+      "pi": {
+        "true": 0.425,
+        "niche": 0.3,
+        "decoy_sender": 0.2,
+        "phantom": 0.05,
+        "random": 0.025
+      },
+      "pred_gate_fps": 0.11935335452568178,
+      "emp_gate_fps": 0.12445495501051057,
+      "abs_diff": 0.005101600484828786,
+      "pred_sdm_fps": 0.5491880833652986
+    },
+    {
+      "niche_decoy_frac": 0.75,
+      "pi": {
+        "true": 0.2125,
+        "niche": 0.44999999999999996,
+        "decoy_sender": 0.30000000000000004,
+        "phantom": 0.025,
+        "random": 0.0125
+      },
+      "pred_gate_fps": 0.28889151580653877,
+      "emp_gate_fps": 0.283051052495497,
+      "abs_diff": 0.005840463311041766,
+      "pred_sdm_fps": 0.7762618506720139
+    }
+  ]
+}

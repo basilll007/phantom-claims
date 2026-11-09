@@ -176,3 +176,32 @@ retention is NaN; missing values no longer drawn as 0). None of these changes an
   - First N2 per-claim gate file: 2026-11-08 00:12:16.
 - The text of Amendment 4 is left unchanged on purpose. This erratum discloses the discrepancy; the paper's appendix
   repeats the disclosure.
+
+### Amendment 5 — 2026-11-08 23:57 CST (Phase 2 Lane S Strengthening Pre-Registration)
+**Prior git commit:** a9a0a13
+**Purpose:** Pre-register Phase 2 Lane S strengthening experiments: hypotheses H8 and H9 with thresholds, spatial baseline specifications (fixed defaults, no tuning), new confirmatory seed set N3, replication protocol for H4 on N3, and real-data negative control pre-specification protocol. Gate configuration remains strictly FROZEN at Amendment 2 defaults (`r=30.0, tile=250.0, n_perm=1000, alpha_half=0.10, n_min=50, rho_min=0.02, q=0.05`).
+
+#### 1. New Confirmatory Seed Set N3
+- Seed set N3 = [300, 301, 302, 303, 304, 305, 306, 307, 308, 309] (10 seeds).
+- Fresh seeds, never touched or inspected during Phase 1 dev [0..4], Phase 1 test [100..104], or Phase 2 N2 [200..209].
+- Committed before generating any N3 benchmark instances or running any evaluations on N3.
+
+#### 2. Pre-Registered Hypotheses & Thresholds (Confirmatory on N3)
+- **H8 (Spatial Baselines on Candidate Lists):**
+  On the A5 list type evaluated on N3 across all four existing tissues (breast Rep1, breast Rep2, pancreas, lung), the frozen gate's false-pass share is lower than that of each spatial baseline below by an absolute margin >= 0.10, OR the paper reports honestly that it is not.
+  - Baselines evaluated:
+    1. SpatialDM (v0.3.1; single_cell=True, l=30.0, cutoff=0.1, n_nearest_neighbors=6, method='z-score').
+    2. Squidpy `gr.ligrec` (v1.8.4; cluster label permutation test, n_perms=1000, threshold=0.01, alpha=0.05).
+    3. Squidpy `gr.ligrec` + `gr.nhood_enrichment` (cluster permutation test combined with spatial neighborhood enrichment filter zscore > 0 from radius=30.0 graph).
+    4. COMMOT: Logged as skipped if installation/execution exceeds time budget or fails upstream dependencies (specifically: COMMOT 0.0.3 fails on NumPy >= 2.0 due to deprecated `np.Inf`).
+  - Verdict: SUPPORTED if frozen gate false-pass share <= (each spatial baseline's false-pass share - 0.10); FALSIFIED if frozen gate false-pass share > that of any spatial baseline; else INCONCLUSIVE.
+- **H9 (Base-Rate Law and Closed-Form Prediction):**
+  Gate false-pass share rises monotonically with the niche/decoy fraction of the candidate list across tested compositions (niche/decoy fraction in {0.0, 0.10, 0.25, 0.50, 0.75}), and the closed-form prediction from per-class pass rates:
+  $$\text{False-Pass Share} = \frac{\sum_{b \in \text{Neg}} \pi_b f_b}{\pi_T r_T + \sum_{b \in \text{Neg}} \pi_b f_b}$$
+  matches the empirical share within 0.05 absolute on N3.
+  - Verdict: SUPPORTED if empirical false-pass share is monotonic in niche/decoy fraction (Spearman rho >= 0.80) AND max |empirical - predicted| <= 0.05; FALSIFIED if monotonicity is violated (rho < 0.50) OR max |empirical - predicted| > 0.10; else INCONCLUSIVE.
+- **Independent Replication of H4 on N3:**
+  Re-run the frozen gate on N3 for variants A0-A5 across all four benchmark tissues. Report all retention, post-gate phantom rates, and unit pass outcomes as an independent verification of the Phase 2 Lane A findings.
+- **Anatomical Negative Controls (Real Data):**
+  Selection rules and code are committed in `reports/negcontrols_prespec.md` before any real-data negative control gate run is executed.
+

@@ -1,0 +1,6 @@
+category,gate_pass_rate,gate_ci_lo,gate_ci_hi,spatialdm_pass_rate,squidpy_ligrec_pass_rate,squidpy_spatial_pass_rate
+true,0.7740625,0.750625,0.7950078125,0.648125,1.0,1.0
+niche,0.0634375,0.045625,0.083125,0.631875,0.99625,0.33
+decoy_sender,0.1275,0.0875,0.1725,0.6025,1.0,0.415
+phantom,0.0,0.0,0.0,0.265,1.0,0.0
+random,0.0021875,0.0,0.007507812499999957,0.49,0.178125,0.0296875
